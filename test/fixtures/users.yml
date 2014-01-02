@@ -1,0 +1,8 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+existing_twitter:
+  provider: Twitter
+  uid: 1
+  name: One Twitter
+
+
