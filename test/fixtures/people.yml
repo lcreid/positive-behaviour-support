@@ -1,0 +1,56 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+user_one:
+  name: User One
+  user: existing_twitter
+
+user_two:
+  name: User Two
+  user: existing_google
+  
+user_three:
+  name: User Three
+  user: existing_yahoo
+    
+user_four:
+  name: User Four
+  user: existing_linkedin
+
+patient_one:
+  name: Patient One
+
+patient_two:
+  name: Patient Two
+
+patient_three:
+  name: Patient Three
+
+patient_four:
+  name: Patient Four
+
+patient_six:
+  name: Patient Six
+  
+person_marie:
+  name: Marie-User
+  user: user_marie
+  
+patient_marie:
+  name: Marie-Person
+  user: user_marie
+  
+person_stella:
+  name: Stella-User
+  user: user_stella
+  
+person_nick:
+  name: Nick-User
+  user: user_nick
+
+patient_max:
+  name: Max-Patient
+
+patient_matt:
+  name: Matt-Patient
+  
+

@@ -5,4 +5,33 @@ existing_twitter:
   uid: 1
   name: One Twitter
 
+existing_google:
+  provider: Google
+  uid: 1
+  name: Two Google
+
+existing_yahoo:
+  provider: Yahoo
+  uid: 1
+  name: Three Yahoo
+
+existing_linkedin:
+  provider: LinkedIn
+  uid: 1
+  name: Four LinkedIn
+
+user_marie:
+  provider: Google
+  uid: 2
+  name: Marie
+
+user_stella:
+  provider: Twitter
+  uid: 2
+  name: Stella
+
+user_nick:
+  provider: Twitter
+  uid: 3
+  name: Nick
 

@@ -1,0 +1,38 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one_to_two:
+  person_a: user_one
+  person_b: user_two
+
+two_to_patient_one:
+  person_a: user_two
+  person_b: patient_one
+
+three_to_two:
+  person_a: user_three
+  person_b: user_two
+
+four_to_patient:
+  person_a: user_four
+  person_b: patient_two
+
+four_to_user:
+  person_a: user_four
+  person_b: user_three
+
+user_marie_to_max:
+  person_a: person_marie
+  person_b: patient_max
+
+user_marie_to_matt:
+  person_a: person_marie
+  person_b: patient_matt
+
+patient_marie_to_max:
+  person_a: patient_marie
+  person_b: person_stella
+
+patient_marie_to_matt:
+  person_a: patient_marie
+  person_b: person_nick
+

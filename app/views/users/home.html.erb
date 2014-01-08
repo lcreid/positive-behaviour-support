@@ -1,3 +1,13 @@
 <div id="user-name">
   <%= @user.name %>
 </div>
+<div id="patients">
+  <% @user.patients.each do | patient | %>
+    <p><%= patient.name %></p>
+  <% end %>
+</div>
+<div id="users">
+  <% @user.users.each do | user | %>
+    <p><%= user.name %></p>
+  <% end %>
+</div>
