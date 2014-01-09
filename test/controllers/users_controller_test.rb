@@ -17,8 +17,8 @@ class UsersControllerTest < ActionController::TestCase
         assert_select p[0], 'p', "Matt-Patient"
         assert_select p[4], 'p', "Max-Patient"
         assert_select p[5], 'a', "Go to bed"
+        assert_select p[6], 'a', "Turn off Minecraft"
       end
-  
     end
     assert_select 'div#users' do
       assert_select 'h1', "Connections"

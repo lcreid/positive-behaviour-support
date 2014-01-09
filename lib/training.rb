@@ -1,12 +1,17 @@
 module Training
   def Training.create(user)
-    [ "1 Training Patient", "2 Training Patient" ].each do |n|
-      user.primary_identity.people << Person.create!(name: n)
-    end
+    i = user.primary_identity
+    pt = Person.create!(name: "1 Training Patient")
+    pt.routines << Routine.create!(name: "Clean up room")
+    pt.routines << Routine.create!(name: "Brush teeth")
+    pt.routines << Routine.create!(name: "Do homework")
+    i.people << pt
     
-    [ "1 Training User" ].each_with_index do |n, i|
-      u = User.create!(name: n, uid: i, provider: "Training")
-      user.primary_identity.people << u.primary_identity
-    end
+    pt = Person.create!(name: "2 Training Patient")
+    pt.routines << Routine.create!(name: "Turn off Minecraft")
+    pt.routines << Routine.create!(name: "Go to bed")
+    i.people << pt
+    
+    i.people << User.create!(name: "1 Training User", uid: 1, provider: "Training").primary_identity
   end
 end
