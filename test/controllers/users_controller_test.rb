@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
     end
     assert_select 'div#top-menu', /.*Marie.*/
     assert_select 'div#patients' do
-      assert_select 'h1', "Patients"
+      assert_select 'h1', "Routines"
       assert_select 'p', 7 do |p|
         assert_select p[0], 'p', "Matt-Patient"
         assert_select p[4], 'p', "Max-Patient"
