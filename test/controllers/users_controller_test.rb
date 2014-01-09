@@ -7,12 +7,21 @@ class UsersControllerTest < ActionController::TestCase
     get :home, {id: @controller.current_user.id}
     assert :success
     
-    assert_select 'div#user-name', "Marie"
+    assert_select 'div#user-name' do
+      assert_select 'h1', "Marie"
+    end
     assert_select 'div#top-menu', /.*Marie.*/
     assert_select 'div#patients' do
-      assert_select 'p', 2 
+      assert_select 'h1', "Patients"
+      assert_select 'p', 7 do |p|
+        assert_select p[0], 'p', "Matt-Patient"
+        assert_select p[4], 'p', "Max-Patient"
+        assert_select p[5], 'a', "Go to bed"
+      end
+  
     end
     assert_select 'div#users' do
+      assert_select 'h1', "Connections"
       assert_select 'p', 2 
     end
   end

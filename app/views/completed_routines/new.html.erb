@@ -1,0 +1,20 @@
+<div id="completed_routine_header">
+  <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.name}" %></h1>
+</div>
+<%= content_tag_for(:table, @completed_routine) do %>
+  <thead>
+    <tr>
+      <th>Expectation</th><th>Yes</th><th>No</th><th>N/A</th><th>Comments</th>
+    </tr>
+  </thead>
+  </tbody>
+    <% @completed_routine.completed_expectations.each do |e| %>
+      <%= content_tag_for(:tr, e) do %>
+        <tr>
+          <td></td>
+        </tr>
+      <% end %>
+    <% end %>
+  <tbody>
+<% end %>
+

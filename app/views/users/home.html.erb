@@ -1,12 +1,17 @@
 <div id="user-name">
-  <%= @user.name %>
+  <h1><%= @user.name %></h1>
 </div>
 <div id="patients">
+  <h1>Patients</h1>
   <% @user.patients.each do | patient | %>
     <p><%= patient.name %></p>
+    <% patient.routines.each do |routine| %>
+      <p><%= link_to(routine.name, new_completed_routine_path, data: { routine_id: routine.id }) %></p>
+    <% end %>
   <% end %>
 </div>
 <div id="users">
+  <h1>Connections</h1>
   <% @user.users.each do | user | %>
     <p><%= user.name %></p>
   <% end %>

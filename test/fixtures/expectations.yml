@@ -1,0 +1,38 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+do_without_reminder:
+  description: Do without reminder
+  routine: clean_up_room
+
+use_right_toothbrush:
+  description: User the right toothbrush
+  routine: brush_teeth
+  
+get_materials:
+  description: Get pencils, pens, etc.
+  routine: do_homework
+  
+put_away_materials:
+  description: Put away pencils, pens, etc.
+  routine: do_homework
+  
+at_nine:
+  description: Turn off game at nine without being asked
+  routine: turn_off_minecraft
+  
+more_time:
+  description: "Don't ask for more time"
+  routine: turn_off_minecraft
+  
+go_to_bed:
+  description: Put on pyjamas
+  routine: go_to_bed
+  
+set_alarm:
+  description: Set alarm
+  routine: go_to_bed
+  
+read:
+  description: Read for ten minutes
+  routine: go_to_bed
+

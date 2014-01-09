@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+clean_up_room:
+  name: Clean up room
+  person: patient_matt
+
+brush_teeth:
+  name: Brush teeth
+  person: patient_matt
+
+do_homework:
+  name: Do homework
+  person: patient_matt
+
+turn_off_minecraft:
+  name: Turn off Minecraft
+  person: patient_max
+  
+go_to_bed:
+  name: Go to bed
+  person: patient_max
+
+# The next one is for forcing error conditions.
+belongs_to_no_one:
+  name: Belongs to no one
+  person: 0
+

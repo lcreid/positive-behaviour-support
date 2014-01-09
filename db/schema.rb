@@ -11,7 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107042224) do
+ActiveRecord::Schema.define(version: 20140108220424) do
+
+  create_table "completed_expectations", force: true do |t|
+    t.string   "description"
+    t.string   "observation"
+    t.string   "comment"
+    t.integer  "completed_routine_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "completed_expectations", ["completed_routine_id"], name: "index_completed_expectations_on_completed_routine_id"
+
+  create_table "completed_routines", force: true do |t|
+    t.string   "name"
+    t.string   "comment"
+    t.integer  "person_id"
+    t.integer  "routine_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "completed_routines", ["person_id"], name: "index_completed_routines_on_person_id"
+  add_index "completed_routines", ["routine_id"], name: "index_completed_routines_on_routine_id"
+
+  create_table "expectations", force: true do |t|
+    t.string   "description"
+    t.integer  "routine_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "expectations", ["routine_id"], name: "index_expectations_on_routine_id"
 
   create_table "links", force: true do |t|
     t.integer  "person_a_id"
@@ -32,6 +64,15 @@ ActiveRecord::Schema.define(version: 20140107042224) do
   end
 
   add_index "people", ["user_id"], name: "index_people_on_user_id"
+
+  create_table "routines", force: true do |t|
+    t.string   "name"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "routines", ["person_id"], name: "index_routines_on_person_id"
 
   create_table "users", force: true do |t|
     t.string   "provider"

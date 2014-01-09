@@ -55,6 +55,17 @@ Return the Person that is the primary identity of the user.
 #    "#{self.class}: #{super}"
 #  end
 
+=begin rdoc
+A user is allowed to complete a routine if:
+* they're connected to the person assigned to the routine.
+* other conditions that are to be defined.
+=end  
+  def can_complete?(routine)
+    routine = Routine.find(routine) unless routine.is_a?(Routine)
+    return false unless routine
+    return people.any? { |p| p.id == routine.person_id }
+  end
+
   private
     
 =begin rdoc

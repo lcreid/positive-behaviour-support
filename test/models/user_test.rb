@@ -70,4 +70,16 @@ class UserTest < ActiveSupport::TestCase
     assert user.people.one? { |p| p.name == "Stella-User" }
     assert_equal 4, user.people.size
   end
+  
+  test "user should be able to access routine" do
+    user = users (:user_marie)
+    routine = routines(:do_homework)
+    assert user.can_complete?(routine), "can_complete returned false, should be true"
+  end
+  
+  test "user shouldn't be able to access routine" do
+    user = users (:user_marie)
+    routine = routines(:belongs_to_no_one)
+    assert ! user.can_complete?(routine), "can_complete returned true, should be false"
+  end
 end
