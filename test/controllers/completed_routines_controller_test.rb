@@ -54,5 +54,6 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_equal r.person_id, cr.person_id
     assert_equal r.name, cr.name
     assert_equal good_day, cr.comment
+    assert_equal 2, cr.completed_expectations.size
   end
 end
