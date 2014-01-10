@@ -12,12 +12,19 @@ class UsersControllerTest < ActionController::TestCase
     end
     assert_select 'div#top-menu', /.*Marie.*/
     assert_select 'div#patients' do
-      assert_select 'h1', "Routines"
-      assert_select 'p', 7 do |p|
-        assert_select p[0], 'p', "Matt-Patient"
-        assert_select p[4], 'p', "Max-Patient"
-        assert_select p[5], 'a', "Go to bed"
-        assert_select p[6], 'a', "Turn off Minecraft"
+      assert_select 'div.person', 2 do |pt|
+        assert_select pt[0], 'h1', "Matt-Patient"
+        assert_select pt[0], 'h2', "Routines"
+        assert_select pt[0], 'p', 3
+
+        assert_select pt[1], 'h1', "Max-Patient"
+        assert_select pt[1], 'h2', "Routines"
+        assert_select pt[1], 'p', 2 do |p|
+          assert_select p[0], 'p', /^Go to bed.*/
+          assert_select p[0], 'a', "Add New"
+          assert_select p[1], 'p', /^Turn off Minecraft.*/
+          assert_select p[1], 'a', "Add New"
+        end
       end
     end
     assert_select 'div#users' do

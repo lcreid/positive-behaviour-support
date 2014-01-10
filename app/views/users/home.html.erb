@@ -2,13 +2,16 @@
   <h1><%= @user.name %></h1>
 </div>
 <div id="patients">
-  <h1>Routines</h1>
-  <% @user.patients.each do | patient | %>
-    <p><%= patient.name %></p>
-    <% patient.routines.each do |routine| %>
-      <p><%= link_to(routine.name, new_completed_routine_path(routine_id: routine.id)) %></p>
+    <%= content_tag_for(:div, @user.patients) do | patient | %>
+      <h1><%= patient.name %></h1>
+      <h2>Routines</h2>
+      <% patient.routines.each do |routine| %>
+        <p>
+          <%= routine.name %>
+          <%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %>
+        </p>
+      <% end %>
     <% end %>
-  <% end %>
 </div>
 <div id="users">
   <h1>Connections</h1>

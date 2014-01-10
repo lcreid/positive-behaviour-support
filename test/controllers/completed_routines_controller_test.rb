@@ -10,7 +10,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
 #    puts @response.body
     
     assert_select 'div#completed_routine_header', "Turn off Minecraft -- Max-Patient"
-    assert_select 'tr.completed_expectation', 2
+    assert_select 'tbody tr', 2
   end
   
   test "try to get a new completed routine without routine_id" do
@@ -36,14 +36,31 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
   test "complete a routine" do
     @controller.log_in(user = users(:user_marie))
     r = routines(:turn_off_minecraft)
+    expectations = r.expectations.collect { |e| e.description }
+    
     good_day = "Good day!"
-    assert_difference "CompletedRoutine.count" do
-      post :create, completed_routine: {
+    completed_routine = ActionController::Parameters.new(
+      completed_routine: {
         routine_id: r.id.to_s, 
         person_id: r.person_id, 
         name: r.name, 
-        comment: good_day
+        comment: good_day,
+        completed_expectations_attributes: {
+          "0" => { 
+            observation: "Y", 
+            comment: "Yay!", 
+            description: expectations[0]
+          },
+          "1" => { 
+            observation: "N", 
+            comment: "Boo!", 
+            description: expectations[1]
+          }
         }
+      }
+    )
+    assert_difference "CompletedRoutine.count" do
+      post :create, completed_routine
     end
     assert_redirected_to home_user_path(@controller.current_user)
     assert cr = CompletedRoutine.
@@ -55,5 +72,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_equal r.name, cr.name
     assert_equal good_day, cr.comment
     assert_equal 2, cr.completed_expectations.size
+    assert_equal expectations[0], cr.completed_expectations[0].description
+    assert_equal expectations[1], cr.completed_expectations[1].description
   end
 end

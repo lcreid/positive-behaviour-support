@@ -1,20 +1,44 @@
 <div id="completed_routine_header">
   <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.name}" %></h1>
 </div>
-<%= content_tag_for(:table, @completed_routine) do %>
-  <thead>
-    <tr>
-      <th>Expectation</th><th>Yes</th><th>No</th><th>N/A</th><th>Comments</th>
-    </tr>
-  </thead>
-  </tbody>
-    <% @completed_routine.completed_expectations.each do |e| %>
-      <%= content_tag_for(:tr, e) do %>
-        <tr>
-          <td></td>
-        </tr>
-      <% end %>
+<% if @completed_routine.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@completed_routine.errors.count, "error") %> prevented this routine from being saved:</h2>
+    <ul>
+    <% @completed_routine.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
     <% end %>
-  <tbody>
+    </ul>
+  </div>
+<% end %>
+<%= content_tag_for(:div, @completed_routine) do %>
+  <%= form_for @completed_routine do | crf | %>
+    <%= crf.hidden_field :name %>
+    <%= crf.hidden_field :routine_id %>
+    <%= crf.hidden_field :person_id %>
+    <p><%= crf.label 'Comments:' %><%= crf.text_field :comment %></p>
+    <%= content_tag_for(:table, @completed_routine) do %>
+      <thead>
+        <tr>
+          <th>Expectation</th><th>Yes</th><th>No</th><th>N/A</th><th>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= crf.fields_for :completed_expectations do |cef| %>
+          <fieldset>
+          <%= cef.hidden_field :description %>
+          <tr>
+            <td><%= cef.label :description %></td>
+            <td><%= cef.radio_button :observation, "Y" %></td>
+            <td><%= cef.radio_button :observation, "N"  %></td>
+            <td><%= cef.radio_button :observation, "N/A"  %></td>
+            <td><%= cef.text_field :comment %></td>
+          </tr>
+          </fieldset>
+        <% end %>
+      </tbody>
+    <% end %>
+    <%= crf.submit %>
+  <% end %>
 <% end %>
 

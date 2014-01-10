@@ -58,7 +58,7 @@ Return the Person that is the primary identity of the user.
 =begin rdoc
 A user is allowed to complete a routine if:
 * they're connected to the person assigned to the routine.
-* other conditions that are to be defined.
+* Possibly other conditions that are to be defined.
 =end  
   def can_complete?(routine)
     routine = Routine.find(routine) unless routine.is_a?(Routine)
