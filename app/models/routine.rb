@@ -1,6 +1,6 @@
 class Routine < ActiveRecord::Base
   belongs_to :person
-  belongs_to :reward_definition
+  belongs_to :goal
   has_many :completed_routines
   has_many :expectations
   accepts_nested_attributes_for :expectations

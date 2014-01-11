@@ -3,17 +3,17 @@
 clean_up_room:
   name: Clean up room
   person: patient_matt
-  reward_definition: matt_one
+  goal: matt_one
 
 brush_teeth:
   name: Brush teeth
   person: patient_matt
-  reward_definition: matt_one
+  goal: matt_one
 
 do_homework:
   name: Do homework
   person: patient_matt
-  reward_definition: matt_two
+  goal: matt_two
 
 turn_off_minecraft:
   name: Turn off Minecraft

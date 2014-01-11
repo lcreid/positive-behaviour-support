@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class RewardDefinitionTest < ActiveSupport::TestCase
+class GoalTest < ActiveSupport::TestCase
   test "two rewards pending" do
-    rd = reward_definitions(:matt_one)
+    rd = goals(:matt_one)
     assert_equal 4, rd.completed_routines.size
     assert_equal 2, rd.pending
   end

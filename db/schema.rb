@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110230722) do
+ActiveRecord::Schema.define(version: 20140111152008) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 20140110230722) do
 
   add_index "expectations", ["routine_id"], name: "index_expectations_on_routine_id"
 
+  create_table "goals", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "target"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "goals", ["person_id"], name: "index_goals_on_person_id"
+
   create_table "links", force: true do |t|
     t.integer  "person_a_id"
     t.integer  "person_b_id"
@@ -65,27 +76,16 @@ ActiveRecord::Schema.define(version: 20140110230722) do
 
   add_index "people", ["user_id"], name: "index_people_on_user_id"
 
-  create_table "reward_definitions", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "target"
-    t.integer  "person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "reward_definitions", ["person_id"], name: "index_reward_definitions_on_person_id"
-
   create_table "routines", force: true do |t|
     t.string   "name"
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "reward_definition_id"
+    t.integer  "goal_id"
   end
 
+  add_index "routines", ["goal_id"], name: "index_routines_on_goal_id"
   add_index "routines", ["person_id"], name: "index_routines_on_person_id"
-  add_index "routines", ["reward_definition_id"], name: "index_routines_on_reward_definition_id"
 
   create_table "users", force: true do |t|
     t.string   "provider"

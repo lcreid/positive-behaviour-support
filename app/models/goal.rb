@@ -1,4 +1,4 @@
-class RewardDefinition < ActiveRecord::Base
+class Goal < ActiveRecord::Base
   belongs_to :person
   has_many :routines
   has_many :completed_routines, through: :routines

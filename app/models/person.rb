@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
   has_many :people, through: :links, source: :person_b
   has_many :routines
   has_many :completed_routines, through: :routines
-  has_many :reward_definitions
+  has_many :goals
   
   include PersonHelper
     
