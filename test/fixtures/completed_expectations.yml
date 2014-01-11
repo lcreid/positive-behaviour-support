@@ -1,13 +1,50 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  description: MyString
-  observation: MyString
-  comment: MyString
-  completed_routine_id: 
+matt_one_one:
+  description: Do without reminder
+  observation: Y
+  comment: 
+  completed_routine: matt_one_one 
 
-two:
-  description: MyString
-  observation: MyString
-  comment: MyString
-  completed_routine_id: 
+matt_one_two:
+  description: Do without reminder
+  observation: N/A
+  comment: 
+  completed_routine: matt_one_two
+
+matt_one_three:
+  description: Use right toothbrush
+  observation: Y
+  comment: 
+  completed_routine: matt_one_three
+
+matt_one_four_one:
+  description: Get pencils, pens, etc.
+  observation: Y
+  comment: 
+  completed_routine: matt_one_four
+
+matt_one_four_two:
+  description: Put away pencils, pens, etc.
+  observation: N
+  comment: 
+  completed_routine: matt_one_four
+
+matt_one_five_one:
+  description: Get pencils, pens, etc.
+  observation: Y
+  comment: 
+  completed_routine: matt_one_five
+
+matt_one_five_two:
+  description: Put away pencils, pens, etc.
+  observation: 
+  comment: 
+  completed_routine: matt_one_five
+
+matt_one_six:
+  description: Use right toothbrush
+  observation: Y
+  comment: 
+  completed_routine: matt_one_three
+

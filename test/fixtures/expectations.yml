@@ -5,7 +5,7 @@ do_without_reminder:
   routine: clean_up_room
 
 use_right_toothbrush:
-  description: User the right toothbrush
+  description: Use the right toothbrush
   routine: brush_teeth
   
 get_materials:

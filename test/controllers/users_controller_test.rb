@@ -14,8 +14,18 @@ class UsersControllerTest < ActionController::TestCase
     assert_select 'div#patients' do
       assert_select 'div.person', 2 do |pt|
         assert_select pt[0], 'h1', "Matt-Patient"
-        assert_select pt[0], 'h2', "Routines"
+        assert_select pt[0], 'h2' do |h2|
+          assert_select h2[0], 'h2', "Routines"
+          assert_select h2[1], 'h2', "Rewards"
+        end
         assert_select pt[0], 'p', 3
+      
+        assert_select pt[0], 'table#pending_rewards' do
+          assert_select 'tbody tr', 2 do |reward|
+            assert_select reward[1], 'td', "Nothing"
+            assert_select reward[0], 'td', "Time Off"
+          end 
+        end
 
         assert_select pt[1], 'h1', "Max-Patient"
         assert_select pt[1], 'h2', "Routines"

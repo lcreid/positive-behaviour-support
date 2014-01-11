@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+matt_one:
+  name: Time Off
+  description: Matt gets to miss one session with Marie.
+  target: 2
+  person: patient_matt
+
+matt_two:
+  name: Nothing
+  description: 
+  target: 1
+  person: patient_matt

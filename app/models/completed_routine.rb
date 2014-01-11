@@ -22,4 +22,22 @@ Return a hash of attributes that make sense to compare to a routine.
       "completed_expectations_attributes" => completed_expectations.collect { |ce| ce.comparable_attributes }
     )
   end
+  
+=begin rdoc
+Return true if all expectations in the routine were completed successfully,
+or weren't able to be completed through no fault of the patient.
+=end
+  def is_clean?
+    completed_expectations.all { |ce| ce.is_clean? }
+  end
 end
+
+=begin
+A more general way to change keys in a hash is this 
+(http://stackoverflow.com/questions/4137824/how-to-elegantly-rename-all-keys-in-a-hash-in-ruby):
+
+ages = { "Bruce" => 32, "Clark" => 28 }
+mappings = {"Bruce" => "Bruce Wayne", "Clark" => "Clark Kent"}
+
+Hash[ages.map {|k, v| [mappings[k], v] }]
+=end

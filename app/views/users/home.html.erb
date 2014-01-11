@@ -2,16 +2,26 @@
   <h1><%= @user.name %></h1>
 </div>
 <div id="patients">
-    <%= content_tag_for(:div, @user.patients) do | patient | %>
-      <h1><%= patient.name %></h1>
-      <h2>Routines</h2>
-      <% patient.routines.each do |routine| %>
-        <p>
-          <%= routine.name %>
-          <%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %>
-        </p>
-      <% end %>
+  <%= content_tag_for(:div, @user.patients) do | patient | %>
+    <h1><%= patient.name %></h1>
+    <h2>Routines</h2>
+    <% patient.routines.each do |routine| %>
+      <p>
+        <%= routine.name %>
+        <%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %>
+      </p>
     <% end %>
+    <h2>Rewards</h2>
+    <table id="pending_rewards">
+      <thead>
+      </thead>
+      <tbody>
+        <%= content_tag_for(:tr, patient.reward_definitions) do |rd| %>
+          <td><%= rd.name %></td><td><%= rd.description %></td><td><%= rd.target.to_s %></td><td><%= rd.pending %></td>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
 <div id="users">
   <h1>Connections</h1>

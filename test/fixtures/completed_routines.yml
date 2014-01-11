@@ -1,13 +1,38 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  comment: MyString
-  person_id: 
-  routine_id: 
+matt_one_one:
+  name: Clean up room
+  comment: 
+  person: patient_matt
+  routine: clean_up_room
 
-two:
-  name: MyString
-  comment: MyString
-  person_id: 
-  routine_id: 
+matt_one_two:
+  name: Clean up room
+  comment: 
+  person: patient_matt
+  routine: clean_up_room
+
+matt_one_three:
+  name: Brush teeth
+  comment: 
+  person: patient_matt
+  routine: brush_teeth
+
+matt_one_four:
+  name: Do homework
+  comment: 
+  person: patient_matt
+  routine: do_homework
+
+matt_one_five:
+  name: Do homework
+  comment: 
+  person: patient_matt
+  routine: do_homework
+
+matt_one_six:
+  name: Brush teeth
+  comment: 
+  person: patient_matt
+  routine: brush_teeth
+
