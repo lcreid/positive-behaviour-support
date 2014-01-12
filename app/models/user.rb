@@ -66,6 +66,22 @@ A user is allowed to complete a routine if:
     return people.any? { |p| p.id == routine.person_id }
   end
 
+=begin rdoc
+Link a User to a Person or a User, bidirectionally, so that each entity is connected
+to the other.
+=end  
+  def linkup(other)
+    primary_identity.linkup(other)
+  end
+    
+=begin rdoc
+Unlink a Person from another Person or a User, bidirectionally, so that each entity is disconnected
+to the other.
+=end  
+  def unlink(other)
+    primary_identity.unlink(other)
+  end
+    
   private
     
 =begin rdoc

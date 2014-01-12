@@ -8,9 +8,9 @@ class PersonTest < ActiveSupport::TestCase
   end
   
   test "person two has one Patient link" do
-    person = people(:user_two)
+    person = people(:user_five)
     assert_equal 1, person.links.size
-    assert_equal "Patient One", person.links.first.person_b.name
+    assert_equal "Patient for User Five", person.links.first.person_b.name
   end
 
   test "person four has two links" do
@@ -30,9 +30,9 @@ test "person one has one User" do
   end
   
   test "person two has one Patient" do
-    person = people(:user_two)
+    person = people(:user_five)
     assert_equal 1, person.people.size
-    assert_equal "Patient One", person.people.first.name
+    assert_equal "Patient for User Five", person.people.first.name
   end
 
   test "person four has one User and one Patient" do

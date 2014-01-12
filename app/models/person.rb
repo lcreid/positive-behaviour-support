@@ -11,6 +11,30 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :goals
   
   include PersonHelper
+
+=begin rdoc
+Link a Person to a Person or a User, bidirectionally, so that each entity is connected
+to the other.
+See: http://stackoverflow.com/questions/2923692/bidirectional-self-referential-associations
+for confirmation that this is probably a good way to do it.
+=end  
+  def linkup(other)
+    retval = other
+    other = other.primary_identity if other.is_a? User
+    people << other
+    other.people << self
+    retval
+  end
+    
+=begin rdoc
+Unlink a Person from another Person or a User, bidirectionally, so that each entity is disconnected
+to the other.
+=end  
+  def unlink(other)
+    other = other.primary_identity if other.is_a? User
+    people.delete(other)
+    other.people.delete(self)
+  end
     
 #  def name
 #    "#{self.class}: #{super}"

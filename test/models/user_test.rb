@@ -26,10 +26,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "User Two", user.links.first.person_b.name
   end
   
-  test "user two has one Patient link" do
-    user = users(:existing_google)
+  test "user five has one Patient link" do
+    user = users(:user_five)
     assert_equal 1, user.links.size
-    assert_equal "Patient One", user.links.first.person_b.name
+    assert_equal "Patient for User Five", user.links.first.person_b.name
   end
 
   test "user four has two links" do
@@ -44,11 +44,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "User Two", user.users.first.name
   end
   
-  test "user two has one Patient" do
-    user = users(:existing_google)
+  test "user five has one Patient" do
+    user = users(:user_five)
     assert_equal 1, user.people.size
     assert_equal 1, user.patients.size
-    assert_equal "Patient One", user.patients.first.name
+    assert_equal "Patient for User Five", user.patients.first.name
   end
 
   test "user four has one User and one Patient" do
@@ -95,9 +95,35 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 10, pt1.completed_routines.size
     assert_equal 8, pt1.goals[0].clean_routines.size
     assert_equal 0, pt1.goals[1].clean_routines.size
+    assert_equal user, pt1.people.first.user
     pt2 = user.patients[1]
     assert_equal 2, pt2.routines.size
     assert_equal 0, pt2.goals.size
     assert_equal 0, pt2.completed_routines.size
+    assert_equal user, pt2.people.first.user
+  end
+  
+  test "link two users" do
+    assert_difference "Link.all.count", 2 do
+      link_two
+    end
+  end
+  
+  test "unlink two users" do
+    u1, u2 = link_two
+    assert_difference "Link.all.count", -2 do
+      u1.unlink(u2)
+    end
+    u1, u2 = link_two
+    assert_difference "Link.all.count", -2 do
+      u2.unlink(u1)
+    end
+  end
+  
+  def link_two
+    friendor = User.create!(name: "Friendor")
+    friendee = User.create!(name: "Friendee")
+    
+    return friendor, friendor.linkup(friendee)
   end
 end

@@ -35,3 +35,8 @@ user_nick:
   uid: 3
   name: Nick
 
+user_five:
+  provider: Testing
+  uid: 1
+  name: User Five
+

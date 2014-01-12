@@ -4,35 +4,79 @@ one_to_two:
   person_a: user_one
   person_b: user_two
 
+two_to_one:
+  person_b: user_one
+  person_a: user_two
+
 two_to_patient_one:
   person_a: user_two
   person_b: patient_one
+
+patient_one_to_two:
+  person_b: user_two
+  person_a: patient_one
 
 three_to_two:
   person_a: user_three
   person_b: user_two
 
+two_to_three:
+  person_b: user_three
+  person_a: user_two
+
 four_to_patient:
   person_a: user_four
   person_b: patient_two
+
+patient_to_four:
+  person_b: user_four
+  person_a: patient_two
 
 four_to_user:
   person_a: user_four
   person_b: user_three
 
+user_to_four:
+  person_b: user_four
+  person_a: user_three
+
 user_marie_to_max:
   person_a: person_marie
   person_b: patient_max
+
+max_to_user_marie:
+  person_b: person_marie
+  person_a: patient_max
 
 user_marie_to_matt:
   person_a: person_marie
   person_b: patient_matt
 
-patient_marie_to_max:
+matt_to_user_marie:
+  person_b: person_marie
+  person_a: patient_matt
+
+patient_marie_to_stella:
   person_a: patient_marie
   person_b: person_stella
 
-patient_marie_to_matt:
+stella_to_patient_marie:
+  person_b: patient_marie
+  person_a: person_stella
+
+patient_marie_to_nick:
   person_a: patient_marie
   person_b: person_nick
+
+nick_to_patient_marie:
+  person_b: patient_marie
+  person_a: person_nick
+
+user_five_to_patient:
+  person_a: user_five
+  person_b: patient_for_user_five
+
+patient_to_user_five:
+  person_b: user_five
+  person_a: patient_for_user_five
 

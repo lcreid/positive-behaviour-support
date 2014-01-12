@@ -97,7 +97,7 @@ meaning the patient is eligible for two rewards, with two left over.
 #    pt.routines[0] << CompletedRoutine.create!(pt1[:routines_attributes])
 #    brush_teeth = pt1[:routines_attributes][1].merge(routine_id: pt.routines[1].id)
     
-    i.people << pt
+    i.linkup(pt)
 =begin
 The second patient has two routines and no goals.
 =end
@@ -123,9 +123,9 @@ The second patient has two routines and no goals.
     }
     
     pt = Person.create!(pt2)
-    i.people << pt
+    i.linkup(pt)
     
-    i.people << User.create!(name: "Training User 1", uid: 1, provider: "Training").primary_identity
+    i.linkup(User.create!(name: "Training User 1", uid: 1, provider: "Training"))
   end
   
   def Training.make_completed_routines(routine, reps, date_increment, start_time = Time.current)
