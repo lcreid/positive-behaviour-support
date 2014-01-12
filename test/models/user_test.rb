@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'training'
 
 class UserTest < ActiveSupport::TestCase
   test "new Twitter user" do
@@ -81,5 +82,22 @@ class UserTest < ActiveSupport::TestCase
     user = users (:user_marie)
     routine = routines(:belongs_to_no_one)
     assert ! user.can_complete?(routine), "can_complete returned true, should be false"
+  end
+  
+  test "create training data" do
+    user = User.create(name: "Training Data User")
+    Training.create(user)
+    assert_equal 3, user.people.size
+    assert_equal 2, user.patients.size
+    pt1 = user.patients[0]
+    assert_equal 3, pt1.routines.size
+    assert_equal 2, pt1.goals.size
+    assert_equal 10, pt1.completed_routines.size
+    assert_equal 8, pt1.goals[0].clean_routines.size
+    assert_equal 0, pt1.goals[1].clean_routines.size
+    pt2 = user.patients[1]
+    assert_equal 2, pt2.routines.size
+    assert_equal 0, pt2.goals.size
+    assert_equal 0, pt2.completed_routines.size
   end
 end

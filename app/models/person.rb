@@ -7,6 +7,8 @@ class Person < ActiveRecord::Base
   has_many :routines
   has_many :completed_routines, through: :routines
   has_many :goals
+  accepts_nested_attributes_for :routines
+  accepts_nested_attributes_for :goals
   
   include PersonHelper
     

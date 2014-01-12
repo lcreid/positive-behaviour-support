@@ -28,7 +28,7 @@ Return true if all expectations in the routine were completed successfully,
 or weren't able to be completed through no fault of the patient.
 =end
   def is_clean?
-    completed_expectations.all { |ce| ce.is_clean? }
+    completed_expectations.all? { |ce| ce.is_clean? }
   end
 end
 

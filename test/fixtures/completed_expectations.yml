@@ -46,5 +46,17 @@ matt_one_six:
   description: Use right toothbrush
   observation: Y
   comment: 
-  completed_routine: matt_one_three
+  completed_routine: matt_one_six
+
+matt_one_seven:
+  description: Use right toothbrush
+  observation: N
+  comment: 
+  completed_routine: matt_one_seven
+
+matt_one_eight:
+  description: Use right toothbrush
+  observation: 
+  comment: 
+  completed_routine: matt_one_eight
 

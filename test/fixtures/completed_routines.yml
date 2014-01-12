@@ -36,3 +36,15 @@ matt_one_six:
   person: patient_matt
   routine: brush_teeth
 
+matt_one_seven:
+  name: Brush teeth
+  comment: 
+  person: patient_matt
+  routine: brush_teeth
+
+matt_one_eight:
+  name: Brush teeth
+  comment: 
+  person: patient_matt
+  routine: brush_teeth
+
