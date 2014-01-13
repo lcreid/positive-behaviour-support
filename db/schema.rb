@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111152008) do
+ActiveRecord::Schema.define(version: 20140113054321) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140111152008) do
     t.integer  "routine_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "awarded",    default: false
   end
 
   add_index "completed_routines", ["person_id"], name: "index_completed_routines_on_person_id"

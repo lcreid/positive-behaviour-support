@@ -11,3 +11,10 @@ matt_two:
   description: 
   target: 1
   person: patient_matt
+  
+belongs_to_no_one:
+  name: No one
+  description: Belongs to no one. For testing.
+  target: 1
+  person: 
+

@@ -2,10 +2,13 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   test "get logged in user" do
-    uid = users(:user_marie).id
+    user = users(:user_marie)
+    uid = user.id
     session[:user_id] = uid
     get :home, {id: @controller.current_user.id}
     assert :success
+    
+    patient = user.people[0]
     
     assert_select 'div#user-name' do
       assert_select 'h1', "Marie"
@@ -22,8 +25,11 @@ class UsersControllerTest < ActionController::TestCase
       
         assert_select pt[0], 'table#pending_rewards' do
           assert_select 'tbody tr', 2 do |reward|
-            assert_select reward[1], 'td', "Nothing"
             assert_select reward[0], 'td', "Time Off"
+            assert_select reward[1], 'td', "Nothing"
+            
+            assert_select reward[0], "a[href=#{new_award_path(goal_id: patient.goals[0].id)}]"
+            assert_select reward[1], "a", false
           end 
         end
 
