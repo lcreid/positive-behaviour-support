@@ -1,3 +1,9 @@
+=begin
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+=end
 class Goal < ActiveRecord::Base
   belongs_to :person
   has_many :routines, inverse_of: :goal
@@ -35,6 +41,8 @@ awarded yet.
   end
   
   def award(n = 1)
+    n ||= 1
+    n = Integer(n) if n.kind_of? String
     return if pending < n
     pending_routines.sort_by { |cr| cr.created_at } .first(n * target).each do |give|
       give.awarded = true
