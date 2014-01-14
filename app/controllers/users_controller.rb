@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   end
   
   def home
+#    flash.notice = "Test notice"
+#    flash.alert = "Test alert\nline 2\nline 3\nline 4\nline 5\nline 6"
   end
   
   private

@@ -1,4 +1,5 @@
 $top_menu_h: 30px !default;
+$width: 986px !default;
 
 body, p, h1, h2, h3, h4, table, td, th, ul, ol, textarea, input {
   font-family: verdana,helvetica,arial,sans-serif;
@@ -32,8 +33,36 @@ body {
   }
 }
 
+#message_area {
+  @extend .centre_in_browser;
+  @extend .normal_content;
+}
+
+#content_container {
+  @extend .centre_in_browser;
+  @extend .normal_content;
+}
+
 .centre_in_browser {
-  width: 986px;
+  width: $width;
   margin-left: auto;
   margin-right: auto;
+}
+
+.normal_content {
+  background: white;
+}
+
+.ui-state-highlight {
+  @extend .centre_in_browser;
+  background: #FFFF99;
+  min-height: 50px;
+  $mw: 5px;
+  margin: 0 $mw $mw $mw;
+  width: $width - 2 * $mw;
+}
+
+.ui-state-error {
+  @extend .ui-state-highlight;
+  background: #FF9999;
 }
