@@ -1,0 +1,39 @@
+$top_menu_h: 30px !default;
+
+body, p, h1, h2, h3, h4, table, td, th, ul, ol, textarea, input {
+  font-family: verdana,helvetica,arial,sans-serif;
+  font-size: 14px;
+}
+
+* {
+  border-style: none;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: gray;
+}
+
+#top_menu {
+  text-align: right;
+  padding-top: 0;
+  color: white;
+  height:  $top_menu_h;
+  line-height: $top_menu_h;
+  background-color: black; 
+  a {
+    color: white;
+    &:hover {
+      opacity:0.6;
+      filter:alpha(opacity=60); /* For IE8 and earlier */
+    }
+  }
+}
+
+.centre_in_browser {
+  width: 986px;
+  margin-left: auto;
+  margin-right: auto;
+}

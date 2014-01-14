@@ -5,22 +5,26 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Pbs</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <style><%= yield :stylesheets %></style>
-</head>
-<body>
-<div id="top-menu">
-  <% if current_user %>
-    Signed in as <%= current_user.name %>.
-    <%= link_to "Sign out", signout_path %>
-  <% end %>
-</div>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>Pbs</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <style><%= yield :stylesheets %></style>
+  </head>
+  <body>
+    <div id="top_menu">
+      <div class="centre_in_browser">
+        <% if current_user %>
+          Signed in as <%= current_user.name %>.
+          <%= link_to "Sign out", signout_path %>
+        <% end %>
+      </div>
+    </div>
+    <div class="centre_in_browser" style="background: white;">
+    
+      <%= yield %>
+      
+    </div>
+  </body>
 </html>
