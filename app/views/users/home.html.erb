@@ -9,28 +9,42 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <div id="patients">
   <%= content_tag_for(:div, @user.patients) do | patient | %>
     <h1><%= patient.name %></h1>
-    <h2>Routines</h2>
-    <% patient.routines.each do |routine| %>
-      <p>
-        <%= routine.name %>
-        <%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %>
-      </p>
-    <% end %>
+    <div id="routines">
+      <h2>Routines</h2>
+      <% patient.routines.each do |routine| %>
+        <p>
+          <%= routine.name %>
+          <%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %>
+        </p>
+      <% end %>
+    </div>
+    <div id="pending_rewards">
     <h2>Rewards</h2>
-    <table id="pending_rewards">
-      <thead>
-        <th>Name</th><th>Description</th><th>Target</th><th>Eligible Rewards</th>
-      </thead>
-      <tbody>
-        <%= content_tag_for(:tr, patient.goals) do |rd| %>
-          <td><%= rd.name %></td>
-          <td><%= rd.description %></td>
-          <td><%= rd.target.to_s %></td>
-          <td><%= rd.pending %></td>
-          <td><%= link_to("Give award", new_award_path(goal_id: rd.id)) if rd.pending > 0 %></td>
-        <% end %>
-      </tbody>
-    </table>
+      <table>
+        <thead>
+          <th>Name</th><th>Description</th><th>Target</th><th>Eligible Rewards</th>
+        </thead>
+        <tbody>
+          <%= content_tag_for(:tr, patient.goals) do |rd| %>
+            <td><%= rd.name %></td>
+            <td><%= rd.description %></td>
+            <td><%= rd.target.to_s %></td>
+            <td><%= rd.pending %></td>
+            <td><%= link_to("Give award", new_award_path(goal_id: rd.id)) if rd.pending > 0 %></td>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div id="completed_routines">
+      <h2>Recently Completed Routines</h2>
+      <table>
+        <thead>
+          <th>Routine</th><th>Clean?</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   <% end %>
 </div>
 <div id="users">
