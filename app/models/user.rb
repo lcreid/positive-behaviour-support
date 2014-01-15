@@ -43,6 +43,7 @@ provided by Omniauth, false otherwise.
 Create a User based on the information provided by Omniauth.
 =end
   def self.create_from_omniauth(auth)
+    puts "Create Google response: #{auth["info"]}"
     user = create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
@@ -50,7 +51,10 @@ Create a User based on the information provided by Omniauth.
       when 'twitter'
         user.name = auth["info"]["nickname"]
       when 'google_oauth2'
-        user.name = auth["name"] # FIXME Isn't getting a name from Google.
+        puts "Oauth2 from Google name: #{auth['name']}"
+        user.name = auth["info"]["name"] 
+      else
+        raise "Shouldn't happen."
       end
     end
   end
