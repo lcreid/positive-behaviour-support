@@ -43,11 +43,19 @@ provided by Omniauth, false otherwise.
 Create a User based on the information provided by Omniauth.
 =end
   def self.create_from_omniauth(auth)
+    puts "Creating???"
     user = create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.name = auth["info"]["nickname"]
+      case user.provider
+      when 'twitter'
+        user.name = auth["info"]["nickname"]
+      when 'google_oauth2'
+        user.name = auth["name"]
+      end
     end
+    puts "Created #{user.inspect}"
+    user
   end
 
 =begin rdoc

@@ -13,5 +13,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   # publicly accessible git repository. For now I'll have to remember to set
   # the environment before running the server.
   provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
+  provider :google_oauth2, ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET']
 end
 

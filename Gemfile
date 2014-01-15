@@ -46,3 +46,9 @@ end
 
 # From: http://railscasts.com/episodes/241-simple-omniauth-revised
 gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+
+group :test do
+  gem 'capybara'
+  gem 'capybara_minitest_spec'
+end

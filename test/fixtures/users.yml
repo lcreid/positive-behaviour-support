@@ -5,12 +5,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 existing_twitter:
-  provider: Twitter
+  provider: twitter
   uid: 1
-  name: One Twitter
+  name: One twitter
 
 existing_google:
-  provider: Google
+  provider: google_oauth2
   uid: 1
   name: Two Google
 
@@ -25,17 +25,17 @@ existing_linkedin:
   name: Four LinkedIn
 
 user_marie:
-  provider: Google
+  provider: google_oauth2
   uid: 2
   name: Marie
 
 user_stella:
-  provider: Twitter
+  provider: twitter
   uid: 2
   name: Stella
 
 user_nick:
-  provider: Twitter
+  provider: twitter
   uid: 3
   name: Nick
 

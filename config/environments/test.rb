@@ -39,4 +39,8 @@ Pbs::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  
+  # From: https://github.com/intridea/omniauth/wiki/Integration-Testing
+  # From: http://stackoverflow.com/questions/9730886/rails-rspec-and-omniauth-integration-testing
+  OmniAuth.config.test_mode = true
 end
