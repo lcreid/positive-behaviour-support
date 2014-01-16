@@ -6,3 +6,15 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$padding: 5px;
+$border-width: 1px;
+$margin: 0;
+$content-width: $width - 2 * ($padding + $border-width + $margin);
+
+.routines {
+  width: $content-width;
+  padding: $padding;
+//  box-shadow: 5px 5px 5px  black;
+//  border: solid $border-width;
+}

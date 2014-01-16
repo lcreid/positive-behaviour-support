@@ -17,6 +17,7 @@ Pbs::Application.routes.draw do
   
   resources :completed_routines
   resources :awards
+  resources :routines
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

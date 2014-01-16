@@ -90,7 +90,7 @@ The first patient also has ten completed routines, eight of which are clean,
 meaning the patient is eligible for two rewards, with two left over.
 =end
     [6,4].each_with_index do |reps,i|
-      make_completed_routines(pt.routines[i], reps, 1.day).each do |cr|
+      make_completed_routines(pt.routines[i], reps, -1.day).each do |cr|
         pt.routines[i].completed_routines << CompletedRoutine.create!(cr)
       end
     end

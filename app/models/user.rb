@@ -43,15 +43,13 @@ provided by Omniauth, false otherwise.
 Create a User based on the information provided by Omniauth.
 =end
   def self.create_from_omniauth(auth)
-    puts "Create Google response: #{auth["info"]}"
     user = create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       case user.provider
-      when 'twitter'
+      when 'twitter', 'Training'
         user.name = auth["info"]["nickname"]
       when 'google_oauth2'
-        puts "Oauth2 from Google name: #{auth['name']}"
         user.name = auth["info"]["name"] 
       else
         raise "Shouldn't happen."
@@ -71,11 +69,19 @@ Return the Person that is the primary identity of the user.
 #  end
 
 =begin rdoc
-A user is allowed to complete a routine if:
+A user is allowed to complete a routine if they
+can access it.
+=end  
+  def can_complete?(routine)
+    can_access?(routine)
+  end
+
+=begin rdoc
+A user is allowed to access a routine if:
 * they're connected to the person assigned to the routine.
 * Possibly other conditions that are to be defined.
 =end  
-  def can_complete?(routine)
+  def can_access?(routine)
     routine = Routine.find(routine) unless routine.is_a?(Routine)
     return false unless routine
     return people.any? { |p| p.id == routine.person_id }

@@ -48,7 +48,13 @@ end
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
+gem 'humanize_boolean'
+
 group :test do
   gem 'capybara'
   gem 'capybara_minitest_spec'
+end
+
+group :test, :development do
+  gem 'timecop'
 end

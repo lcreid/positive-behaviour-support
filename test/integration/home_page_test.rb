@@ -38,7 +38,16 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert page.has_link?("Google"), "No Google link."
     click_on('Google')
     assert_equal home_user_path(user), current_path
-    assert has_selector?('div#completed_routines'), "Missing the completed routines"
+    assert has_selector?('div.completed_routines'), "Missing the completed routines"
+    assert has_selector?('div.completed_routines tbody tr', count: before = 8), "Unexpected completed routines"
+    all('a', :text => 'Add New').first.click
+    assert_equal new_completed_routine_path, current_path
+    all('tbody tr') do |row|
+      row.within {choose('observation_y')}
+    end
+    click_button('Create')
+    assert_equal home_user_path(user), current_path
+    assert has_selector?('div.completed_routines tbody tr', count: before + 1), "Missing completed routine row"
   end
 end
 

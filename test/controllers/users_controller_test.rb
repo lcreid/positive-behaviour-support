@@ -29,7 +29,7 @@ class UsersControllerTest < ActionController::TestCase
         end
         assert_select pt[0], 'p', 3
       
-        assert_select pt[0], 'div#pending_rewards table' do
+        assert_select pt[0], 'div.pending_rewards table' do
           assert_select 'tbody tr', 2 do |reward|
             assert_select reward[0], 'td', "Time Off"
             assert_select reward[1], 'td', "Nothing"

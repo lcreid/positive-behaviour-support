@@ -51,6 +51,8 @@ GEM
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
+    humanize_boolean (0.0.1)
+      i18n
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -135,6 +137,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    timecop (0.7.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -154,6 +157,7 @@ DEPENDENCIES
   capybara
   capybara_minitest_spec
   coffee-rails (~> 4.0.0)
+  humanize_boolean
   jbuilder (~> 1.2)
   jquery-rails
   omniauth-google-oauth2
@@ -162,5 +166,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3
+  timecop
   turbolinks
   uglifier (>= 1.3.0)
