@@ -9,6 +9,7 @@ class CompletedRoutine < ActiveRecord::Base
   belongs_to :routine
   has_many :completed_expectations
   accepts_nested_attributes_for :completed_expectations
+  scope :most_recent, ->(n = 5) { order(created_at: :desc).limit(n) }
   
 =begin rdoc
 Override == when the other object is a Routine, to test only the attributes

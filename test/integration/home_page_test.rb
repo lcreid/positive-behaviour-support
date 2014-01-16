@@ -39,15 +39,18 @@ class HomePageTest < ActionDispatch::IntegrationTest
     click_on('Google')
     assert_equal home_user_path(user), current_path
     assert has_selector?('div.completed_routines'), "Missing the completed routines"
-    assert has_selector?('div.completed_routines tbody tr', count: before = 8), "Unexpected completed routines"
-    all('a', :text => 'Add New').first.click
-    assert_equal new_completed_routine_path, current_path
-    all('tbody tr') do |row|
-      row.within {choose('observation_y')}
+    # There are 8 completed routines at this point, but we set the maximum to display to 5.
+    assert_difference "CompletedRoutine.all.count" do
+      assert has_selector?('div.completed_routines tbody tr', count: before = 5), "Unexpected completed routines"
+      all('a', :text => 'Add New').first.click
+      assert_equal new_completed_routine_path, current_path
+      all('tbody tr') do |row|
+        row.within {choose('observation_y')}
+      end
+      click_button('Create')
+      assert_equal home_user_path(user), current_path
     end
-    click_button('Create')
-    assert_equal home_user_path(user), current_path
-    assert has_selector?('div.completed_routines tbody tr', count: before + 1), "Missing completed routine row"
+    # assert has_selector?('div.completed_routines tbody tr', count: before + 1), "Missing completed routine row"
   end
 end
 

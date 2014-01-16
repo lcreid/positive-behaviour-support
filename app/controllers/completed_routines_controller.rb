@@ -5,7 +5,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 class CompletedRoutinesController < ApplicationController
-  before_action :user_allowed_to_complete_routine, except: :create
+  before_action :user_allowed_to_complete_routine, except: [:create, :index]
   
   def new
     template = Routine.find(params[:routine_id])
@@ -24,6 +24,10 @@ class CompletedRoutinesController < ApplicationController
 #    puts params.inspect # Get the view working so I can see what the parameters are going to be, so I can write the test case.
     CompletedRoutine.create!(completed_routine_params)
     redirect_to home_user_path(current_user)
+  end
+  
+  def index
+    params.require(:person_id)
   end
   
   private

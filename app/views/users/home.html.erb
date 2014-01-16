@@ -36,6 +36,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       </table>
     </div>
     <div class="completed_routines">
+      <% rows_to_show = 5 %>
       <h2>Recently Completed Routines</h2>
       <table>
         <thead>
@@ -43,13 +44,16 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </thead>
         <tbody>
 <!--        TODO limit to five rows with a "More..." link-->
-        <%= content_tag_for(:tr, patient.completed_routines) do |cr| %>
+        <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
           <td><%= cr.name %></td>
           <td><%= cr.is_clean?.humanize %></td>
           <td><%= cr.created_at.to_s(:humanized_ago) %></td> 
         <% end %>
         </tbody>
       </table>
+      <% if rows_to_show < patient.completed_routines.size %>
+        <%= link_to("More...", completed_routines_path(person_id: patient.id)) %>
+      <% end %>
     </div>
   <% end %>
 </div>
