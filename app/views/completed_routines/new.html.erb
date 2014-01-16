@@ -43,7 +43,9 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         <% end %>
       </tbody>
     <% end %>
-    <%= crf.submit %>
+    <!-- The following button trick doesn't work for <= IE8 -->
+    <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+    <%= crf.submit 'Save' %>
   <% end %>
 <% end %>
 

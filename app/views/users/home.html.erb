@@ -3,63 +3,72 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id="user-name">
-  <h1><%= @user.name %></h1>
-</div>
-<div id="patients">
-  <%= content_tag_for(:div, @user.patients) do | patient | %>
-    <h1><%= patient.name %></h1>
-    <div class="routines">
-      <h2>Routines</h2>
-      <% patient.routines.each do |routine| %>
-        <p>
-          <%= link_to(routine.name, routine_path(routine)) %>
-          <%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %>
-        </p>
-      <% end %>
-    </div>
-    <div class="pending_rewards">
-    <h2>Rewards</h2>
-      <table>
-        <thead>
-          <th>Name</th><th>Description</th><th>Target</th><th>Eligible Rewards</th>
-        </thead>
-        <tbody>
-          <%= content_tag_for(:tr, patient.goals) do |g| %>
-            <td><%= g.name %></td>
-            <td><%= g.description %></td>
-            <td><%= g.target.to_s %></td>
-            <td><%= g.pending %></td>
-            <td><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+<div id="home">
+  <div id="user-name" class="container">
+    <h1><%= @user.name %></h1>
+  </div>
+  <div id="patients">
+    <%= content_tag_for(:div, @user.patients, class: "container") do | patient | %>
+      <h1><%= patient.name %></h1>
+      <div class="routines content">
+        <h2>Routines</h2>
+        <table>
+          <tbody>
+            <%= content_tag_for(:tr, patient.routines) do |routine| %>
+              <td><%= link_to(routine.name, routine_path(routine)) %></td>
+              <td style="text-align: right;"><%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %></td>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="pending_rewards content">
+      <h2>Rewards</h2>
+        <table>
+          <thead>
+            <th>Name</th><th>Description</th><th>Target</th><th>Eligible Rewards</th><th></th>
+          </thead>
+          <tbody>
+            <%= content_tag_for(:tr, patient.goals) do |g| %>
+              <td><%= g.name %></td>
+              <td><%= g.description %></td>
+              <td style="text-align: right;"><%= g.target.to_s %></td>
+              <td style="text-align: right;"><%= g.pending %></td>
+              <td style="text-align: right;"><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="completed_routines content">
+        <% rows_to_show = 5 %>
+        <h2>Recently Completed Routines</h2>
+        <table>
+          <thead>
+            <th>Routine</th><th>Clean?</th><th>Date</th>
+          </thead>
+          <tbody>
+          <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
+            <td><%= cr.name %></td>
+            <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
+            <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
           <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="completed_routines">
-      <% rows_to_show = 5 %>
-      <h2>Recently Completed Routines</h2>
+          </tbody>
+        </table>
+        <% if rows_to_show < patient.completed_routines.size %>
+          <p><%= link_to("More...", completed_routines_path(person_id: patient.id)) %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div id="users" class="container">
+    <h1>Connections</h1>
+    <div class="content">
       <table>
-        <thead>
-          <th>Routine</th><th>Clean?</th><th>Date</th>
-        </thead>
         <tbody>
-<!--        TODO limit to five rows with a "More..." link-->
-        <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
-          <td><%= cr.name %></td>
-          <td><%= cr.is_clean?.humanize %></td>
-          <td><%= cr.created_at.to_s(:humanized_ago) %></td> 
+        <%= content_tag_for(:tr, @user.users) do | user | %>
+          <td><%= user.name %></td>
         <% end %>
         </tbody>
       </table>
-      <% if rows_to_show < patient.completed_routines.size %>
-        <%= link_to("More...", completed_routines_path(person_id: patient.id)) %>
-      <% end %>
     </div>
-  <% end %>
-</div>
-<div id="users">
-  <h1>Connections</h1>
-  <% @user.users.each do | user | %>
-    <p><%= user.name %></p>
-  <% end %>
+  </div>
 </div>

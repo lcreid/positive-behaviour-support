@@ -47,7 +47,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
       all('tbody tr') do |row|
         row.within {choose('observation_y')}
       end
-      click_button('Create')
+      click_button('Save')
       assert_equal home_user_path(user), current_path
     end
     # assert has_selector?('div.completed_routines tbody tr', count: before + 1), "Missing completed routine row"

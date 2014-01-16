@@ -1,12 +1,36 @@
 $top_menu_h: 30px !default;
-$width: 986px !default;
+$width: 668px !default;
+$font-size: 13px !default;
 
-body, p, h1, h2, h3, h4, table, td, th, ul, ol, textarea, input {
-  font-family: verdana,helvetica,arial,sans-serif;
-  font-size: 14px;
+// Colours
+$browser-background: rgb(236, 236, 236);
+$content-background: white !default;
+$menu-background: black !default;
+$menu-text-colour: white !default;
+$note-background: rgb(255, 255, 204) !default;
+$alert-background: rgb(255, 255, 204) !default;
+$alert-border-colour: rgb(255, 153, 0) !default;
+$h1-background: rgb(237, 243, 254) !default;
+$h1-colour: black !default;
+$h2-background: $browser-background !default;
+$h2-colour: black !default;
+$table-heading-background: $browser-background !default;
+$table-background-odd: $table-heading-background;
+$table-background-even: $content-background;
+$table-border-colour: $table-heading-background;
+$table-heading-border-colour: white;
+$link-colour: #6699FF;
+$box-shadow: rgb(128, 128, 128) !default;
+
+body, p, h4, table, td, th, ul, ol, textarea, input {
+  font-size: $font-size;
 }
+h1 { font-size: $font-size + 3px; }
+h2 { font-size: $font-size + 2px; }
+h3 { font-size: $font-size + 1px; }
+body { font-family: "Lucida Grande",verdana,helvetica,arial,sans-serif; }
 
-* {
+.layout_box {
   border-style: none;
   border-width: 0;
   margin: 0;
@@ -14,10 +38,14 @@ body, p, h1, h2, h3, h4, table, td, th, ul, ol, textarea, input {
 }
 
 body {
-  background: gray;
+  @extend .layout_box;
+  background: $browser-background;
 }
+table { border-collapse:collapse; } 
 
 #top_menu {
+  @extend .layout_box;
+  font-size: $font-size - 2px;
   text-align: right;
   padding-top: 0;
   color: white;
@@ -34,13 +62,14 @@ body {
 }
 
 #message_area {
+  @extend .layout_box;
   @extend .centre_in_browser;
-  @extend .normal_content;
 }
 
 #content_container {
+  @extend .layout_box;
   @extend .centre_in_browser;
-  @extend .normal_content;
+  padding-top: .1px; // This seems to make the container bump up against the menu bar.
 }
 
 .centre_in_browser {
@@ -49,22 +78,27 @@ body {
   margin-right: auto;
 }
 
-.normal_content {
-  background: white;
+.container {
+  background: $content-background;
+  box-shadow: 2px 2px 3px $box-shadow;
+//  box-shadow: 2px 2px 3px 0px #aaaaaa;
 }
 
 .ui-state-highlight {
   @extend .centre_in_browser;
-  background: #FFFF99;
+  background: $alert-background;
   min-height: 50px;
-  $mw: 5px;
-  margin: 0 $mw $mw $mw;
-  width: $width - 2 * $mw;
+  $padding: 5px;
+  padding: $padding;
+  width: $width - 2 * $padding;
+  border-color: $alert-border-colour;
+  border-style: solid none solid none;
+  border-width: 1px 0 1px 0;
 }
 
 .ui-state-error {
   @extend .ui-state-highlight;
-  background: #FF9999;
+  background: $alert-background; // FIXME Change this to another colour, more red.
 }
 
 @import "users";

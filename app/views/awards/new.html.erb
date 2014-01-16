@@ -8,7 +8,8 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <p>Congratulations! You've earned <%= @goal.description %></p>
   <%= label_tag "number_of_rewards", "Rewards (Enter 1 to #{@goal.pending})" %>
   <%= number_field_tag "number_of_rewards", "1", min: 1, max: @goal.pending %>
-  <%= submit_tag "Give Reward!" %>
+  <br/>
   <!-- The following button trick doesn't work for <= IE8 -->
   <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+  <%= submit_tag "Give Reward!" %>
 <% end %>

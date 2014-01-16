@@ -7,14 +7,55 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$padding: 5px;
-$border-width: 1px;
+$horizontal-padding: 15px;
+$vertical-padding: 5px;
+$border-width: 0px;
 $margin: 0;
-$content-width: $width - 2 * ($padding + $border-width + $margin);
+$content-width: $width - 2 * ($horizontal-padding + $border-width + $margin);
 
-.routines {
-  width: $content-width;
-  padding: $padding;
-//  box-shadow: 5px 5px 5px  black;
-//  border: solid $border-width;
+#home {
+  margin: 10px 0 10px 0;
+  
+  h1, h2 {
+    padding: 2px;
+    margin: 10px 0 0 0;
+  }
+  h1 {
+    background: $h1-background;
+    color: $h1-colour;
+  }
+  h2 {
+    background: $h2-background;
+    color: $h2-colour;
+  }
+
+  .pending_rewards { @extend .routines; }
+  .completed_routines { @extend .routines; }
+  .content {
+    width: $content-width;
+    padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
+  //  box-shadow: 5px 5px 5px  black;
+  //  border: solid $border-width;
+  }
+
+  table { width: $content-width; }
+  
+  th {
+    background-color: $table-heading-background;
+    font-weight: normal;
+    border-style: solid solid none solid;
+    border-width: thin thin 0 thin;
+    border-color: $table-heading-border-colour;
+  }
+  tr {
+    border-style: solid;
+    border-width: thin 0 thin 0;
+    border-color: $table-border-colour;
+    // TODO Vertical centre text
+  }
+  .odd_row { background-color: $table-background-odd; }
+  .even_row { background-color: $table-background-even; }
+  
+  a { color: $link_colour; }
 }
+
