@@ -18,12 +18,10 @@ class WelcomeControllerTest < ActionController::TestCase
     get :index
     assert_response :success
 
-    assert_select 'div#top_menu', "" # When using display: none style, it renders as the div with nothing in it
-	  assert_select 'div#sign-in', nil, "Missing sign in" do
+    assert_select 'div#top_menu', false, message("Found top menu") # When using display: none style, it renders as the div with nothing in it
 #		  assert_select 'div#sign-in-with', /.*Already registered? Sign in with.*/, "Missing or wrong sign-in header" do
-		  assert_select 'div#sign-in-with', nil, "Missing or wrong sign-in header" do
-		    assert_select 'a[href=/auth/twitter]', nil, "Missing link"
-		  end
+	  assert_select 'div#sign-in-with', nil, "Missing or wrong sign-in header" do
+	    assert_select 'a[href=/auth/twitter]', nil, "Missing link"
 	  end
   end
 end

@@ -5,7 +5,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 class WelcomeController < ApplicationController
-  skip_before_action :require_login, only: :index
+  skip_before_action :require_login#, only: :index
 
   layout 'welcome'
   

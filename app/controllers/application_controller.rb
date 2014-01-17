@@ -31,8 +31,6 @@ Return the user currently logged-in.
   end
   helper_method :current_user
   
-  before_action :require_login
-
 =begin rdoc
 Log in a user.
 =end  
@@ -46,7 +44,8 @@ Throw a page not found exception (404) if there is no logged in user.
   def require_login
     not_found unless logged_in?
   end
-  
+  before_action :require_login
+
 =begin rdoc
 Return nil if no user is logged in.
 =end  

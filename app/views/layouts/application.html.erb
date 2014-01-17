@@ -13,23 +13,25 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <style><%= yield :stylesheets %></style>
   </head>
   <body>
-    <div id="top_menu">
-      <div class="centre_in_browser">
-        <% if current_user %>
-          Signed in as <%= current_user.name %>.
-          <%= link_to "Sign out", signout_path %>
-        <% end %>
+    <% if current_user %>
+      <div id="top_menu">
+        <div class="centre_in_browser">
+            Signed in as <%= current_user.name %>.
+            <%= link_to "Sign out", signout_path %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <div id="content_container">
-	    <div id="message_area">
-		    <% if notice %>
-			    <pre class="ui-state-highlight"><%= notice %></pre>
-		    <% end %>
-		    <% if alert %>
-			    <pre class="ui-state-error"><%= alert %></pre>
-		    <% end %>
-	    </div>
+      <% unless flash.empty? %>
+	      <div id="message_area">
+		      <% if notice %>
+			      <pre class="ui-state-highlight"><%= notice %></pre>
+		      <% end %>
+		      <% if alert %>
+			      <pre class="ui-state-error"><%= alert %></pre>
+		      <% end %>
+	      </div>
+      <% end %>
     
       <%= yield %>
       

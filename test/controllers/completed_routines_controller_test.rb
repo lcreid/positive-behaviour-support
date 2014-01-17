@@ -81,4 +81,9 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_equal expectations[0], cr.completed_expectations[0].description
     assert_equal expectations[1], cr.completed_expectations[1].description
   end
+  
+  test "show index of completed routines" do
+    @controller.log_in(user = users(:user_marie))
+    
+  end
 end

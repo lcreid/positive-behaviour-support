@@ -28,6 +28,7 @@ class CompletedRoutinesController < ApplicationController
   
   def index
     params.require(:person_id)
+    @person = Person.find(params[:person_id])
   end
   
   private

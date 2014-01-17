@@ -3,12 +3,13 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id='sign-in'>
-  <div id='sign-in-with' style="text-align: center;">
-  Sign in with
+<div id='sign_in' class="welcome">
+  <h1>Welcome to Positive Behaviour Support</h1>
+  <div id='sign_in_with'>
+  <p>Sign in with<p>
     <div id='sign-in-with'>
-      <%= link_to "Twitter", "/auth/twitter" %>
-      <%= link_to "Google", "/auth/google_oauth2" %>
+      <div class="idp"><%= link_to image_tag("sign-in-with-twitter-link.png", alt: "Twitter"), "/auth/twitter" %></div>
+      <div class="idp"><%= link_to "Google", "/auth/google_oauth2" %></div>
     </div>
   </div>
 </div>

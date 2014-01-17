@@ -1,4 +1,4 @@
-$top_menu_h: 30px !default;
+$top-menu-h: 30px !default;
 $width: 668px !default;
 $font-size: 13px !default;
 
@@ -22,7 +22,7 @@ $table-heading-border-colour: white;
 $link-colour: #6699FF;
 $box-shadow: rgb(128, 128, 128) !default;
 
-body, p, h4, table, td, th, ul, ol, textarea, input {
+body, p, h4, table, td, th, ul, ol, textarea, input, button {
   font-size: $font-size;
 }
 h1 { font-size: $font-size + 3px; }
@@ -41,25 +41,7 @@ body {
   @extend .layout_box;
   background: $browser-background;
 }
-table { border-collapse:collapse; } 
-
-#top_menu {
-  @extend .layout_box;
-  font-size: $font-size - 2px;
-  text-align: right;
-  padding-top: 0;
-  color: white;
-  height:  $top_menu_h;
-  line-height: $top_menu_h;
-  background-color: black; 
-  a {
-    color: white;
-    &:hover {
-      opacity:0.6;
-      filter:alpha(opacity=60); /* For IE8 and earlier */
-    }
-  }
-}
+table { border-collapse: collapse; } 
 
 #message_area {
   @extend .layout_box;
@@ -69,7 +51,25 @@ table { border-collapse:collapse; }
 #content_container {
   @extend .layout_box;
   @extend .centre_in_browser;
-  padding-top: .1px; // This seems to make the container bump up against the menu bar.
+//  padding-top: .1px; // This seems to make the container bump up against the menu bar.
+}
+  
+#top_menu {
+  @extend .layout_box;
+  font-size: $font-size - 2px;
+  text-align: right;
+  padding-top: 0;
+  color: white;
+  height:  $top-menu-h;
+  line-height: $top-menu-h;
+  background-color: black; 
+  a {
+    color: white;
+    &:hover {
+      opacity:0.6;
+      filter:alpha(opacity=60); /* For IE8 and earlier */
+    }
+  }
 }
 
 .centre_in_browser {
@@ -81,7 +81,6 @@ table { border-collapse:collapse; }
 .container {
   background: $content-background;
   box-shadow: 2px 2px 3px $box-shadow;
-//  box-shadow: 2px 2px 3px 0px #aaaaaa;
 }
 
 .ui-state-highlight {
@@ -101,5 +100,73 @@ table { border-collapse:collapse; }
   background: $alert-background; // FIXME Change this to another colour, more red.
 }
 
-@import "users";
+#home, #completed_routine, #new_award, #completed_routines {
+  $horizontal-padding: 15px;
+  $vertical-padding: 5px;
+  $border-width: 0px;
+  $margin: 0;
+  $content-width: $width - 2 * ($horizontal-padding + $border-width + $margin);
 
+  margin: 10px 0 10px 0;
+  
+  h1, h2 {
+    padding: 2px;
+    margin: 10px 0 0 0;
+  }
+  h1 {
+    background: $h1-background;
+    color: $h1-colour;
+  }
+  h2 {
+    background: $h2-background;
+    color: $h2-colour;
+  }
+
+  .pending_rewards { @extend .routines; }
+  .completed_routines { @extend .routines; }
+  .content {
+    width: $content-width;
+    padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
+  //  box-shadow: 5px 5px 5px  black;
+  //  border: solid $border-width;
+  }
+
+  table { width: $content-width; }
+  
+  th {
+    background-color: $table-heading-background;
+    font-weight: normal;
+    border-style: solid solid none solid;
+    border-width: thin thin 0 thin;
+    border-color: $table-heading-border-colour;
+  }
+  tr {
+    border-style: solid;
+    border-width: thin 0 thin 0;
+    border-color: $table-border-colour;
+    // TODO Vertical centre text
+  }
+  .odd_row { background-color: $table-background-odd; }
+  .even_row { background-color: $table-background-even; }
+  
+  a { color: $link_colour; }
+
+  // From http://stackoverflow.com/questions/1030793/input-with-displayblock-is-not-a-block-why-not
+  .grow_child_to_parent {
+    display: block; 
+    width: 100%;
+	  box-sizing: border-box; /* css3 rec */
+	  -moz-box-sizing: border-box; /* ff2 */
+	  -ms-box-sizing: border-box; /* ie8 */
+	  -webkit-box-sizing: border-box; /* safari3 */
+	  -khtml-box-sizing: border-box; /* konqueror */
+  }
+  /* TODO I would have to download and include the file boxsizing.htc into my app.
+    Already doing lots that isn't supported by IE6 and IE7.
+  //<!-- The voodoo gets scary. Force IE6 and IE7 to support IE5's box model -->
+  //<!--[if lt IE 8]><style>.bb {behavior:url("boxsizing.htc");}</style><![endif]-->
+  */
+}
+
+@import "welcome";
+@import "awards";

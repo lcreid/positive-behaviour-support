@@ -1,1 +1,25 @@
-<%= __FILE__ %>
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<div id="completed_routines">
+  <div id="patient-name" class="container">
+    <h1>Recently Completed Routines for <%= @person.name %></h1>
+    <div class="completed_routines content">
+      <table>
+        <thead>
+          <th>Routine</th><th>Clean?</th><th>Date</th>
+        </thead>
+        <tbody>
+        <%= content_tag_for(:tr, @person.completed_routines.most_recent) do |cr| %>
+          <td><%= cr.name %></td>
+          <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
+          <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!--FIXME Dry it up. Add back button. Fix the way we do infinite numbers of records.-->
