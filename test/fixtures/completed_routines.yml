@@ -51,4 +51,24 @@ matt_one_eight:
   comment: 
   person: patient_matt
   routine: brush_teeth
+  
+routine_index_one:
+  name: R1
+  person: person_marty
+  routine: routine_index_one
+
+routine_index_two:
+  name: R2
+  person: person_marty
+  routine: routine_index_two
+
+routine_index_three:
+  name: R3
+  person: person_marty
+  routine: routine_index_three
+
+routine_index_four:
+  name: R4
+  person: person_marty
+  routine: routine_index_four
 

@@ -44,3 +44,8 @@ user_five:
   uid: 1
   name: User Five
 
+user_sharon:
+  provider: Testing
+  uid: 2
+  name: Sharon
+

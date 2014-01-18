@@ -11,10 +11,10 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   $idp-horz-margin: 10px;
   $font-size: 20px;
   
-  $width: 100%;
-//  @extend .centre_in_browser;
+  $width: 90%;
+  @extend .centre_in_browser;
   @extend .container;
-//  width: $width;
+  width: $width;  // Because the @extend classes put in a the width as calculated when they were defined.
   padding: 10px 5px 20px 5px;
   margin-top: 10px;
 

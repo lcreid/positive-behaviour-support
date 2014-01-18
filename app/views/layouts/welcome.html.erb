@@ -3,7 +3,16 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<% content_for :stylesheets do %>
-  #top-menu {display: none}
-<% end %>
-<%= render template: "layouts/application" %>
+<%# TODO Dry this up with the application template. %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Positive Behaviour Support</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+      <%= yield %>
+  </body>
+</html>

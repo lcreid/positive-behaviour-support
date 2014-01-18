@@ -12,6 +12,7 @@ class Person < ActiveRecord::Base
   has_many :people, through: :links, source: :person_b
   has_many :routines
   has_many :completed_routines, through: :routines
+  has_many :completed_expectations, through: :completed_routines
   has_many :goals
   accepts_nested_attributes_for :routines
   accepts_nested_attributes_for :goals
@@ -41,7 +42,16 @@ to the other.
     people.delete(other)
     other.people.delete(self)
   end
-    
+
+=begin rdoc
+Get all the unique expectations, by expectation ID, for completed routines
+for this person. These become the column headings (or row headings) for
+the display.
+=end
+  def unique_expectations
+    # Select unique expectations that are in completed expectations for this person.
+  end
+
 #  def name
 #    "#{self.class}: #{super}"
 #  end

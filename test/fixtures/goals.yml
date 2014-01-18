@@ -22,3 +22,9 @@ belongs_to_no_one:
   target: 1
   person: 
 
+marty_one:
+  name: "Marty's Goal"
+  description: 
+  target: 1
+  person: person_marty
+

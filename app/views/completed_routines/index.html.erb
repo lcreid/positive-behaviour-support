@@ -9,17 +9,27 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <div class="completed_routines content">
       <table>
         <thead>
-          <th>Routine</th><th>Clean?</th><th>Date</th>
+          <th>Routine</th><th>Clean?</th><th>Date</th><th>Expectations</th>
         </thead>
         <tbody>
-        <%= content_tag_for(:tr, @person.completed_routines.most_recent) do |cr| %>
+        <%= content_tag_for(:tr, @person.completed_routines.order(created_at: :desc)) do |cr| %>
           <td><%= cr.name %></td>
           <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
           <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
+          <td>
+            <table class="grow_child_to_parent">
+              <%= content_tag_for(:tr, cr.completed_expectations) do |ce| %>
+                <td><%= ce.description %></td>
+                <td><%= ce.observation %></td>
+              <% end %>
+            </table>
+          </td>
         <% end %>
         </tbody>
       </table>
+      <!-- The following button trick doesn't work for <= IE8 -->
+      <p><%= link_to '<button type="button">Back</button>'.html_safe, :back %></p>
     </div>
   </div>
 </div>
-<!--FIXME Dry it up. Add back button. Fix the way we do infinite numbers of records.-->
+<!--TODO Dry it up.
