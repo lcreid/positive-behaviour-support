@@ -7,7 +7,7 @@ set :branch, 'master'
 set :deploy_to, '/var/www/pbs'
 set :default_stage, 'staging'
 set :keep_releases, 5
-set :linked_files, %w{config/database.yml config/config.yml}
+set :linked_files, %w{config/database.yml config/initializers/omniauth.rb}
 
 
 # Default branch is :master
