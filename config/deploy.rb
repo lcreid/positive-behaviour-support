@@ -8,7 +8,7 @@ set :deploy_to, '/var/www/pbs'
 set :default_stage, 'staging'
 set :keep_releases, 5
 set :linked_files, %w{config/database.yml config/initializers/omniauth.rb}
-
+set :rails_env, "staging" # To work around a bug in capistrano-rails. Check when it's fixed supposedly in 1.1.0
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
