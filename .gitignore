@@ -15,4 +15,7 @@
 /log/*.log
 /tmp
 
+# Hide secrets
 omniauth.sh
+/config/database.yml
+/config/initializers/omniauth.rb

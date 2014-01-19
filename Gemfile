@@ -49,6 +49,8 @@ gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
 gem 'humanize_boolean'
+gem 'capistrano', '~> 3.1'
+gem 'capistrano-bundler'
 
 group :test do
   gem 'capybara'
@@ -57,4 +59,8 @@ end
 
 group :test, :development do
   gem 'timecop'
+end
+
+group :development do
+  gem 'capistrano-rails', '~> 1.1'
 end

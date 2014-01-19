@@ -48,6 +48,7 @@ table { border-collapse: collapse; }
   @extend .centre_in_browser;
 }
 
+// This is in the application template. It centres its descendants in the browser window.
 #content_container {
   @extend .layout_box;
   @extend .centre_in_browser;
@@ -78,6 +79,8 @@ table { border-collapse: collapse; }
   margin-right: auto;
 }
 
+// Put a drop shadow on an area.
+// This has to be a a parent of the block with the .content.
 .container {
   background: $content-background;
   box-shadow: 2px 2px 3px $box-shadow;
@@ -124,6 +127,8 @@ table { border-collapse: collapse; }
 
   .pending_rewards { @extend .routines; }
   .completed_routines { @extend .routines; }
+  // Pad the stuff inside the container for aesthetic reasons.
+  // This has to be a child of the container. 
   .content {
     width: $content-width;
     padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
