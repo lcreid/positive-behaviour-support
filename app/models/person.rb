@@ -69,7 +69,11 @@ then also grouped by month and year.
     completed_routines
       .group("date(completed_routines.created_at)")
       .pluck("date(completed_routines.created_at), count(*)")
+<<<<<<< HEAD
       .collect { |x| [x[0].kind_of?(String) ? Time.zone.parse(x[0]) : x[0], x[1]]}
+=======
+      .collect { |x| [x[0].kind_of?(Time) ? x[0] : Time.zone.parse(x[0]), x[1]]}
+>>>>>>> 4c7723971383b1c2c88ef89055c206f575615db9
       .group_by { |x| x[0].beginning_of_month }
       .flatten
       # TODO Confirm when I add time zone that this uses time zone
