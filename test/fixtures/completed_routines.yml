@@ -52,23 +52,39 @@ matt_one_eight:
   person: patient_matt
   routine: brush_teeth
   
-routine_index_one:
+routine_index_one_one:
   name: R1
   person: person_marty
   routine: routine_index_one
+  created_at: 2014-01-30T12:59:43.1Z
 
-routine_index_two:
+routine_index_one_two:
   name: R2
   person: person_marty
-  routine: routine_index_two
+  routine: routine_index_one
+  created_at: 2014-02-01T12:59:43.1Z
 
-routine_index_three:
+routine_index_one_three:
   name: R3
   person: person_marty
-  routine: routine_index_three
+  routine: routine_index_one
+  created_at: 2014-02-02T09:59:43.1Z
 
-routine_index_four:
+routine_index_one_four:
   name: R4
   person: person_marty
-  routine: routine_index_four
+  routine: routine_index_one
+  created_at: 2014-02-02T12:59:43.1Z
+
+routine_index_two_one:
+  name: R5
+  person: person_marty
+  routine: routine_index_two
+  created_at: 2014-01-31T12:59:43.1Z
+
+routine_index_two_two:
+  name: R6
+  person: person_marty
+  routine: routine_index_two
+  created_at: 2014-02-01T14:59:43.1Z
 

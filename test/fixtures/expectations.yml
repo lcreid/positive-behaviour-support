@@ -40,3 +40,27 @@ read:
   description: Read for ten minutes
   routine: go_to_bed
 
+ri0101:
+  description: Expectation 1
+  routine: routine_index_one
+   
+ri0102:
+  description: Expectation 2
+  routine: routine_index_one
+   
+ri0103:
+  description: Expectation 3
+  routine: routine_index_one
+     
+ri0104:
+  description: Expectation 4
+  routine: routine_index_one
+   
+ri0201:
+  description: Expectation 5
+  routine: routine_index_two
+     
+ri0202:
+  description: Expectation 6
+  routine: routine_index_two
+

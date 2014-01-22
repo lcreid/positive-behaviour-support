@@ -1,9 +1,3 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -17,7 +11,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113054321) do
+ActiveRecord::Schema.define(version: 20140122033440) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -26,9 +20,11 @@ ActiveRecord::Schema.define(version: 20140113054321) do
     t.integer  "completed_routine_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "expectation_id"
   end
 
   add_index "completed_expectations", ["completed_routine_id"], name: "index_completed_expectations_on_completed_routine_id"
+  add_index "completed_expectations", ["expectation_id"], name: "index_completed_expectations_on_expectation_id"
 
   create_table "completed_routines", force: true do |t|
     t.string   "name"

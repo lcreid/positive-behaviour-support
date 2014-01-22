@@ -9,21 +9,29 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <div class="completed_routines content">
       <table>
         <thead>
-          <th>Routine</th><th>Clean?</th><th>Date</th><th>Expectations</th>
+          <tr>
+            <th rowspan="2">Routine</th>
+            <th rowspan="2">Expectation</th>
+            <%= month_heading %></tr>
+          <tr><%= day_heading %></tr>
         </thead>
         <tbody>
-        <%= content_tag_for(:tr, @person.completed_routines.order(created_at: :desc)) do |cr| %>
-          <td><%= cr.name %></td>
-          <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
-          <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
-          <td>
-            <table class="grow_child_to_parent">
-              <%= content_tag_for(:tr, cr.completed_expectations) do |ce| %>
-                <td><%= ce.description %></td>
+        <% @person.routines.order(name: :asc).each do |r| %>
+          <%# Loop on expectations %>
+          <%= content_tag_for(:tr, r.expectations) do |e| %>
+            <td><%= r.name %></td>
+            <td><%= e.description %></td>
+            <%# Loop on Dates %>
+            <% @detail_columns.each do |day, cols| %>
+              <%# Loop on completed expectations within the date %>
+              <% ces = @person.completed_expectations_for_day_and_expectation(e, day) %>
+              <% ces.each do |ce| %>
                 <td><%= ce.observation %></td>
               <% end %>
-            </table>
-          </td>
+              <%# if fewer completed expectations than needed, output empty column(s) %>
+              <%= (cols - ces.count).times.reduce("") { |sum, x| sum + "<td></td>"}.html_safe %>
+            <% end %>
+          <% end %>
         <% end %>
         </tbody>
       </table>
@@ -32,4 +40,4 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     </div>
   </div>
 </div>
-<!--TODO Dry it up.
+

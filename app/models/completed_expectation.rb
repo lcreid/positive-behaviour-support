@@ -6,7 +6,15 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 class CompletedExpectation < ActiveRecord::Base
   belongs_to :completed_routine
+  belongs_to :expectation
   scope :clean, -> { where('observation = "Y" or observation = "N/A"') }
+  
+=begin rdoc
+Get the routine associated with this completed expectation.
+=end
+  def routine
+    completed_routine.routine
+  end
   
 =begin rdoc
 Return a hash of attributes that make sense to compare to an expectation.

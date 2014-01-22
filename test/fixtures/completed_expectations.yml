@@ -65,46 +65,92 @@ matt_one_eight:
   completed_routine: matt_one_eight
   
 ri0101:
-  description: Expectation 1
-  completed_routine: routine_index_one
+  description: Expectation 1 Do Not Show
+  completed_routine: routine_index_one_one
+  observation: N
+  expectation: ri0101
+   
+ri0102:
+  description: Expectation 3 Do Not Show
+  completed_routine: routine_index_one_one
+  observation: Y
+  expectation: ri0103
    
 ri0103:
-  description: Expectation 3
-  completed_routine: routine_index_one
+  description: Expectation 1 Do Not Show
+  completed_routine: routine_index_one_two
+  observation: Y
+  expectation: ri0101
    
-ri0201:
-  description: Expectation 1
-  completed_routine: routine_index_two
+ri0104:
+  description: Expectation 2 Do Not Show
+  completed_routine: routine_index_one_two
+  observation: Y
+  expectation: ri0102
    
-ri0202:
-  description: Expectation 2
-  completed_routine: routine_index_two
-   
-ri0204:
-  description: Expectation 4
-  completed_routine: routine_index_two
+ri0105:
+  description: Expectation 4 Do Not Show
+  completed_routine: routine_index_one_two
+  observation: Y
+  expectation: ri0104
     
-ri0301:
-  description: Expectation 1
-  completed_routine: routine_index_three
+ri0106:
+  description: Expectation 1 Do Not Show
+  completed_routine: routine_index_one_three
+  observation: N
+  expectation: ri0101
    
-ri0302:
-  description: Expectation 2
-  completed_routine: routine_index_three
+ri0107:
+  description: Expectation 2 Do Not Show
+  completed_routine: routine_index_one_three
+  observation: Y
+  expectation: ri0102
    
-ri0303:
-  description: Expectation 3
-  completed_routine: routine_index_three
+ri0108:
+  description: Expectation 3 Do Not Show
+  completed_routine: routine_index_one_three
+  observation: Y
+  expectation: ri0103
      
-ri0402:
-  description: Expectation 2
-  completed_routine: routine_index_four
+ri0109:
+  description: Expectation 2 Do Not Show
+  completed_routine: routine_index_one_four
+  observation: N
+  expectation: ri0102
    
-ri0403:
-  description: Expectation 3
-  completed_routine: routine_index_four
+ri010a:
+  description: Expectation 3 Do Not Show
+  completed_routine: routine_index_one_four
+  observation: Y
+  expectation: ri0103
    
-ri0404:
-  description: Expectation 4
-  completed_routine: routine_index_four
- 
+ri010b:
+  description: Expectation 4 Do Not Show
+  completed_routine: routine_index_one_four
+  observation: Y
+  expectation: ri0104
+  
+ri0201:
+  description: Expectation 5 Do Not Show
+  completed_routine: routine_index_two_one
+  observation: Y
+  expectation: ri0201
+  
+ri0202:
+  description: Expectation 6 Do Not Show
+  completed_routine: routine_index_two_one
+  observation: Y
+  expectation: ri0202
+  
+ri0203:
+  description: Expectation 5 Do Not Show
+  completed_routine: routine_index_two_two
+  observation: Y
+  expectation: ri0201
+  
+ri0204:
+  description: Expectation 6 Do Not Show
+  completed_routine: routine_index_two_two
+  observation: Y
+  expectation: ri0202
+

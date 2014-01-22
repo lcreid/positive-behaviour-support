@@ -6,6 +6,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 class Expectation < ActiveRecord::Base
   belongs_to :routine
+  has_many :completed_routines, through: :routine
 
 =begin rdoc
 Return a hash of attributes that make sense to compare to a completed expectation.

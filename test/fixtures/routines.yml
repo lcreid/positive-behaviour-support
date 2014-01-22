@@ -42,13 +42,13 @@ routine_index_two:
   person: person_marty
   goal: marty_one
 
-routine_index_three:
-  name: R3
-  person: person_marty
-  goal: marty_one
+#routine_index_three:
+#  name: R3
+#  person: person_marty
+#  goal: marty_one
 
-routine_index_four:
-  name: R4
-  person: person_marty
-  goal: marty_one
+#routine_index_four:
+#  name: R4
+#  person: person_marty
+#  goal: marty_one
 

@@ -37,6 +37,14 @@ or weren't able to be completed through no fault of the patient.
   def is_clean?
     completed_expectations.all? { |ce| ce.is_clean? }
   end
+
+=begin rdoc
+Return all the expectations that have ever existed for the routine associated
+with this comopleted routine.
+=end
+  def expectations
+    Expectation.uniq.where(routine_id: self.routine_id)
+  end
 end
 
 =begin

@@ -17,4 +17,9 @@ class CompletedRoutineTest < ActiveSupport::TestCase
     assert_equal r, cr
     assert_equal cr, r
   end
+  
+  test "get expectations for completed routines reports" do
+    cr = completed_routines(:routine_index_one_one)
+    assert_equal 4, cr.expectations.size
+  end
 end
