@@ -89,10 +89,8 @@ to be eligible for a reward.
 The first patient also has ten completed routines, eight of which are clean,
 meaning the patient is eligible for two rewards, with two left over.
 =end
-    [6,4].each_with_index do |reps,i|
-      make_completed_routines(pt.routines[i], reps, -1.day).each do |cr|
-        pt.routines[i].completed_routines << CompletedRoutine.create!(cr)
-      end
+    [6,4,3].each_with_index do |reps,i|
+      make_completed_routines(pt.routines[i], reps, -1.day)
     end
     # Make two of the routines not clean.
     pt.routines[0].completed_routines[2].completed_expectations[0].observation = "N"
@@ -137,23 +135,33 @@ The second patient has two routines and no goals.
   def Training.make_completed_routines(routine, reps, date_increment, start_time = Time.current)
     completed_routines = []
     reps.times do |i|
-      hash = routine.attributes.change_keys("id" => "routine_id" ).
-        merge("created_at" => start_time + i * date_increment, 
-          "updated_at" => start_time + i * date_increment
-        )
-      hash.delete_if { |k,v| k == "goal_id" }
-      hash = hash.merge(completed_expectations_attributes: 
-        routine.expectations.collect do |e| 
-          e.attributes.
-            merge("observation" => "Y", 
-              "comment" => "Comment #{i.to_s}",
-              "created_at" => start_time + i * date_increment, 
-              "updated_at" => start_time + i * date_increment
-              ).
-            delete_if { |k,v| k == "routine_id" || k == "id" } 
+      completed_routines << CompletedRoutine.create!(routine.copyable_attributes) do |cr|
+#        puts "routine.copyable_attributes: #{routine.copyable_attributes.inspect}"
+        cr.created_at = cr.updated_at = start_time + i * date_increment
+        cr.completed_expectations.each do |ce|
+          ce.save!
+#          puts "ce: #{ce.inspect}"
+          ce.comment = "Comment #{i.to_s}"
+          ce.observation = "Y"
         end
-      )
-      completed_routines << hash
+      end
+#      hash = routine.attributes.change_keys("id" => "routine_id" ).
+#        merge("created_at" => start_time + i * date_increment, 
+#          "updated_at" => start_time + i * date_increment
+#        )
+#      hash.delete_if { |k,v| k == "goal_id" }
+#      hash = hash.merge(completed_expectations_attributes: 
+#        routine.expectations.collect do |e| 
+#          e.attributes.
+#            merge("observation" => "Y", 
+#              "comment" => "Comment #{i.to_s}",
+#              "created_at" => start_time + i * date_increment, 
+#              "updated_at" => start_time + i * date_increment
+#              ).
+#            delete_if { |k,v| k == "routine_id" || k == "id" } 
+#        end
+#      )
+#      completed_routines << hash
     end
     completed_routines
   end

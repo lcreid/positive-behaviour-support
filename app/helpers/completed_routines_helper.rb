@@ -31,7 +31,7 @@ module CompletedRoutinesHelper
 
     heading = by_month.inject("") do |memo, month|
 #      puts month.inspect
-      memo += "<th colspan=\"#{month[1]}\">#{month[0].strftime('%b-%y')}</th>"
+      memo += "<th colspan=\"#{month[1]}\">#{month[0].strftime('%b-%Y')}</th>"
     end
     
 #    puts heading

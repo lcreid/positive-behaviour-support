@@ -10,7 +10,15 @@ class CompletedExpectation < ActiveRecord::Base
   scope :clean, -> { where('observation = "Y" or observation = "N/A"') }
   
 =begin rdoc
-Get the routine associated with this completed expectation.
+Build a new CompletedExpectation from an Expectation.
+=end
+  def initialize(params)
+    params = params.copyable_attributes if params.is_a? Expectation
+    super(params)
+  end
+  
+=begin rdoc
+Get the Routine associated with this CompletedExpectation.
 =end
   def routine
     completed_routine.routine
@@ -20,7 +28,7 @@ Get the routine associated with this completed expectation.
 Return a hash of attributes that make sense to compare to an expectation.
 =end
   def comparable_attributes
-    attributes.slice("description")
+    attributes.slice("description", "expectation_id")
   end
   
 =begin rdoc

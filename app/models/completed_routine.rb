@@ -11,6 +11,14 @@ class CompletedRoutine < ActiveRecord::Base
   accepts_nested_attributes_for :completed_expectations
   scope :most_recent, ->(n = 10000) { order(created_at: :desc).limit(n) }
   
+#=begin rdoc
+#Build a new CompletedRoutine from a Routine.
+#=end
+#  def initialize(params = nil)
+#    params = params.copyable_attributes if params.is_a? Routine
+#    super(params)
+#  end
+  
 =begin rdoc
 Override == when the other object is a Routine, to test only the attributes
 that make sense to compare.

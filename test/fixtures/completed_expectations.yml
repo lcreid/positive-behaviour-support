@@ -9,60 +9,70 @@ matt_one_one:
   observation: Y
   comment: 
   completed_routine: matt_one_one 
+  expectation: do_without_reminder
 
 matt_one_two:
   description: Do without reminder
   observation: N/A
   comment: 
   completed_routine: matt_one_two
+  expectation: do_without_reminder
 
 matt_one_three:
   description: Use right toothbrush
   observation: Y
   comment: 
   completed_routine: matt_one_three
+  expectation: use_right_toothbrush
 
 matt_one_four_one:
   description: Get pencils, pens, etc.
   observation: Y
   comment: 
   completed_routine: matt_one_four
-
+  expectation: get_materials
+  
 matt_one_four_two:
   description: Put away pencils, pens, etc.
   observation: N
   comment: 
   completed_routine: matt_one_four
-
+  expectation: put_away_materials
+  
 matt_one_five_one:
   description: Get pencils, pens, etc.
   observation: Y
   comment: 
   completed_routine: matt_one_five
+  expectation: get_materials
 
 matt_one_five_two:
   description: Put away pencils, pens, etc.
   observation: 
   comment: 
   completed_routine: matt_one_five
+  expectation: put_away_materials
 
 matt_one_six:
   description: Use right toothbrush
   observation: Y
   comment: 
   completed_routine: matt_one_six
+  expectation: use_right_toothbrush
 
 matt_one_seven:
   description: Use right toothbrush
   observation: N
   comment: 
   completed_routine: matt_one_seven
+  expectation: use_right_toothbrush
 
 matt_one_eight:
   description: Use right toothbrush
   observation: 
   comment: 
   completed_routine: matt_one_eight
+  expectation: use_right_toothbrush
   
 ri0101:
   description: Expectation 1 Do Not Show

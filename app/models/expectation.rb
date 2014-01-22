@@ -19,7 +19,7 @@ Return a hash of attributes that make sense to compare to a completed expectatio
 Return a hash of attributes that make sense to copy to initialize a completed expectation.
 =end
   def copyable_attributes
-    attributes.slice("description")
+    attributes.slice("description").merge("expectation_id" => attributes["id"])
   end
   
 =begin rdoc
