@@ -65,11 +65,11 @@ then also grouped by month and year.
 =end
   def completed_routines_column_layout
     # select to_date(created_at), count(*) from completed_routines group by to_date(created_at)
-    # The date comes out as a string.
+    # The date comes out as a string on sqlite and a date on MySql. Crap. Ugliness ahead.
     completed_routines
       .group("date(completed_routines.created_at)")
       .pluck("date(completed_routines.created_at), count(*)")
-      .collect { |x| [Time.zone.parse(x[0]), x[1]]}
+      .collect { |x| [x[0].kind_of?(Time) ? x[0] : Time.zone.parse(x[0]), x[1]]}
       .group_by { |x| x[0].beginning_of_month }
       .flatten
       # TODO Confirm when I add time zone that this uses time zone
