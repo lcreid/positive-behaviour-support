@@ -57,6 +57,7 @@ test "person one has one User" do
   end
   
   test "hash for completed routines detailed overview" do
+    Time.zone = 'Samoa'
     correct_hash = {
       DateTime.parse('2014-01-15T00:00:00') => [
         routines(:routine_index_one) => [completed_routines(:routine_index_one_one)]
@@ -88,6 +89,7 @@ test "person one has one User" do
   end
   
   test "routines layout" do
+    Time.zone = 'Samoa'
     correct_hash = {
       routines(:routine_index_one)=> {
         Time.zone.local(2014, 01, 30)=> [
@@ -118,6 +120,7 @@ test "person one has one User" do
   end
   
   test "whole layout" do
+    Time.zone = 'Samoa'
     correct_hash = {
       routines(:routine_index_one) => {
         expectations(:ri0101) => {

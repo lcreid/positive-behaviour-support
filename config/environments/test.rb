@@ -43,4 +43,10 @@ Pbs::Application.configure do
   # From: https://github.com/intridea/omniauth/wiki/Integration-Testing
   # From: http://stackoverflow.com/questions/9730886/rails-rspec-and-omniauth-integration-testing
   OmniAuth.config.test_mode = true
+  
+  # Set the time zone to something other than PT, so problems are more apparent.
+  # Suggested by: http://railscasts.com/episodes/106-time-zones-revised?view=asciicast
+  # Duplicate this in test or you'll be really confused.
+  # Central America doesn't do DST, so it adds that bit of fun.
+  config.time_zone = 'Central America'
 end

@@ -103,7 +103,7 @@ table { border-collapse: collapse; }
   background: $alert-background; // FIXME Change this to another colour, more red.
 }
 
-#home, #completed_routine, #new_award, #completed_routines, #routine {
+#home, #completed_routine, #new_award, #completed_routines, #routine, #user {
   $horizontal-padding: 15px;
   $vertical-padding: 5px;
   $border-width: 0px;

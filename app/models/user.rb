@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :identities, class_name: "Person"
   has_many :links, through: :identities
   has_many :people, through: :links, :source => :person_b
+
+  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_nil: true, allow_blank: true
   
   after_create :add_primary_identity
   

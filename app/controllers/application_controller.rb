@@ -52,4 +52,15 @@ Return nil if no user is logged in.
   def logged_in?
     session[:user_id]
   end
+
+###### Time zone support
+# FROM http://railscasts.com/episodes/106-time-zones-revised
+
+  around_filter :user_time_zone, if: :logged_in?
+
+private
+  
+  def user_time_zone(&block)
+    Time.use_zone(current_user.time_zone, &block)
+  end
 end

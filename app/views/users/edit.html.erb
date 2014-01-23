@@ -1,0 +1,38 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+
+<div id="user" class="container">
+  <h1>Your Profile</h1>
+  <div class="content">
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <div class="error_messages">
+          <h2>Form is invalid</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <p>
+          <%= f.label :time_zone %>
+          <% puts "TIME ZONE: #{@user.time_zone}" %>
+          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
+        </p>
+      </div>
+      <div class="actions">
+        <p>
+          <%= f.submit %>
+          <!-- The following button trick doesn't work for <= IE8 -->
+          <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

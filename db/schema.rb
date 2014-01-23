@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122033440) do
+ActiveRecord::Schema.define(version: 20140123185659) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20140122033440) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "time_zone"
   end
 
 end

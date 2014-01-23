@@ -64,15 +64,22 @@ Get arrays of the dates of completed routines and number of columns needed for e
 then also grouped by month and year.
 =end
   def completed_routines_column_layout
-    # select to_date(created_at), count(*) from completed_routines group by to_date(created_at)
+    completed_routines.
+      group_by { |cr| cr.created_at.beginning_of_day }.
+      collect { |k, v| [k, v.count] }.
+      group_by { |x| x[0].beginning_of_month }.
+      flatten
+    
     # The date comes out as a string on sqlite and a date on MySql. Crap. Ugliness ahead.
-    completed_routines
-      .group("date(completed_routines.created_at)")
-      .pluck("date(completed_routines.created_at), count(*)")
-      .collect { |x| [x[0].kind_of?(String) ? Time.zone.parse(x[0]) : x[0], x[1]]}
-      .group_by { |x| x[0].beginning_of_month }
-      .flatten
-      # TODO Confirm when I add time zone that this uses time zone
+    # More crap. Obviously I can't use a to_date-based query, since the date changes
+    # based on the time zone
+#    completed_routines
+#      .group("date(completed_routines.created_at)")
+#      .pluck("date(completed_routines.created_at), count(*)")
+#      .collect { |x| [x[0].kind_of?(String) ? Time.find_zone('UTC').parse(x[0]).in_time_zone : x[0], x[1]]}
+#      .group_by { |x| x[0].beginning_of_month }
+#      .flatten
+      # Confirm when I add time zone that this uses time zone Ha Ha. It doesn't
   end
   
 =begin rdoc
