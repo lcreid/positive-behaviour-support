@@ -3,26 +3,31 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<%= content_tag_for(:div, @routine) do %>
-  <h1><%= "#{@routine.name} -- #{@routine.person.name}" %></h1>
-    <h1>Expectations</h1>
-  <%= content_tag_for(:table, @routine) do %>
-    <thead>
-      <tr>
-        <th>Expectation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= content_tag_for(:tr, @routine.expectations) do |e| %>
-        <td><%= e.description %></td>
-      <% end %>
-    </tbody>
-  <% end %>
-  <% if @routine.goal %>
-    <% g = @routine.goal %>
-    <h1>Goal</h1>
-    <p><%= "#{g.name}: With #{g.target.to_s} clean #{'routine'.pluralize(g.target)}, #{g.description}" %></p>
-  <% end %>
-  <p><%= link_to("Back", :back) %></p>
-<% end %>
-
+<div id="routine" class="container">
+	<%= content_tag_for(:div, @routine,  class: "content") do %>
+		<h1><%= "#{@routine.name} -- #{@routine.person.name}" %></h1>
+			<h2>Expectations</h2>
+		<%= content_tag_for(:table, @routine) do %>
+			<thead>
+				<tr>
+					<th>Expectation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= content_tag_for(:tr, @routine.expectations) do |e| %>
+					<td><%= e.description %></td>
+				<% end %>
+			</tbody>
+		<% end %>
+		<% if @routine.goal %>
+			<% g = @routine.goal %>
+			<h2>Goal</h2>
+			<p>
+				<%= "#{g.name}: With #{g.target.to_s} clean #{'routine'.pluralize(g.target)}, #{g.description}" %>
+				<%= "Shared with #{g.routines.count} other #{'routines'.pluralize(g.routines.count)}." %>
+			</p>
+		<% end %>
+		<!-- The following button trick doesn't work for <= IE8 -->
+		<p><%= link_to '<button type="button">Back</button>'.html_safe, :back %></p>
+	<% end %>
+</div>

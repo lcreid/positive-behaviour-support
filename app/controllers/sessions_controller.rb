@@ -17,11 +17,11 @@ class SessionsController < ApplicationController
     log_in(user)
     Training.create(user) if new_user
     # I modified the next line to go to the user's home
-    redirect_to home_user_path(user), notice: "Signed in!"
+    redirect_to home_user_path(user)#, notice: "Signed in!"
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: "Signed out!"
+    redirect_to root_url#, notice: "Signed out!"
   end
 end
