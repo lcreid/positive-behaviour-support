@@ -37,6 +37,8 @@ class SessionsController < ApplicationController
           "Please click #{view_context.link_to(edit_user_path(user), 'here')}" +
           " if you want to change your time zone."
       end
+    else
+      logger.error("#{user.name} (id: #{user.id}) logged in with no time zone from browser.")
     end      
     
     # Now create training data if a new user. Have to set the time zone explicitly
