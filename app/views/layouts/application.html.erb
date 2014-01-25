@@ -25,10 +25,10 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <% unless flash.empty? %>
 	      <div id="message_area">
 		      <% if notice %>
-			      <pre class="ui-state-highlight"><%= notice %></pre>
+			      <p class="ui-state-highlight"><%= notice.html_safe %></p>
 		      <% end %>
 		      <% if alert %>
-			      <pre class="ui-state-error"><%= alert %></pre>
+			      <p class="ui-state-error"><%= alert.html_safe %></p>
 		      <% end %>
 	      </div>
       <% end %>

@@ -11,14 +11,19 @@ class SessionsControllerTest < ActionController::TestCase
     @controller.env = { "omniauth.auth" => 
       {"provider" => users(:existing_twitter).provider, 
       "uid" => users(:existing_twitter).uid, 
-      "info" => {"nickname" => users(:existing_twitter).name}}}
+      "info" => {"nickname" => users(:existing_twitter).name}},
+      "omniauth.params" =>
+      {"time_zone" => "Samoa"}
+      }
   end
   
   test "log in" do
     assert_no_difference "User.count + Person.count + Link.count" do
       get :create
     end
-    assert_redirected_to home_user_path(users(:existing_twitter))
+    assert_redirected_to home_user_path(u = users(:existing_twitter))
+    assert_equal "Samoa", u.reload.time_zone
+    assert !flash.notice.blank?, "Flash was blank."
   end
   
   test "log out" do
@@ -31,7 +36,10 @@ class SessionsControllerTest < ActionController::TestCase
     @controller.env = { "omniauth.auth" => 
       {"provider" => "Training", 
       "uid" => "1001", 
-      "info" => {"nickname" => "New User"}}}
+      "info" => {"nickname" => "New User"}},
+      "omniauth.params" =>
+      {"time_zone" => "Samoa"}
+      }
     assert_difference "User.count", 2 do
       get :create
     end
@@ -46,5 +54,7 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal 3, u.patients[1].routines[1].expectations.size
     assert_equal 1, u.users.size
     assert_redirected_to home_user_path(u)
+    assert_equal "Samoa", u.time_zone
+    assert !flash.notice.blank?, "Flash was blank."
   end
 end

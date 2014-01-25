@@ -128,6 +128,48 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
+  test "Time zone validation" do
+    user = users(:user_marie)
+
+    user.time_zone = ''
+    assert_nothing_raised do
+      user.save!
+    end
+    user.time_zone = nil
+    assert_nothing_raised do
+      user.save!
+    end
+    user.time_zone = 'Samoa'
+    assert_nothing_raised do
+      user.save!
+    end
+    user.time_zone = 'Pacific Time (US & Canada)'
+    assert_nothing_raised do
+      user.save!
+    end
+    user.time_zone = 'Samoaz'
+    assert_raise ActiveRecord::RecordInvalid do
+      user.save!
+    end
+    user.time_zone = 'Pacific Tim (US & Canada)'
+    assert_raise ActiveRecord::RecordInvalid do
+      user.save!
+    end
+  end
+  
+  test "set zones" do
+    user = users(:user_marie)
+
+    user.time_zone = 'Pacific Time (US & Canada)'
+    assert_equal 'Pacific Time (US & Canada)', user.time_zone
+
+#    user.time_zone = 'America/Los_Angeles'
+#    assert_equal 'Pacific Time (US & Canada)', user.time_zone
+
+    user.time_zone = 'Samoa'
+    assert_equal 'Samoa', user.time_zone
+  end
+
   def link_two
     friendor = User.create!(name: "Friendor")
     friendee = User.create!(name: "Friendee")

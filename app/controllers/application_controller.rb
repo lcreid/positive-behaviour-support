@@ -39,7 +39,7 @@ Log in a user.
   end
   
 =begin rdoc
-Throw a page not found exception (404) if there is no logged in user.
+Throw a routing error if there is no logged in user.
 =end  
   def require_login
     not_found unless logged_in?

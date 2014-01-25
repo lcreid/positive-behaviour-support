@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_many :links, through: :identities
   has_many :people, through: :links, :source => :person_b
 
-  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_nil: true, allow_blank: true
+#  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_nil: true, allow_blank: true
+  validate :validate_time_zone
   
   after_create :add_primary_identity
   
@@ -104,7 +105,34 @@ to the other.
   def unlink(other)
     primary_identity.unlink(other)
   end
-    
+
+=begin rdoc
+Validate the given timezone either by Rails city name or TZinfo string. Blank or nil is also okay.
+=end
+  def validate_time_zone
+    unless self.time_zone.blank? || Time.find_zone(self.time_zone)
+      errors.add(:validate_time_zone, "#{self.time_zone} is not a valid time zone.")
+    end
+  end
+  
+#  def time_zone=(tz)
+#    # First, see if the time zone passed in is the human-friendly one,
+#    # e.g. Pacific Time (US & Canada)
+#    puts "tz = #{tz}"
+#    super(tz) and return if Time.find_zone(tz)
+#    puts "time_zone= past first super"
+#    # If not, then find it 
+#    tzinfo = ActiveSupport::TimeZone.find_tzinfo(tz)
+#    puts "tzinfo = #{tzinfo.inspect}"
+#    converted_tz = ActiveSupport::TimeZone.zones_map.find { |k, tz| tz.tzinfo == tzinfo }
+#    puts "converted_tz = #{converted_tz.inspect}"
+#    super(converted_tz[1].name) and return unless converted_tz.nil?
+#    puts "time_zone= past second super"
+#    
+#    # Otherwise, just throw it in and let validation fail.
+#    super(tz)
+#  end
+
   private
     
 =begin rdoc

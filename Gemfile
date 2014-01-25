@@ -8,7 +8,7 @@ gem 'rails', '4.0.2'
 gem 'sqlite3'
 
 # Use mysql2 in production
-group :production do 
+group :production, :staging do 
   gem 'mysql2'
 end
 
@@ -57,6 +57,8 @@ gem 'omniauth-google-oauth2'
 gem 'humanize_boolean'
 gem 'capistrano', '~> 3.1'
 gem 'capistrano-bundler'
+
+gem 'detect_timezone_rails'
 
 group :test do
   gem 'capybara'
