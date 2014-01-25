@@ -12,12 +12,11 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <script type="text/javascript">
-      $(document).ready(function(){
-        $('a.time_zone')
-          .each(function()
-          {
-            this.href = this.href + "?time_zone=" + encodeURIComponent($().get_timezone());
-          });
+      $(document).ready(function() {
+        $('a.time_zone').each(function() {
+          this.href = this.href + "?time_zone=" 
+            + encodeURIComponent($().get_timezone());
+        });
       });
     </script>
   </head>

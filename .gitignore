@@ -20,5 +20,3 @@ omniauth.sh
 /config/database.yml
 /config/initializers/omniauth.rb
 
-# Ignore public assets (they get generated)
-/public/assets
