@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
           " if you want to change your time zone."
       end
     else
-      logger.error("#{user.name} (id: #{user.id}) logged in with no time zone from browser.")
+      logger.info("#{user.name} (id: #{user.id}) logged in with no time zone from browser.")
     end      
     
     # Now create training data if a new user. Have to set the time zone explicitly

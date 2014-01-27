@@ -125,6 +125,7 @@ table { border-collapse: collapse; }
     color: $h2-colour;
   }
 
+  // FIXME .routines doesn't exist anymore. I guess I don't need these classes.
   .pending_rewards { @extend .routines; }
   .completed_routines { @extend .routines; }
   // Pad the stuff inside the container for aesthetic reasons.
@@ -174,4 +175,4 @@ table { border-collapse: collapse; }
 }
 
 @import "welcome";
-@import "awards";
+

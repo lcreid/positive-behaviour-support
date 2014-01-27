@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_filter :prepare_for_mobile
+
 =begin rdoc
 Throw a page not found exception (404).
 Use this in controllers when you want to hide a link, e.g.
@@ -61,6 +63,24 @@ Return nil if no user is logged in.
 private
   
   def user_time_zone(&block)
+#    puts "user_time_zone current_user: #{current_user.inspect}"
+#    puts "user_time_zone block doesn't exist." unless block
     Time.use_zone(current_user.time_zone, &block)
+  end
+
+###### Mobile
+# From http://railscasts.com/episodes/199-mobile-devices?view=asciicast
+  def mobile_device?
+    if session[:mobile_param]
+      session[:mobile_param] == "1"
+    else
+      request.user_agent =~ /Mobile|webOS/
+    end
+  end
+  helper_method :mobile_device?
+
+  def prepare_for_mobile
+    session[:mobile_param] = params[:mobile] if params[:mobile]
+    request.format = :mobile if mobile_device?
   end
 end

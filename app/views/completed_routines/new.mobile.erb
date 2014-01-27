@@ -1,0 +1,28 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<div id="completed_routine"  title="PBS" selected="true">
+  <%= form_for(@completed_routine) do |crf| %>
+    <%= crf.hidden_field :name %>
+    <%= crf.hidden_field :routine_id %>
+    <%= crf.hidden_field :person_id %>
+      <ul>
+        <%= crf.fields_for :completed_expectations do |cef| %>
+            <%= cef.label(:description, cef.object.description) %>
+            <%= cef.hidden_field :description %>
+            <%= cef.radio_button :observation, "Y" %>
+            <%= cef.label(:observation_y, "Y") %>
+            <%= cef.radio_button :observation, "N"  %>
+            <%= cef.label(:observation_n, "N") %>
+            <%= cef.radio_button :observation, "N/A"  %>
+            <%= cef.label(:observation_na, "N/A") %>
+            <%= cef.text_field(:comment, placeholder: "Observation comment") %>
+        <% end %>
+      </ul>
+    <p><%= crf.text_field(:comment, placeholder: "Routine comment") %></p>
+    <%= crf.submit 'Save' %>
+  <% end %>
+</div>
+

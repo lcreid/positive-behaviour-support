@@ -1,0 +1,64 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<%# With iui, we put the toolbar in here, *not* in the template.
+When you link to another page, the toolbar handling gets messed
+up if you define another toolbar when one is in place already.
+%>
+<div class="toolbar">
+  <h1 id="pageTitle">PBS</h1>
+  <a id="backButton" class="button" href="#"></a>
+  <%= link_to "Settings", "#settings", class: "button" %>
+</div>
+
+<ul id="home" title="PBS" selected="true">
+
+  <% unless flash.empty? %>
+    <div class="info">
+    <%- flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <%- end -%>
+    </div>
+  <% end %>
+  <% @user.patients.each do | patient | %>
+    <li><%= link_to patient.name, "#person_#{patient.id}" %></li>
+  <% end %>
+</ul>
+
+<% @user.patients.each do | patient | %>
+  <%= "<ul id=\"person_#{patient.id}\" title=\"#{patient.name}\" class=\"panel\">".html_safe %>
+    <li class="group">Routines</li>
+    <%= content_tag_for(:li, patient.routines) do |routine| %>
+      <div style="float:left;"><%= routine.name %></div>
+      <div style="float:right;">
+        <%= link_to('+', new_completed_routine_path(routine_id: routine.id)) %>
+      </div>
+      <div style="clear:both;"></div>
+    <% end %>
+
+    <li class="group">Goals and Rewards</li>
+    <%= content_tag_for(:li, patient.goals) do |g| %>
+      <div style="float:left;"><%= g.name %></div>
+      <div style="float:right;">
+        <%= link_to("Give award", new_award_path(goal_id: g.id), class: "whiteButton") if g.pending > 0 %>
+      </div>
+      <div style="clear:both;"></div>
+    <% end %>
+
+    <li class="group">Recently Completed Routines</li>
+    <% rows_to_show = 5 %>
+    <%= content_tag_for(:li, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
+      <div style="float:left;"><%= cr.name %></div>
+      <div style="float:right;"><%= cr.created_at.to_s(:humanized_ago) %></div> 
+      <div style="clear:both;"></div>
+    <% end %>
+  </ul>
+<% end %>
+
+<ul id="settings" title="Settings">
+  <li><%= link_to "Sign out", signout_path, target: "_webapp" %></li>
+  <li><%= link_to "Full Site", root_url(:mobile => 0), target: "_webapp" %></li>
+</ul>
+

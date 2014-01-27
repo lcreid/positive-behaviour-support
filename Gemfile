@@ -67,6 +67,7 @@ end
 
 group :test, :development do
   gem 'timecop'
+  gem 'httplog'
 end
 
 group :development do

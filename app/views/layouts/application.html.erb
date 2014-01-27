@@ -9,15 +9,24 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <title>Positive Behaviour Support</title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag 'mobile' if mobile_device? %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <% if current_user %>
       <div id="top_menu">
         <div class="centre_in_browser">
-            Signed in as <%= current_user.name %>. |
-            <%= link_to "Profile", edit_user_path(current_user) %> |
-            <%= link_to "Sign out", signout_path %>
+          Signed in as <%= current_user.name %>. |
+
+          <% if mobile_device? %>
+            <%= link_to "Full Site", :mobile => 0 %>
+          <% else %>
+            <%= link_to "Mobile Site", :mobile => 1 %>
+          <% end %> |
+
+          <%= link_to "Profile", edit_user_path(current_user) %> |
+
+          <%= link_to "Sign out", signout_path %>
         </div>
       </div>
     <% end %>
