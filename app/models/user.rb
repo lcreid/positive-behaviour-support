@@ -50,7 +50,7 @@ Create a User based on the information provided by Omniauth.
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       case user.provider
-      when 'twitter', 'Training'
+      when 'twitter', 'Training', 'facebook', 'yahoo'
         user.name = auth["info"]["nickname"]
       when 'google_oauth2'
         user.name = auth["info"]["name"] 

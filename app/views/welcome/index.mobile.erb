@@ -11,15 +11,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <div role="main" class="ui-content">
     <h1>Welcome to Positive Behaviour Support</h1>
     <div id='sign_in_with'>
-      <h2>Sign in with</h2>
-      <p class="idp">
-        <%= link_to image_tag("sign-in-with-twitter-link.png", alt: "Twitter"), 
-          "/auth/twitter", "data-ajax" => "false", "data-role" => "button" %>
-      </p>
-      <p class="idp">
-        <%= link_to "Google", 
-          "/auth/google_oauth2", "data-ajax" => "false", "data-role" => "button" %>
-      </p>
+      <%= render partial: "idps", formats: [:html] %>
     </div>
   </div>
 </div>

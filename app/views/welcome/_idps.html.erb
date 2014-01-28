@@ -1,0 +1,27 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+
+<div class="idp">
+  <%= link_to image_tag("White-signin_Long_base_20dp.png", alt: "Google"), 
+    "/auth/google_oauth2", "data-ajax" => "false", "data-role" => "button", 
+    class: "time_zone" %>
+</div>
+<div class="idp">
+  <%= link_to image_tag("sign-in-with-twitter-link.png", alt: "Twitter"), 
+    "/auth/twitter", "data-ajax" => "false", "data-role" => "button", 
+    class: "time_zone" %>
+</div>
+<div class="idp">
+  <%= link_to image_tag("y-open-id-button-1.png", alt: "Yahoo!"), 
+    "/auth/yahoo", "data-ajax" => "false", "data-role" => "button", 
+    class: "time_zone" %>
+</div>
+<div class="idp">
+  <%= link_to image_tag("facebook-unofficial.gif", alt: "Facebook"), 
+    "/auth/facebook", "data-ajax" => "false", "data-role" => "button", 
+    class: "time_zone" %>
+</div>
+

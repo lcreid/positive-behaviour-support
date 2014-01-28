@@ -1,0 +1,36 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+*/
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.welcome {
+  $idp-horz-margin: 10px;
+//  $font-size: 20px;
+//  
+//  $width: 90%;
+//  @extend .centre_in_browser;
+//  @extend .container;
+//  width: $width;  // Because the @extend classes put in a the width as calculated when they were defined.
+//  padding: 10px 5px 20px 5px;
+//  margin-top: 10px;
+
+//  
+//  p { font-size: $font-size }
+//  
+//  h1 { 
+//    font-size: $font-size + 4px; 
+//    text-align: center;
+//  }
+  
+  .idp {
+    margin: 0 $idp-horz-margin;
+  }
+  
+  #sign_in_with {
+    text-align: center;
+  }
+}

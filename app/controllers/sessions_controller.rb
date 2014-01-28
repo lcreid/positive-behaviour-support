@@ -8,6 +8,12 @@ require 'training'
 
 # From: http://railscasts.com/episodes/241-simple-omniauth-revised
 # With modifications
+# From: http://railscasts.com/episodes/241-simple-omniauth-revised
+# Google stuff at: https://cloud.google.com/console/project/apps~serene-craft-460S
+# Yahoo!: http://developer.apps.yahoo.com/projects/SHQdFY4m
+# Facebook: https://developers.facebook.com/x/apps/494216987366288/dashboard/
+# Twitter: https://dev.twitter.com/apps/5595046/show
+
 class SessionsController < ApplicationController
   skip_before_action :require_login
 
