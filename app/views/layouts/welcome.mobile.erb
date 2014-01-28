@@ -6,10 +6,13 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>    <title>PBS</title>
-    <%= stylesheet_link_tag "mobile" %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PBS</title>
     <%# Disable the javascript on the welcome page so the omniauth sign-in works. %>
-    <%#= javascript_include_tag "mobile" %>
+    <%= javascript_include_tag "mobile" %>
+    <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css"/> 
+    <script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script> 
+    <%= stylesheet_link_tag "mobile" %>
   </head>
   <body>
     <%= yield %>

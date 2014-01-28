@@ -13,8 +13,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014 */
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require iui.css
- *= require t/default/default-theme.css
+ *= require global.mobile
  */
 
 /* 
