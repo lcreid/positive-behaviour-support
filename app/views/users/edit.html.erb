@@ -22,7 +22,6 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <div class="field">
         <p>
           <%= f.label :time_zone %>
-          <% puts "TIME ZONE: #{@user.time_zone}" %>
           <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
         </p>
       </div>
