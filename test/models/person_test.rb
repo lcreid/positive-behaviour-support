@@ -195,4 +195,16 @@ test "person one has one User" do
     assert_equal correct_hash[routines(:routine_index_one)], full_layout[routines(:routine_index_one)]
     assert_equal correct_hash, full_layout
   end
+  
+#  test "link_to" do
+#    marie = users(:user_marie)
+#    max = people(:patient_max)
+#    stella = people(:person_stella)
+#    not_connected = people(:user_five)
+#    
+#    assert_equal 4, marie.people.count
+#    assert_not_nil max.link_to(marie)
+#    assert_not_nil stella.link_to(marie)
+#    assert_nil marie.primary_identity.link_to(not_connected)
+#  end
 end
