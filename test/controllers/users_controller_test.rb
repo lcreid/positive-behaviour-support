@@ -55,17 +55,30 @@ class UsersControllerTest < ActionController::TestCase
       assert_select 'tbody tr', 2 
     end
   end
+  
   test "get not logged in user" do
     uid = users(:existing_twitter).id
     assert_raise ActionController::RoutingError do
       get :home, {id: uid}
     end
   end
+  
   test "get other user" do
     uid = users(:existing_twitter).id
     session[:user_id] = uid
     assert_raise ActionController::RoutingError do
       get :home, {id: 0}
     end
+  end
+  
+  test "profile page" do
+    uid = users(:user_marie).id
+    session[:user_id] = uid
+    
+    get :edit, id: uid
+    
+    assert_select '#people'
+    assert_select '.link', 4
+    assert_select '.link a', 8
   end
 end

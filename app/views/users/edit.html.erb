@@ -25,6 +25,23 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
         </p>
       </div>
+      
+      <div id="people">
+        <h2>Linked People</h2>
+        <table>
+          <thead>
+            <tr><th>Name</th><th></th><th></th></tr>
+          </thead>
+          <tbody>
+            <%= content_tag_for(:tr, @user.links) do |link| %>
+              <td>link.person_b.name</td>
+              <td><%= link_to "Edit", edit_person_path(link.person_b) %></td>
+              <td><%= link_to "Unlink", link_path(link), method: :delete %></td>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
       <div class="actions">
         <p>
           <%= f.submit %>
