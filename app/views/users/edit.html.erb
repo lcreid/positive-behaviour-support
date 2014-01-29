@@ -26,29 +26,30 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </p>
       </div>
       
-      <div id="people">
-        <h2>Linked People</h2>
-        <table>
-          <thead>
-            <tr><th>Name</th><th></th><th></th></tr>
-          </thead>
-          <tbody>
-            <%= content_tag_for(:tr, @user.links) do |link| %>
-              <td>link.person_b.name</td>
-              <td><%= link_to "Edit", edit_person_path(link.person_b) %></td>
-              <td><%= link_to "Unlink", link_path(link), method: :delete %></td>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      
       <div class="actions">
         <p>
-          <%= f.submit %>
+          <%= f.submit "Update Profile" %>
           <!-- The following button trick doesn't work for <= IE8 -->
           <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
         </p>
       </div>
     <% end %>
+      
+    <div id="people">
+      <h2>Manage Linked People</h2>
+      <table>
+        <thead>
+          <tr><th>Name</th><th></th><th></th></tr>
+        </thead>
+        <tbody>
+          <%= content_tag_for(:tr, @user.links) do |link| %>
+            <td><%= link.person_b.name %></td>
+            <td><%= link_to "Edit", edit_person_path(link.person_b) %></td>
+            <td><%= link_to( "Unlink", link_path(link), method: :delete) unless link.person_b.is_owned_by?(@user) %></td>
+          <% end %>
+        </tbody>
+      </table>
+      <p><%= link_to '<button type="button">Add Person</button>'.html_safe, new_person_path %>
+    </div>
   </div>
 </div>

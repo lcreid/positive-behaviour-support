@@ -1,0 +1,11 @@
+<div id="person_edit" class="container">
+  <div class="content">
+    <%= form_for @person do |pf| %>
+      <p><%= pf.label :name %><%= pf.text_field :name %></p>
+      <p>
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= pf.submit 'Save' %>
+      </p>
+    <% end %>
+  </div>
+</div>

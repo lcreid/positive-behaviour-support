@@ -25,6 +25,7 @@ patient_one:
 
 patient_two:
   name: Patient Two
+  creator: existing_linkedin
 
 patient_three:
   name: Patient Three
@@ -46,16 +47,20 @@ patient_marie:
 person_stella:
   name: Stella-User
   user: user_stella
+  creator: user_stella
   
 person_nick:
   name: Nick-User
   user: user_nick
+  creator: user_nick
 
 patient_max:
   name: Max-Patient
+  creator: user_marie
 
 patient_matt:
   name: Matt-Patient
+  creator: user_marie
   
 user_five:
   name: User Five

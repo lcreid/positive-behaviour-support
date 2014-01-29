@@ -9,19 +9,20 @@ require 'test_helper'
 
 class UserProfileTest < ActionDispatch::IntegrationTest
   test "Unlink a user" do
-    # It looks like if you don't sign out at the end of each test case,
-    # the test case will start off still logged in.
-    # I guess that's sort of desirable, so you don't have to keep logging in.
-    click_on('Sign out') if has_link? ("Sign out")
-    assert_equal root_path, current_path
-    
     user = users(:user_marie)
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       "provider" => 'google_oauth2',
       "uid" => user.uid.to_s,
       "name" => user.name
     })
+
     visit(root_path)
+    # It looks like if you don't sign out at the end of each test case,
+    # the test case will start off still logged in.
+    # I guess that's sort of desirable, so you don't have to keep logging in.
+    click_on('Sign out') if has_link? ("Sign out")
+    assert_equal root_path, current_path
+    
     click_on('Google')
     assert_equal home_user_path(user), current_path
     click_on('Profile')
@@ -34,7 +35,37 @@ class UserProfileTest < ActionDispatch::IntegrationTest
     end
     
     all('a', :text => 'Edit').first.click
-    assert_equal edit_person_path(user.people.first)
+    assert_equal edit_person_path(user.people(true).first), current_path
+    click_link('Cancel')
+    assert_equal edit_user_path(user), current_path
   end
+  
+  test "Add a person" do
+    user = users(:user_marie)
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+      "provider" => 'google_oauth2',
+      "uid" => user.uid.to_s,
+      "name" => user.name
+    })
+
+    visit(root_path)
+    # It looks like if you don't sign out at the end of each test case,
+    # the test case will start off still logged in.
+    # I guess that's sort of desirable, so you don't have to keep logging in.
+    click_on('Sign out') if has_link? ("Sign out")
+    assert_equal root_path, current_path
+    
+    click_on('Google')
+    assert_equal home_user_path(user), current_path
+    click_on('Profile')
+    assert_equal edit_user_path(user), current_path
+
+    assert_difference "Link.all.count", 2 do
+      click_link('Add Person')
+      assert_equal new_person_path, current_path
+      click_on('Save')
+    end
+    assert_equal edit_user_path(user), current_path
+  end  
 end
 

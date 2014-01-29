@@ -127,6 +127,18 @@ A user is allowed to create, modify or delete a routine if:
   end
 
 =begin rdoc
+A user is allowed to modify or delete a person if:
+* They're the creator of the person and no parent defined for the person,
+* or they're a parent of the person, # TODO
+* or the person is one of the user's identities.S
+=end  
+  def can_modify_person?(person)
+    person = Person.find(person) unless person.is_a?(Person)
+    return true if person.creator == self
+    return identities.any? { |i| i == person } # This one has to be last or rewrite logic.
+  end
+
+=begin rdoc
 Validate the given timezone either by Rails city name or TZinfo string. Blank or nil is also okay.
 =end
   def validate_time_zone

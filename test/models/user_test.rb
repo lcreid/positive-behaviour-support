@@ -169,6 +169,31 @@ class UserTest < ActiveSupport::TestCase
     user.time_zone = 'Samoa'
     assert_equal 'Samoa', user.time_zone
   end
+  
+  test "user can't modify" do
+    user = users(:existing_linkedin)
+    person = people(:patient_one)
+    refute user.can_modify_person?(person)
+  end
+  
+  test "user is creator and can modify" do
+    user = users(:existing_linkedin)
+    person = people(:patient_two)
+    assert user.can_modify_person?(person)
+  end
+
+  test "person is identity of user and can modify" do
+    user = users(:user_marie)
+    person = user.identities.last
+    assert user.can_modify_person?(person)
+  end
+
+  test "person is child of user and can modify" do
+    skip
+    user = users(:user_marie) #TODO
+    person = user.identities.last
+    assert user.can_modify_person?(person)
+  end
 
   def link_two
     friendor = User.create!(name: "Friendor")
