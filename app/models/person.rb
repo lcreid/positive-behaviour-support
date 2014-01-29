@@ -19,7 +19,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :routines
   accepts_nested_attributes_for :goals
   
-#FIXME add back in  validates_presence_of :creator
+  validates_presence_of :creator
   
   include PersonHelper
 

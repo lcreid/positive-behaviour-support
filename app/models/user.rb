@@ -171,6 +171,6 @@ Validate the given timezone either by Rails city name or TZinfo string. Blank or
 After create callback to add the primary identity of the user.
 =end
   def add_primary_identity
-    (identities << Person.create!(name: name)).first
+    (identities << Person.create!(name: name, creator_id: self.id)).first
   end
 end
