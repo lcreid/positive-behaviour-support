@@ -79,6 +79,6 @@ class UsersControllerTest < ActionController::TestCase
     
     assert_select '#people'
     assert_select '.link', 4
-    assert_select '.link a', 8
+    assert_select '.link a', 6
   end
 end

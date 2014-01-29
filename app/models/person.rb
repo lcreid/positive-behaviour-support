@@ -7,15 +7,19 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 require 'person_helper'
 
 class Person < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user # if this is an identity of a User
+  belongs_to :creator, class_name: User
   has_many :links, foreign_key: :person_a_id
   has_many :people, through: :links, source: :person_b
   has_many :routines, -> {order("routines.created_at")}
   has_many :completed_routines, -> {order("completed_routines.created_at")}, through: :routines
   has_many :completed_expectations, through: :completed_routines
   has_many :goals
+  
   accepts_nested_attributes_for :routines
   accepts_nested_attributes_for :goals
+  
+#FIXME add back in  validates_presence_of :creator
   
   include PersonHelper
 
@@ -41,6 +45,19 @@ to the other.
     other = other.primary_identity if other.is_a? User
     people.delete(other)
     other.people.delete(self)
+  end
+
+=begin rdoc
+A person is owned by a user if:
+* The person is the user.
+* They're a parent of the person, # TODO
+* If there is no parent, then the creator is the owner
+=end  
+  def is_owned_by?(user)
+    user = User.find(user) unless user.is_a?(User)
+    return true if self.user == user
+    # TODO Check for parent.
+    self.creator == user
   end
 
 =begin rdoc
