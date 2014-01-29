@@ -55,6 +55,7 @@ to be eligible for a reward.
 =end
     pt1 = {
       name: "Training Patient 1", 
+      creator_id: user.id,
       routines_attributes: [
         {
           name: "Clean up room", 
@@ -107,6 +108,7 @@ The second patient has two routines and no goals.
 =end
     pt2 = {
       name: "Training Patient 2",
+      creator_id: user.id,
       routines_attributes: [
         {
           name: "Turn off Minecraft",

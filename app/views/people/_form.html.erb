@@ -1,6 +1,7 @@
 <div id="person_edit" class="container">
   <div class="content">
     <%= form_for @person do |pf| %>
+      <%= pf.hidden_field :creator_id %>
       <p><%= pf.label :name %><%= pf.text_field :name %></p>
       <p>
         <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
