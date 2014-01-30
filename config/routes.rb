@@ -20,6 +20,7 @@ Pbs::Application.routes.draw do
   resources :routines
   resources :people
   resources :links
+  resources :goals
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

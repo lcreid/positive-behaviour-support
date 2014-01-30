@@ -1,0 +1,21 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<div id="goal_edit" class="container">
+  <h1>Goal</h1>
+  <div class="content">
+    <%= form_for @goal do |rf| %>
+      <%= rf.hidden_field :person_id %>
+      <p><%= rf.label :name, "Goal Name" %><%= rf.text_field :name %></p>
+      <p><%= rf.label :description, "Goal Description" %><%= rf.text_area :description %></p>
+      <p><%= rf.label :target, "Target" %><%= rf.text_field :target %></p>
+
+      <p>
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= rf.submit 'Save' %>
+      </p>
+    <% end %>
+  </div>
+</div>

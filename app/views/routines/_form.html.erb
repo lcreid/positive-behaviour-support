@@ -8,7 +8,10 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <div class="content">
     <%= form_for @routine do |rf| %>
       <%= rf.hidden_field :person_id %>
-      <p><%= rf.label :name, "Routine Name" %><%= rf.text_field :name %></p>
+      <p>
+        <%= rf.label :name, "Routine Name: " %><%= rf.text_field :name %>
+        Goal: <%= rf.select :goal_id, @routine.person.goals.collect {|g| [ g.name, g.id ] } %>
+      </p>
 
       <h2>Expectations</h2>
       <%= rf.fields_for :expectations do |builder| %>

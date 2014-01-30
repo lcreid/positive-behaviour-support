@@ -92,6 +92,17 @@ A user is allowed to access a routine if:
   end
 
 =begin rdoc
+A user is allowed to access a goal if:
+* they're connected to the person assigned to the goal.
+* Possibly other conditions that are to be defined.
+=end  
+  def can_access_goal?(goal)
+    goal = Routine.find(goal) unless goal.is_a?(Goal)
+    return false unless goal
+    return people.any? { |p| p.id == goal.person_id }
+  end
+
+=begin rdoc
 Link a User to a Person or a User, bidirectionally, so that each entity is connected
 to the other.
 =end  
