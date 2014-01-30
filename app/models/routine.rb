@@ -9,7 +9,7 @@ class Routine < ActiveRecord::Base
   belongs_to :goal, inverse_of: :routines
   has_many :completed_routines
   has_many :expectations
-  accepts_nested_attributes_for :expectations
+  accepts_nested_attributes_for :expectations, allow_destroy: true
   
 =begin rdoc
 Return a hash of attributes that make sense to compare to a completed routine.

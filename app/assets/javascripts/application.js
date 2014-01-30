@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require detect_timezone
 //= require jquery.detect_timezone
+//= require routines.js
