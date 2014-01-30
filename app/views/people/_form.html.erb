@@ -19,6 +19,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <table>
         <thead>
           <tr>
+            <th>Name</th><th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +30,26 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </tbody>
       </table>
       <p><%= link_to '<button type="button">Add Routine</button>'.html_safe, new_routine_path(person: @person.attributes) %>
+    <div>
+  </div>
+    
+    <div>
+      <h2>Goals</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>Target</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= content_tag_for(:tr, @person.goals) do |g| %>
+            <td><%= g.name %></td>
+            <td><%= g.target %></td>
+            <td><%= link_to "Edit", edit_goal_path(g) %></td>
+          <% end %>
+        </tbody>
+      </table>
+      <p><%= link_to '<button type="button">Add Goal</button>'.html_safe, new_goal_path(person: @person.attributes) %>
     <div>
   </div>
 </div>

@@ -25,7 +25,11 @@ class RoutinesController < ApplicationController
   
   def update
     @routine.update_attributes(routine_params)
-    redirect_to edit_person_path(@routine.person)
+    if @routine.save
+      redirect_to edit_person_path(@routine.person)
+    else
+      render "edit"
+    end
   end
   
   def destroy
@@ -42,8 +46,7 @@ class RoutinesController < ApplicationController
   end
   
   def routine_params
-    params.require(:routine).permit(:name, 
-      :person_id, 
-      expectations_attributes: [:description])
+    params.require(:routine).permit(:name, :person_id, :goal_id, :_destroy,
+      expectations_attributes: [:description, :routine_id, :id])
   end
 end

@@ -65,9 +65,19 @@ class RoutinesControllerTest < ActionController::TestCase
     @controller.log_in(user = users(:user_marie))
     person = people(:patient_matt)
     routine = routines(:clean_up_room)
+    
+    expectation = routine.expectations.first
+    
     original_routine_name = routine.name
     
-    post :update, id: routine.id, routine: { name: "New Name" }
+    assert_no_difference "person.routines.count" do
+      assert_no_difference "Expectation.all.count" do
+        post :update, 
+          id: routine.id, 
+          routine: { name: "New Name",
+            expectations_attributes: [{description: "new description", id: expectation.id}] }
+      end
+    end
     assert_redirected_to edit_person_path(person)
     
     db_routine = Routine.find(routine.id)

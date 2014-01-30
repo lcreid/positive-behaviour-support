@@ -8,12 +8,12 @@ require 'capybara/rails'
 require 'test_helper'
 
 class PersonProfileTest < ActionDispatch::IntegrationTest
-  test "Add a routine" do
-    user = users(:user_marie)
+  def setup
+    @user = users(:user_marie)
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       "provider" => 'google_oauth2',
-      "uid" => user.uid.to_s,
-      "name" => user.name
+      "uid" => @user.uid.to_s,
+      "name" => @user.name
     })
 
     visit(root_path)
@@ -24,12 +24,19 @@ class PersonProfileTest < ActionDispatch::IntegrationTest
     assert_equal root_path, current_path
     
     click_on('Google')
-    assert_equal home_user_path(user), current_path
+    assert_equal home_user_path(@user), current_path
+  end
     
-    visit(edit_person_path(user.people.last))
-    
+  test "Add a routine" do
+    visit(edit_person_path(@user.people.last))
     click_link('Add Routine')
     assert_equal new_routine_path, current_path
+  end
+  
+  test "Add a goal" do
+    visit(edit_person_path(@user.people.last))
+    click_link('Add Goal')
+    assert_equal new_goal_path, current_path
   end
 end
 

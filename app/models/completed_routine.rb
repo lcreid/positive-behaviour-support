@@ -8,7 +8,7 @@ class CompletedRoutine < ActiveRecord::Base
   belongs_to :person
   belongs_to :routine
   has_many :completed_expectations
-  accepts_nested_attributes_for :completed_expectations
+  accepts_nested_attributes_for :completed_expectations, allow_destroy: true
   scope :most_recent, ->(n = 10000) { reorder(created_at: :desc).limit(n) }
   
 #=begin rdoc

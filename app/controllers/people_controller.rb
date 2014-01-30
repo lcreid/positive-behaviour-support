@@ -21,7 +21,11 @@ class PeopleController < ApplicationController
   
   def update
     @person.update_attributes(person_params)
-    redirect_to edit_user_path(current_user)
+    if @person.save
+      redirect_to edit_user_path(current_user)
+    else
+      render "edit"
+    end
   end
   
   def destroy
