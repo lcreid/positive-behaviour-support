@@ -65,6 +65,7 @@ gem 'detect_timezone_rails'
 group :test do
   gem 'capybara'
   gem 'capybara_minitest_spec'
+  gem 'capybara-webkit'
 end
 
 group :test, :development do

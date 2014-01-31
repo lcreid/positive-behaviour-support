@@ -20,7 +20,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <p><%= link_to_add_fields "Add Expectation", rf, :expectations %></p>
 
       <p>
-        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, edit_person_path(@routine.person) %>
         <%= rf.submit 'Save' %>
       </p>
     <% end %>
