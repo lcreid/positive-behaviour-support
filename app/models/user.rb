@@ -115,11 +115,11 @@ Unlink a Person from another Person or a User, bidirectionally, so that each ent
 to the other.
 =end  
   def unlink(other)
-    primary_identity.unlink(other) # FIXME This has to unlink whether it's primary identity or not.
+    identities.each { |i| i.unlink(other) }
   end
 
 =begin rdoc
-A user is allowed to create, modify or delete a routine if:
+A user is allowed to create, modify or delete a link if:
 * They're a participant in the link,
 * or they created one of the participants in the link, # TODO
 * or they're the parent of one of the participants in the link. # TODO

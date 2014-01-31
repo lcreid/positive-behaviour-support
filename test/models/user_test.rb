@@ -190,9 +190,14 @@ class UserTest < ActiveSupport::TestCase
 
   test "person is child of user and can modify" do
     skip
-    user = users(:user_marie) #TODO
-    person = user.identities.last
-    assert user.can_modify_person?(person)
+  end
+  
+  test "unlink when link isn't through primary identity" do
+    user = users(:user_marie)
+    person = people(:person_stella)
+    assert_difference "Link.all.count", -2 do
+      user.unlink(person)
+    end
   end
 
   def link_two
