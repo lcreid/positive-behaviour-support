@@ -10,6 +10,7 @@ class Person < ActiveRecord::Base
   belongs_to :user # if this is an identity of a User
   belongs_to :creator, class_name: User
   has_many :links, foreign_key: :person_a_id
+  has_many :reverse_links, foreign_key: :person_b_id, class_name: Link
   has_many :people, through: :links, source: :person_b
   has_many :routines, -> {order("routines.created_at")}
   has_many :completed_routines, -> {order("completed_routines.created_at")}, through: :routines

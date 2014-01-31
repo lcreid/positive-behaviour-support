@@ -9,7 +9,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <%= pf.hidden_field :creator_id %>
       <p><%= pf.label :name %><%= pf.text_field :name %></p>
       <p>
-        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, edit_user_path(current_user) %>
         <%= pf.submit 'Save' %>
       </p>
     <% end %>
