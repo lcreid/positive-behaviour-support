@@ -14,14 +14,18 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     "/auth/twitter", "data-ajax" => "false", "data-role" => "button", 
     class: "time_zone" %>
 </div>
+<%# Yahoo won't allow anything other than port 80 or 443
+Also, I can't figure out how to modify a project I've already
+set up. Idiots. Yahoos. 
 <div class="idp">
   <%= link_to image_tag("y-open-id-button-1.png", alt: "Yahoo!"), 
     "/auth/yahoo", "data-ajax" => "false", "data-role" => "button", 
     class: "time_zone" %>
-</div>
+<%#</div>
 <div class="idp">
   <%= link_to image_tag("facebook-unofficial.gif", alt: "Facebook"), 
     "/auth/facebook", "data-ajax" => "false", "data-role" => "button", 
     class: "time_zone" %>
-</div>
+<%#</div>
+%>
 
