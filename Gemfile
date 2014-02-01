@@ -75,5 +75,4 @@ end
 
 group :development do
   gem 'capistrano-rails', '~> 1.1'
-  gem 'spring'
 end

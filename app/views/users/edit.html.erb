@@ -49,7 +49,11 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <% end %>
         </tbody>
       </table>
-      <p><%= link_to '<button type="button">Add Person</button>'.html_safe, new_person_path %>
+      <p>
+        <%= link_to '<button type="button">Add Person</button>'.html_safe, new_person_path %>
+        <%= link_to '<button type="button">Invite a User to Connect</button>'.html_safe, 
+          new_message_path(message_type: "invitation") %>
+      </p>
     </div>
   </div>
 </div>

@@ -7,6 +7,11 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 require 'person_helper'
 
 class User < ActiveRecord::Base
+  @@providers = {
+    "Google" => "google_oauth2",
+    "Twitter" => "twitter",
+    "Testing" => "Testing"
+  }
   has_many :identities, class_name: "Person"
   has_many :links, through: :identities
   has_many :people, through: :links, :source => :person_b
@@ -165,6 +170,19 @@ Unread messages.
 =end
   def unread_messages(requery = false)
     messages(requery).where(read: false)
+  end
+
+=begin rdoc
+Send an invitation to someone based on identity provider and name.
+Silently do nothing if there is no user that matches.
+=end
+  def send_invitation(provider, name)
+    return unless to = User.find_by(provider: @@providers[provider], name: name)
+    Message.create! do |m|
+      m.from = self
+      m.to = to
+      m.body = "#{self.name} would like to connect so you can work together."
+    end
   end
   
 #  def time_zone=(tz)

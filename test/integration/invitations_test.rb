@@ -61,22 +61,38 @@ class InvitationsTest < ActionDispatch::IntegrationTest
   end  
   
   test "invite, accept, and connect" do
-    get_logged_in(:user_invitor)
-    
+    invitee = users(:user_invitee)
     # Send invitation
-    
-    # Switch to invitee session and accept invitation
-    
-    assert_difference "@user.people(true).count" do
-      within "#message_#{message.id}" do
-        click_link 'Accept'
+    using_session(:invitor) do
+      invitor = get_logged_in(users(:user_invitor))
+      visit(edit_user_path(invitor))
+      click_link('Invite')
+      assert_equal new_message_path, current_path
+      select('Google')
+      fill_in 'Name', with: invitee.name
+      assert_difference "invitee.messages.count" do
+        click_button('Send')
       end
-      assert has_no_selector? "#message_#{message.id}", "Message still there"
     end
+        
+    # Switch to invitee session and accept invitation
+    using_session(:invitee) do
+      get_logged_in(invitee)
+      visit(home_user_path(invitee))
+      assert_difference "invitee.people(true).count" do
+        within ".message:first-of-type" do
+          click_link 'Accept'
+          assert_equal home_user_path(invitee), current_path
+        end
+        assert has_no_selector? ".message", "Message still there"
+      end
+    end
+    
   end  
   
   def get_logged_in(user)
-    @user = users(user)
+    user = users(user) unless user.is_a? User
+    @user = user
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       "provider" => 'google_oauth2',
       "uid" => @user.uid.to_s,
