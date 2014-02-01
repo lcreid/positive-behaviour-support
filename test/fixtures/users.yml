@@ -49,3 +49,13 @@ user_sharon:
   uid: 2
   name: Sharon
 
+user_invitor:
+  provider: google_oauth2
+  uid: 10
+  name: Invitor
+
+user_invitee:
+  provider: google_oauth2
+  uid: 20
+  name: Invitee
+

@@ -1,0 +1,12 @@
+<div id="message_<%= message.id -%>" class="message">
+  <p><%= message.body %></p>
+  <p>
+    <%= link_to 'Mark as read', message_path(message, response: "read"), method: :put %>
+    <% if message.message_type == "invitation" %>
+      <%= link_to 'Accept', message_path(message, response: "accept"), method: :put %>
+      <%= link_to 'Ignore', message_path(message, response: "ignore"), method: :put %>
+      <%= link_to 'Report as spam', message_path(message, response: "report_as_spam"), method: :put %>
+    <% end %>
+  </p>
+</div>
+

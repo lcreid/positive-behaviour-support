@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129193733) do
+ActiveRecord::Schema.define(version: 20140131150255) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -69,6 +69,21 @@ ActiveRecord::Schema.define(version: 20140129193733) do
 
   add_index "links", ["person_a_id"], name: "index_links_on_person_a_id"
   add_index "links", ["person_b_id"], name: "index_links_on_person_b_id"
+
+  create_table "messages", force: true do |t|
+    t.integer  "to_id"
+    t.integer  "from_id"
+    t.boolean  "read"
+    t.string   "message_type"
+    t.boolean  "reported_as_spam"
+    t.string   "recipient_action"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["from_id"], name: "index_messages_on_from_id"
+  add_index "messages", ["to_id"], name: "index_messages_on_to_id"
 
   create_table "people", force: true do |t|
     t.integer  "user_id"

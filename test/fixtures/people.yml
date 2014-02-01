@@ -75,4 +75,17 @@ person_sharon:
 person_marty:
   name: Marty
 
+user_invitor:
+  name: Invitor
+  user: user_invitor
+  creator: user_invitor
 
+user_invitee:
+  name: Invitor
+  user: user_invitee
+  creator: user_invitee
+
+invitation_person:
+  name: Invitation
+  creator: user_invitor
+  

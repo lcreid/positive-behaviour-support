@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+invitation:
+  to: user_invitee
+  from: user_invitor
+  read: false
+  message_type: invitation
+  reported_as_spam: false
+  recipient_action: MyString
+  body:
+
+first_message:
+  to: user_invitor
+  from: user_nick
+  read: false
+  message_type: message
+  reported_as_spam: false
+  recipient_action: 
+  body: Hello, world!
+

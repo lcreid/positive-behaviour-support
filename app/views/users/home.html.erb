@@ -59,6 +59,11 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       </div>
     <% end %>
   </div>
+  
+  <div id=messages class="container"> <%# FIXME Move this to a better place on the page %>
+    <%= render partial: "messages/message", collection: @user.unread_messages, spacer_template: "messages/message_spacer" %>
+  </div>
+  
   <div id="users" class="container">
     <h1>Connections</h1>
     <div class="content">
