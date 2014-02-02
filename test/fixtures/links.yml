@@ -84,3 +84,11 @@ patient_to_user_five:
   person_a: patient_for_user_five
   person_b: user_five
 
+p10_secondary_to_p20_secondary:
+  person_a: p10_secondary
+  person_b: p20_secondary
+
+p10_secondary_to_p20_secondary:
+  person_a: p20_secondary
+  person_b: p10_secondary
+

@@ -30,7 +30,9 @@ to the other.
 See: http://stackoverflow.com/questions/2923692/bidirectional-self-referential-associations
 for confirmation that this is probably a good way to do it.
 =end  
+# FIXME Only link if not already linked.
   def linkup(other)
+    return other if other.people.any? { |p| p == self }
     retval = other
     other = other.primary_identity if other.is_a? User
     people << other

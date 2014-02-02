@@ -74,18 +74,20 @@ class InvitationsTest < ActionDispatch::IntegrationTest
         click_button('Send')
       end
     end
-        
+    
+    invitation = invitee.messages(true).order(created_at: :desc).first
+    
     # Switch to invitee session and accept invitation
     using_session(:invitee) do
       get_logged_in(invitee)
       visit(home_user_path(invitee))
       assert_difference "invitee.people(true).count" do
-        within ".message:first-of-type" do
+        within "#message_#{invitation.id}" do
           click_link 'Accept'
-          assert_equal home_user_path(invitee), current_path
         end
-        assert has_no_selector? ".message", "Message still there"
       end
+      assert_equal home_user_path(invitee), current_path, "Not on home page"
+      assert has_no_selector?("#message_#{invitation.id}"), "Message still there"
     end
     
   end  

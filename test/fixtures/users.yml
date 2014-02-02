@@ -59,3 +59,12 @@ user_invitee:
   uid: 20
   name: Invitee
 
+p10:
+  provider: Testing
+  uid: 10
+  name: P10
+
+p20:
+  provider: Testing
+  uid: 20
+  name: P20

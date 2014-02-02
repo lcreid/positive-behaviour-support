@@ -50,6 +50,15 @@ test "person one has one User" do
     assert_equal "User Three", person.users.first.name
   end
   
+  test "Don't link people already linked" do
+    p10 = people(:p10_secondary)
+    p20 = people(:p20_secondary)
+    
+    assert_no_difference "p10.people.count" do
+      p10.linkup(p20)
+    end
+  end
+  
   test "find dates for all routines for a person" do
     person = people(:person_marty)
     assert_equal 2, person.routines.size

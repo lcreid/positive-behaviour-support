@@ -5,14 +5,19 @@ class MessagesController < ApplicationController
     if params["response"]
       @message.read = true
       @message.recipient_action = params["response"]
-    
-      @message.to.linkup(@message.from) if params["response"] == "accept"
+      
+      if params["response"] == "accept"
+        current_user.linkup(@message.from) 
+        current_user.save
+        @message.from.save
+      end
+      
       @message.reported_as_spam = true if params["response"] == "report_as_spam"
       
       @message.save
     end
     
-    redirect_to :back
+    redirect_to home_user_path(current_user)
   end
   
   def new
@@ -21,7 +26,7 @@ class MessagesController < ApplicationController
  
  def create
    current_user.send_invitation(params["provider"], params["name"])
-   redirect_to :back
+   redirect_to edit_user_path(current_user)
  end
   
   private

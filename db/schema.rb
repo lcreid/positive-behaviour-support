@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 20140131150255) do
   create_table "messages", force: true do |t|
     t.integer  "to_id"
     t.integer  "from_id"
-    t.boolean  "read"
+    t.boolean  "read",             default: false
     t.string   "message_type"
-    t.boolean  "reported_as_spam"
+    t.boolean  "reported_as_spam", default: false
     t.string   "recipient_action"
     t.string   "body"
     t.datetime "created_at"

@@ -182,6 +182,7 @@ Silently do nothing if there is no user that matches.
       m.from = self
       m.to = to
       m.body = "#{self.name} would like to connect so you can work together."
+      m.message_type = "invitation"
     end
   end
   

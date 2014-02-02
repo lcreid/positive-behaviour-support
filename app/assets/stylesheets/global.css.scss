@@ -1,5 +1,5 @@
 $top-menu-h: 30px !default;
-$width: 668px !default;
+$width: 960px !default;
 $font-size: 13px !default;
 
 // Colours
@@ -103,7 +103,7 @@ table { border-collapse: collapse; }
   background: $alert-background; // FIXME Change this to another colour, more red.
 }
 
-#home, #completed_routine, #new_award, #completed_routines, #routine, #user, #person_edit, #routine_edit, #goal_edit, #invitation {
+#home, #completed_routine, #new_award, #completed_routines, #routine, #user, #person_edit, #routine_edit, #goal_edit, #invitation, #messages {
   $horizontal-padding: 15px;
   $vertical-padding: 5px;
   $border-width: 0px;
@@ -137,7 +137,7 @@ table { border-collapse: collapse; }
   //  border: solid $border-width;
   }
 
-  table { width: $content-width; }
+  //table { width: $content-width; }
   
   th {
     background-color: $table-heading-background;

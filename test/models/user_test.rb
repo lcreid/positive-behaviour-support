@@ -202,6 +202,15 @@ class UserTest < ActiveSupport::TestCase
       user.unlink(person)
     end
   end
+  
+  test "Don't link people already linked" do
+    p10 = users(:p10)
+    p20 = users(:p20)
+    
+    assert_no_difference "p10.people.count" do
+      p10.linkup(p20)
+    end
+  end
 
   def link_two
     friendor = User.create!(name: "Friendor")

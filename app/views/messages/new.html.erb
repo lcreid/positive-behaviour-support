@@ -7,11 +7,13 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <div id="invitation" class="container">
   <h1>Invite</h1>
   <div class="content">
-    <div>
+    <div style="display:inline;float:left;width:55%;">
       <%= form_tag messages_path do |f| %>
         <p>
-          <%= label_tag :provider, 'Identity Provider' %>
+          <%= label_tag :provider, 'Identity Provider: ' %>
           <%= select_tag :provider, options_for_select(['Google', 'Twitter']), prompt: "Select an indentity provider" %>
+        </p>
+        <p>
           <%= label_tag :name, 'Name: ' %>
           <%= text_field_tag :name %>
         </p>
@@ -22,7 +24,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </p>
       <% end %>
     </div>
-    <div float="right">
+    <div style="display:inline;float:right;width:40%">
       <p>
         Find out from the user to whom you wish to connect, 
         which of the identity providers they use to log in,
@@ -38,5 +40,6 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         phishing attempts to gain access to someone else's
         data in the clean routines app.
     </div>
+    <div style="clear:both"></div>
   </div>
 </div>

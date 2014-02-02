@@ -89,3 +89,23 @@ invitation_person:
   name: Invitation
   creator: user_invitor
   
+p10_primary:
+  name: P10 Primary
+  creator: p10
+  user: p10
+    
+p10_secondary:
+  name: P10 secondary
+  creator: person_marty
+  user: p10
+    
+p20_primary:
+  name: P20 Primary
+  creator: p20
+  user: p20
+    
+p20_secondary:
+  name: P20 secondary
+  creator: person_sharon
+  user: p20
+  

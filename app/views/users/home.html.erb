@@ -7,73 +7,84 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <div id="user-name" class="container">
     <h1><%= @user.name %></h1>
   </div>
-  <div id="patients">
-    <%= content_tag_for(:div, @user.patients, class: "container") do | patient | %>
-      <h1><%= patient.name %></h1>
-      <div class="routines content">
-        <h2>Routines</h2>
-        <table>
-          <tbody>
-            <%= content_tag_for(:tr, patient.routines) do |routine| %>
-              <td><%= link_to(routine.name, routine_path(routine)) %></td>
-              <td style="text-align: right;"><%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %></td>
+  <div style="display:inline;float:left;width:60%;">
+    <div id="patients">
+      <%= content_tag_for(:div, @user.patients, class: "container") do | patient | %>
+        <h1><%= patient.name %></h1>
+        <div class="routines content">
+          <h2>Routines</h2>
+          <table>
+            <tbody>
+              <%= content_tag_for(:tr, patient.routines) do |routine| %>
+                <td><%= link_to(routine.name, routine_path(routine)) %></td>
+                <td style="text-align: right;"><%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %></td>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="pending_rewards content">
+        <h2>Rewards</h2>
+          <table>
+            <thead>
+              <th>Name</th><th>Description</th><th>Target</th><th>Eligible Rewards</th><th></th>
+            </thead>
+            <tbody>
+              <%= content_tag_for(:tr, patient.goals) do |g| %>
+                <td><%= g.name %></td>
+                <td><%= g.description %></td>
+                <td style="text-align: right;"><%= g.target.to_s %></td>
+                <td style="text-align: right;"><%= g.pending %></td>
+                <td style="text-align: right;"><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="completed_routines content">
+          <% rows_to_show = 5 %>
+          <h2>Recently Completed Routines</h2>
+          <table>
+            <thead>
+              <th>Routine</th><th>Clean?</th><th>Date</th>
+            </thead>
+            <tbody>
+            <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
+              <td><%= cr.name %></td>
+              <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
+              <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
             <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="pending_rewards content">
-      <h2>Rewards</h2>
+            </tbody>
+          </table>
+          <% if rows_to_show < patient.completed_routines.size %>
+            <p><%= link_to("More...", completed_routines_path(person_id: patient.id)) %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    
+    
+    <div id="users" class="container">
+      <h1>Connections</h1>
+      <div class="content">
         <table>
-          <thead>
-            <th>Name</th><th>Description</th><th>Target</th><th>Eligible Rewards</th><th></th>
-          </thead>
           <tbody>
-            <%= content_tag_for(:tr, patient.goals) do |g| %>
-              <td><%= g.name %></td>
-              <td><%= g.description %></td>
-              <td style="text-align: right;"><%= g.target.to_s %></td>
-              <td style="text-align: right;"><%= g.pending %></td>
-              <td style="text-align: right;"><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="completed_routines content">
-        <% rows_to_show = 5 %>
-        <h2>Recently Completed Routines</h2>
-        <table>
-          <thead>
-            <th>Routine</th><th>Clean?</th><th>Date</th>
-          </thead>
-          <tbody>
-          <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
-            <td><%= cr.name %></td>
-            <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
-            <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
+          <%= content_tag_for(:tr, @user.users) do | user | %>
+            <td><%= user.name %></td>
           <% end %>
           </tbody>
         </table>
-        <% if rows_to_show < patient.completed_routines.size %>
-          <p><%= link_to("More...", completed_routines_path(person_id: patient.id)) %></p>
-        <% end %>
       </div>
-    <% end %>
-  </div>
-  
-  <div id=messages class="container"> <%# FIXME Move this to a better place on the page %>
-    <%= render partial: "messages/message", collection: @user.unread_messages, spacer_template: "messages/message_spacer" %>
-  </div>
-  
-  <div id="users" class="container">
-    <h1>Connections</h1>
-    <div class="content">
-      <table>
-        <tbody>
-        <%= content_tag_for(:tr, @user.users) do | user | %>
-          <td><%= user.name %></td>
-        <% end %>
-        </tbody>
-      </table>
     </div>
   </div>
+  
+  <div style="display:bl;float:right;width:35%;">
+    <div class="container">
+      <div id="messages">
+        <h2>Messages</h2>
+        <%= render partial: "messages/message", 
+          collection: @user.unread_messages.order(created_at: :desc), 
+          spacer_template: "messages/message_spacer" %>
+      </div>
+    </div>
+  </div>
+  <div style="clean:both;"></div>
 </div>
