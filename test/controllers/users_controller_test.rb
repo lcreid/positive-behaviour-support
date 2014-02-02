@@ -50,10 +50,6 @@ class UsersControllerTest < ActionController::TestCase
         end
       end
     end
-    assert_select 'div#users' do
-      assert_select 'h1', "Connections"
-      assert_select 'tbody tr', 2 
-    end
   end
   
   test "get not logged in user" do

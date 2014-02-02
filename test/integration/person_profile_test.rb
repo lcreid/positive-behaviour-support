@@ -8,27 +8,8 @@ require 'capybara/rails'
 require 'test_helper'
 
 class PersonProfileTest < ActionDispatch::IntegrationTest
-  def get_logged_in
-    @user = users(:user_marie)
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      "provider" => 'google_oauth2',
-      "uid" => @user.uid.to_s,
-      "name" => @user.name
-    })
-
-    visit(root_path)
-    # It looks like if you don't sign out at the end of each test case,
-    # the test case will start off still logged in.
-    # I guess that's sort of desirable, so you don't have to keep logging in.
-    click_link('Sign out') if has_link? ("Sign out")
-    assert_equal root_path, current_path
-    
-    click_link('Google')
-    assert_equal home_user_path(@user), current_path
-  end
-    
   test "Add a routine" do
-    get_logged_in
+    get_logged_in(:user_marie)
     
     visit(edit_person_path(@user.people.last))
     click_link('Add Routine')
@@ -36,7 +17,7 @@ class PersonProfileTest < ActionDispatch::IntegrationTest
   end
   
   test "Add a goal" do
-    get_logged_in
+    get_logged_in(:user_marie)
     
     visit(edit_person_path(@user.people.last))
     click_link('Add Goal')
@@ -44,7 +25,7 @@ class PersonProfileTest < ActionDispatch::IntegrationTest
   end
   
   test "cancel backwards from routine" do
-    get_logged_in
+    get_logged_in(:user_marie)
     
     person = people(:patient_matt)
     visit(home_user_path(@user))
@@ -66,7 +47,7 @@ class PersonProfileTest < ActionDispatch::IntegrationTest
     # This test needs Javascript
 #    Capybara.current_driver = :webkit
     
-    get_logged_in
+    get_logged_in(:user_marie)
     
     person = people(:patient_matt)
     visit(home_user_path(@user))
@@ -97,6 +78,22 @@ class PersonProfileTest < ActionDispatch::IntegrationTest
     
     # Turn off Javascript
 #    Capybara.use_default_driver
+  end
+  
+  test "change team" do
+    get_logged_in(:user_marie)
+    matt = people(:patient_matt)
+    visit(edit_person_path(matt))
+    check('Stella')
+    assert_difference "matt.people(true).count" do
+      click_button('Save')
+    end
+    assert_equal edit_user_path(@user), current_path
+    visit(edit_person_path(matt))
+    uncheck('Stella')
+    assert_difference "matt.people(true).count", -1 do
+      click_button('Save')
+    end
   end
 end
 

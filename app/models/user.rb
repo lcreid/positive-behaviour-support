@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :identities, class_name: "Person"
   has_many :links, through: :identities
   has_many :people, through: :links, :source => :person_b
+  has_many :users, through: :people
   has_many :messages, foreign_key: :to_id # These are received messages
   has_many :sent_messages, foreign_key: :from_id, class_name: Message
 

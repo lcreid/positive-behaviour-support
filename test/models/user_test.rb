@@ -47,7 +47,7 @@ class UserTest < ActiveSupport::TestCase
     user = users(:existing_twitter)
     assert_equal 1, user.people.size
     assert_equal 1, user.users.size
-    assert_equal "User Two", user.users.first.name
+    assert_equal "Two Google", user.users.first.name
   end
   
   test "user five has one Patient" do
@@ -63,7 +63,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, user.patients.size
     assert_equal 1, user.users.size
     assert_equal "Patient Two", user.patients.first.name
-    assert_equal "User Three", user.users.first.name
+    assert_equal "Three Yahoo", user.users.first.name
   end
   
   test "user five has two identities and four people" do

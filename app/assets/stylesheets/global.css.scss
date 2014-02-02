@@ -103,6 +103,8 @@ table { border-collapse: collapse; }
   background: $alert-background; // FIXME Change this to another colour, more red.
 }
 
+ul.ul_no_decorations li { list-style-type: none; }
+
 #home, #completed_routine, #new_award, #completed_routines, #routine, #user, #person_edit, #routine_edit, #goal_edit, #invitation, #messages {
   $horizontal-padding: 15px;
   $vertical-padding: 5px;

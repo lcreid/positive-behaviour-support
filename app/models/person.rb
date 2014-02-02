@@ -12,6 +12,7 @@ class Person < ActiveRecord::Base
   has_many :links, foreign_key: :person_a_id
   has_many :reverse_links, foreign_key: :person_b_id, class_name: Link
   has_many :people, through: :links, source: :person_b
+  has_many :users, through: :people
   has_many :routines, -> {order("routines.created_at")}
   has_many :completed_routines, -> {order("completed_routines.created_at")}, through: :routines
   has_many :completed_expectations, through: :completed_routines
@@ -30,7 +31,6 @@ to the other.
 See: http://stackoverflow.com/questions/2923692/bidirectional-self-referential-associations
 for confirmation that this is probably a good way to do it.
 =end  
-# FIXME Only link if not already linked.
   def linkup(other)
     return other if other.people.any? { |p| p == self }
     retval = other
@@ -50,6 +50,43 @@ to the other.
     other.people.delete(self)
   end
 
+=begin rdoc
+Update links to the person from an array of user ids. The array contains the
+complete list of users connected to the person.
+=end
+=begin
+I would prefer to leave them all alone, but the algorithm is harder.
+=end
+  def update_team(updated_users)
+    # An empty array means no users (which should happen either)
+    # Nil means don't do anything with existing links.
+    return if updated_users.nil?
+    
+    # Don't let the app be stupid. Can't ever completely unlink a person.
+    logger.warn("update_team called with an empty array.") and return if updated_users.empty?
+    
+    # Get rid of the HTML artifact.
+    updated_users -= [""]
+    
+    updated_users = updated_users.map { |u| User.find(u) }
+    
+    # Delete the links that are no longer valid.
+    (users - updated_users).each do |u|
+#      puts "Unlinking: #{u.to_yaml}"
+      unlink(u)
+    end
+    
+    # Add the new users.
+    (updated_users - users).each do |u|
+#      puts "Linking: #{u.to_yaml}"
+      linkup(u)
+    end
+    
+    # At the moment, no need to do anything else.
+    # What happens when I put attributes on the link?
+    # TODO Add parent and other atributes to links.
+  end
+  
 =begin rdoc
 A person is owned by a user if:
 * The person is the user.

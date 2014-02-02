@@ -7,11 +7,16 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @person.creator = current_user
+    # The following makes sure that the creator goes out to the hidden field
+    # in the form and comes back to the create, so it doesn't get unlinked.
+    current_user.linkup(@person)
   end
   
   def create
     @person = Person.new(person_params)
     current_user.linkup(@person)
+    
+    @person.update_team(params[:person][:users])
     if @person.save
       redirect_to edit_user_path(current_user)
     else
@@ -21,6 +26,8 @@ class PeopleController < ApplicationController
   
   def update
     @person.update_attributes(person_params)
+    
+    @person.update_team(params[:person][:users])
     if @person.save
       redirect_to edit_user_path(current_user)
     else

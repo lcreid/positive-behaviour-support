@@ -32,7 +32,7 @@ test "person one has one User" do
     person = people(:user_one)
     assert_equal 1, person.people.size
     assert_equal "User Two", person.people.first.name
-    assert_equal "User Two", person.users.first.name
+    assert_equal "Two Google", person.users.first.name
   end
   
   test "person two has one Patient" do
@@ -47,7 +47,7 @@ test "person one has one User" do
     assert_equal 1, person.users.size
     assert_equal 1, person.patients.size
     assert_equal "Patient Two", person.patients.first.name
-    assert_equal "User Three", person.users.first.name
+    assert_equal "Three Yahoo", person.users.first.name
   end
   
   test "Don't link people already linked" do

@@ -60,26 +60,12 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </div>
       <% end %>
     </div>
-    
-    
-    <div id="users" class="container">
-      <h1>Connections</h1>
-      <div class="content">
-        <table>
-          <tbody>
-          <%= content_tag_for(:tr, @user.users) do | user | %>
-            <td><%= user.name %></td>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
   
   <div style="display:bl;float:right;width:35%;">
     <div class="container">
       <div id="messages">
-        <h2>Messages</h2>
+        <h1>Messages</h1>
         <%= render partial: "messages/message", 
           collection: @user.unread_messages.order(created_at: :desc), 
           spacer_template: "messages/message_spacer" %>
