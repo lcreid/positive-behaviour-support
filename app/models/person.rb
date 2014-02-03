@@ -62,11 +62,11 @@ I would prefer to leave them all alone, but the algorithm is harder.
     # Nil means don't do anything with existing links.
     return if updated_users.nil?
     
-    # Don't let the app be stupid. Can't ever completely unlink a person.
-    logger.warn("update_team called with an empty array.") and return if updated_users.empty?
-    
     # Get rid of the HTML artifact.
     updated_users -= [""]
+    
+    # Don't let the app be stupid. Can't ever completely unlink a person.
+    logger.warn("update_team called with an empty array.") and return if updated_users.empty?
     
     updated_users = updated_users.map { |u| User.find(u) }
     

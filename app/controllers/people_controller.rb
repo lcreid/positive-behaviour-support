@@ -7,9 +7,6 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @person.creator = current_user
-    # The following makes sure that the creator goes out to the hidden field
-    # in the form and comes back to the create, so it doesn't get unlinked.
-    current_user.linkup(@person)
   end
   
   def create

@@ -37,5 +37,18 @@ class UserProfileTest < ActionDispatch::IntegrationTest
     end
     assert_equal edit_user_path(@user), current_path
   end
+  
+  test "Add a person but cancel out" do
+    get_logged_in(:user_marie)
+    click_on('Profile')
+    assert_equal edit_user_path(@user), current_path
+
+    assert_no_difference "Link.all.count" do
+      click_link('Add Person')
+      assert_equal new_person_path, current_path
+      click_link('Cancel')
+    end
+    assert_equal edit_user_path(@user), current_path
+  end
 end
 
