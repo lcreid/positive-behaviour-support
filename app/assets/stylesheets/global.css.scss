@@ -30,6 +30,7 @@ h2 { font-size: $font-size + 2px; }
 h3 { font-size: $font-size + 1px; }
 body { font-family: "Lucida Grande",verdana,helvetica,arial,sans-serif; }
 
+// set basic styles for containers that are just for spacing
 .layout_box {
   border-style: none;
   border-width: 0;
@@ -48,13 +49,6 @@ table { border-collapse: collapse; }
   @extend .centre_in_browser;
 }
 
-// This is in the application template. It centres its descendants in the browser window.
-#content_container {
-  @extend .layout_box;
-  @extend .centre_in_browser;
-//  padding-top: .1px; // This seems to make the container bump up against the menu bar.
-}
-  
 #top_menu {
   @extend .layout_box;
   font-size: $font-size - 2px;
@@ -84,6 +78,7 @@ table { border-collapse: collapse; }
 .container {
   background: $content-background;
   box-shadow: 2px 2px 3px $box-shadow;
+  margin: 10px 0 10px 0;
 }
 
 .ui-state-highlight {
@@ -105,76 +100,70 @@ table { border-collapse: collapse; }
 
 ul.ul_no_decorations li { list-style-type: none; }
 
-#home, #completed_routine, #new_award, #completed_routines, #routine, #user, #person_edit, #routine_edit, #goal_edit, #invitation, #messages {
-  $horizontal-padding: 15px;
-  $vertical-padding: 5px;
-  $border-width: 0px;
-  $margin: 0;
-  $content-width: $width - 2 * ($horizontal-padding + $border-width + $margin);
+$horizontal-padding: 15px;
+$vertical-padding: 5px;
+$border-width: 0px;
+$margin: 0;
+$content-width: $width - 2 * ($horizontal-padding + $border-width + $margin);
 
-  margin: 10px 0 10px 0;
-  
-  h1, h2 {
-    padding: 2px;
-    margin: 10px 0 0 0;
-  }
-  h1 {
-    background: $h1-background;
-    color: $h1-colour;
-  }
-  h2 {
-    background: $h2-background;
-    color: $h2-colour;
-  }
-
-  // FIXME .routines doesn't exist anymore. I guess I don't need these classes.
-  .pending_rewards { @extend .routines; }
-  .completed_routines { @extend .routines; }
-  // Pad the stuff inside the container for aesthetic reasons.
-  // This has to be a child of the container. 
-  .content {
-    width: $content-width;
-    padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
-  //  box-shadow: 5px 5px 5px  black;
-  //  border: solid $border-width;
-  }
-
-  //table { width: $content-width; }
-  
-  th {
-    background-color: $table-heading-background;
-    font-weight: normal;
-    border-style: solid solid none solid;
-    border-width: thin thin 0 thin;
-    border-color: $table-heading-border-colour;
-  }
-  tr {
-    border-style: solid;
-    border-width: thin 0 thin 0;
-    border-color: $table-border-colour;
-    // TODO Vertical centre text
-  }
-  .odd_row { background-color: $table-background-odd; }
-  .even_row { background-color: $table-background-even; }
-  
-  a { color: $link_colour; }
-
-  // From http://stackoverflow.com/questions/1030793/input-with-displayblock-is-not-a-block-why-not
-  .grow_child_to_parent {
-    display: block; 
-    width: 100%;
-	  box-sizing: border-box; /* css3 rec */
-	  -moz-box-sizing: border-box; /* ff2 */
-	  -ms-box-sizing: border-box; /* ie8 */
-	  -webkit-box-sizing: border-box; /* safari3 */
-	  -khtml-box-sizing: border-box; /* konqueror */
-  }
-  /* TODO I would have to download and include the file boxsizing.htc into my app.
-    Already doing lots that isn't supported by IE6 and IE7.
-  //<!-- The voodoo gets scary. Force IE6 and IE7 to support IE5's box model -->
-  //<!--[if lt IE 8]><style>.bb {behavior:url("boxsizing.htc");}</style><![endif]-->
-  */
+h1, h2 {
+  padding: 2px;
+  margin: 10px 0 0 0;
 }
+h1 {
+  background: $h1-background;
+  color: $h1-colour;
+}
+#welcome h1 { background: $content-background; }
+h2 {
+  background: $h2-background;
+  color: $h2-colour;
+}
+
+// Pad the stuff inside the container for aesthetic reasons.
+// This has to be a child of the container. 
+.content {
+  width: $content-width;
+  padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
+//  box-shadow: 5px 5px 5px  black;
+//  border: solid $border-width;
+}
+
+//table { width: $content-width; }
+
+th {
+  background-color: $table-heading-background;
+  font-weight: normal;
+  border-style: solid solid none solid;
+  border-width: thin thin 0 thin;
+  border-color: $table-heading-border-colour;
+}
+tr {
+  border-style: solid;
+  border-width: thin 0 thin 0;
+  border-color: $table-border-colour;
+  // TODO Vertical centre text
+}
+.odd_row { background-color: $table-background-odd; }
+.even_row { background-color: $table-background-even; }
+
+a { color: $link_colour; }
+
+// From http://stackoverflow.com/questions/1030793/input-with-displayblock-is-not-a-block-why-not
+.grow_child_to_parent {
+  display: block; 
+  width: 100%;
+  box-sizing: border-box; /* css3 rec */
+  -moz-box-sizing: border-box; /* ff2 */
+  -ms-box-sizing: border-box; /* ie8 */
+  -webkit-box-sizing: border-box; /* safari3 */
+  -khtml-box-sizing: border-box; /* konqueror */
+}
+/* TODO I would have to download and include the file boxsizing.htc into my app.
+  Already doing lots that isn't supported by IE6 and IE7.
+//<!-- The voodoo gets scary. Force IE6 and IE7 to support IE5's box model -->
+//<!--[if lt IE 8]><style>.bb {behavior:url("boxsizing.htc");}</style><![endif]-->
+*/
 
 @import "welcome";
 
