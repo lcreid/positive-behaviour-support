@@ -9,19 +9,19 @@ Pbs::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   
-  resources :users do
+  resources :users, only: [:show, :edit, :update] do
     member do
       get 'home'
     end
   end
   
-  resources :completed_routines
-  resources :awards
+  resources :completed_routines, only: [:new, :create, :index]
+  resources :awards, only: [:new, :create]
   resources :routines
   resources :people
-  resources :links
+  resources :links, only: [:destroy]
   resources :goals
-  resources :messages
+  resources :messages, only: [:update, :new, :create]
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
