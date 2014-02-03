@@ -30,7 +30,7 @@ go_to_bed:
 # The next one is for forcing error conditions.
 belongs_to_no_one:
   name: Belongs to no one
-  person: 0
+  person_id: 0
 
 routine_index_one:
   name: R1
@@ -51,4 +51,9 @@ routine_index_two:
 #  name: R4
 #  person: person_marty
 #  goal: marty_one
+
+# Force a team for person_one
+single_team:
+  name: Single team routine
+  person: patient_one
 

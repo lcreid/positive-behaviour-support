@@ -187,24 +187,14 @@ Silently do nothing if there is no user that matches.
     end
   end
   
-#  def time_zone=(tz)
-#    # First, see if the time zone passed in is the human-friendly one,
-#    # e.g. Pacific Time (US & Canada)
-#    puts "tz = #{tz}"
-#    super(tz) and return if Time.find_zone(tz)
-#    puts "time_zone= past first super"
-#    # If not, then find it 
-#    tzinfo = ActiveSupport::TimeZone.find_tzinfo(tz)
-#    puts "tzinfo = #{tzinfo.inspect}"
-#    converted_tz = ActiveSupport::TimeZone.zones_map.find { |k, tz| tz.tzinfo == tzinfo }
-#    puts "converted_tz = #{converted_tz.inspect}"
-#    super(converted_tz[1].name) and return unless converted_tz.nil?
-#    puts "time_zone= past second super"
-#    
-#    # Otherwise, just throw it in and let validation fail.
-#    super(tz)
-#  end
-
+=begin rdoc
+Return a list of people who have routines and are directly connected to 
+the user.
+=end
+  def team
+    
+  end
+  
   private
     
 =begin rdoc

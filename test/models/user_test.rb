@@ -211,6 +211,14 @@ class UserTest < ActiveSupport::TestCase
       p10.linkup(p20)
     end
   end
+  
+  test "Teams" do
+    one = users(:existing_google)
+    marie = users(:user_marie)
+    
+    assert_equal 1, one.subjects.count
+    assert_equal 2, marie.subjects.count
+  end
 
   def link_two
     friendor = User.create!(name: "Friendor")
