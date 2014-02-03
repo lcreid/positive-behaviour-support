@@ -22,6 +22,14 @@ admin pages.
   end
 
 #  private
+
+#=begin rdoc
+#Make a link look like a button.
+#=end
+#  def link_to_button(text, path, options = {})
+#    link_to "<button type=\"button\">#{text}</button>".html_safe, path
+#  end
+#  helper_method :link_to_button
   
   ###### Session helpers ######
 

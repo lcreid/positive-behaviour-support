@@ -65,14 +65,20 @@ table { border-collapse: collapse; }
       filter:alpha(opacity=60); /* For IE8 and earlier */
     }
   }
-  .left_side {float: left;}
-  .right_side {float: right;}
 }
+
+#bottom_menu {
+  @extend #top_menu;
+}
+
+.left {float: left;}
+.right {float: right;}
+.centre {margin-left: auto; margin-right: auto;}
+.clear {clear: both;}
 
 .centre_in_browser {
   width: $width;
-  margin-left: auto;
-  margin-right: auto;
+  @extend .centre;
 }
 
 #home, #welcome { 
@@ -83,7 +89,7 @@ table { border-collapse: collapse; }
   }
 }
 // Put a drop shadow on an area.
-// This has to be a a parent of the block with the .content.
+// This has to be a parent of the block with the .content.
 .container {
   background: $content-background;
   box-shadow: 2px 2px 3px $box-shadow;

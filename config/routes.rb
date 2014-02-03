@@ -5,7 +5,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 Pbs::Application.routes.draw do
-  get "welcome/index"
+  resources :welcome, only: [:index] do
+    member do
+      get "privacy"
+      get "terms"
+    end
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   

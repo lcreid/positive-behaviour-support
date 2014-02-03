@@ -5,10 +5,19 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <div id='sign_in' class="welcome">
   <h1>Welcome to Positive Behaviour Support</h1>
+  
+  <div style="width:300px" class="content centre">
+    <p style="text-align:center;">
+      Monitor performance of an individual in a positive behaviour support framework.
+    </p>
+  </div>
+  
   <div id='sign_in_with'>
-    <div id='sign-in-with'>
+    <div style="display:inline;">
       <%= render partial: "idps", formats: [:html] %>
     </div>
   </div>
+  
+  <div class="terms"><%= render "terms" %></div>
 </div>
 

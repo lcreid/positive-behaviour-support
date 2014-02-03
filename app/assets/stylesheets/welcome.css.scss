@@ -28,10 +28,22 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   
   .idp {
     margin: 0 $idp-horz-margin;
-    display: inline;
+    min-height: 40px;
+    display: table-cell;
+    vertical-align: middle;
   }
   
   #sign_in_with {
     text-align: center;
   }
+
+  .terms {
+    margin-top: 20px;
+    width: 400px;
+    @extend .centre;
+    
+    p { font-size: 10px; }
+    h2 { text-align: center; }
+  }
 }
+

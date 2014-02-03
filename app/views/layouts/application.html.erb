@@ -16,13 +16,13 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <% if current_user %>
       <div id="top_menu">
         <div class="centre_in_browser">
-          <div class="left_side">
+          <div class="left">
             <% unless home_user_path(current_user) == request.path %>
               <%= link_to "Home", home_user_path(current_user) %>
             <% end %>
           </div>
           
-          <div class="right_side">
+          <div class="right">
             Signed in as <%= current_user.name %>. |
 
             <% if mobile_device? %>
@@ -53,6 +53,18 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     
       <%= yield %>
       
+    </div>
+    
+    <div class="clear">
+    </div>
+    
+    <div class="centre_in_browser">
+      <div id="bottom_menu">
+        <div class="right">
+          <%= link_to "Privacy", privacy_welcome_path %> |
+          <%= link_to "Terms", terms_welcome_path %> 
+        </div>
+      </div>
     </div>
   </body>
 </html>

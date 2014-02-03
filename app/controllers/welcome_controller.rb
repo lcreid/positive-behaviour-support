@@ -12,4 +12,10 @@ class WelcomeController < ApplicationController
   def index
     redirect_to(home_user_path(current_user)) if current_user
   end
+  
+  def privacy
+  end
+  
+  def terms
+  end
 end
