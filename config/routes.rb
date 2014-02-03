@@ -5,12 +5,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 Pbs::Application.routes.draw do
-  resources :welcome, only: [:index] do
-    member do
-      get "privacy"
-      get "terms"
-    end
-  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -41,6 +35,9 @@ Pbs::Application.routes.draw do
   # LCR
   get "sessions/create"
   get "sessions/destroy"
+  get "welcome/index"
+  get "welcome/privacy"
+  get "welcome/terms"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

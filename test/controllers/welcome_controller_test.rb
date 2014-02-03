@@ -20,7 +20,7 @@ class WelcomeControllerTest < ActionController::TestCase
 
     assert_select 'div#top_menu', false, message("Found top menu") # When using display: none style, it renders as the div with nothing in it
 #		  assert_select 'div#sign-in-with', /.*Already registered? Sign in with.*/, "Missing or wrong sign-in header" do
-	  assert_select 'div#sign-in-with', nil, "Missing or wrong sign-in header" do
+	  assert_select 'div#sign_in_with', nil, "Missing or wrong sign-in header" do
 	    assert_select 'a[href=/auth/twitter]', nil, "Missing link"
 	  end
   end
