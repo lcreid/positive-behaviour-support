@@ -1,5 +1,6 @@
 $top-menu-h: 30px !default;
-$width: 960px !default;
+$width: 660px !default;
+$sidebar-width: 300px !default;
 $font-size: 13px !default;
 
 // Colours
@@ -9,7 +10,7 @@ $menu-background: black !default;
 $menu-text-colour: white !default;
 $note-background: rgb(255, 255, 204) !default;
 $alert-background: rgb(255, 255, 204) !default;
-$alert-border-colour: rgb(255, 153, 0) !default;
+$alert-border-colour: #FFCCCC !default;
 $h1-background: rgb(237, 243, 254) !default;
 $h1-colour: black !default;
 $h2-background: $browser-background !default;
@@ -52,7 +53,6 @@ table { border-collapse: collapse; }
 #top_menu {
   @extend .layout_box;
   font-size: $font-size - 2px;
-  text-align: right;
   padding-top: 0;
   color: white;
   height:  $top-menu-h;
@@ -65,12 +65,19 @@ table { border-collapse: collapse; }
       filter:alpha(opacity=60); /* For IE8 and earlier */
     }
   }
+  .left_side {float: left;}
+  .right_side {float: right;}
 }
 
 .centre_in_browser {
   width: $width;
   margin-left: auto;
   margin-right: auto;
+}
+
+#home .centre_in_browser {
+  @extend .centre_in_browser;
+  width: $width + $sidebar-width;
 }
 
 // Put a drop shadow on an area.
@@ -95,7 +102,7 @@ table { border-collapse: collapse; }
 
 .ui-state-error {
   @extend .ui-state-highlight;
-  background: $alert-background; // FIXME Change this to another colour, more red.
+  background: $alert-background;
 }
 
 ul.ul_no_decorations li { list-style-type: none; }
@@ -122,11 +129,10 @@ h2 {
 
 // Pad the stuff inside the container for aesthetic reasons.
 // This has to be a child of the container. 
+// THIS IS WERE CSS IS CRAP. I have to specify the content width, so I can't make this a general
+// purpose style for any container.
 .content {
-  width: $content-width;
   padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
-//  box-shadow: 5px 5px 5px  black;
-//  border: solid $border-width;
 }
 
 //table { width: $content-width; }
@@ -142,7 +148,7 @@ tr {
   border-style: solid;
   border-width: thin 0 thin 0;
   border-color: $table-border-colour;
-  // TODO Vertical centre text
+  vertical-align: middle;
 }
 .odd_row { background-color: $table-background-odd; }
 .even_row { background-color: $table-background-even; }
