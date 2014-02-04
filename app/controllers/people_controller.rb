@@ -38,7 +38,6 @@ class PeopleController < ApplicationController
   end
   
   def show
-    
   end
   
   private
@@ -50,6 +49,6 @@ class PeopleController < ApplicationController
   end
   
   def person_params
-    params.require(:person).permit(:name, :creator_id)
+    params.require(:person).permit(:name, :short_name, :real_name, :creator_id)
   end
 end

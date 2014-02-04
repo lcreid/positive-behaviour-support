@@ -88,13 +88,13 @@ class PeopleControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = 'http://test.hostperson/edit'
     
     person = people(:patient_two)
-    original_person_name = person.name
+    original_person_name = person.short_name
     
     post :update, id: person.id, person: { name: "New Name" }
     assert_redirected_to edit_user_path(user)
     
     db_person = Person.find(person.id)
-    refute_equal original_person_name, db_person.name
+    refute_equal original_person_name, db_person.short_name
   end
   
   test "show page to create a new person" do

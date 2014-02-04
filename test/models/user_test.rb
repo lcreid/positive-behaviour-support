@@ -29,13 +29,13 @@ class UserTest < ActiveSupport::TestCase
     user = users(:existing_twitter)
     assert_equal 1, user.identities.size
     assert_equal 1, user.links.size
-    assert_equal "User Two", user.links.first.person_b.name
+    assert_equal "User Two", user.links.first.person_b.short_name
   end
   
   test "user five has one Patient link" do
     user = users(:user_five)
     assert_equal 1, user.links.size
-    assert_equal "Patient for User Five", user.links.first.person_b.name
+    assert_equal "Patient for User Five", user.links.first.person_b.short_name
   end
 
   test "user four has two links" do
@@ -54,7 +54,7 @@ class UserTest < ActiveSupport::TestCase
     user = users(:user_five)
     assert_equal 1, user.people.size
     assert_equal 1, user.patients.size
-    assert_equal "Patient for User Five", user.patients.first.name
+    assert_equal "Patient for User Five", user.patients.first.short_name
   end
 
   test "user four has one User and one Patient" do
@@ -62,7 +62,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 2, user.people.size
     assert_equal 1, user.patients.size
     assert_equal 1, user.users.size
-    assert_equal "Patient Two", user.patients.first.name
+    assert_equal "Patient Two", user.patients.first.short_name
     assert_equal "Three Yahoo", user.users.first.name
   end
   
@@ -70,11 +70,11 @@ class UserTest < ActiveSupport::TestCase
     user = users (:user_marie)
     assert_equal 2, user.identities.size
     assert_equal 2, user.patients.size
-    assert user.people.one? { |p| p.name == "Max-Patient" }
-    assert user.people.one? { |p| p.name == "Matt-Patient" }
+    assert user.people.one? { |p| p.short_name == "Max-Patient" }
+    assert user.people.one? { |p| p.short_name == "Matt-Patient" }
     assert_equal 2, user.users.size
-    assert user.people.one? { |p| p.name == "Nick-User" }
-    assert user.people.one? { |p| p.name == "Stella-User" }
+    assert user.people.one? { |p| p.short_name == "Nick-User" }
+    assert user.people.one? { |p| p.short_name == "Stella-User" }
     assert_equal 4, user.people.size
   end
   

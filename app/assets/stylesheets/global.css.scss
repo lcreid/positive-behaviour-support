@@ -16,8 +16,8 @@ $h1-colour: black !default;
 $h2-background: $browser-background !default;
 $h2-colour: black !default;
 $table-heading-background: $browser-background !default;
-$table-background-odd: $table-heading-background;
-$table-background-even: $content-background;
+$background-odd: $content-background;
+$background-even: rgb(250,250,250);
 $table-border-colour: $table-heading-background;
 $table-heading-border-colour: white;
 $link-colour: #6699FF;
@@ -163,8 +163,8 @@ tr {
   border-color: $table-border-colour;
   vertical-align: middle;
 }
-.odd_row { background-color: $table-background-odd; }
-.even_row { background-color: $table-background-even; }
+.odd_row { background-color: $background-odd; }
+.even_row { background-color: $background-even; }
 
 a { color: $link_colour; }
 

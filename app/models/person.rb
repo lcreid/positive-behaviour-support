@@ -26,6 +26,14 @@ class Person < ActiveRecord::Base
   include PersonHelper
 
 =begin rdoc
+Return the short_name, if any, or the name.
+The short name is intended to mask the identity of the subject,
+so people can't learn who's under care by shoulder surfing.
+=end
+  def short_name
+    super || self.name
+  end
+=begin rdoc
 Link a Person to a Person or a User, bidirectionally, so that each entity is connected
 to the other.
 See: http://stackoverflow.com/questions/2923692/bidirectional-self-referential-associations

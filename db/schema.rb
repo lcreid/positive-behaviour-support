@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131150255) do
+ActiveRecord::Schema.define(version: 20140204003907) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20140131150255) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "creator_id"
+    t.string   "short_name"
   end
 
   add_index "people", ["creator_id"], name: "index_people_on_creator_id"

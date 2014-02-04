@@ -10,13 +10,13 @@ class PersonTest < ActiveSupport::TestCase
   test "person one has one User link" do
     person = people(:user_one)
     assert_equal 1, person.links.size
-    assert_equal "User Two", person.links.first.person_b.name
+    assert_equal "User Two", person.links.first.person_b.short_name
   end
   
   test "person two has one Patient link" do
     person = people(:user_five)
     assert_equal 1, person.links.size
-    assert_equal "Patient for User Five", person.links.first.person_b.name
+    assert_equal "Patient for User Five", person.links.first.person_b.short_name
   end
 
   test "person four has two links" do
@@ -24,21 +24,21 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 2, person.links.size
     assert_equal 1, person.links.joins(:person_b).where("user_id is null").size
     assert_equal 1, person.links.joins(:person_b).where("user_id is not null").size
-    assert_equal "Patient Two", person.links.joins(:person_b).where("user_id is null").first.person_b.name
-    assert_equal "User Three", person.links.joins(:person_b).where("user_id is not null").first.person_b.name
+    assert_equal "Patient Two", person.links.joins(:person_b).where("user_id is null").first.person_b.short_name
+    assert_equal "User Three", person.links.joins(:person_b).where("user_id is not null").first.person_b.short_name
   end
 
 test "person one has one User" do
     person = people(:user_one)
     assert_equal 1, person.people.size
-    assert_equal "User Two", person.people.first.name
+    assert_equal "User Two", person.people.first.short_name
     assert_equal "Two Google", person.users.first.name
   end
   
   test "person two has one Patient" do
     person = people(:user_five)
     assert_equal 1, person.people.size
-    assert_equal "Patient for User Five", person.people.first.name
+    assert_equal "Patient for User Five", person.people.first.short_name
   end
 
   test "person four has one User and one Patient" do
@@ -46,7 +46,7 @@ test "person one has one User" do
     assert_equal 2, person.people.size
     assert_equal 1, person.users.size
     assert_equal 1, person.patients.size
-    assert_equal "Patient Two", person.patients.first.name
+    assert_equal "Patient Two", person.patients.first.short_name
     assert_equal "Three Yahoo", person.users.first.name
   end
   

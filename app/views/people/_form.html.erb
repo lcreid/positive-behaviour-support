@@ -8,6 +8,22 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <%= form_for @person do |pf| %>
       <%= pf.hidden_field :creator_id %>
       <p><%= pf.label :name, 'Name: ' %><%= pf.text_field :name %></p>
+      <div class="even_row">
+        <div class="left" style="width:48%;">
+          <p>
+            <%= pf.label :short_name, 'Short Name: ' %><%= pf.text_field :short_name %>
+          </p>
+        </div>
+        <div class="right" style="width:48%;">
+          <p>
+            Choose a short name that identifies the person to you and the rest
+            of the team, but won't necessarily identify the person to anyone else.
+            This is so you don't have to worry about people identifying the person
+            by looking over your shoulder.
+          </p>
+        </div>
+        <div class="clear"></div>
+      </div>
     
       <div>
         <h2>Team</h2>
