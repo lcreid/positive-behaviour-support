@@ -37,6 +37,10 @@ class PeopleController < ApplicationController
     redirect_to :back
   end
   
+  def show
+    
+  end
+  
   private
 
   def user_allowed_to_modify_person

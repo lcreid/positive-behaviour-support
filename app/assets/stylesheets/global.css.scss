@@ -51,12 +51,21 @@ table { border-collapse: collapse; }
 }
 
 #top_menu {
+  @extend %menu_common;
+  padding-top: 0;
+}
+
+#bottom_menu {
+  @extend %menu_common;
+  margin-top: 20px;
+}
+
+%menu_common {
   @extend .layout_box;
   font-size: $font-size - 2px;
-  padding-top: 0;
-  color: white;
   height:  $top-menu-h;
   line-height: $top-menu-h;
+  color: white;
   background-color: black; 
   a {
     color: white;
@@ -65,10 +74,6 @@ table { border-collapse: collapse; }
       filter:alpha(opacity=60); /* For IE8 and earlier */
     }
   }
-}
-
-#bottom_menu {
-  @extend #top_menu;
 }
 
 .left {float: left;}
@@ -178,6 +183,11 @@ a { color: $link_colour; }
 //<!-- The voodoo gets scary. Force IE6 and IE7 to support IE5's box model -->
 //<!--[if lt IE 8]><style>.bb {behavior:url("boxsizing.htc");}</style><![endif]-->
 */
+
+div#patients {
+  ul { margin: 0; padding-left: 0; }
+  li { list-style-type: none; margin: 2px 0 2px 0; }
+}
 
 @import "welcome";
 

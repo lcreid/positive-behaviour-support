@@ -18,7 +18,11 @@ Pbs::Application.routes.draw do
   resources :completed_routines, only: [:new, :create, :index]
   resources :awards, only: [:new, :create]
   resources :routines
-  resources :people
+  resources :people do
+    member do
+      get 'dashboard'
+    end
+  end
   resources :links, only: [:destroy]
   resources :goals
   resources :messages, only: [:update, :new, :create]

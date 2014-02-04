@@ -8,62 +8,17 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <h1><%= @user.name %></h1>
   </div>
   <div style="display:inline;float:left;width:60%;">
-    <div id="patients">
-      <%= content_tag_for(:div, @user.patients, class: "container") do | patient | %>
-        <h1><%= patient.name %></h1>
-        <div class="routines content">
-          <h2>Routines</h2>
-          <table class="grow_child_to_parent">
-            <tbody>
-              <%= content_tag_for(:tr, patient.routines) do |routine| %>
-                <td><%= link_to(routine.name, routine_path(routine)) %></td>
-                <td style="text-align: right;"><%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %></td>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <div class="content pending_rewards">
-        <h2>Rewards</h2>
-          <% if 0 < patient.goals.count %>
-            <table>
-              <thead>
-                <th>Name</th><th style="width:6em;">Target</th><th style="width:6em;">Eligible Rewards</th><th>Action</th>
-              </thead>
-              <tbody>
-                <%= content_tag_for(:tr, patient.goals) do |g| %>
-                  <td><%= g.name %></td>
-                  <td style="text-align: right;"><%= g.target.to_s %></td>
-                  <td style="text-align: right;"><%= g.pending %></td>
-                  <td style="text-align: right;"><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
-                <% end %>
-              </tbody>
-            </table>
-          <% else %>
-            No goals assigned.
-          <% end %>
-        </div>
-        <div class="content completed_routines">
-          <% rows_to_show = 5 %>
-          <h2>Recently Completed Routines</h2>
-          <% if 0 < patient.completed_routines.count %>
-            <table>
-              <thead>
-                <th>Routine</th><th>Clean?</th><th>Date</th>
-              </thead>
-              <tbody>
-              <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
-                <td><%= cr.name %></td>
-                <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
-                <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
-              <% end %>
-              </tbody>
-            </table>
-            <% if rows_to_show < patient.completed_routines.size %>
-              <p><%= link_to("More...", completed_routines_path(person_id: patient.id)) %></p>
+    <div id="patients" class="container">
+      <% if @user.subjects.count == 1 %>
+        <%= render partial: "people/subject_dashboard", locals: { patient: @user.subject.first } %>
+      <% else %>
+        <h1>Subjects</h1>
+        <div class="content">
+          <ul>
+            <%= content_tag_for(:li, @user.subjects) do | patient | %>
+              <%= link_to patient.name, person_path(patient) %>
             <% end %>
-          <% else %>
-            No recently completed routines.
-          <% end %>
+          </ul>
         </div>
       <% end %>
     </div>
