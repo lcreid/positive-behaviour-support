@@ -60,6 +60,8 @@ gem 'humanize_boolean'
 gem 'capistrano', '~> 3.1'
 gem 'capistrano-bundler'
 
+gem 'whenever', require: false
+
 gem 'detect_timezone_rails'
 
 group :test do
