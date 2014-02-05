@@ -1,0 +1,29 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<div class="content completed_routines">
+  <% rows_to_show = 5 %>
+  <h2>Recently Completed Routines</h2>
+  <% if 0 < patient.completed_routines.count %>
+    <table>
+      <thead>
+        <th>Routine</th><th>Clean?</th><th>Date</th>
+      </thead>
+      <tbody>
+      <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
+        <td><%= link_to(cr.name, edit_completed_routine_path(cr)) %></td>
+        <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
+        <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
+      <% end %>
+      </tbody>
+    </table>
+    <% if rows_to_show < patient.completed_routines.size %>
+      <p><%= link_to("More...", completed_routines_path(person_id: patient.id)) %></p>
+    <% end %>
+  <% else %>
+    No recently completed routines.
+  <% end %>
+</div>
+

@@ -5,7 +5,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 class CompletedRoutinesController < ApplicationController
-  before_action :user_allowed_to_complete_routine, except: [:create, :index]
+  before_action :user_allowed_to_complete_routine, only: [:new]
+  before_action :user_allowed_to_edit, except: [:new, :create, :index, :report]
   
   def new
     template = Routine.find(params[:routine_id])
@@ -30,11 +31,9 @@ class CompletedRoutinesController < ApplicationController
   end
   
   def edit
-    @completed_routine = CompletedRoutine.find(params[:id])
   end
   
   def update
-    @completed_routine = CompletedRoutine.find(params[:id])
     @completed_routine.update_attributes(completed_routine_params)
     if @completed_routine.save
       redirect_to :back
@@ -48,11 +47,22 @@ class CompletedRoutinesController < ApplicationController
     @person = Person.find(params[:person_id])
   end
   
+  def report
+  end
+  
   private
 
   def user_allowed_to_complete_routine
     params.require(:routine_id) # Theoretically, this isn't right, but it seems to work.
     current_user.can_complete?(params[:routine_id]) || not_found
+  end
+
+  def user_allowed_to_edit
+    @completed_routine = CompletedRoutine.find(params[:id])
+    puts @completed_routine.to_yaml
+    puts current_user.can_modify?(@completed_routine)
+    puts current_user.to_yaml
+    current_user.can_modify?(@completed_routine) || not_found
   end
   
   def completed_routine_params

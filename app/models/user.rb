@@ -111,6 +111,28 @@ A user is allowed to access a goal if:
   end
 
 =begin rdoc
+Check if a user is allowed to modify an object.
+=end
+  def can_modify?(o)
+    case o
+    when CompletedRoutine, Goal, Routine
+      team_member_for?(o.person)
+    else
+      false
+    end
+  end
+  
+=begin rdoc
+Is this User on the team for the given person.
+=end
+  def team_member_for?(person)
+    puts "User (self): #{self.to_yaml}\nPerson: #{person.to_yaml}"
+    person = Person.find(person) unless person.is_a? Person
+    return false unless person
+    return people.any? { |p| p == person }
+  end
+  
+=begin rdoc
 Link a User to a Person or a User, bidirectionally, so that each entity is connected
 to the other.
 =end  

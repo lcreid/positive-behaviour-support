@@ -1,0 +1,45 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<div id="completed_routines">
+  <div id="patient-name" class="container">
+    <h1>Recently Completed Routines for <%= @person.name %></h1>
+    <div class="completed_routines content">
+      <div style="overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Routine</th>
+              <th rowspan="2">Expectation</th>
+              <%= month_heading %></tr>
+            <tr><%= day_heading %></tr>
+          </thead>
+          <tbody>
+          <% @person.routines.order(name: :asc).each do |r| %>
+            <%# Loop on expectations %>
+            <%= content_tag_for(:tr, r.expectations) do |e| %>
+              <td><%= r.name %></td>
+              <td><%= e.description %></td>
+              <%# Loop on Dates %>
+              <% @detail_columns.each do |day, cols| %>
+                <%# Loop on completed expectations within the date %>
+                <% ces = @person.completed_expectations_for_day_and_expectation(e, day) %>
+                <% ces.each do |ce| %>
+                  <td style="text-align:center"><%= ce.observation %></td>
+                <% end %>
+                <%# if fewer completed expectations than needed, output empty column(s) %>
+                <%= (cols - ces.count).times.reduce("") { |sum, x| sum + "<td></td>"}.html_safe %>
+              <% end %>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <!-- The following button trick doesn't work for <= IE8 -->
+      <p><%= link_to '<button type="button">Back</button>'.html_safe, :back %></p>
+    </div>
+  </div>
+</div>
+
