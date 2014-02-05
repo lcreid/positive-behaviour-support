@@ -15,7 +15,7 @@ Pbs::Application.routes.draw do
     end
   end
   
-  resources :completed_routines, only: [:new, :create, :index]
+  resources :completed_routines, except: [:show, :destroy]
   resources :awards, only: [:new, :create]
   resources :routines
   resources :people do

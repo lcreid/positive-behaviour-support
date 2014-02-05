@@ -22,8 +22,25 @@ class CompletedRoutinesController < ApplicationController
   
   def create
 #    puts params.inspect # Get the view working so I can see what the parameters are going to be, so I can write the test case.
-    CompletedRoutine.create!(completed_routine_params)
-    redirect_to home_user_path(current_user)
+    if CompletedRoutine.create(completed_routine_params)
+      redirect_to home_user_path(current_user)
+    else
+      render "new"
+    end
+  end
+  
+  def edit
+    @completed_routine = CompletedRoutine.find(params[:id])
+  end
+  
+  def update
+    @completed_routine = CompletedRoutine.find(params[:id])
+    @completed_routine.update_attributes(completed_routine_params)
+    if @completed_routine.save
+      redirect_to :back
+    else
+      render "edit"
+    end
   end
   
   def index

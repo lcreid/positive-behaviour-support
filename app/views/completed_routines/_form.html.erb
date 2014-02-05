@@ -1,0 +1,54 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<div class="container">
+  <div id="completed_routine">
+    <div id="completed_routine_header">
+      <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.name}" %></h1>
+    </div>
+    <% if @completed_routine.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@completed_routine.errors.count, "error") %> prevented this routine from being saved:</h2>
+        <ul>
+        <% @completed_routine.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= content_tag_for(:div, @completed_routine, class: "content") do %>
+      <%= form_for(@completed_routine) do |crf| %>
+        <%= crf.hidden_field :name %>
+        <%= crf.hidden_field :routine_id %>
+        <%= crf.hidden_field :person_id %>
+        <table>
+          <thead>
+            <tr>
+              <th>Expectation</th><th>Yes</th><th>No</th><th>N/A</th><th>Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= crf.fields_for :completed_expectations do |cef| %>
+              <tr>
+                <td>
+                  <%= cef.label(:description, cef.object.description) %>
+                  <%= cef.hidden_field :description %>
+                </td>
+                <td style="text-align: center;"><%= cef.radio_button :observation, "Y" %></td>
+                <td style="text-align: center;"><%= cef.radio_button :observation, "N"  %></td>
+                <td style="text-align: center;"><%= cef.radio_button :observation, "N/A"  %></td>
+                <td><%= cef.text_field(:comment, class: "grow_child_to_parent") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <p><%= crf.label 'Comment:' %><%= crf.text_field(:comment, class: "grow_child_to_parent") %></p>
+        <!-- The following button trick doesn't work for <= IE8 -->
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= crf.submit 'Save' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

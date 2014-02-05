@@ -20,7 +20,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <% @person.routines.order(name: :asc).each do |r| %>
             <%# Loop on expectations %>
             <%= content_tag_for(:tr, r.expectations) do |e| %>
-              <td><%= r.name %></td>
+              <td><%= link_to(r.name, edit_completed_routine_path(r.id)) %></td>
               <td><%= e.description %></td>
               <%# Loop on Dates %>
               <% @detail_columns.each do |day, cols| %>
