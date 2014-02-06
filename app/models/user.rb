@@ -7,11 +7,6 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 require 'person_helper'
 
 class User < ActiveRecord::Base
-  @@providers = {
-    "Google" => "google_oauth2",
-    "Twitter" => "twitter",
-    "Testing" => "Testing"
-  }
   has_many :identities, class_name: "Person"
   has_many :links, through: :identities
   has_many :people, through: :links, :source => :person_b
@@ -68,17 +63,36 @@ Create a User based on the information provided by Omniauth.
     end
   end
 
+  private
+
+  @@provider = {
+      "Google" => "google_oauth2",
+      "Twitter" => "twitter",
+      "Testing" => "Testing"
+    }
+
+  public
+  
+=begin rdoc
+Return hash of human readable name and internal provider name.
+=end
+  def self.provider(name)
+    @@provider[name]
+  end
+
+=begin rdoc
+Return of hash of internal provider name and human readable name.
+=end
+  def self.inverse_provider(provider)
+    @@provider.invert[provider]
+  end
+  
 =begin rdoc
 Return the Person that is the primary identity of the user.
 =end
   def primary_identity
     identities.first
   end
-
-#  
-#  def name
-#    "#{self.class}: #{super}"
-#  end
 
 =begin rdoc
 A user is allowed to complete a routine if they
@@ -148,6 +162,15 @@ to the other.
     identities.each { |i| i.unlink(other) }
   end
 
+=begin rdoc
+Return the Link that joins one User to another.
+=end
+  def link_to!(user)
+    Link.find_by!(person_a_id: self.identities, person_b_id: user.identities)
+    # This should return only one link, as the only links between two users should
+    # be the forward and backward link. But I'm not so sure... Return the first for now
+  end
+  
 =begin rdoc
 A user is allowed to create, modify or delete a link if:
 * They're a participant in the link,

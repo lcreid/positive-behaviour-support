@@ -19,6 +19,20 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </div>
       <% end %>
 
+      <div class="even_row">
+        <div class="left" style="width:48%;">
+          <p>Identity Provider: <%= User.inverse_provider(f.object.provider) %></p>
+          <p>Name: <%= f.object.name %></p>
+        </div>
+        <div class="right" style="width:48%;">
+          <p>
+            This is the information you have to send to someone else so that they
+            can invite you to connect. You can't change this name in this app. 
+          </p>
+        </div>
+        <div class="clear"></div>
+      </div>
+      
       <div class="field">
         <p>
           <%= f.label :time_zone %>
@@ -42,16 +56,14 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <tr><th>Name</th><th></th><th></th></tr>
         </thead>
         <tbody>
-          <%= content_tag_for(:tr, @user.links) do |link| %>
-            <td><%= link.person_b.name %></td>
-            <td><%= link_to "Edit", edit_person_path(link.person_b) %></td>
-            <td><%= link_to( "Unlink", link_path(link), method: :delete) unless link.person_b.is_owned_by?(@user) %></td>
+          <%= content_tag_for(:tr, @user.users) do |other| %>
+            <td><%= other.name %></td>
+            <td><%= link_to( "Unlink", link_path(@user.link_to!(other)), method: :delete) %></td>
           <% end %>
         </tbody>
       </table>
       <p>
-        <%= link_to '<button type="button">Add Person</button>'.html_safe, new_person_path %>
-        <%= link_to '<button type="button">Invite a User to Connect</button>'.html_safe, 
+        <%= link_to '<button type="button">Invite a User to Link Up</button>'.html_safe, 
           new_message_path(message_type: "invitation") %>
       </p>
     </div>
