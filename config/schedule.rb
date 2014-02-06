@@ -13,6 +13,11 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+# Need to add "-i" to command line for Ubunut.
+# See last comment: https://github.com/javan/whenever/issues/205
+# -i was added and then removed from default since it doesn't work for some people.
+# Low impact to rest of Linux install is to change the command put in cron.
+set :job_template, "PATH=./bin:$PATH /bin/bash -l -c ':job'"
 
 every :day, at: '12:30 am', roles: [:db] do
   rake "db:backup", output: 'log/backup.log' #{:error => 'error.log', :standard => 'cron.log'}
