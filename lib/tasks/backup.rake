@@ -9,7 +9,7 @@ namespace :db do
     db = "pbs_" + Rails.env
     time = Time.new.strftime '%Y%m%d%H%M%S'
     backup_path = File.expand_path("~/backups")
-    backup_file = File.join(backup_path, "backup_#{db}_#{time}")
+    backup_file = File.join(backup_path, "backup_#{db}_#{time}.gz")
     
     FileUtils.mkpath(backup_path) unless Dir.exists?(backup_path)
     
