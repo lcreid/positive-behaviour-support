@@ -72,9 +72,11 @@ patient_for_user_five:
 
 person_sharon:
   name: Sharon
+  user: user_sharon
 
 person_marty:
   name: Marty
+  creator: user_sharon
 
 user_invitor:
   name: Invitor

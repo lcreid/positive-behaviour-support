@@ -17,7 +17,7 @@ class RoutinesController < ApplicationController
   def create
     @routine = Routine.new(routine_params)
     if @routine.save
-      redirect_to edit_person_path(@routine.person)
+      redirect_to person_path(@routine.person)
     else
       render "new"
     end
@@ -26,7 +26,7 @@ class RoutinesController < ApplicationController
   def update
     @routine.update_attributes(routine_params)
     if @routine.save
-      redirect_to edit_person_path(@routine.person)
+      redirect_to person_path(@routine.person)
     else
       render "edit"
     end

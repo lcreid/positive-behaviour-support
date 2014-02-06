@@ -142,8 +142,6 @@ h2 {
 
 // Pad the stuff inside the container for aesthetic reasons.
 // This has to be a child of the container. 
-// THIS IS WERE CSS IS CRAP. I have to specify the content width, so I can't make this a general
-// purpose style for any container.
 .content {
   padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
 }
@@ -167,6 +165,8 @@ tr {
 .even_row { background-color: $background-even; }
 
 a { color: $link_colour; }
+
+.button_row { text-align:right; }
 
 // From http://stackoverflow.com/questions/1030793/input-with-displayblock-is-not-a-block-why-not
 .grow_child_to_parent {

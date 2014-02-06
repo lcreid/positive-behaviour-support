@@ -78,7 +78,7 @@ class RoutinesControllerTest < ActionController::TestCase
             expectations_attributes: [{description: "new description", id: expectation.id}] }
       end
     end
-    assert_redirected_to edit_person_path(person)
+    assert_redirected_to person_path(person)
     
     db_routine = Routine.find(routine.id)
     refute_equal original_routine_name, db_routine.name
@@ -102,6 +102,6 @@ class RoutinesControllerTest < ActionController::TestCase
         post :create, routine: { name: "New Name", person_id: person.id, expectations_attributes: ["description" => "one"] }
       end
     end
-    assert_redirected_to edit_person_path(person)
+    assert_redirected_to person_path(person)
   end
 end

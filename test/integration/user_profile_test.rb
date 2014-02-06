@@ -18,11 +18,6 @@ class UserProfileTest < ActionDispatch::IntegrationTest
       all('a', :text => 'Unlink').first.click
       assert_equal edit_user_path(@user), current_path
     end
-    
-    all('a', :text => 'Edit').first.click
-    assert_equal edit_person_path(@user.people(true).first), current_path
-    click_link('Cancel')
-    assert_equal edit_user_path(@user), current_path
   end
   
   test "Add a person" do

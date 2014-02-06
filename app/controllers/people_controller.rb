@@ -33,11 +33,14 @@ class PeopleController < ApplicationController
   end
   
   def destroy
-    @person.destroy
+    @person.destroy # TODO I don't think I wan to destroy any data, so re-think this.
     redirect_to :back
   end
   
   def show
+  end
+  
+  def reports
   end
   
   private

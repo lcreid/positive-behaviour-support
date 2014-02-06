@@ -154,10 +154,47 @@ class PeopleControllerTest < ActionController::TestCase
       assert_select pt[0], 'h2', "Routines"
       assert_select pt[0], 'tbody tr', 2 do |p|
         assert_select p[0], 'td', /^Go to bed.*/
-        assert_select p[0], 'a', "Add New"
+        assert_select p[0], 'a', 2 do |links|
+          assert_select links[0], 'a', "Edit"
+          assert_select links[1], 'a', "New Observations"
+        end
         assert_select p[1], 'td', /^Turn off Minecraft.*/
-        assert_select p[1], 'a', "Add New"
       end
     end
+  end
+  
+  test "show report of completed routines" do
+    @controller.log_in(user = users(:user_sharon))
+    patient = people(:person_marty)
+    get :reports, id: patient.id
+    assert :success
+    
+#    puts @response.body
+
+    assert_select 'tr:nth-of-type(1) th', 4
+    assert_select 'tr:nth-of-type(2) th', 4 # Don't count the rowspan
+    assert_select 'tr:nth-of-type(1) td', 7 # Even though the : is on the tr, the count is for the whole selector
+    assert_select 'tr:nth-of-type(2) td', 7 
+    assert_select 'tr:nth-of-type(3) td', 7
+    assert_select 'tr:nth-of-type(4) td', 7
+    assert_select 'tr:nth-of-type(5) td', 7
+    assert_select 'tr:nth-of-type(6) td', 7
+#    assert_select 'tr.completed_routine', 6 do |row|
+#      assert_select row[0], 'td', 4
+#      assert_select row[1], 'td', 4
+#      assert_select row[2], 'td', 4
+#      assert_select row[3], 'td', 4
+#      # The following suck because it depends on the order that my test data comes 
+#      assert_select row[0], 'td:last-of-type tr', 3, "Row 1"
+#      assert_select row[1], 'td:last-of-type tr', 3, "Row 2"
+#      assert_select row[2], 'td:last-of-type tr', 2, "Row 3"
+#      assert_select row[3], 'td:last-of-type tr', 3, "Row 4"
+      
+#      assert_select row[0], 'td:nth-of-type(2)', "Not part of routine"
+#      assert_select row[0], 'td:nth-of-type(4)', "Not part of routine"
+#      assert_select row[1], 'td:nth-of-type(3)', "Not part of routine"
+#      assert_select row[2], 'td:nth-of-type(4)', "Not part of routine"
+#      assert_select row[3], 'td:nth-of-type(1)', "Not part of routine"
+#    end
   end
 end

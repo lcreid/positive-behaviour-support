@@ -20,7 +20,7 @@ Pbs::Application.routes.draw do
   resources :routines
   resources :people do
     member do
-      get 'dashboard'
+      get 'reports'
     end
   end
   resources :links, only: [:destroy]

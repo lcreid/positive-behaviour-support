@@ -1,3 +1,18 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
 <div id="patients" class="container">
-  <%= render partial: "subject_dashboard", locals: { patient: @person } %>
+  <h1><%= @person.name %></h1>
+  <div class="content">
+    <p class="button_row">
+      <%= link_to 'Reports', reports_person_path(@person), class: "button" %>
+      <%= link_to 'Edit Team', edit_person_path(@person), class: "button" %>
+      <%= link_to 'New Team', new_person_path, class: "button" %>
+    </p>
+    <%= render partial: "routines/index" %>
+    <%= render partial: "goals/index" %>
+    <%= render partial: "completed_routines/index" %>
+  </div>
 </div>

@@ -30,7 +30,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
     # There are 8 completed routines at this point, but we set the maximum to display to 5.
     assert_difference "CompletedRoutine.all.count" do
       assert has_selector?('div.completed_routines tbody tr', count: before = 5), "Unexpected completed routines"
-      all('a', :text => 'Add New').first.click
+      all('a', :text => 'New Observations').first.click
       assert_equal new_completed_routine_path, current_path
       all('tbody tr') do |row|
         row.within {choose('observation_y')}

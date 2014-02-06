@@ -1,0 +1,27 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<div class="pending_rewards">
+<h2>Rewards</h2>
+  <% if 0 < @person.goals.count %>
+    <table>
+      <thead>
+        <th>Name</th><th style="width:6em;">Target</th><th style="width:6em;">Eligible Rewards</th><th>Action</th>
+      </thead>
+      <tbody>
+        <%= content_tag_for(:tr, @person.goals) do |g| %>
+          <td><%= g.name %></td>
+          <td style="text-align: right;"><%= g.target.to_s %></td>
+          <td style="text-align: right;"><%= g.pending %></td>
+          <td style="text-align: right;"><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    No goals assigned.
+  <% end %>
+  <p><%= link_to 'New Goal', new_goal_path(person: @person.attributes), class: "button" %></p>
+</div>
+
