@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
 
   before_filter :prepare_for_mobile
 
+  def title
+    "Clean Routines"
+  end
+  helper_method :title
+  
 =begin rdoc
 Throw a page not found exception (404).
 Use this in controllers when you want to hide a link, e.g.

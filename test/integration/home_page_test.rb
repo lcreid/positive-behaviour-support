@@ -36,7 +36,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
         row.within {choose('observation_y')}
       end
       click_button('Save')
-      assert_equal home_user_path(user), current_path
+      assert_equal person_path(matt), current_path
     end
     # assert has_selector?('div.completed_routines tbody tr', count: before + 1), "Missing completed routine row"
   end

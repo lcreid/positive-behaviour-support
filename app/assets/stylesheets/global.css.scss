@@ -45,7 +45,7 @@ body {
 }
 table { border-collapse: collapse; } 
 
-#message_area {
+#flash_area {
   @extend .layout_box;
   @extend .centre_in_browser;
 }
@@ -101,22 +101,22 @@ table { border-collapse: collapse; }
   margin: 10px 0 10px 0;
 }
 
-//.ui-state-highlight {
-//  @extend .centre_in_browser;
-//  background: $alert-background;
-//  min-height: 50px;
-//  $padding: 5px;
-//  padding: $padding;
-//  width: $width - 2 * $padding;
-//  border-color: $alert-border-colour;
-//  border-style: solid none solid none;
-//  border-width: 1px 0 1px 0;
-//}
-
-//.ui-state-error {
-//  @extend .ui-state-highlight;
-//  background: $alert-background;
-//}
+// These next two I want to pull in jquery-ui theme, but I don't know if I can.
+.flash_notice {
+  @extend .centre_in_browser;
+  background: $alert-background;
+  min-height: 50px;
+  $padding: 5px;
+  padding: $padding;
+  width: $width - 2 * $padding;
+  border-color: $alert-border-colour;
+  border-style: solid none solid none;
+  border-width: 1px 0 1px 0;
+}
+.flash_alert {
+  @extend .ui-state-highlight;
+  background: $alert-background;
+}
 
 ul.ul_no_decorations li { list-style-type: none; }
 

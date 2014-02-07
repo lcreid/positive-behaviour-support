@@ -6,66 +6,68 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 
 <div id="user" class="container">
   <h1>Your Profile</h1>
-  <div class="content">
-    <%= form_for(@user) do |f| %>
-      <% if @user.errors.any? %>
-        <div class="error_messages">
-          <h2>Form is invalid</h2>
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+  <% content_for :content do %>
+    <div class="content">
+      <h2>Identity</h2>
+      <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+          <div class="error_messages">
+            <h2>Form is invalid</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-      <div class="even_row">
-        <div class="left" style="width:48%;">
-          <p>Identity Provider: <%= User.inverse_provider(f.object.provider) %></p>
-          <p>Name: <%= f.object.name %></p>
+        <div class="even_row">
+          <div class="left" style="width:48%;">
+            <p>Identity Provider: <%= User.inverse_provider(f.object.provider) %></p>
+            <p>Name: <%= f.object.name %></p>
+          </div>
+          <div class="right" style="width:48%;">
+            <p>
+              This is the information you have to send to someone else so that they
+              can invite you to connect. You can't change this name in this app. 
+            </p>
+          </div>
+          <div class="clear"></div>
         </div>
-        <div class="right" style="width:48%;">
+        
+        <h2>Preferences</h2>
+        <div class="field">
           <p>
-            This is the information you have to send to someone else so that they
-            can invite you to connect. You can't change this name in this app. 
+            <%= f.label :time_zone %>
+            <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
           </p>
         </div>
-        <div class="clear"></div>
-      </div>
-      
-      <div class="field">
+        
+        <div class="actions">
+          <p>
+            <!-- The following button trick doesn't work for <= IE8 -->
+            <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+            <%= f.submit "Update Profile" %>
+          </p>
+        </div>
+      <% end %>
+        
+      <div id="people">
+        <h2>Linked People</h2>
+        <table>
+          <tbody>
+            <%= content_tag_for(:tr, @user.users) do |other| %>
+              <td><%= other.name %></td>
+              <td><%= link_to( "Unlink", link_path(@user.link_to!(other)), method: :delete) %></td>
+            <% end %>
+          </tbody>
+        </table>
         <p>
-          <%= f.label :time_zone %>
-          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
+          <%= link_to '<button type="button">Invite a User to Link Up</button>'.html_safe, 
+            new_message_path(message_type: "invitation") %>
         </p>
       </div>
-      
-      <div class="actions">
-        <p>
-          <%= f.submit "Update Profile" %>
-          <!-- The following button trick doesn't work for <= IE8 -->
-          <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
-        </p>
-      </div>
-    <% end %>
-      
-    <div id="people">
-      <h2>Manage Linked People</h2>
-      <table>
-        <thead>
-          <tr><th>Name</th><th></th><th></th></tr>
-        </thead>
-        <tbody>
-          <%= content_tag_for(:tr, @user.users) do |other| %>
-            <td><%= other.name %></td>
-            <td><%= link_to( "Unlink", link_path(@user.link_to!(other)), method: :delete) %></td>
-          <% end %>
-        </tbody>
-      </table>
-      <p>
-        <%= link_to '<button type="button">Invite a User to Link Up</button>'.html_safe, 
-          new_message_path(message_type: "invitation") %>
-      </p>
     </div>
-  </div>
+  <% end %>
+  <%= render partial: "layouts/with_messages" %>
 </div>

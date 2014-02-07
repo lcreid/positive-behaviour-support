@@ -70,11 +70,11 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_difference "CompletedRoutine.count" do
       post :create, completed_routine
     end
-    assert_redirected_to home_user_path(@controller.current_user)
     assert cr = CompletedRoutine.
       where(routine_id: r.id).
       order(:updated_at).
       last, "No completed routines for user #{user.name}"
+    assert_redirected_to person_path(cr.person)
     assert_equal r.id, cr.routine_id
     assert_equal r.person_id, cr.person_id
     assert_equal r.name, cr.name

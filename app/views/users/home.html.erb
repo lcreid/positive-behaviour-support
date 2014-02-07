@@ -3,16 +3,16 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id="home" title="PBS" selected="true">
+<div id="home" selected="true">
   <div id="user-name" class="container">
     <h1><%= @user.name %></h1>
   </div>
-  <div style="display:inline;float:left;width:60%;">
+  <% content_for :content do %>
     <div id="patients" class="container">
       <% if @user.subjects.count == 1 %>
         <%= render partial: "people/subject_dashboard", locals: { patient: @user.subject.first } %>
       <% else %>
-        <h1>Subjects</h1>
+        <h1>Teams</h1>
         <div class="content">
           <ul>
             <%= content_tag_for(:li, @user.subjects) do | patient | %>
@@ -22,19 +22,6 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </div>
       <% end %>
     </div>
-  </div>
-  
-  <div style="display:bl;float:right;width:35%;">
-    <div class="container">
-      <div id="messages">
-        <h1>Messages</h1>
-        <div class="content">
-          <%= render(partial: "messages/message", 
-            collection: @user.unread_messages.order(created_at: :desc), 
-            spacer_template: "messages/message_spacer") || "No unread messages" %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div style="clean:both;"></div>
+  <% end %>
+  <%= render partial: "layouts/with_messages" %>
 </div>
