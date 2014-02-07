@@ -56,6 +56,7 @@ to be eligible for a reward.
     pt1 = {
       name: "Training Patient 1", 
       creator_id: user.id,
+      created_at: user.created_at, # So we can easily delete the training data.
       routines_attributes: [
         {
           name: "Clean up room", 
@@ -109,6 +110,7 @@ The second patient has two routines and no goals.
     pt2 = {
       name: "Training Patient 2",
       creator_id: user.id,
+      created_at: user.created_at, # So we can easily delete the training data.
       routines_attributes: [
         {
           name: "Turn off Minecraft",
@@ -131,7 +133,7 @@ The second patient has two routines and no goals.
     pt = Person.create!(pt2)
     i.linkup(pt)
     
-    i.linkup(User.create!(name: "Training User 1", uid: 1, provider: "Training"))
+    i.linkup(User.create!(name: "Training User 1", uid: 1, provider: "Training", created_at: user.created_at))
   end
   
   def Training.make_completed_routines(routine, reps, date_increment, start_time = Time.current)
@@ -167,7 +169,28 @@ The second patient has two routines and no goals.
     end
     completed_routines
   end
+
+=begin rdoc
+Delete the training data for a user, defined as patients and user 
+created within 15s of the user being created.
+=end
+  def Training.delete(user)
+    # Assumes delete dependent is on for the relevant associations.
+    range = user.created_at - 1.second .. user.created_at + 15.seconds
+    
+    user.users.each do |u|
+      if range.cover? u.created_at
+        user.unlink(u)
+        u.destroy 
+      end
+    end
+    
+    user.people(true).each do |p|
+      if range.cover? p.created_at
+        user.unlink(p)
+        p.destroy
+      end
+    end
+  end
 end
-
-
 

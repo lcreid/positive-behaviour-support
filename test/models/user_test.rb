@@ -111,6 +111,24 @@ class UserTest < ActiveSupport::TestCase
     assert pt1.completed_expectations.all? { |ce| ce.expectation }, "Missing expectations from completed expectations"
   end
   
+  test "create and delete training data" do
+    user = User.create!(name: "Training Data User", created_at: 10.minutes.ago)
+              assert_no_difference "CompletedExpectation.all.count" do
+            assert_no_difference "CompletedRoutine.all.count" do
+          assert_no_difference "Expectation.all.count" do
+        assert_no_difference "Routine.all.count" do
+      assert_no_difference "Goal.all.count" do
+    assert_no_difference "user.people(true).count" do
+                Training.create(user)
+                Training.delete(user)
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  
   test "link two users" do
     assert_difference "Link.all.count", 2 do
       link_two

@@ -7,8 +7,8 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 class Routine < ActiveRecord::Base
   belongs_to :person
   belongs_to :goal, inverse_of: :routines
-  has_many :completed_routines
-  has_many :expectations
+  has_many :completed_routines, dependent: :destroy
+  has_many :expectations, dependent: :destroy
   accepts_nested_attributes_for :expectations, allow_destroy: true
   
 =begin rdoc

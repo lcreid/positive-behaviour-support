@@ -13,10 +13,10 @@ class Person < ActiveRecord::Base
   has_many :reverse_links, foreign_key: :person_b_id, class_name: Link
   has_many :people, through: :links, source: :person_b
   has_many :users, through: :people
-  has_many :routines, -> {order("routines.created_at")}
-  has_many :completed_routines, -> {order("completed_routines.routine_done_at")}, through: :routines
+  has_many :routines, -> {order("routines.created_at")}, dependent: :destroy
+  has_many :completed_routines, -> {order("completed_routines.routine_done_at")}, through: :routines, dependent: :destroy
   has_many :completed_expectations, through: :completed_routines
-  has_many :goals
+  has_many :goals, dependent: :destroy
   
   accepts_nested_attributes_for :routines
   accepts_nested_attributes_for :goals

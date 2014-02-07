@@ -7,7 +7,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 require 'person_helper'
 
 class User < ActiveRecord::Base
-  has_many :identities, class_name: "Person"
+  has_many :identities, class_name: "Person", dependent: :destroy
   has_many :links, through: :identities
   has_many :people, through: :links, :source => :person_b
   has_many :users, through: :people
