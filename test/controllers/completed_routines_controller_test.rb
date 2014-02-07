@@ -51,6 +51,8 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
         person_id: r.person_id, 
         name: r.name, 
         comment: good_day,
+        routine_done_at_date: "2014-01-23",
+        routine_done_at_time: "12:30 AM",
         completed_expectations_attributes: {
           "0" => { 
             observation: "Y", 
@@ -80,6 +82,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_equal 2, cr.completed_expectations.size
     assert_equal expectations[0], cr.completed_expectations[0].description
     assert_equal expectations[1], cr.completed_expectations[1].description
+    assert_equal Time.zone.local(2014, 01, 23, 00, 30), cr.routine_done_at
   end
   
   test "show report of completed routines" do

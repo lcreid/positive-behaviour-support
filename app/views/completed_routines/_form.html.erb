@@ -45,6 +45,13 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           </tbody>
         </table>
         <p><%= crf.label 'Comment:' %><%= crf.text_field(:comment, class: "grow_child_to_parent") %></p>
+        <p>
+          <% routine_done_at = crf.object.routine_done_at || Time.current %>
+          Routine Date: 
+            <%= text_field_tag "#{crf.object.class.to_s.underscore}[routine_done_at_date]", routine_done_at.to_s(:date), class: "datepicker", size: 8 %>
+          Routine Time: 
+            <%= text_field_tag "#{crf.object.class.to_s.underscore}[routine_done_at_time]", routine_done_at.to_s(:time), class: "timepicker", size: 8 %>
+        </p>
         <!-- The following button trick doesn't work for <= IE8 -->
         <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
         <%= crf.submit 'Save' %>

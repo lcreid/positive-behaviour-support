@@ -44,7 +44,7 @@ awarded yet.
     n ||= 1
     n = Integer(n) if n.kind_of? String
     return if pending < n
-    pending_routines.sort_by { |cr| cr.created_at } .first(n * target).each do |give|
+    pending_routines.sort_by { |cr| cr.routine_done_at } .first(n * target).each do |give|
       give.awarded = true
       give.save!
     end

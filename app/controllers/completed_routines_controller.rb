@@ -59,16 +59,17 @@ class CompletedRoutinesController < ApplicationController
 
   def user_allowed_to_edit
     @completed_routine = CompletedRoutine.find(params[:id])
-    puts @completed_routine.to_yaml
-    puts current_user.can_modify?(@completed_routine)
-    puts current_user.to_yaml
     current_user.can_modify?(@completed_routine) || not_found
   end
   
   def completed_routine_params
     r = params.require(:completed_routine)
-    r.permit(:routine_id, :person_id, :comment, :name,
-      completed_expectations_attributes: [:description, :observation, :comment]
+    params[:completed_routine][:routine_done_at] = 
+      params[:completed_routine][:routine_done_at_date] +
+      " " +
+      params[:completed_routine][:routine_done_at_time]
+    r.permit(:id, :routine_id, :person_id, :comment, :name, :routine_done_at,
+      completed_expectations_attributes: [:id, :description, :observation, :comment]
     )
   end
 end

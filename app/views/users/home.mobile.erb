@@ -71,7 +71,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         <% patient.completed_routines.most_recent(rows_to_show).each do |cr| %>
           <tr style="background-color:<%= cr.is_clean? ? "#CCFF99" : "#FFFF99" %>;">
             <td><%= cr.name %></td>
-            <td><%= cr.created_at.to_s(:humanized_ago) %></td> 
+            <td><%= cr.routine_done_at.to_s(:humanized_ago) %></td> 
           </tr>
         <% end %>
       </tbody>

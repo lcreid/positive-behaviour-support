@@ -9,7 +9,27 @@ class CompletedRoutine < ActiveRecord::Base
   belongs_to :routine
   has_many :completed_expectations
   accepts_nested_attributes_for :completed_expectations, allow_destroy: true
-  scope :most_recent, ->(n = 10000) { reorder(created_at: :desc).limit(n) }
+  scope :most_recent, ->(n = 10000) { reorder(routine_done_at: :desc).limit(n) }
+
+  before_create :set_routine_done_at
+
+=begin rdoc
+By default, the routine is given a date and time of when the person began
+recording the observations. This field is editable in the form.
+=end
+  def set_routine_done_at
+    self.routine_done_at || self.routine_done_at = Time.now
+  end
+
+=begin 
+For records created before the routine_done_at column was added,
+use the created_at time.
+No. Better to fix in the migration de una buena vez.
+Also have fix the fixtures, because they don't fire the triggers.
+=end
+#  def routine_done_at
+#    super || self.routine_done_at = self.created_at
+#  end
   
 #=begin rdoc
 #Build a new CompletedRoutine from a Routine.

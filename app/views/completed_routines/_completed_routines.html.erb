@@ -15,7 +15,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <%= content_tag_for(:tr, patient.completed_routines.most_recent(rows_to_show)) do |cr| %>
         <td><%= link_to(cr.name, edit_completed_routine_path(cr)) %></td>
         <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
-        <td style="text-align: right;"><%= cr.created_at.to_s(:humanized_ago) %></td> 
+        <td style="text-align: right;"><%= cr.routine_done_at.to_s(:humanized_ago) %></td> 
       <% end %>
       </tbody>
     </table>

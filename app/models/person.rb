@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
   has_many :people, through: :links, source: :person_b
   has_many :users, through: :people
   has_many :routines, -> {order("routines.created_at")}
-  has_many :completed_routines, -> {order("completed_routines.created_at")}, through: :routines
+  has_many :completed_routines, -> {order("completed_routines.routine_done_at")}, through: :routines
   has_many :completed_expectations, through: :completed_routines
   has_many :goals
   
@@ -121,7 +121,7 @@ the display.
 Get the unique dates on which this person completed at least one routine.
 =end
   def routine_dates
-    completed_routines.pluck(:created_at).collect { |d| d.beginning_of_day }.uniq
+    completed_routines.collect { |d| d.routine_done_at.beginning_of_day }.uniq
   end
 
 =begin rdoc
@@ -130,7 +130,7 @@ then also grouped by month and year.
 =end
   def completed_routines_column_layout
     completed_routines.
-      group_by { |cr| cr.created_at.beginning_of_day }.
+      group_by { |cr| cr.routine_done_at.beginning_of_day }.
       collect { |k, v| [k, v.count] }.
       group_by { |x| x[0].beginning_of_month }.
       flatten
@@ -139,8 +139,8 @@ then also grouped by month and year.
     # More crap. Obviously I can't use a to_date-based query, since the date changes
     # based on the time zone
 #    completed_routines
-#      .group("date(completed_routines.created_at)")
-#      .pluck("date(completed_routines.created_at), count(*)")
+#      .group("date(completed_routines.routine_done_at)")
+#      .pluck("date(completed_routines.routine_done_at), count(*)")
 #      .collect { |x| [x[0].kind_of?(String) ? Time.find_zone('UTC').parse(x[0]).in_time_zone : x[0], x[1]]}
 #      .group_by { |x| x[0].beginning_of_month }
 #      .flatten
@@ -155,7 +155,7 @@ Get a has of routines containing completed routines grouped by date.
       routines.
         map { |r| [r, r.
         completed_routines.
-        group_by { |cr| cr.created_at.beginning_of_day }]}
+        group_by { |cr| cr.routine_done_at.beginning_of_day }]}
     ]
   end
   
@@ -164,8 +164,8 @@ Get a has of routines containing completed routines grouped by date.
 #      puts "ce, o: #{ce}, #{o}"
       o[ce.routine] ||= Hash.new
       o[ce.routine][ce.expectation] ||= Hash.new # Cause we want an array next, we have to create a hash but don't return hash as default.'
-      o[ce.routine][ce.expectation][ce.completed_routine.created_at.beginning_of_day] ||= []
-      o[ce.routine][ce.expectation][ce.completed_routine.created_at.beginning_of_day] << ce
+      o[ce.routine][ce.expectation][ce.completed_routine.routine_done_at.beginning_of_day] ||= []
+      o[ce.routine][ce.expectation][ce.completed_routine.routine_done_at.beginning_of_day] << ce
 #      puts "layout: #{o.inspect}"
     end
     layout
@@ -173,7 +173,7 @@ Get a has of routines containing completed routines grouped by date.
   
   def completed_expectations_for_day_and_expectation(expectation, day)
     completed_expectations.find_all do |x|
-      x.completed_routine.created_at.beginning_of_day == day &&
+      x.completed_routine.routine_done_at.beginning_of_day == day &&
         x.expectation == expectation
     end
   end

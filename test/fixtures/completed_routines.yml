@@ -9,54 +9,63 @@ matt_one_one:
   comment: 
   person: patient_matt
   routine: clean_up_room
+  routine_done_at: <%= Time.now %>
 
 matt_one_two:
   name: Clean up room
   comment: 
   person: patient_matt
   routine: clean_up_room
+  routine_done_at: <%= Time.now %>
 
 matt_one_three:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
+  routine_done_at: <%= Time.now %>
 
 matt_one_four:
   name: Do homework
   comment: 
   person: patient_matt
   routine: do_homework
+  routine_done_at: <%= Time.now %>
 
 matt_one_five:
   name: Do homework
   comment: 
   person: patient_matt
   routine: do_homework
+  routine_done_at: <%= Time.now %>
 
 matt_one_six:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
+  routine_done_at: <%= Time.now %>
 
 matt_one_seven:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
+  routine_done_at: <%= Time.now %>
 
 matt_one_eight:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
+  routine_done_at: <%= Time.now %>
   
 routine_index_one_one:
   name: R1
   person: person_marty
   routine: routine_index_one
   created_at: <%= Time.find_zone('Samoa').parse('2014-01-30T12:59:43.1') %>
+  routine_done_at: <%= Time.find_zone('Samoa').parse('2014-01-30T12:59:43.1') %>
 
 routine_index_one_two:
   name: R2
@@ -64,6 +73,7 @@ routine_index_one_two:
   routine: routine_index_one
 #  created_at: 2014-02-01T12:59:43.1Z
   created_at: <%= Time.find_zone('Samoa').parse('2014-02-01T12:59:43.1') %>
+  routine_done_at: <%= Time.find_zone('Samoa').parse('2014-02-01T12:59:43.1') %>
 
 routine_index_one_three:
   name: R3
@@ -71,6 +81,7 @@ routine_index_one_three:
   routine: routine_index_one
 #  created_at: 2014-02-02T09:59:43.1Z
   created_at: <%= Time.find_zone('Samoa').parse('2014-02-02T12:59:43.1') %>
+  routine_done_at: <%= Time.find_zone('Samoa').parse('2014-02-02T12:59:43.1') %>
 
 routine_index_one_four:
   name: R4
@@ -78,6 +89,7 @@ routine_index_one_four:
   routine: routine_index_one
 #  created_at: 2014-02-02T12:59:43.1Z
   created_at: <%= Time.find_zone('Samoa').parse('2014-02-02T12:59:43.1') %>
+  routine_done_at: <%= Time.find_zone('Samoa').parse('2014-02-02T12:59:43.1') %>
 
 routine_index_two_one:
   name: R5
@@ -85,6 +97,7 @@ routine_index_two_one:
   routine: routine_index_two
 #  created_at: 2014-01-31T12:59:43.1Z
   created_at: <%= Time.find_zone('Samoa').parse('2014-01-31T12:59:43.1') %>
+  routine_done_at: <%= Time.find_zone('Samoa').parse('2014-01-31T12:59:43.1') %>
 
 routine_index_two_two:
   name: R6
@@ -92,4 +105,5 @@ routine_index_two_two:
   routine: routine_index_two
 #  created_at: 2014-02-01T14:59:43.1Z
   created_at: <%= Time.find_zone('Samoa').parse('2014-02-01T12:59:43.1') %>
+  routine_done_at: <%= Time.find_zone('Samoa').parse('2014-02-01T12:59:43.1') %>
 
