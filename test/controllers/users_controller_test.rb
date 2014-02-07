@@ -47,7 +47,7 @@ class UsersControllerTest < ActionController::TestCase
     get :edit, id: uid
     
     assert_select '#people'
-    assert_select '.link', 4
-    assert_select '.link a', 6
+    assert_select '.user', 2
+    assert_select '.user a', 2
   end
 end

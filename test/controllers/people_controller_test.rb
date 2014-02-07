@@ -91,7 +91,7 @@ class PeopleControllerTest < ActionController::TestCase
     original_person_name = person.short_name
     
     post :update, id: person.id, person: { name: "New Name" }
-    assert_redirected_to edit_user_path(user)
+    assert_redirected_to person_path(person)
     
     db_person = Person.find(person.id)
     refute_equal original_person_name, db_person.short_name
@@ -110,7 +110,7 @@ class PeopleControllerTest < ActionController::TestCase
     
     assert_difference "user.people.count" do
       post :create, person: { name: "New Name", creator_id: user.id }
-      assert_redirected_to edit_user_path(user)
+      assert_redirected_to person_path(user.people.last)
     end
   end
   

@@ -65,7 +65,7 @@ Create a User based on the information provided by Omniauth.
 
   private
 
-  @@provider = {
+  @@providers = {
       "Google" => "google_oauth2",
       "Twitter" => "twitter",
       "Testing" => "Testing"
@@ -77,14 +77,14 @@ Create a User based on the information provided by Omniauth.
 Return hash of human readable name and internal provider name.
 =end
   def self.provider(name)
-    @@provider[name]
+    @@providers[name]
   end
 
 =begin rdoc
 Return of hash of internal provider name and human readable name.
 =end
   def self.inverse_provider(provider)
-    @@provider.invert[provider]
+    @@providers.invert[provider]
   end
   
 =begin rdoc
@@ -223,21 +223,13 @@ Send an invitation to someone based on identity provider and name.
 Silently do nothing if there is no user that matches.
 =end
   def send_invitation(provider, name)
-    return unless to = User.find_by(provider: @@providers[provider], name: name)
+    return unless to = User.find_by(provider: User.provider(provider), name: name)
     Message.create! do |m|
       m.from = self
       m.to = to
       m.body = "#{self.name} would like to connect so you can work together."
       m.message_type = "invitation"
     end
-  end
-  
-=begin rdoc
-Return a list of people who have routines and are directly connected to 
-the user.
-=end
-  def team
-    
   end
   
   private

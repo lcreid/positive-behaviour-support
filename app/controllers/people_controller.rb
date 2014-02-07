@@ -15,7 +15,7 @@ class PeopleController < ApplicationController
     
     @person.update_team(params[:person][:users])
     if @person.save
-      redirect_to edit_user_path(current_user)
+      redirect_to person_path(@person)
     else
       render "new"
     end
@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
     
     @person.update_team(params[:person][:users])
     if @person.save
-      redirect_to edit_user_path(current_user)
+      redirect_to person_path(@person)
     else
       render "edit"
     end
