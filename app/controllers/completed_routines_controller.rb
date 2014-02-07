@@ -13,6 +13,7 @@ class CompletedRoutinesController < ApplicationController
 #    puts template.comparable_attributes
 #    puts template.expectations.size
     @completed_routine = CompletedRoutine.new(template.copyable_attributes)
+    @completed_routine.recorded_by = current_user
 #    puts @completed_routine.comparable_attributes
 #    puts @completed_routine.completed_expectations.size
 #      
@@ -23,6 +24,7 @@ class CompletedRoutinesController < ApplicationController
   
   def create
 #    puts params.inspect # Get the view working so I can see what the parameters are going to be, so I can write the test case.
+    params[:completed_routine][:recorded_by_id] = current_user.id
     if @completed_routine = CompletedRoutine.create(completed_routine_params)
       redirect_to person_path(@completed_routine.person)
     else
@@ -34,6 +36,7 @@ class CompletedRoutinesController < ApplicationController
   end
   
   def update
+    params[:completed_routine][:updated_by_id] = current_user.id
     @completed_routine.update_attributes(completed_routine_params)
     if @completed_routine.save
       redirect_to person_path(@completed_routine.person)
@@ -68,7 +71,7 @@ class CompletedRoutinesController < ApplicationController
       params[:completed_routine][:routine_done_at_date] +
       " " +
       params[:completed_routine][:routine_done_at_time]
-    r.permit(:id, :routine_id, :person_id, :comment, :name, :routine_done_at,
+    r.permit(:id, :routine_id, :person_id, :comment, :name, :routine_done_at, :recorded_by_id, :updated_by_id,
       completed_expectations_attributes: [:id, :description, :observation, :comment]
     )
   end

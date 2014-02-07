@@ -7,6 +7,8 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 class CompletedRoutine < ActiveRecord::Base
   belongs_to :person
   belongs_to :routine
+  belongs_to :recorded_by, class_name: User
+  belongs_to :updated_by, class_name: User
   has_many :completed_expectations, dependent: :destroy
   accepts_nested_attributes_for :completed_expectations, allow_destroy: true
   scope :most_recent, ->(n = 10000) { reorder(routine_done_at: :desc).limit(n) }
