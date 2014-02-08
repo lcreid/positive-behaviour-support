@@ -6,7 +6,9 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 
 <div id="user" class="container">
   <h1>Your Profile</h1>
-  <% content_for :content do %>
+</div>
+<% content_for :content do %>
+  <div class="container">
     <div class="content">
       <h2>Identity</h2>
       <%= form_for(@user) do |f| %>
@@ -68,6 +70,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </p>
       </div>
     </div>
-  <% end %>
-  <%= render partial: "layouts/with_messages" %>
-</div>
+  </div>
+<% end %>
+<%= render partial: "layouts/with_messages" %>
+

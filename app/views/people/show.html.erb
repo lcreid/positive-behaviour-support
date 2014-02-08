@@ -5,7 +5,9 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <div id="patients" class="container">
   <h1><%= @person.name %></h1>
-  <% content_for :content do %>
+</div>
+<% content_for :content do %>
+  <div class="container">
     <div class="content">
       <p class="button_row">
         <%= link_to 'Reports', reports_person_path(@person), class: "button" %>
@@ -15,6 +17,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <%= render partial: "goals/index" %>
       <%= render partial: "completed_routines/index" %>
     </div>
-  <% end %>
-  <%= render partial: "layouts/with_messages" %>
-</div>
+  </div>
+<% end %>
+<%= render partial: "layouts/with_messages" %>
+
