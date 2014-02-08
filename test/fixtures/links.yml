@@ -88,7 +88,15 @@ p10_secondary_to_p20_secondary:
   person_a: p10_secondary
   person_b: p20_secondary
 
-p10_secondary_to_p20_secondary:
+p20_secondary_to_p10_secondary:
   person_a: p20_secondary
+  person_b: p10_secondary
+
+p10_secondary_to_P30:
+  person_a: p10_secondary
+  person_b: p30
+
+P30_to_p10_secondary:
+  person_a: p30
   person_b: p10_secondary
 

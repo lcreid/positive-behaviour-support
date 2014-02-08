@@ -237,7 +237,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, one.subjects.count
     assert_equal 2, marie.subjects.count
   end
-
+  
   def link_two
     friendor = User.create!(name: "Friendor")
     friendee = User.create!(name: "Friendee")

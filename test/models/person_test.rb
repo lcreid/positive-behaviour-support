@@ -205,6 +205,14 @@ test "person one has one User" do
     assert_equal correct_hash, full_layout
   end
   
+  test "Connections through secondary IDs" do
+    # Test that a person connected only to a user's secondary id shows up in the person's
+    # user association.
+    p10 = users(:p10)
+    p30 = people(:p30)
+    assert p30.users.include?(p10)
+  end
+
 #  test "link_to" do
 #    marie = users(:user_marie)
 #    max = people(:patient_max)
