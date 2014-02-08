@@ -7,8 +7,13 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <div id="top_menu">
     <div class="centre_in_browser">
       <div class="left">
+        <% if current_user.subjects.count == 1 %>
+          <% unless person_path(current_user.subjects.first) == request.path %>
+            <%= link_to "Home", person_path(current_user.subjects.first) %>
+          <% end %>
+        <% end %>
         <% unless home_user_path(current_user) == request.path %>
-          <%= link_to "Home", home_user_path(current_user) %>
+          <%= link_to "Teams", home_user_path(current_user) %>
         <% end %>
       </div>
       

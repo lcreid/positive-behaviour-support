@@ -12,9 +12,6 @@ class PersonProfileTest < ActionDispatch::IntegrationTest
     get_logged_in(:user_marie)
     matt = people(:patient_matt)
     
-    click_link('Matt-Patient')
-    assert_equal person_path(matt), current_path
-
     assert_difference "Link.all.count", 2 do
       click_link('New Team')
       assert_equal new_person_path, current_path
@@ -27,15 +24,12 @@ class PersonProfileTest < ActionDispatch::IntegrationTest
     get_logged_in(:user_marie)
     matt = people(:patient_matt)
     
-    click_link('Matt-Patient')
-    assert_equal person_path(matt), current_path
-
     assert_no_difference "Link.all.count" do
       click_link('New Team')
       assert_equal new_person_path, current_path
       click_link('Cancel')
     end
-    assert_equal person_path(matt), current_path
+    assert_equal home_user_path(@user), current_path
   end
 end
 

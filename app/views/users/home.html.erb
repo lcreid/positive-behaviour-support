@@ -9,18 +9,15 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   </div>
   <% content_for :content do %>
     <div id="patients" class="container">
-      <% if @user.subjects.count == 1 %>
-        <%= render partial: "people/subject_dashboard", locals: { patient: @user.subject.first } %>
-      <% else %>
-        <h1>Teams</h1>
-        <div class="content">
-          <ul>
-            <%= content_tag_for(:li, @user.subjects) do | patient | %>
-              <%= link_to patient.name, person_path(patient) %>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <h1>Teams</h1>
+      <div class="content">
+        <ul>
+          <%= content_tag_for(:li, @user.subjects) do | patient | %>
+            <%= link_to patient.name, person_path(patient) %>
+          <% end %>
+        </ul>
+      <%= link_to 'New Team', new_person_path, class: "button" %>
+      </div>
     </div>
   <% end %>
   <%= render partial: "layouts/with_messages" %>
