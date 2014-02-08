@@ -35,12 +35,12 @@ class SessionsController < ApplicationController
         user.save!
         flash.notice = "Your time zone has been set to #{user.time_zone}." +
           " If this is wrong," +
-          " please click #{view_context.link_to('here', edit_user_path(user))}" +
-          " to change your profile."
+          " please go to your #{view_context.link_to('profile', edit_user_path(user))}" +
+          " to change it."
       elsif user.time_zone != tz
 #        puts "New time zone to #{tz}"
-        flash.notice = "It appears you are now in the #{tz} time zone. " +
-          "Please click #{view_context.link_to(edit_user_path(user), 'here')}" +
+        flash.notice = "It appears you are now in the #{tz} time zone." +
+          " Please go to your #{view_context.link_to('profile', edit_user_path(user))}" +
           " if you want to change your time zone."
       end
     else
@@ -53,7 +53,11 @@ class SessionsController < ApplicationController
     end if new_user
     
     # I modified the next line to go to the user's home
-    redirect_to home_user_path(user)#, notice: "Signed in!"
+    if user.subjects.count == 1
+      redirect_to person_path(user.subjects.first)
+    else
+      redirect_to home_user_path(user)#, notice: "Signed in!"
+    end
   end
 
   def destroy
