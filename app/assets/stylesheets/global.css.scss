@@ -86,11 +86,12 @@ table { border-collapse: collapse; }
   @extend .centre;
 }
 
-#home, #welcome { 
+// This takes advantage of the application template setting the controller and view
+// for all pages.
+.users_home, .users_edit, .people_show, #welcome { 
   .centre_in_browser {
     width: $width + $sidebar-width;
-    margin-left: auto;
-    margin-right: auto;
+    @extend .centre;
   }
 }
 // Put a drop shadow on an area.
