@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
  end
  
  def create
-   current_user.send_invitation(params["provider"], params["name"])
+   current_user.send_invitation(params["message"]["to_id"])
    redirect_to edit_user_path(current_user)
  end
   

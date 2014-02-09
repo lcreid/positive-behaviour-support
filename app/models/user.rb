@@ -222,8 +222,8 @@ Unread messages.
 Send an invitation to someone based on identity provider and name.
 Silently do nothing if there is no user that matches.
 =end
-  def send_invitation(provider, name)
-    return unless to = User.find_by(provider: User.provider(provider), name: name)
+  def send_invitation(id)
+    return unless to = User.find(id)
     Message.create! do |m|
       m.from = self
       m.to = to

@@ -68,8 +68,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
       visit(edit_user_path(invitor))
       click_link('Invite')
       assert_equal new_message_path, current_path
-      select('Google')
-      fill_in 'Name', with: invitee.name
+      fill_in 'ID', with: invitee.id
       assert_difference "invitee.messages(true).count" do
         click_button('Send')
       end

@@ -8,14 +8,10 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <h1>Invite</h1>
   <div class="content">
     <div style="display:inline;float:left;width:55%;">
-      <%= form_tag messages_path do |f| %>
+      <%= form_for(@message) do |f| %>
         <p>
-          <%= label_tag :provider, 'Identity Provider: ' %>
-          <%= select_tag :provider, options_for_select(['Google', 'Twitter']), prompt: "Select an indentity provider" %>
-        </p>
-        <p>
-          <%= label_tag :name, 'Name: ' %>
-          <%= text_field_tag :name %>
+          <%= f.label :to_id, 'Unique User ID: ' %>
+          <%= f.text_field :to_id %>
         </p>
         <p>
           <%= submit_tag "Send" %>
@@ -27,18 +23,16 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <div style="display:inline;float:right;width:40%">
       <p>
         Find out from the user to whom you wish to connect, 
-        which of the identity providers they use to log in,
-        and what their user name is. They can find this out
+        what thieir unique user ID is. They can find this out
         on their profile page.
       </p>
       <p>
-        Select their identity provider and fill in their
-        name, then click 'Send'.
+        Fill in their unique user ID, then click 'Send'.
       </p>
       <p>
         We do it this way to reduce the chance of spam, or
         phishing attempts to gain access to someone else's
-        data in the clean routines app.
+        data in the Clean Routines app.
     </div>
     <div style="clear:both"></div>
   </div>
