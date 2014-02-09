@@ -121,24 +121,20 @@ class PeopleControllerTest < ActionController::TestCase
     get :show, id: subject.id
     assert_response :success
      
-    assert_select 'div#patients' do |pt|
-      assert_select pt[0], 'h1', "Matt-Patient"
-      assert_select pt[0], 'h2' do |h2|
-        assert_select h2[0], 'h2', "Routines"
-        assert_select h2[1], 'h2', "Rewards"
-      end
+    assert_select 'div#patients h1', "Matt-Patient"
+    assert_select '.routines h2', "Routines"
+    assert_select '.pending_rewards h2', "Rewards"
 
-      assert_select pt[0], '.routines table tbody tr', 3
-    
-      assert_select pt[0], 'div.pending_rewards table' do
-        assert_select 'tbody tr', 2 do |reward|
-          assert_select reward[0], 'td', "Time Off"
-          assert_select reward[1], 'td', "Nothing"
-          
-          assert_select reward[0], "a[href=#{new_award_path(goal_id: subject.goals[0].id)}]"
-          assert_select reward[1], "a", false
-        end 
-      end
+    assert_select '.routines table tbody tr', 3
+  
+    assert_select 'div.pending_rewards table' do
+      assert_select 'tbody tr', 2 do |reward|
+        assert_select reward[0], 'td', "Time Off"
+        assert_select reward[1], 'td', "Nothing"
+        
+        assert_select reward[0], "a[href=#{new_award_path(goal_id: subject.goals[0].id)}]"
+        assert_select reward[1], "a", false
+      end 
     end
   end
   
@@ -149,17 +145,16 @@ class PeopleControllerTest < ActionController::TestCase
     get :show, id: subject.id
     assert_response :success
      
-    assert_select 'div#patients' do |pt|
-      assert_select pt[0], 'h1', "Max-Patient"
-      assert_select pt[0], 'h2', "Routines"
-      assert_select pt[0], 'tbody tr', 2 do |p|
-        assert_select p[0], 'td', /^Go to bed.*/
-        assert_select p[0], 'a', 2 do |links|
-          assert_select links[0], 'a', "Edit"
-          assert_select links[1], 'a', "New Observations"
-        end
-        assert_select p[1], 'td', /^Turn off Minecraft.*/
+    assert_select 'div#patients h1', "Max-Patient"
+    
+    assert_select '.routines h2', "Routines"
+    assert_select 'tbody tr', 2 do |reward|
+      assert_select reward[0], 'td', /^Go to bed.*/
+      assert_select reward[0], 'a', 2 do |links|
+        assert_select links[0], 'a', "Edit"
+        assert_select links[1], 'a', "New Observations"
       end
+      assert_select reward[1], 'td', /^Turn off Minecraft.*/
     end
   end
   

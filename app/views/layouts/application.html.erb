@@ -18,6 +18,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           dateFormat: "yy-mm-dd"
           })
         });
+    <%= yield(:javascript) %>
     </script>
     <%= stylesheet_link_tag 'mobile' if mobile_device? %>
     <%= csrf_meta_tags %>

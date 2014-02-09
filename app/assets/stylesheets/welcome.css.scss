@@ -11,19 +11,23 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   $idp-horz-margin: 10px;
   $font-size: 20px;
   
-  $width: 90%;
-  @extend .centre_in_browser;
-  @extend .container;
+  $width: 96%;
+  @extend .centre;
   width: $width;  // Because the @extend classes put in a the width as calculated when they were defined.
+  min-width: 600px;
   padding: 10px 5px 20px 5px;
   margin-top: 10px;
 
+  .centre_in_browser { width: $width; }
+  
+  .container { padding: 15px 0 15px 0 }
   
   p { font-size: $font-size }
   
   h1 { 
     font-size: $font-size + 4px; 
     text-align: center;
+    background: $content-background
   }
   
   .idp {

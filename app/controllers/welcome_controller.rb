@@ -7,7 +7,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 class WelcomeController < ApplicationController
   skip_before_action :require_login, only: :index
 
-  layout 'welcome'
+#  layout 'welcome'
   
   def index
     redirect_to(home_user_path(current_user)) if current_user

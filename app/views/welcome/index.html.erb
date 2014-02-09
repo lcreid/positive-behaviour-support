@@ -3,21 +3,33 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id='sign_in' class="welcome">
-  <h1>Welcome to Clean Routines</h1>
-  
-  <div style="width:300px" class="content centre">
-    <p style="text-align:center;">
-      Monitor performance of an individual in a positive behaviour support framework.
-    </p>
-  </div>
-  
-  <div id='sign_in_with'>
-    <div style="display:inline;">
-      <%= render partial: "idps", formats: [:html] %>
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $('a.time_zone').each(function() {
+      this.href = this.href + "?time_zone=" 
+        + encodeURIComponent($().get_timezone());
+    });
+  });
+<% end %>
+<% content_for :navigation do %>
+<% end %>
+<div class="container">
+  <div id='sign_in'>
+    <h1>Welcome to Clean Routines</h1>
+    
+    <div style="width:300px" class="content centre">
+      <p style="text-align:center;">
+        Monitor performance of an individual in a positive behaviour support framework.
+      </p>
     </div>
+    
+    <div id='sign_in_with'>
+      <div style="display:inline;">
+        <%= render partial: "idps", formats: [:html] %>
+      </div>
+    </div>
+    
+    <div class="terms"><%= render "terms" %></div>
   </div>
-  
-  <div class="terms"><%= render "terms" %></div>
 </div>
 
