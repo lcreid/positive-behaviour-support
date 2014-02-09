@@ -26,19 +26,18 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         <div class="even_row">
           <div class="left" style="width:48%;">
             <p>
-              <%# FIXME Make this copyable. %>
               <%= f.label :id, "Unique User ID: " %>
-              <%= f.text_field :id, disabled: true, size: 12 %>
+              <%= f.text_field :id, readonly: "readonly", size: 12 %>
             </p>
-         </div>
+          </div>
           <div class="right" style="width:48%;">
             <p>
               This is the information you have to send to someone else so that they
-              can invite you to connect. You can't change this name in this app. 
+              can invite you to connect. 
             </p>
           </div>
-        </div>
-        <div class="clear">
+          <div class="clear">
+          </div>
         </div>
 
         <p>
