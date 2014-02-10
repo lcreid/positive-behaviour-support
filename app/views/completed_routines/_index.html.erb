@@ -6,25 +6,22 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <div class="completed_routines">
   <% rows_to_show = 5 %>
   <h2>Recently Completed Routines</h2>
-  <% if 0 < @person.completed_routines.count %>
+  <% if 0 < @completed_routines.count %>
     <table>
       <thead>
         <th>Routine</th><th>Clean?</th><th>Date</th>
       </thead>
       <tbody>
-      <%= content_tag_for(:tr, @person.completed_routines.most_recent(rows_to_show)) do |cr| %>
+      <%= content_tag_for(:tr, @completed_routines) do |cr| %>
         <td><%= link_to(cr.name, edit_completed_routine_path(cr)) %></td>
         <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
         <td style="text-align: right;"><%= cr.routine_done_at.to_s(:humanized_ago) %></td> 
       <% end %>
       </tbody>
     </table>
-    <%# TODO Turn this into a paginated model. %>
-    <% if rows_to_show < @person.completed_routines.size %>
-      <p><%= link_to("More...", completed_routines_path(person_id: @person.id)) %></p>
-    <% end %>
+    <%= paginate @completed_routines %>
   <% else %>
-    No recently completed routines.
+    <p>No recently completed routines.</p>
   <% end %>
 </div>
 

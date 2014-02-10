@@ -38,6 +38,7 @@ class PeopleController < ApplicationController
   end
   
   def show
+    @completed_routines = @person.completed_routines.reorder(routine_done_at: :desc).page(params[:page]).per(15)
   end
   
   def reports

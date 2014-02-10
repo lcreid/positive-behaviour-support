@@ -64,6 +64,8 @@ gem 'whenever', require: false
 
 gem 'detect_timezone_rails'
 
+gem 'kaminari' # Pagination From http://railscasts.com/episodes/254-pagination-with-kaminari
+
 group :test do
   gem 'capybara'
   gem 'capybara_minitest_spec'
