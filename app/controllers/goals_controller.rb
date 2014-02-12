@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
   before_action :user_allowed_to_access_goal, except: [:create, :new]
+  before_action :prep_new_goal, only: [:create, :new]
   
   def show
     @goal = Goal.find(params[:id])
@@ -9,15 +10,12 @@ class GoalsController < ApplicationController
   end
   
   def new
-    params.require(:person)
-    @goal = Goal.new
-    @goal.person_id = params[:person][:id]
   end
   
   def create
-    @goal = Goal.new(goal_params)
+    @goal.update_attributes(goal_params)
     if @goal.save
-      redirect_to edit_person_path(@goal.person)
+      redirect_to edit_person_path(@person)
     else
       render "new"
     end
@@ -47,5 +45,12 @@ class GoalsController < ApplicationController
   
   def goal_params
     params.require(:goal).permit(:name, :person_id, :description, :target)
+  end
+  
+  def prep_new_goal
+    params.require(:person_id)
+    @person = Person.find(params[:person_id])
+    @goal = Goal.new
+    @goal.person_id = params[:person_id]
   end
 end

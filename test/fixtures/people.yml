@@ -8,7 +8,6 @@ user_one:
   name: User One
   user: existing_twitter
 
-
 user_two:
   name: User Two
   user: existing_google
@@ -23,6 +22,7 @@ user_four:
 
 patient_one:
   name: Patient One
+  creator: existing_google
 
 patient_two:
   name: Patient Two

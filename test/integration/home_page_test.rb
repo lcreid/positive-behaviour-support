@@ -16,6 +16,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
       "info" => { "nickname" => user.name }
     })
     visit(root_path)
+    click_on('Sign out') if has_link? ("Sign out")
     click_on('Twitter')
     assert_equal home_user_path(user), current_path
   end

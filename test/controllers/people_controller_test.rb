@@ -133,7 +133,7 @@ class PeopleControllerTest < ActionController::TestCase
         assert_select reward[1], 'td', "Nothing"
         
         assert_select reward[0], "a[href=#{new_award_path(goal_id: subject.goals[0].id)}]"
-        assert_select reward[1], "a", false
+        assert_select reward[1], "a", 1
       end 
     end
   end

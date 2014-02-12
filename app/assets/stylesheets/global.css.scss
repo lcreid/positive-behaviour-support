@@ -193,5 +193,13 @@ div#patients {
 //.datepicker { width: 6em; }
 //.timepicker { width: 4em; }
 
+.field_with_errors {
+  padding: 1px;
+  background-color: red;
+  display: table;
+}
+
+.vertical_align_children * { vertical-align: middle; }
+
 @import "welcome";
 

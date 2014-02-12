@@ -35,7 +35,7 @@ Takes a User, or a symbol which will be assumed to be a User fixture.
     user = users(user) unless user.is_a? User
     @user = user
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      "provider" => 'google_oauth2',
+      "provider" => @user.provider,
       "uid" => @user.uid.to_s,
       "name" => @user.name
     })
@@ -48,7 +48,12 @@ Takes a User, or a symbol which will be assumed to be a User fixture.
     assert_equal root_path, current_path
     
     click_on('Google')
-    assert_equal home_user_path(@user), current_path
+
+    if @user.subjects.count != 1
+      assert_equal home_user_path(@user), current_path
+    else
+      assert_equal person_path(@user.subjects.first), current_path
+    end
     
     @user
   end

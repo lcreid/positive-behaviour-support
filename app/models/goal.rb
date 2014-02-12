@@ -9,6 +9,9 @@ class Goal < ActiveRecord::Base
   has_many :routines, inverse_of: :goal
   has_many :completed_routines, through: :routines
   
+  validates :target, numericality: { only_integer: true }, allow_blank: true
+  validates :name, presence: true
+  
 =begin rdoc
 Return the number of clean routines for this goal,
 minus the number of routines already rewarded, and divide that difference

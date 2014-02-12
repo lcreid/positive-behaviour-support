@@ -8,20 +8,24 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <% if 0 < @person.goals.count %>
     <table>
       <thead>
-        <th>Name</th><th style="width:6em;">Target</th><th style="width:6em;">Eligible Rewards</th><th>Action</th>
+        <th>Name</th>
+        <th style="width:6em;">Target</th>
+        <th style="width:6em;">Eligible Rewards</th>
+        <th colspan="2">Actions</th>
       </thead>
       <tbody>
         <%= content_tag_for(:tr, @person.goals) do |g| %>
           <td><%= g.name %></td>
           <td style="text-align: right;"><%= g.target.to_s %></td>
           <td style="text-align: right;"><%= g.pending %></td>
-          <td style="text-align: right;"><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+          <td><%= link_to("Edit Goal", edit_goal_path(g)) %></td>
+          <td style="text-align: right;"><%= link_to("Give Award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
         <% end %>
       </tbody>
     </table>
   <% else %>
     No goals assigned.
   <% end %>
-  <p><%= link_to 'New Goal', new_goal_path(person: @person.attributes), class: "button" %></p>
+  <p><%= link_to 'New Goal', new_person_goal_path(@person.id), class: "button" %></p>
 </div>
 

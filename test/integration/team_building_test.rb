@@ -21,7 +21,7 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
     
     visit(person_path(@user.people.last))
     click_link('New Goal')
-    assert_equal new_goal_path, current_path
+    assert_equal new_person_goal_path(@user.people.last), current_path
   end
   
   test "cancel backwards from routine" do
