@@ -23,9 +23,9 @@ class CompletedRoutinesController < ApplicationController
   end
   
   def create
-#    puts params.inspect # Get the view working so I can see what the parameters are going to be, so I can write the test case.
     params[:completed_routine][:recorded_by_id] = current_user.id
-    if @completed_routine = CompletedRoutine.create(completed_routine_params)
+    @completed_routine = CompletedRoutine.new(completed_routine_params)
+    if @completed_routine.save
       redirect_to person_path(@completed_routine.person)
     else
       render "new"

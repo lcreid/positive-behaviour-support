@@ -14,6 +14,8 @@ class CompletedRoutine < ActiveRecord::Base
   scope :most_recent, ->(n = 10000) { reorder(routine_done_at: :desc).limit(n) } # TODO either remove the limit or get rid of this scope altogether
 
   before_create :set_routine_done_at
+  
+  validates_datetime :routine_done_at, allow_blank: true
 
 =begin rdoc
 By default, the routine is given a date and time of when the person began
