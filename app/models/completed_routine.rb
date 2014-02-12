@@ -11,7 +11,7 @@ class CompletedRoutine < ActiveRecord::Base
   belongs_to :updated_by, class_name: User
   has_many :completed_expectations, dependent: :destroy
   accepts_nested_attributes_for :completed_expectations, allow_destroy: true
-  scope :most_recent, ->(n = 10000) { reorder(routine_done_at: :desc).limit(n) }
+  scope :most_recent, ->(n = 10000) { reorder(routine_done_at: :desc).limit(n) } # TODO either remove the limit or get rid of this scope altogether
 
   before_create :set_routine_done_at
 
@@ -23,24 +23,6 @@ recording the observations. This field is editable in the form.
     self.routine_done_at || self.routine_done_at = Time.now
   end
 
-=begin 
-For records created before the routine_done_at column was added,
-use the created_at time.
-No. Better to fix in the migration de una buena vez.
-Also have fix the fixtures, because they don't fire the triggers.
-=end
-#  def routine_done_at
-#    super || self.routine_done_at = self.created_at
-#  end
-  
-#=begin rdoc
-#Build a new CompletedRoutine from a Routine.
-#=end
-#  def initialize(params = nil)
-#    params = params.copyable_attributes if params.is_a? Routine
-#    super(params)
-#  end
-  
 =begin rdoc
 Override == when the other object is a Routine, to test only the attributes
 that make sense to compare.
