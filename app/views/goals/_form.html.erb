@@ -3,19 +3,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<%#= validation_messages @goal %>
-<% if @goal.errors.any? %>
-  <% content_for :validation_messages do %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this goal from being saved:</h2>
-      <ul>
-      <% @goal.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>  
-<% end %>
+<%= validation_messages @goal %>
 
 <div id="goal_edit" class="container">
   <h1>Goal</h1>
