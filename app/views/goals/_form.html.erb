@@ -20,7 +20,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <div id="goal_edit" class="container">
   <h1>Goal</h1>
   <div class="content">
-    <%= form_for [@goal.person, @goal] do |rf| %>
+    <%= form_for shallow_args(@goal.person, @goal) do |rf| %>
       <%= rf.hidden_field :person_id %>
       <p><%= rf.label :name, "Goal Name: " %><%= rf.text_field :name %></p>
       <p class="vertical_align_children"><%= rf.label :description, "Goal Description: " %><%= rf.text_area :description %></p>
