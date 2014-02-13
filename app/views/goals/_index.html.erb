@@ -19,7 +19,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <td style="text-align: right;"><%= g.target.to_s %></td>
           <td style="text-align: right;"><%= g.pending %></td>
           <td><%= link_to("Edit Goal", edit_goal_path(g)) %></td>
-          <td style="text-align: right;"><%= link_to("Give Award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+          <td style="text-align: right;"><%= link_to("Give Reward", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
         <% end %>
       </tbody>
     </table>
