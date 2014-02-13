@@ -28,5 +28,5 @@ require "whenever/capistrano"
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 
-# Rails Guide for the Asset Pipeline says do this.
-load 'deploy/assets'
+# Rails Guide for the Asset Pipeline says do this. But it breaks the cap deploy.
+#load 'deploy/assets'
