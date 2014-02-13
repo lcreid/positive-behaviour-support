@@ -3,17 +3,19 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
+<%= validation_messages @goal %>
+
 <div id="goal_edit" class="container">
   <h1>Goal</h1>
   <div class="content">
-    <%= form_for @goal do |rf| %>
+    <%= form_for shallow_args(@goal.person, @goal) do |rf| %>
       <%= rf.hidden_field :person_id %>
-      <p><%= rf.label :name, "Goal Name" %><%= rf.text_field :name %></p>
-      <p><%= rf.label :description, "Goal Description" %><%= rf.text_area :description %></p>
-      <p><%= rf.label :target, "Target" %><%= rf.text_field :target %></p>
+      <p><%= rf.label :name, "Goal Name: " %><%= rf.text_field :name %></p>
+      <p class="vertical_align_children"><%= rf.label :description, "Goal Description: " %><%= rf.text_area :description %></p>
+      <p><%= rf.label :target, "Target: " %><%= rf.text_field :target, size: 5 %></p>
 
       <p>
-        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, person_path(@goal.person) %>
         <%= rf.submit 'Save' %>
       </p>
     <% end %>

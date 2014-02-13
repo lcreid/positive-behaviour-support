@@ -3,6 +3,8 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
+<%= validation_messages @goal %>
+
 <div id="new_award" class="container">
   <div class="content">
     <%= form_tag(:awards) do %>
@@ -13,7 +15,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <%= number_field_tag "number_of_rewards", "1", {min: 1, max: @goal.pending, size: 2} %>
       <p>
         <!-- The following button trick doesn't work for <= IE8 -->
-        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, person_path(@goal.person) %>
         <%= submit_tag "Give Reward!" %>
       </p>
     <% end %>

@@ -3,21 +3,13 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
+<%= validation_messages @completed_routine %>
+
 <div class="container">
   <div id="completed_routine">
     <div id="completed_routine_header">
       <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.name}" %></h1>
     </div>
-    <% if @completed_routine.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@completed_routine.errors.count, "error") %> prevented this routine from being saved:</h2>
-        <ul>
-        <% @completed_routine.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
     <%= content_tag_for(:div, @completed_routine, class: "content") do %>
       <%= form_for(@completed_routine) do |crf| %>
         <%= crf.hidden_field :name %>

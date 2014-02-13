@@ -67,7 +67,7 @@ class GoalsControllerTest < ActionController::TestCase
     goal = goals(:matt_one)
     original_goal_name = goal.name
     
-    post :update, id: goal.id, goal: { name: "New Name" }
+    post :update, id: goal.id, goal: { id: goal.id, name: "New Name" }
     assert_redirected_to edit_person_path(person)
     
     db_goal = Goal.find(goal.id)
@@ -78,7 +78,7 @@ class GoalsControllerTest < ActionController::TestCase
     @controller.log_in(user = users(:user_marie))
     person = people(:patient_matt)
     
-    get :new, person: { id: person.id }
+    get :new, person_id: person.id
     assert_response :success
     assert_not_nil assigns(:goal)
   end
@@ -88,7 +88,7 @@ class GoalsControllerTest < ActionController::TestCase
     person = people(:patient_matt)
     
     assert_difference "person.goals.count" do
-      post :create, goal: { name: "New Name", person_id: person.id, expectations_attributes: ["description" => "one"] }
+      post :create, person_id: person.id, goal: { name: "New Name", person_id: person.id, expectations_attributes: ["description" => "one"] }
     end
     assert_redirected_to edit_person_path(person)
   end

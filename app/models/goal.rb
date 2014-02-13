@@ -9,6 +9,9 @@ class Goal < ActiveRecord::Base
   has_many :routines, inverse_of: :goal
   has_many :completed_routines, through: :routines
   
+  validates :target, numericality: { only_integer: true }, allow_blank: true
+  validates :name, presence: true
+  
 =begin rdoc
 Return the number of clean routines for this goal,
 minus the number of routines already rewarded, and divide that difference
@@ -41,9 +44,18 @@ awarded yet.
   end
   
   def award(n = 1)
-    n ||= 1
-    n = Integer(n) if n.kind_of? String
-    return if pending < n
+    begin
+      n = Integer(n) if n.kind_of? String
+    rescue ArgumentError
+      errors.add(:number_of_rewards, "is not an integer")
+      return
+    end
+    
+    if pending < n
+      errors.add(:number_of_awards, "must be less than or equal to #{pending}")
+      return
+    end
+    
     pending_routines.sort_by { |cr| cr.routine_done_at } .first(n * target).each do |give|
       give.awarded = true
       give.save!

@@ -100,3 +100,11 @@ P30_to_p10_secondary:
   person_a: p30
   person_b: p10_secondary
 
+sharon_to_marty:
+  person_a: person_sharon
+  person_b: person_marty
+
+marty_to_sharon:
+  person_a: person_marty
+  person_b: person_sharon
+

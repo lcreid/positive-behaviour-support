@@ -22,9 +22,9 @@ Pbs::Application.routes.draw do
     member do
       get 'reports'
     end
+    resources :goals, shallow: true
   end
   resources :links, only: [:destroy]
-  resources :goals
   resources :messages, only: [:update, :new, :create]
 
   # You can have the root of your site routed with "root"
