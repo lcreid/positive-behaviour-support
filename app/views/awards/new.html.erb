@@ -15,7 +15,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <%= number_field_tag "number_of_rewards", "1", {min: 1, max: @goal.pending, size: 2} %>
       <p>
         <!-- The following button trick doesn't work for <= IE8 -->
-        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, person_path(@goal.person) %>
         <%= submit_tag "Give Reward!" %>
       </p>
     <% end %>

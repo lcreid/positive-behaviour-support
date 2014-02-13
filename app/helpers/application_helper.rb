@@ -36,7 +36,7 @@ module ApplicationHelper
           </ul>
         </div>
         ]
-        content
+        content.html_safe
       end  
     end
   end

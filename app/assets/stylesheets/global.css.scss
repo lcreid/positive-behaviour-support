@@ -118,6 +118,16 @@ table { border-collapse: collapse; }
   @extend .ui-state-highlight;
   background: $alert-background;
 }
+#error_explanation {
+  @extend .flash_alert;
+  
+  h2 { 
+    font-weight: normal; 
+    background: transparent;
+  }
+  
+  ul { margin-top: 6px; }
+}
 
 ul.ul_no_decorations li { list-style-type: none; }
 
