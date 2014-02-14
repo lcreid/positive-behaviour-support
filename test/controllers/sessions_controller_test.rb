@@ -50,8 +50,8 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal 1, u.patients[0].routines[1].expectations.size
     assert_equal 2, u.patients[0].routines[2].expectations.size
     assert_equal 2, u.patients[1].routines.size
-    assert_equal 2, u.patients[1].routines[0].expectations.size
-    assert_equal 3, u.patients[1].routines[1].expectations.size
+    assert_equal 3, u.patients[1].routines[0].expectations.size
+    assert_equal 2, u.patients[1].routines[1].expectations.size
     assert_equal 1, u.users.size
     assert_redirected_to home_user_path(u)
     assert_equal "Samoa", u.time_zone
