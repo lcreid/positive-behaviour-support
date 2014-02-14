@@ -21,10 +21,10 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 //  
 //  p { font-size: $font-size }
 //  
-//  h1 { 
+  h1 { 
 //    font-size: $font-size + 4px; 
-//    text-align: center;
-//  }
+    text-align: center;
+  }
   
   .idp {
     margin: 0 $idp-horz-margin;
@@ -32,5 +32,9 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   
   #sign_in_with {
     text-align: center;
+  }
+  
+  .blurb { 
+    p { text-align:center; }
   }
 }

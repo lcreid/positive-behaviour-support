@@ -7,7 +7,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title || "Positive Behaviour Support" %></title>
+    <title><%= title || "Clean Routines" %></title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -22,6 +22,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <%= yield(:javascript) %>
     </script>
     <%= stylesheet_link_tag 'mobile' if mobile_device? %>
+    <%= javascript_include_tag 'mobile' if mobile_device? %>
     <%= csrf_meta_tags %>
   </head>
   <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">

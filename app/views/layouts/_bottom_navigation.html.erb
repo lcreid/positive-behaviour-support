@@ -6,6 +6,12 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <div class="centre_in_browser">
   <div id="bottom_menu">
     <div class="right">
+      <% if mobile_device? %>
+        <%= link_to "Full Site", mobile: 0 %>
+      <% else %>
+        <%= link_to "Mobile Site", root_path(mobile: 1) %>
+      <% end %> |
+
       <%= link_to "Privacy", welcome_privacy_path %> |
       <%= link_to "Terms", welcome_terms_path %> 
     </div>

@@ -3,16 +3,11 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id="sign_in" title="Sign In" data-role="page">
-  <div  data-role="header">
-    <h1>PBS Sign In</h1>
+<div id="sign_in" title="Sign In" data-role="page" class="welcome">
+  <div data-role="header">
+    <h1>Clean Routines Sign In</h1>
   </div>
 
-  <div role="main" class="ui-content">
-    <h1>Welcome to Positive Behaviour Support</h1>
-    <div id='sign_in_with'>
-      <%= render partial: "idps", formats: [:html] %>
-    </div>
-  </div>
+  <%= render partial: "content", formats: ["html"] %>
 </div>
 
