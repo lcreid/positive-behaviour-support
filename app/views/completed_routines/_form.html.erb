@@ -8,7 +8,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <div class="container">
   <div id="completed_routine">
     <div id="completed_routine_header">
-      <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.name}" %></h1>
+      <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.short_name}" %></h1>
     </div>
     <%= content_tag_for(:div, @completed_routine, class: "content") do %>
       <%= form_for(@completed_routine) do |crf| %>
@@ -31,12 +31,13 @@ Copyright (c) Jade Systems Inc. 2013, 2014
                 <td style="text-align: center;"><%= cef.radio_button :observation, "Y" %></td>
                 <td style="text-align: center;"><%= cef.radio_button :observation, "N"  %></td>
                 <td style="text-align: center;"><%= cef.radio_button :observation, "N/A"  %></td>
-                <td><%= cef.text_field(:comment, class: "grow_child_to_parent") %></td>
+                <td><%= cef.text_field(:comment, placeholder: "Comment", class: "grow_child_to_parent") %></td>
               </tr>
             <% end %>
           </tbody>
         </table>
-        <p><%= crf.label 'Comment:' %><%= crf.text_field(:comment, class: "grow_child_to_parent") %></p>
+        <p><%= crf.label 'Category: ' %><%= crf.text_field(:category, placeholder: "Category") %></p>
+        <p><%= crf.label 'Comment: ' %><%= crf.text_field(:comment, placeholder: "Comment", class: "grow_child_to_parent") %></p>
         <p>
           <% routine_done_at = crf.object.routine_done_at || Time.current %>
           Routine Date: 

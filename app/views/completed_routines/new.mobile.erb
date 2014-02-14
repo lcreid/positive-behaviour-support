@@ -29,6 +29,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           </div>
         </div>
       <% end %>
+      <p><%= crf.text_field(:category, placeholder: "Category") %></p>
       <p><%= crf.text_field(:comment, placeholder: "Routine comment") %></p>
       <%= crf.submit 'Save' %>
     <% end %>

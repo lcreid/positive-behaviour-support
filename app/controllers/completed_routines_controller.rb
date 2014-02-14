@@ -71,7 +71,15 @@ class CompletedRoutinesController < ApplicationController
       params[:completed_routine][:routine_done_at_date] +
       " " +
       params[:completed_routine][:routine_done_at_time]
-    r.permit(:id, :routine_id, :person_id, :comment, :name, :routine_done_at, :recorded_by_id, :updated_by_id,
+    r.permit(:id, 
+      :routine_id, 
+      :person_id, 
+      :category,
+      :comment, 
+      :name, 
+      :routine_done_at, 
+      :recorded_by_id, 
+      :updated_by_id,
       completed_expectations_attributes: [:id, :description, :observation, :comment]
     )
   end
