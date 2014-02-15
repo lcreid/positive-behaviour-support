@@ -9,6 +9,7 @@ class CompletedRoutine < ActiveRecord::Base
   belongs_to :routine
   belongs_to :recorded_by, class_name: User
   belongs_to :updated_by, class_name: User
+  belongs_to :routine_category
   has_many :completed_expectations, dependent: :destroy
   accepts_nested_attributes_for :completed_expectations, allow_destroy: true
   scope :most_recent, ->(n = 10000) { reorder(routine_done_at: :desc).limit(n) } # TODO either remove the limit or get rid of this scope altogether
@@ -58,6 +59,21 @@ with this comopleted routine.
 =end
   def expectations
     Expectation.uniq.where(routine_id: self.routine_id)
+  end
+
+# FROM http://railscasts.com/episodes/102-auto-complete-association-revised
+=begin rdoc
+Return the category name for the completed routine.
+=end
+  def category_name
+    routine_category.try(:name)
+  end
+  
+=begin rdoc
+Set the category based on the name.
+=end
+  def category_name=(name)
+    self.routine_category = RoutineCategory.find_or_create_by(name: name, person_id: self.person_id) if name.present?
   end
 end
 

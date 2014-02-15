@@ -36,7 +36,13 @@ Copyright (c) Jade Systems Inc. 2013, 2014
             <% end %>
           </tbody>
         </table>
-        <p><%= crf.label 'Category: ' %><%= crf.text_field(:category, placeholder: "Category") %></p>
+        <p>
+          <%= crf.label(:category_name, 'Category: ') %>
+          <%= crf.text_field(:category_name, 
+            placeholder: "Category", 
+            id: "completed_routine_category_name", 
+            data: { autocomplete_source: RoutineCategory.order(:name).map(&:name) }) %>
+        </p>
         <p><%= crf.label 'Comment: ' %><%= crf.text_field(:comment, placeholder: "Comment", class: "grow_child_to_parent") %></p>
         <p>
           <% routine_done_at = crf.object.routine_done_at || Time.current %>

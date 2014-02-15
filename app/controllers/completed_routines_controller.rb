@@ -74,7 +74,7 @@ class CompletedRoutinesController < ApplicationController
     r.permit(:id, 
       :routine_id, 
       :person_id, 
-      :category,
+      :category_name,
       :comment, 
       :name, 
       :routine_done_at, 

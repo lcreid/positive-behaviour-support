@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214224832) do
+ActiveRecord::Schema.define(version: 20140215001737) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -33,15 +33,16 @@ ActiveRecord::Schema.define(version: 20140214224832) do
     t.integer  "routine_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "awarded",         default: false
+    t.boolean  "awarded",             default: false
     t.datetime "routine_done_at"
     t.integer  "recorded_by_id"
     t.integer  "updated_by_id"
-    t.string   "category"
+    t.integer  "routine_category_id"
   end
 
   add_index "completed_routines", ["person_id"], name: "index_completed_routines_on_person_id"
   add_index "completed_routines", ["recorded_by_id"], name: "index_completed_routines_on_recorded_by_id"
+  add_index "completed_routines", ["routine_category_id"], name: "index_completed_routines_on_routine_category_id"
   add_index "completed_routines", ["routine_id"], name: "index_completed_routines_on_routine_id"
   add_index "completed_routines", ["updated_by_id"], name: "index_completed_routines_on_updated_by_id"
 
@@ -102,6 +103,15 @@ ActiveRecord::Schema.define(version: 20140214224832) do
 
   add_index "people", ["creator_id"], name: "index_people_on_creator_id"
   add_index "people", ["user_id"], name: "index_people_on_user_id"
+
+  create_table "routine_categories", force: true do |t|
+    t.integer  "person_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "routine_categories", ["person_id"], name: "index_routine_categories_on_person_id"
 
   create_table "routines", force: true do |t|
     t.string   "name"
