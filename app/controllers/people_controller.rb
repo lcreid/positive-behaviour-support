@@ -38,7 +38,17 @@ class PeopleController < ApplicationController
   end
   
   def show
-    @completed_routines = @person.completed_routines.reorder(routine_done_at: :desc).page(params[:page]).per(15)
+    @completed_routines = @person.completed_routines.
+      reorder(routine_done_at: :desc).
+      page(params[:page]).per(15)
+    
+#    respond_to do |format|
+#      format.html # index.html.erb
+#      format.mobile  { 
+#        puts "*** #{home_user_path(current_user)}#person_#{@person.id}"
+#        redirect_to home_user_path(current_user)# + "#person_#{@person.id}"
+#      }
+#    end
   end
   
   def reports

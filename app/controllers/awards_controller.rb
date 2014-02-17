@@ -19,9 +19,9 @@ class AwardsController < ApplicationController
   
   def create
     if @goal.award(params[:number_of_rewards] || 1)
-      redirect_to home_user_path(current_user)
+      redirect_to person_path(@goal.person)
     else
-      render "awards/new"
+      render "new"
     end
   end
 

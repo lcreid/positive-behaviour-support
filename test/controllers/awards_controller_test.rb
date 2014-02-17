@@ -25,7 +25,7 @@ class AwardsControllerTest < ActionController::TestCase
     assert_difference "CompletedRoutine.where(awarded: true).count", 2 do
       put :create, { goal_id: @goal.id }
     end
-    assert_redirected_to home_user_path(@controller.current_user)
+    assert_redirected_to person_path(@goal.person)
   end
 
   test "create two awards" do
@@ -34,7 +34,7 @@ class AwardsControllerTest < ActionController::TestCase
     assert_difference "CompletedRoutine.where(awarded: true).count", 4 do
       put :create, { goal_id: @goal.id, number_of_rewards: 2 }
     end
-    assert_redirected_to home_user_path(@controller.current_user)
+    assert_redirected_to person_path(@goal.person)
   end
 
   test "try to get a new award without goal_id" do

@@ -1,0 +1,61 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<%= content_tag_for(:div, @person, data: {role: "page", url: "#{request.fullpath}"} ) do %>
+  <div  data-role="header">
+    <%#= link_to "", :back, "data-role" => "button", "data-rel" => "back", "data-icon" => "back", "data-iconpos" => "notext" %>
+    <%= link_to "Back", :back, data: {role: :button, rel: :back, icon: :back, iconpos: :notext} %>
+    <h1><%= @person.name %></h1>
+    <%= link_to "Settings", "#settings", "data-role" => "button", "data-icon" => "gear", "data-iconpos" => "notext", class: "ui-btn-right" %>
+  </div>
+
+  <div role="main" class="ui-content">
+    <h3 class="group">Routines</h3>
+    <ul data-role="listview">
+      <% @person.routines.each do |routine| %>
+        <li>
+          <div style="float:left;"><%= routine.name %></div>
+          <div style="float:right;">
+            <%= link_to('', new_completed_routine_path(routine_id: routine.id), "data-role" => "button", "data-icon" => "plus", "data-iconpos" => "notext", "data-ajax" => "false") %>
+          </div>
+          <div style="clear:both;"></div>
+        </li>
+      <% end %>
+    </ul>
+
+    <h3>Goals and Rewards</h3>
+    <ul data-role="listview">
+      <%= content_tag_for(:li, @person.goals) do |g| %>
+        <div style="float:left;"><%= g.name %></div>
+        <div style="float:right;">
+          <%= link_to("Give award", new_award_path(goal_id: g.id), "data-role" => "button", "data-icon" => "plus", "data-iconpos" => "notext", "data-ajax" => "false") if g.pending > 0 %>
+        </div>
+        <div style="clear:both;"></div>
+      <% end %>
+    </ul>
+
+    <h3>Recently Completed Routines</h3>
+    <table data-role="table" data-mode="reflow" class="ui-responsive">
+      <thead>
+        <tr>
+          <th data-priority="1">Routine</th>
+          <th data-priority="2">When</th>
+        </tr>
+      </thead>
+      <% rows_to_show = 5 %>
+      <tbody>
+        <% @person.completed_routines.most_recent(rows_to_show).each do |cr| %>
+          <tr style="background-color:<%= cr.is_clean? ? "#CCFF99" : "#FFFF99" %>;">
+            <td><%= cr.name %></td>
+            <td><%= cr.routine_done_at.to_s(:humanized_ago) %></td> 
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<%= render "users/settings" %>
+
