@@ -12,9 +12,12 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script> 
     <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css"/> 
     <%= stylesheet_link_tag "mobile" %>
-    <%= yield(:head) %>
+    <script>
+      <%= yield(:javascript) %>
+    </script>
+    <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
     <%= yield %>
   </body>
 </html>

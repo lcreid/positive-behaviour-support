@@ -32,7 +32,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     </header>
     <main role="main">
       <div class="centre_in_browser">
-        <%= render 'layouts/flashes' %>
+        <%= yield :flashes if content_for? :flashes %>
         <%= yield %>
       </div>
       <div class="clear">

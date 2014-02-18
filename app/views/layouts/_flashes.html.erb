@@ -3,7 +3,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<% unless flash.empty? && ! content_for?(:validation_messages) %>
+<% unless flash.empty? && object.errors.empty? %>
   <div id="flash_area">
     <% flash.each do |name, msg| %>
       <% if msg.is_a?(String) %>
@@ -11,14 +11,19 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <% end %>
     <% end %>
 
-    <% if notice %>
-      <p class="ui-state-highlight"><%= notice.html_safe %></p>
+    <% if object.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(object.errors.count, "error") %> 
+          prevented this 
+          <%= object.class.name.underscore.humanize.downcase %> 
+          from being saved:</h2>
+        <ul>
+          <% object.errors.full_messages.each do |msg| %>
+            <li><%= msg %>.</li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    <% if alert %>
-      <p class="ui-state-error"><%= alert.html_safe %></p>
-    <% end %>
-    
-    <%= yield :validation_messages if content_for?(:validation_messages) %>
   </div>
 <% end %>
 
