@@ -37,4 +37,8 @@ ValidatesTimeliness.setup do |config|
   #
   # Treat ambiguous dates, such as 01/02/1950, as a Non-US date.
   config.parser.remove_us_formats
+  
+  # LCR Add ISO 8601 without seconds
+  Timeliness.add_formats(:datetime, "yyyy-mm-ddThh:nn")
+  Timeliness.add_formats(:datetime, "yyyy/mm/dd hh:nn")
 end

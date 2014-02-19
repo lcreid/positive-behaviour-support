@@ -1,0 +1,75 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<%= validation_messages @completed_routine %>
+
+<div role="main" class="content" data-role="page">
+
+  <%# The next two are to handle mobile devices. Sure wish I had my head around this better. %>
+  <%= yield :heading_buttons if content_for? :heading_buttons %>
+  <%= yield :flashes if content_for? :flashes %>
+
+  <%= form_for(@completed_routine) do |crf| %>
+    <%= crf.hidden_field :name %>
+    <%= crf.hidden_field :routine_id %>
+    <%= crf.hidden_field :person_id %>
+    <p>
+      <div class="ui-grid-b">
+        <%= crf.fields_for :completed_expectations do |cef| %>
+          <div class="ui-block-a">
+            <%= cef.object.description %>
+            <%= cef.hidden_field :description %>
+          </div>
+          <div class="ui-block-b">
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+              <%= cef.radio_button :observation, "Y" %>
+              <%= cef.label(:observation_y, "Y") %>
+              <%= cef.radio_button :observation, "N"  %>
+              <%= cef.label(:observation_n, "N") %>
+              <%= cef.radio_button :observation, "N/A"  %>
+              <%= cef.label(:observation_na, "N/A") %>
+            </div>
+          </div>
+          <div class="ui-block-c">
+            <%= cef.text_field(:comment, placeholder: "Comment") %>
+          </div>
+        <% end %>
+      </div>
+    </p>
+
+    <p>
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <%= crf.label(:category_name, class: "ui-hidden-accessible") %>
+          <%= crf.text_field(:category_name, 
+            placeholder: "Category", 
+            id: "completed_routine_category_name", 
+            data: { autocomplete_source: RoutineCategory.order(:name).map(&:name) }) %>
+        </div>
+        <div class="ui-block-b">
+          <%= crf.label(:routine_done_at, class: "ui-hidden-accessible") %>
+          <% @completed_routine.routine_done_at ||= Time.current %>
+          <%= crf.text_field :routine_done_at, 
+            value: @completed_routine.routine_done_at.to_s(:datetime_local),
+            placeholder: "Routine Date/Time", 
+            type: "datetime-local" %>
+        </div>
+      </div>
+    </p>
+    <p>
+      <%= crf.label(:comment, class: "ui-hidden-accessible") %>
+      <%= crf.text_field(:comment, placeholder: "Routine comment") %>
+    </p>
+    <p>
+      <%= crf.label :recorded_by, "Recorded by: ", class: "ui-hidden-accessible" %>
+      <%= crf.text_field :recorded_by, value: crf.object.recorded_by.name, disabled: true %>
+      <%= crf.label :updated_by, "Updated by: ", class: "ui-hidden-accessible" %>
+      <%= crf.text_field :updated_by, value: current_user.name, disabled: true %>
+    </p>
+    <%= yield :cancel_button if content_for? :cancel_button %>
+    <%= crf.submit 'Save' %>
+  <% end %>
+</div>
+

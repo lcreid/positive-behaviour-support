@@ -18,4 +18,5 @@ Time::DATE_FORMATS[:humanized_ago]  = ->(time) do
     time.strftime('%y-%b-%d %H:%M')
   end
 end
+Time::DATE_FORMATS[:datetime_local]  = "%Y-%m-%d %H:%M:%S"
 

@@ -5,11 +5,6 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <%= validation_messages @completed_routine %>
 
-<div class="container">
-  <div id="completed_routine">
-    <div id="completed_routine_header">
-      <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.short_name}" %></h1>
-    </div>
     <%= content_tag_for(:div, @completed_routine, class: "content") do %>
       <%= form_for(@completed_routine) do |crf| %>
         <%= crf.hidden_field :name %>
@@ -45,12 +40,14 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         </p>
         <p><%= crf.label 'Comment: ' %><%= crf.text_field(:comment, placeholder: "Comment", class: "grow_child_to_parent") %></p>
         <p>
-          <% routine_done_at = crf.object.routine_done_at || Time.current %>
-          Routine Date: 
-            <%= text_field_tag "#{crf.object.class.to_s.underscore}[routine_done_at_date]", routine_done_at.to_date.to_s, class: "datepicker", size: 8 %>
-          Routine Time: 
-            <%= text_field_tag "#{crf.object.class.to_s.underscore}[routine_done_at_time]", routine_done_at.to_s(:time), class: "timepicker", size: 8 %>
-        </p>
+          <%= crf.label(:routine_done_at, class: "ui-hidden-accessible") %>
+          <% @completed_routine.routine_done_at ||= Time.current %>
+          <%= crf.text_field :routine_done_at, 
+            value: @completed_routine.routine_done_at.to_s(:datetime_local),
+            placeholder: "Routine Date/Time", 
+            type: "datetime-local",
+            class: "datetimepicker" %>
+       </p>
         <p>
           <%= crf.label :recorded_by, "Recorded by: " %>
           <%= crf.text_field :recorded_by, value: crf.object.recorded_by.name, disabled: true %>
@@ -62,5 +59,4 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         <%= crf.submit 'Save' %>
       <% end %>
     <% end %>
-  </div>
-</div>
+

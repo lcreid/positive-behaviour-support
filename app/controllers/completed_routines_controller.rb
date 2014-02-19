@@ -67,10 +67,12 @@ class CompletedRoutinesController < ApplicationController
   
   def completed_routine_params
     r = params.require(:completed_routine)
-    params[:completed_routine][:routine_done_at] = 
-      params[:completed_routine][:routine_done_at_date] +
-      " " +
-      params[:completed_routine][:routine_done_at_time]
+    unless params[:completed_routine][:routine_done_at]
+      params[:completed_routine][:routine_done_at] = 
+        params[:completed_routine][:routine_done_at_date] +
+        " " +
+        params[:completed_routine][:routine_done_at_time]
+    end
     r.permit(:id, 
       :routine_id, 
       :person_id, 

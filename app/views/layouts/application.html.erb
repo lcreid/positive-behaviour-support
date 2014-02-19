@@ -16,13 +16,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
     <script>
-      <%# TODO Put the following into the appropriate partial and views %>
-      $(function () {
-        $(".datepicker").datepicker({
-          dateFormat: "yy-mm-dd"
-          })
-        });
-    <%= yield(:javascript) %>
+      <%= yield(:javascript) %>
     </script>
     <%= csrf_meta_tags %>
   </head>

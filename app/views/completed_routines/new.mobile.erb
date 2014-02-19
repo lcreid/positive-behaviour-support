@@ -3,48 +3,9 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id="completed_routine" data-role="page">
-  <div  data-role="header">
-    <%= link_to "", :back, "data-role" => "button", "data-rel" => "back", "data-icon" => "back", "data-iconpos" => "notext", "data-ajax" => "false" %>
-    <h1><%= @completed_routine.name %></h1>
-  </div>
+<%= content_for :heading_buttons do %>
+  <%= render partial: "layouts/navigation", locals: { h1: @completed_routine.name } %>
+<% end %>
 
-  <div role="main" class="ui-content">
-    <%= form_for(@completed_routine) do |crf| %>
-      <%= crf.hidden_field :name %>
-      <%= crf.hidden_field :routine_id %>
-      <%= crf.hidden_field :person_id %>
-      <%= crf.fields_for :completed_expectations do |cef| %>
-        <div data-role="fieldcontain" data-type="horizontal">
-          <%= cef.label(:comment, cef.object.description) %>
-          <div data-role="controlgroup" data-type="horizontal">
-            <%= cef.hidden_field :description %>
-            <%= cef.radio_button :observation, "Y" %>
-            <%= cef.label(:observation_y, "Y") %>
-            <%= cef.radio_button :observation, "N"  %>
-            <%= cef.label(:observation_n, "N") %>
-            <%= cef.radio_button :observation, "N/A"  %>
-            <%= cef.label(:observation_na, "N/A") %>
-            <%= cef.text_field(:comment, placeholder: "Observation comment", "data-wrapper-class" => "controlgroup-textinput ui-btn") %>
-          </div>
-        </div>
-      <% end %>
-      <p>
-        <%= crf.text_field(:category_name, 
-          placeholder: "Category", 
-          id: "completed_routine_category_name", 
-          data: { autocomplete_source: RoutineCategory.order(:name).map(&:name) }) %>
-        </p>
-      <p><%= crf.text_field(:comment, placeholder: "Routine comment") %></p>
-      <p>
-        <% routine_done_at = crf.object.routine_done_at || Time.current %>
-        <%= text_field_tag "#{crf.object.class.to_s.underscore}[routine_done_at_date]", 
-          routine_done_at.to_date.to_s, class: "datepicker", size: 8, placeholder: "Routine Date" %>
-        <%= text_field_tag "#{crf.object.class.to_s.underscore}[routine_done_at_time]", 
-          routine_done_at.to_s(:time), class: "timepicker", size: 8, placeholder: "Routine Time" %>
-      </p>
-      <%= crf.submit 'Save' %>
-    <% end %>
-  </div>
-</div>
+<%= render partial: "form", formats: ["mobile", "html"] %>
 

@@ -15,7 +15,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     
 #    puts @response.body
     
-    assert_select 'div#completed_routine_header', "Turn off Minecraft -- Max-Patient"
+    assert_select 'h1', "Turn off Minecraft -- Max-Patient"
     assert_select 'tbody tr', 2
   end
   

@@ -10,14 +10,14 @@ require 'test_helper'
 class CompletedRoutinesTest < ActionDispatch::IntegrationTest
   test "invalid date" do
     wrapper do
-      fill_in 'completed_routine_routine_done_at_date', with: "2014-02-30"
+      fill_in 'completed_routine_routine_done_at', with: "2014-02-30 23:50"
     end
     page.must_have_content "Routine done at is not a valid datetime"
   end
   
   test "invalid time" do
     wrapper do
-      fill_in 'completed_routine_routine_done_at_time', with: "23:61"
+      fill_in 'completed_routine_routine_done_at', with: "2014-02-28 23:61"
     end
     page.must_have_content "Routine done at is not a valid datetime"
   end
