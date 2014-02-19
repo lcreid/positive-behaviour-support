@@ -11,7 +11,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 
 <div class="container">
   <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.short_name}" %></h1>
-  <%= render partial: "form" %>
+  <%= render partial: "form", formats: ["mobile"] %>
 </div>
 
 <%# FROM http://xdsoft.net/jqplugins/datetimepicker/ %>

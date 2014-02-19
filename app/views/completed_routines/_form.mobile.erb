@@ -16,27 +16,29 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <%= crf.hidden_field :routine_id %>
     <%= crf.hidden_field :person_id %>
     <p>
-      <div class="ui-grid-b">
-        <%= crf.fields_for :completed_expectations do |cef| %>
-          <div class="ui-block-a">
-            <%= cef.object.description %>
-            <%= cef.hidden_field :description %>
-          </div>
-          <div class="ui-block-b">
-            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-              <%= cef.radio_button :observation, "Y" %>
-              <%= cef.label(:observation_y, "Y") %>
-              <%= cef.radio_button :observation, "N"  %>
-              <%= cef.label(:observation_n, "N") %>
-              <%= cef.radio_button :observation, "N/A"  %>
-              <%= cef.label(:observation_na, "N/A") %>
-            </div>
-          </div>
-          <div class="ui-block-c">
-            <%= cef.text_field(:comment, placeholder: "Comment") %>
-          </div>
-        <% end %>
-      </div>
+      <table data-role="table">
+        <thead>
+          <tr>
+            <th>Expectation</th><th>Clean?</th><th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= crf.fields_for(:completed_expectations, data: {mini: true}) do |cef| %>
+            <tr>
+              <td>
+                <%= cef.object.description %>
+                <%= cef.hidden_field :description %>
+              </td>
+              <td><div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <%= cef.radio_button :observation, "Y" %><%= cef.label(:observation_y, "Y") %>
+                <%= cef.radio_button :observation, "N"  %><%= cef.label(:observation_n, "N") %>
+                <%= cef.radio_button :observation, "N/A"  %><%= cef.label(:observation_na, "N/A") %>
+              </div></td>
+              <td><%= cef.text_field(:comment, placeholder: "Comment", class: "grow_child_to_parent") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </p>
 
     <p>
@@ -54,7 +56,8 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <%= crf.text_field :routine_done_at, 
             value: @completed_routine.routine_done_at.to_s(:datetime_local),
             placeholder: "Routine Date/Time", 
-            type: "datetime-local" %>
+            type: "datetime-local",
+            class: "datetimepicker" %>
         </div>
       </div>
     </p>
