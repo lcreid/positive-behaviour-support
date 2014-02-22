@@ -1,0 +1,88 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<%= validation_messages @completed_routine %>
+
+<div role="main" class="content" data-role="page">
+
+  <%# The next two are to handle mobile devices. Sure wish I had my head around this better. %>
+  <%= yield :heading_buttons if content_for? :heading_buttons %>
+  <%= yield :flashes if content_for? :flashes %>
+
+  <%= form_for(@completed_routine) do |crf| %>
+    <%= crf.hidden_field :name %>
+    <%= crf.hidden_field :routine_id %>
+    <%= crf.hidden_field :person_id %>
+    <table data-role="table" class="expectations">
+      <thead>
+        <tr>
+          <th>Expectation</th><th class="clean_column">Clean?</th><th>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= crf.fields_for(:completed_expectations, data: {mini: true}, class: :expectations) do |cef| %>
+          <tr>
+            <td>
+              <%= cef.object.description %>
+              <%= cef.hidden_field :description %>
+            </td>
+            <td><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="buttonset">
+              <%= cef.radio_button :observation, "Y" %><%= cef.label(:observation_y, "Y") %>
+              <%= cef.radio_button :observation, "N"  %><%= cef.label(:observation_n, "N") %>
+              <%= cef.radio_button :observation, "N/A"  %><%= cef.label(:observation_na, "N/A") %>
+            </div></td>
+            <td><%= cef.text_field(:comment, placeholder: "Comment", class: "grow_child_to_parent") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <table data-role="table" class="layout_table">
+      <tbody>
+        <tr>
+          <td>
+            <%= crf.label(:category_name, "Category: ", class: "ui-hidden-accessible") %>
+            <%= crf.text_field(:category_name, 
+              placeholder: "Category", 
+              id: "completed_routine_category_name", 
+              data: { autocomplete_source: RoutineCategory.order(:name).map(&:name) }) %>
+          </td>
+          <td>
+            <%= crf.label(:routine_done_at, "Routine Done At: ", class: "ui-hidden-accessible") %>
+            <% @completed_routine.routine_done_at ||= Time.current %>
+            <%= crf.text_field :routine_done_at, 
+              value: @completed_routine.routine_done_at.to_s(:datetime_local),
+              placeholder: "Routine Date/Time", 
+              type: "datetime-local",
+              class: "datetimepicker" %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <%= crf.label(:comment, "Comment: ", class: "ui-hidden-accessible label_for_fill_rest_of_line") %>
+            <span class="input_fill_rest_of_line">
+              <%= crf.text_field(:comment, placeholder: "Routine comment") %>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= crf.label :recorded_by, "Recorded by: ", class: "ui-hidden-accessible" %>
+            <%= crf.text_field :recorded_by, value: crf.object.recorded_by.name, disabled: true %>
+          </td>
+          <td>
+            <%= crf.label :updated_by, "Updated by: ", class: "ui-hidden-accessible" %>
+            <%= crf.text_field :updated_by, value: current_user.name, disabled: true %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <%= yield :cancel_button if content_for? :cancel_button %>
+      <%= crf.submit 'Save' %>
+    </p>
+  <% end %>
+</div>
+

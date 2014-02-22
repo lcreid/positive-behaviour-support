@@ -11,12 +11,17 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 
 <div class="container">
   <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.short_name}" %></h1>
-  <%= render partial: "form", formats: ["mobile"] %>
+  <%= render partial: "form" %>
 </div>
 
 <%# FROM http://xdsoft.net/jqplugins/datetimepicker/ %>
 <%= stylesheet_link_tag("jquery.datetimepicker", media: "all") unless mobile_device? %>
 <%= javascript_include_tag("jquery.datetimepicker") unless mobile_device? %>
 <script>
-  $('.datetimepicker').datetimepicker({step: 15});
+  $('.datetimepicker').datetimepicker({
+  step: 15,
+  format: 'Y-m-d H:i'
+  });
+  
+  $('.buttonset').buttonset();
 </script>

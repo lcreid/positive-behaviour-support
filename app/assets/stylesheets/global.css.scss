@@ -3,6 +3,12 @@ $width: 660px !default;
 $sidebar-width: 300px !default;
 $font-size: 13px !default;
 
+$horizontal-padding: 15px;
+$vertical-padding: 5px;
+$border-width: 0px;
+$margin: 0;
+$content-width: $width - 2 * ($horizontal-padding + $border-width + $margin);
+
 // Colours
 $browser-background: rgb(236, 236, 236);
 $content-background: white !default;
@@ -25,11 +31,11 @@ $box-shadow: rgb(128, 128, 128) !default;
 
 body, p, h4, table, td, th, ul, ol, textarea, input, button {
   font-size: $font-size;
+  font-family: "Lucida Grande",verdana,helvetica,arial,sans-serif;
 }
 h1 { font-size: $font-size + 3px; }
 h2 { font-size: $font-size + 2px; }
 h3 { font-size: $font-size + 1px; }
-body { font-family: "Lucida Grande",verdana,helvetica,arial,sans-serif; }
 
 // set basic styles for containers that are just for spacing
 .layout_box {
@@ -77,6 +83,7 @@ table { border-collapse: collapse; }
 }
 
 .left {float: left;}
+.left_inline {float: left; display:inline-block;}
 .right {float: right;}
 .centre {margin-left: auto; margin-right: auto;}
 .clear {clear: both;}
@@ -100,6 +107,12 @@ table { border-collapse: collapse; }
   background: $content-background;
   box-shadow: 2px 2px 3px $box-shadow;
   margin: 10px 0 10px 0;
+}
+
+// Pad the stuff inside the container for aesthetic reasons.
+// This has to be a child of the container. 
+.content {
+  padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
 }
 
 // These next two I want to pull in jquery-ui theme, but I don't know if I can.
@@ -129,13 +142,13 @@ table { border-collapse: collapse; }
   ul { margin-top: 6px; }
 }
 
-ul.ul_no_decorations li { list-style-type: none; }
+.field_with_errors {
+  padding: 1px;
+  background-color: red;
+  display: table;
+}
 
-$horizontal-padding: 15px;
-$vertical-padding: 5px;
-$border-width: 0px;
-$margin: 0;
-$content-width: $width - 2 * ($horizontal-padding + $border-width + $margin);
+ul.ul_no_decorations li { list-style-type: none; }
 
 h1, h2 {
   padding: 2px;
@@ -149,12 +162,6 @@ h1 {
 h2 {
   background: $h2-background;
   color: $h2-colour;
-}
-
-// Pad the stuff inside the container for aesthetic reasons.
-// This has to be a child of the container. 
-.content {
-  padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
 }
 
 //table { width: $content-width; }
@@ -179,16 +186,6 @@ a { color: $link_colour; }
 
 .button_row { text-align:right; }
 
-// From http://stackoverflow.com/questions/1030793/input-with-displayblock-is-not-a-block-why-not
-.grow_child_to_parent {
-  display: block; 
-  width: 100%;
-  box-sizing: border-box; /* css3 rec */
-  -moz-box-sizing: border-box; /* ff2 */
-  -ms-box-sizing: border-box; /* ie8 */
-  -webkit-box-sizing: border-box; /* safari3 */
-  -khtml-box-sizing: border-box; /* konqueror */
-}
 /* TODO I would have to download and include the file boxsizing.htc into my app.
   Already doing lots that isn't supported by IE6 and IE7.
 //<!-- The voodoo gets scary. Force IE6 and IE7 to support IE5's box model -->
@@ -200,17 +197,10 @@ div#patients {
   li { list-style-type: none; margin: 2px 0 2px 0; }
 }
 
-//.datepicker { width: 6em; }
-//.timepicker { width: 4em; }
-
-.field_with_errors {
-  padding: 1px;
-  background-color: red;
-  display: table;
-}
-
 .vertical_align_children * { vertical-align: middle; }
 
 @import "welcome";
 @import "awards";
+@import "completed_routines";
+@import "common";
 

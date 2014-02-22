@@ -1,0 +1,36 @@
+//This Source Code Form is subject to the terms of the Mozilla Public
+//License, v. 2.0. If a copy of the MPL was not distributed with this
+//file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//Copyright (c) Jade Systems Inc. 2013, 2014
+
+@media ( min-width: 30em ) {
+	/* Show the table header rows and set all cells to display: table-cell */
+	.completed_routines td,
+	.completed_routines th,
+	.completed_routines tbody th,
+	.completed_routines tbody td,
+	.completed_routines thead td,
+	.completed_routines thead th {
+		display: table-cell;
+		margin: 0;
+	}
+	/* Hide the labels in each cell */
+	.completed_routines td .ui-table-cell-label,
+	.completed_routines th .ui-table-cell-label {
+		display: none;
+	}
+}
+
+.completed_routines {
+  table {
+    margin-top: 1.5;
+  }
+  
+  .layout_table tr,
+  .layout_table td,
+  .layout_table th, {
+    border-style: none;
+  }
+  
+  .clean_column { min-width: 8em; }
+}

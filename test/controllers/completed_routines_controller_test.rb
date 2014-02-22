@@ -16,7 +16,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
 #    puts @response.body
     
     assert_select 'h1', "Turn off Minecraft -- Max-Patient"
-    assert_select 'tbody tr', 2
+    assert_select '.expectations tbody tr', 2
   end
   
   test "try to get a new completed routine without routine_id" do
