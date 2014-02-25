@@ -12,18 +12,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   </div>
 
   <div role="main" class="ui-content">
-    <h3 class="group">Routines</h3>
-    <ul data-role="listview">
-      <% @person.routines.each do |routine| %>
-        <li>
-          <div style="float:left;"><%= routine.name %></div>
-          <div style="float:right;">
-            <%= link_to('', new_completed_routine_path(routine_id: routine.id), "data-role" => "button", "data-icon" => "plus", "data-iconpos" => "notext", "data-ajax" => "false") %>
-          </div>
-          <div style="clear:both;"></div>
-        </li>
-      <% end %>
-    </ul>
+    <%= render partial: "routines/index", formats: ["html"] %>
 
     <h3>Goals and Rewards</h3>
     <ul data-role="listview">

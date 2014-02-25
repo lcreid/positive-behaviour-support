@@ -9,11 +9,25 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <tbody>
       <%= content_tag_for(:tr, @person.routines) do |routine| %>
         <td><%= routine.name %></td>
-        <td style="text-align: right;"><%= link_to('Edit', edit_routine_path(routine)) %></td>
-        <td style="text-align: right;"><%= link_to('New Observations', new_completed_routine_path(routine_id: routine.id)) %></td>
+        <td style="text-align: right;">
+          <%= link_to('Edit', 
+            edit_routine_path(routine), 
+            data: {role: "button", icon: "edit", iconpos: "notext", ajax: false}) %>
+        </td>
+        <td style="text-align: right;">
+          <%= link_to('New Observations', 
+            new_completed_routine_path(routine_id: routine.id), 
+            data: {role: "button", icon: "plus", iconpos: "notext", ajax: false}) %>
+        </td>
       <% end %>
+      <tr>
+        <td>
+          <%= link_to 'New Routine', 
+            new_routine_path(person: @person.attributes),
+            data: {role: "button", icon: "plus", iconpos: "right", ajax: false} %>
+        </td>
+      </tr>
     </tbody>
   </table>
-  <p><%= link_to 'New Routine', new_routine_path(person: @person.attributes), class: "button" %></p>
 </div>
 
