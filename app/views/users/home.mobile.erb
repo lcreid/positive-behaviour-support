@@ -7,23 +7,10 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 
   <div  data-role="header">
     <h1>Clean Routines</h1>
-    <%= link_to "Settings", "#settings", "data-role" => "button", "data-icon" => "gear", "data-iconpos" => "notext", class: "ui-btn-right" %>
+    <%= link_to "Settings", "#settings", data: {role: "button", icon: "gear", iconpos: "notext"}, class: "ui-btn-right" %>
   </div>
 
-  <div role="main" class="ui-content">
-    <% unless flash.empty? %>
-      <div class="info">
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end -%>
-      </div>
-    <% end %>
-    <ul data-role="listview">
-      <% @user.patients.each do | patient | %>
-        <li><%= link_to(patient.name, person_path(patient), data: { ajax: false }) %></li>
-      <% end %>
-    </ul>
-  </div>
+  <%= render partial: "teams", formats: ["html"] %>
 </div>
 
 <%= render "users/settings" %>

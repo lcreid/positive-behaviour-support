@@ -10,14 +10,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <% content_for :content do %>
     <div id="patients" class="container">
       <h1>Teams</h1>
-      <div class="content">
-        <ul>
-          <%= content_tag_for(:li, @user.subjects) do | patient | %>
-            <%= link_to patient.name, person_path(patient) %>
-          <% end %>
-        </ul>
-      <%= link_to 'New Team', new_person_path, class: "button" %>
-      </div>
+      <%= render partial: "teams" %>
     </div>
   <% end %>
   <%= render partial: "layouts/with_messages" %>
