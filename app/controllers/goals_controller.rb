@@ -7,6 +7,7 @@ class GoalsController < ApplicationController
   end
   
   def edit
+    render "new"
   end
   
   def new
@@ -26,7 +27,7 @@ class GoalsController < ApplicationController
     if @goal.save
       redirect_to edit_person_path(@goal.person)
     else
-      render "edit"
+      render "new"
     end
   end
   

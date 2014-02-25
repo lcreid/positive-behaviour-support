@@ -1,1 +1,18 @@
-<%= render 'form' %>
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+
+<% content_for :cancel_button do %>
+  <!-- The following button trick doesn't work for <= IE8 -->
+  <%= link_to '<button type="button">Cancel</button>'.html_safe, person_path(@goal.person) %>
+<% end %>
+
+<div class="container">
+  <h1><%= @goal.name || "New Goal" %></h1>
+  <div class="content">
+    <%= render "form" %>
+  </div>
+</div>
+

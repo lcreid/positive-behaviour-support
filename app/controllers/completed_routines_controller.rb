@@ -42,7 +42,7 @@ class CompletedRoutinesController < ApplicationController
     if @completed_routine.save
       redirect_to person_path(@completed_routine.person)
     else
-      render "edit"
+      render "new"
     end
   end
   
