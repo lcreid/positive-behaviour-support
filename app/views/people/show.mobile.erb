@@ -5,7 +5,6 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <%= content_tag_for(:div, @person, data: {role: "page", url: "#{request.fullpath}"} ) do %>
   <div  data-role="header">
-    <%#= link_to "", :back, "data-role" => "button", "data-rel" => "back", "data-icon" => "back", "data-iconpos" => "notext" %>
     <%= link_to "Back", :back, data: {role: :button, rel: :back, icon: :back, iconpos: :notext} %>
     <h1><%= @person.name %></h1>
     <%= link_to "Settings", "#settings", "data-role" => "button", "data-icon" => "gear", "data-iconpos" => "notext", class: "ui-btn-right" %>
@@ -13,17 +12,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 
   <div role="main" class="ui-content">
     <%= render partial: "routines/index", formats: ["html"] %>
-
-    <h3>Goals and Rewards</h3>
-    <ul data-role="listview">
-      <%= content_tag_for(:li, @person.goals) do |g| %>
-        <div style="float:left;"><%= g.name %></div>
-        <div style="float:right;">
-          <%= link_to("Give award", new_award_path(goal_id: g.id), "data-role" => "button", "data-icon" => "plus", "data-iconpos" => "notext", "data-ajax" => "false") if g.pending > 0 %>
-        </div>
-        <div style="clear:both;"></div>
-      <% end %>
-    </ul>
+    <%= render partial: "goals/index", formats: ["html"] %>
 
     <h3>Recently Completed Routines</h3>
     <table data-role="table" data-mode="reflow" class="ui-responsive">

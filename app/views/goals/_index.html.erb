@@ -4,9 +4,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <div class="pending_rewards">
-<h2>Rewards</h2>
-  <% if 0 < @person.goals.count %>
-    <table>
+<h2>Goals and Rewards</h2>
+  <table>
+    <% if 0 < @person.goals.count %>
       <thead>
         <th>Name</th>
         <th style="width:6em;">Target</th>
@@ -18,14 +18,27 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <td><%= g.name %></td>
           <td style="text-align: right;"><%= g.target.to_s %></td>
           <td style="text-align: right;"><%= g.pending %></td>
-          <td><%= link_to("Edit Goal", edit_goal_path(g)) %></td>
-          <td style="text-align: right;"><%= link_to("Give Reward", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+          <td><%= link_to("Edit Goal", 
+            edit_goal_path(g), 
+              data: {role: "button", icon: "edit", iconpos: "notext", ajax: false}) %></td>
+          <td style="text-align: right;">
+            <%= link_to("Give Reward", 
+              new_award_path(goal_id: g.id), 
+              data: {role: "button", icon: "plus", iconpos: "notext", ajax: false}) if g.pending > 0 %>
+          </td>
         <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    No goals assigned.
-  <% end %>
-  <p><%= link_to 'New Goal', new_person_goal_path(@person.id), class: "button" %></p>
+    <% else %>
+      <tbody>
+        <tr><td>No goals assigned.</td></tr>
+    <% end %>
+        <tr>
+          <td>
+            <%= link_to 'New Goal', 
+              new_person_goal_path(@person.id), 
+              data: {role: "button", icon: "plus", iconpos: "right", ajax: false} %>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 </div>
 

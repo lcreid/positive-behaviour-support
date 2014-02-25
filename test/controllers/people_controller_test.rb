@@ -123,12 +123,12 @@ class PeopleControllerTest < ActionController::TestCase
      
     assert_select 'div#patients h1', "Matt-Patient"
     assert_select '.routines h2', "Routines"
-    assert_select '.pending_rewards h2', "Rewards"
+    assert_select '.pending_rewards h2', "Goals and Rewards"
 
-    assert_select '.routines table tbody tr', 3
+    assert_select '.routines table tbody tr', 4
   
-    assert_select 'div.pending_rewards table' do
-      assert_select 'tbody tr', 2 do |reward|
+    assert_select 'div.pending_rewards table' do |d|
+      assert_select d[0], 'tbody tr', 3 do |reward|
         assert_select reward[0], 'td', "Time Off"
         assert_select reward[1], 'td', "Nothing"
         
@@ -148,7 +148,7 @@ class PeopleControllerTest < ActionController::TestCase
     assert_select 'div#patients h1', "Max-Patient"
     
     assert_select '.routines h2', "Routines"
-    assert_select 'tbody tr', 2 do |reward|
+    assert_select '.routines table tbody tr', 3 do |reward|
       assert_select reward[0], 'td', /^Go to bed.*/
       assert_select reward[0], 'a', 2 do |links|
         assert_select links[0], 'a', "Edit"
