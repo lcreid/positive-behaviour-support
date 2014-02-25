@@ -4,18 +4,23 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <div class="completed_routines">
-  <% rows_to_show = 5 %>
   <h2>Recently Completed Routines</h2>
   <% if 0 < @completed_routines.count %>
-    <table>
+    <table data-role="table" data-mode="reflow" class="ui-responsive">
       <thead>
-        <th>Routine</th><th>Clean?</th><th>Date</th>
+        <th data-priority="1">Routine</th><th>Clean?</th><th data-priority="2">Date</th>
       </thead>
       <tbody>
-      <%= content_tag_for(:tr, @completed_routines) do |cr| %>
-        <td><%= link_to(cr.name, edit_completed_routine_path(cr)) %></td>
-        <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
-        <td style="text-align: right;"><%= cr.routine_done_at.to_s(:humanized_ago) %></td> 
+      <% @completed_routines.each do |cr| %>
+        <tr class="<%= cr.is_clean? ? "clean_routine" : "dirty_routine" %>">
+          <td>
+            <%= link_to(cr.name, 
+              edit_completed_routine_path(cr), 
+              data: {role: "button", icon: "edit", iconpos: "right", ajax: false}) %>
+          </td>
+          <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
+          <td style="text-align: right;"><%= cr.routine_done_at.to_s(:humanized_ago) %></td> 
+        </tr>
       <% end %>
       </tbody>
     </table>
