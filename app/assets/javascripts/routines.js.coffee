@@ -10,15 +10,14 @@
 ready = ->
 # End part 1 Turbolinks
 
-jQuery ->
   $('form').on 'click', '.remove_fields', (event) ->
-    console.log("A")
+#    console.log("A")
     $(this).prev('input[type=hidden]').val('1')
     $(this).closest('fieldset').hide()
     event.preventDefault()
 
   $('form').on 'click', '.add_fields', (event) ->
-    console.log("B")
+#    console.log("B")
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))

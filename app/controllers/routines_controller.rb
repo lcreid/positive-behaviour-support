@@ -6,6 +6,7 @@ class RoutinesController < ApplicationController
   end
   
   def edit
+    render "new"
   end
   
   def new
@@ -28,7 +29,7 @@ class RoutinesController < ApplicationController
     if @routine.save
       redirect_to person_path(@routine.person)
     else
-      render "edit"
+      render "new"
     end
   end
   
