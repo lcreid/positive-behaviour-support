@@ -18,7 +18,7 @@ class AwardsTest < ActionDispatch::IntegrationTest
   def wrapper
     user = get_logged_in(:user_marie)
     matt = people(:patient_matt)
-    click_link matt.name
+    click_link matt.short_name
     assert_equal person_path(matt), current_path
     click_link "Give Reward"
     yield

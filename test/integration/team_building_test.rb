@@ -77,7 +77,7 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
   test "change team" do
     get_logged_in(:user_marie)
     matt = people(:patient_matt)
-    click_link(matt.name)
+    click_link(matt.short_name)
     click_link('Edit Team')
     check('Stella')
     assert_difference "matt.people(true).count" do

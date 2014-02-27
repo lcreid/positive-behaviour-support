@@ -6,7 +6,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <div role="main" class="content ui-content">
   <ul data-role="listview">
     <%= content_tag_for(:li, @user.subjects) do | patient | %>
-      <%= link_to patient.name, person_path(patient), data: { ajax: false } %>
+      <%= link_to patient.short_name, person_path(patient), data: { ajax: false } %>
     <% end %>
     <li><%= link_to 'New Team', new_person_path, data: { ajax: false } %></li>
   </ul>

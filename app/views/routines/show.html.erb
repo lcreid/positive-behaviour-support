@@ -5,7 +5,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <div id="routine" class="container">
 	<%= content_tag_for(:div, @routine,  class: "content") do %>
-		<h1><%= "#{@routine.name} -- #{@routine.person.name}" %></h1>
+		<h1><%= "#{@routine.name} -- #{@routine.person.short_name}" %></h1>
 			<h2>Expectations</h2>
 		<%= content_tag_for(:table, @routine) do %>
 			<thead>
