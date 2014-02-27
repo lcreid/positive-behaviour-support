@@ -68,7 +68,6 @@ GEM
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
-    httplog (0.2.4)
     humanize_boolean (0.0.1)
       i18n
     i18n (0.6.9)
@@ -205,7 +204,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   detect_timezone_rails
-  httplog
   humanize_boolean
   jbuilder (~> 1.2)
   jquery-rails
