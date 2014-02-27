@@ -58,6 +58,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    database_cleaner (1.2.0)
     detect_timezone_rails (0.0.5)
       railties (>= 3.1)
     erubis (2.7.0)
@@ -202,6 +203,7 @@ DEPENDENCIES
   capybara-webkit
   capybara_minitest_spec
   coffee-rails (~> 4.0.0)
+  database_cleaner
   detect_timezone_rails
   httplog
   humanize_boolean

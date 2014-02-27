@@ -8,6 +8,9 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
+# From http://mifsud.me/transactional-tests-ruby-rails/
+DatabaseCleaner.strategy = :truncation
+ 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 
@@ -28,12 +31,13 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
 
 =begin rdoc
-Helper to log in a user for integration tests. Set's @user. Returns @user.
+Helper to log in a user for integration tests. Sets @user. Returns @user.
 Takes a User, or a symbol which will be assumed to be a User fixture.
 =end  
   def get_logged_in(user)
     user = users(user) unless user.is_a? User
     @user = user
+
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       "provider" => @user.provider,
       "uid" => @user.uid.to_s,
@@ -49,6 +53,8 @@ Takes a User, or a symbol which will be assumed to be a User fixture.
     
     click_on('Google')
 
+    # puts page.body
+    
     if @user.subjects.count != 1
       assert_equal home_user_path(@user), current_path
     else

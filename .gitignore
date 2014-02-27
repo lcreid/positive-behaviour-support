@@ -20,3 +20,4 @@ omniauth.sh
 /config/database.yml
 /config/initializers/omniauth.rb
 
+pbs.sublime-workspace

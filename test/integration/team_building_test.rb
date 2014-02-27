@@ -8,6 +8,12 @@ require 'capybara/rails'
 require 'test_helper'
 
 class TeamBuildingTest < ActionDispatch::IntegrationTest
+  self.use_transactional_fixtures = false
+
+  def teardown
+    DatabaseCleaner.clean
+  end
+
   test "Add a routine" do
     get_logged_in(:user_marie)
     
@@ -39,7 +45,7 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
   
   test "save backwards from routine" do
     # This test needs Javascript
-#    Capybara.current_driver = :webkit
+    Capybara.current_driver = :webkit
     
     get_logged_in(:user_marie)
     
@@ -51,21 +57,21 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
     assert_equal new_routine_path, current_path
     fill_in 'Name', with: "Capy add"
     # Can't add exepctation because I don't have Javascript support in Capybara yet.
-#    click_link 'Add Expectation'
-#    puts body
-#    puts "Console: #{page.driver.console_messages}"
-#    puts "Errors: #{page.driver.error_messages}"
-#    assert has_selector?("input[id*='description']")
-#    find('input[id$=_description]').set("Exp 1")
-#    assert_difference "Expectation.all.count" do
+    click_link 'Add Expectation'
+    # puts body
+    # puts "Console: #{page.driver.console_messages}"
+    # puts "Errors: #{page.driver.error_messages}"
+    assert has_selector?("input[id*='description']")
+    find('input[id$=_description]').set("Exp 1")
+    assert_difference "Expectation.all.count" do
       assert_difference "person.routines(true).count" do
         click_button('Save')
+        assert_equal person_path(person), current_path
       end
-#    end
-    assert_equal person_path(person), current_path
+    end
     
     # Turn off Javascript
-#    Capybara.use_default_driver
+    Capybara.use_default_driver
   end
   
   test "change team" do
