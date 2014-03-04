@@ -1,0 +1,28 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+
+<div class="container">
+  <h1>Invite</h1>
+  <div class="content">
+    <%= form_for(@invitation) do |f| %>
+      <p>
+        <%= f.label :e_mail, 'E-mail: ' %>
+        <%= f.text_field :e_mail, type: :email %>
+      </p>
+      <p>
+        <%= submit_tag "Send Invitation" %>
+        <!-- The following button trick doesn't work for <= IE8 -->
+        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
+      </p>
+    <% end %>
+    <p>
+      Note: You won't get told if you type the wrong e-mail address. 
+      If you don't get a response from the intended recipient of
+      your invitation, contact them through other means and make sure 
+      they received your invitation.
+    </p>
+  </div>
+</div>

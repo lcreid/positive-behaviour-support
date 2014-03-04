@@ -61,6 +61,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
   end  
   
   test "invite, accept, and connect" do
+    skip # This is for old way of connecting.
     invitee = users(:user_invitee)
     # Send invitation
     using_session(:invitor) do
@@ -88,7 +89,36 @@ class InvitationsTest < ActionDispatch::IntegrationTest
       assert_equal home_user_path(invitee), current_path, "Not on home page"
       assert has_no_selector?("#message_#{invitation.id}"), "Message still there"
     end
-    
   end  
+
+  test "e-mail invitation" do
+    clear_emails
+
+    test_address = "invitee@example.com"
+
+    using_session(:invitor) do
+      invitor = get_logged_in(:user_invitor)
+      visit(edit_user_path(invitor))
+      click_link 'Invite'
+      assert_equal new_invitation_path, current_path
+      fill_in 'E-mail', with: test_address
+      assert_difference "ActionMailer::Base.deliveries.count" do
+        click_button 'Send Invitation'
+      end
+    end
+
+    using_session(:invitee) do
+      puts "ALREADY LOGGED IN" if has_link? ("Sign out")
+      invitee = set_up_omniauth_mock(:user_invitee)
+      open_email test_address
+      # puts current_email.body
+      assert_difference 'invitee.people.count' do
+        current_email.click_on 'Accept'
+        assert_equal signin_path, current_path
+        click_link 'Google'
+        assert_equal edit_user_path(invitee), current_path
+      end
+    end
+  end
 end
 

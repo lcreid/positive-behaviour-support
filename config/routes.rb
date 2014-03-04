@@ -6,6 +6,8 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 Pbs::Application.routes.draw do
   
+  get "invitations/new"
+  get "invitations/create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   
@@ -26,6 +28,11 @@ Pbs::Application.routes.draw do
   end
   resources :links, only: [:destroy]
   resources :messages, only: [:update, :new, :create]
+  resources :invitations, only: [:new, :create] do
+    member do
+      get 'respond' # UGH This should be put or post, but I can't test it.
+    end
+  end
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
@@ -40,6 +47,7 @@ Pbs::Application.routes.draw do
   get "sessions/create"
   get "sessions/destroy"
   get "welcome/index"
+  get "welcome/index", as: "signin"
   get "welcome/privacy"
   get "welcome/terms"
 
