@@ -42,13 +42,13 @@ admin pages.
 Return the user currently logged-in.
 =end  
   def current_user
-#    begin
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-#    rescue ActiveRecord::RecordNotFound 
-#      logger.warn "Session terminated because user not in database (break-in attempt?)."
-#      log_out
-#      raise
-#    end
+   begin
+      @current_user ||= User.find(session[:user_id]) if logged_in?
+   rescue ActiveRecord::RecordNotFound 
+     logger.warn "Session terminated because user not in database (break-in attempt?)."
+     log_out
+     nil
+   end
   end
   helper_method :current_user
   
