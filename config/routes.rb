@@ -30,7 +30,7 @@ Pbs::Application.routes.draw do
   resources :messages, only: [:update, :new, :create]
   resources :invitations, only: [:new, :create] do
     member do
-      get 'respond' # UGH This should be put or post, but I can't test it.
+      get 'respond' # TODO UGH This should be put or post, but I can't test it.
     end
   end
 
