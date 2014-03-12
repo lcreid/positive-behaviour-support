@@ -46,7 +46,7 @@ Pbs::Application.configure do
   
  # Set the time zone to something other than PT, so problems are more apparent.
   # Suggested by: http://railscasts.com/episodes/106-time-zones-revised?view=asciicast
-  # Duplicate this in test or you'll be really confused.
+  # Duplicate this in development or you'll be really confused.
   # Central America doesn't do DST, so it adds that bit of fun.
   config.time_zone = 'Central America'
 end

@@ -1,0 +1,34 @@
+<%# This Source Code Form is subject to the terms of the Mozilla Public 
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/. 
+Copyright (c) Jade Systems Inc. 2013, 2014
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      You have been invited to connect to <%= @invitation.invitor.name %>
+      on <%= link_to root_url, root_url %>.
+    </p>
+    <p>
+      To accept the invitation, click on this link: 
+      <%= link_to 'Accept', respond_invitation_url(@invitation.attributes.merge disposition: "accept") %>.
+    </p>
+    <p>
+      To ignore the invitation, click on this link: 
+      <%= link_to 'Ignore', respond_invitation_url(@invitation.attributes.merge disposition: "ignore") %>.
+    </p> 
+    <p>
+      To report this e-mail as spam, click on this link: 
+      <%= link_to 'Spam', respond_invitation_url(@invitation.attributes.merge disposition: "spam") %>.
+    </p>
+    <p>
+      If clicking on any of those links doesn't do anything, 
+      copy and paste the link into your browser.
+    </p>
+    <p>Thanks for using <%= root_url %>, and have a great day.</p>
+  </body>
+</html>

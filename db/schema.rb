@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215001737) do
+ActiveRecord::Schema.define(version: 20140303215338) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 20140215001737) do
   end
 
   add_index "goals", ["person_id"], name: "index_goals_on_person_id"
+
+  create_table "invitations", force: true do |t|
+    t.integer  "invitor_id"
+    t.string   "e_mail"
+    t.string   "token"
+    t.string   "disposition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invitations", ["invitor_id"], name: "index_invitations_on_invitor_id"
 
   create_table "links", force: true do |t|
     t.integer  "person_a_id"

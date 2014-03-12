@@ -53,7 +53,10 @@ class SessionsController < ApplicationController
     end if new_user
     
     # I modified the next line to go to the user's home
-    if user.subjects.count == 1
+    if session[:original_url]
+      redirect_to session[:original_url]
+      session.delete(:original_url)
+    elsif user.subjects.count == 1
       redirect_to person_path(user.subjects.first)
     else
       redirect_to home_user_path(user)#, notice: "Signed in!"

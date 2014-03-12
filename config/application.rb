@@ -28,5 +28,7 @@ module Pbs
     
     # From: http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
     config.i18n.enforce_available_locales = true
+
+    config.action_mailer.default_url_options = { host: 'cleanroutines.com' }
   end
 end

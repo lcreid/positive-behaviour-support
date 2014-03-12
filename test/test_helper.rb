@@ -7,6 +7,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'capybara/email'
 
 # From http://mifsud.me/transactional-tests-ruby-rails/
 DatabaseCleaner.strategy = :truncation
@@ -29,20 +30,14 @@ Added LCR to bring in capybara.
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+  include Capybara::Email::DSL
 
 =begin rdoc
 Helper to log in a user for integration tests. Sets @user. Returns @user.
 Takes a User, or a symbol which will be assumed to be a User fixture.
 =end  
   def get_logged_in(user)
-    user = users(user) unless user.is_a? User
-    @user = user
-
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      "provider" => @user.provider,
-      "uid" => @user.uid.to_s,
-      "name" => @user.name
-    })
+    @user = set_up_omniauth_mock(user)
 
     visit(root_path)
     # It looks like if you don't sign out at the end of each test case,
@@ -62,6 +57,18 @@ Takes a User, or a symbol which will be assumed to be a User fixture.
     end
     
     @user
+  end
+
+  def set_up_omniauth_mock(user)
+    user = users(user) unless user.is_a? User
+
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+      "provider" => user.provider,
+      "uid" => user.uid.to_s,
+      "name" => user.name
+    })
+
+    user
   end
 end
 
