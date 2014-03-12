@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303215338) do
+ActiveRecord::Schema.define(version: 20140311200605) do
 
   create_table "completed_expectations", force: true do |t|
     t.string   "description"
@@ -46,6 +46,21 @@ ActiveRecord::Schema.define(version: 20140303215338) do
   add_index "completed_routines", ["routine_id"], name: "index_completed_routines_on_routine_id"
   add_index "completed_routines", ["updated_by_id"], name: "index_completed_routines_on_updated_by_id"
 
+  create_table "docks", force: true do |t|
+    t.string   "name"
+    t.date     "observation_date"
+    t.integer  "score_on_success"
+    t.integer  "daily_quota"
+    t.integer  "remaining"
+    t.integer  "person_id"
+    t.integer  "health_point_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "docks", ["health_point_id"], name: "index_docks_on_health_point_id"
+  add_index "docks", ["person_id"], name: "index_docks_on_person_id"
+
   create_table "expectations", force: true do |t|
     t.string   "description"
     t.integer  "routine_id"
@@ -65,6 +80,17 @@ ActiveRecord::Schema.define(version: 20140303215338) do
   end
 
   add_index "goals", ["person_id"], name: "index_goals_on_person_id"
+
+  create_table "health_points", force: true do |t|
+    t.string   "name"
+    t.integer  "score_on_success"
+    t.integer  "daily_quota"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "health_points", ["person_id"], name: "index_health_points_on_person_id"
 
   create_table "invitations", force: true do |t|
     t.integer  "invitor_id"
