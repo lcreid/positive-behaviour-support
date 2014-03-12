@@ -44,6 +44,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-email (2.3.0)
+      capybara (~> 2.2.0)
+      mail
     capybara-webkit (1.1.0)
       capybara (~> 2.0, >= 2.0.2)
       json
@@ -199,6 +202,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails (~> 1.1)
   capybara
+  capybara-email
   capybara-webkit
   capybara_minitest_spec
   coffee-rails (~> 4.0.0)

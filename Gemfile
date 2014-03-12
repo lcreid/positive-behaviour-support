@@ -72,6 +72,7 @@ group :test do
   gem 'capybara'
   gem 'capybara_minitest_spec'
   gem 'capybara-webkit'
+  gem 'capybara-email'
   gem 'database_cleaner'
 end
 

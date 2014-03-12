@@ -88,7 +88,20 @@ class InvitationsTest < ActionDispatch::IntegrationTest
       assert_equal home_user_path(invitee), current_path, "Not on home page"
       assert has_no_selector?("#message_#{invitation.id}"), "Message still there"
     end
-    
   end  
+
+  test "e-mail invitation" do
+    using_session(:invitor) do
+      invitor = get_logged_in(:user_invitor)
+      visit(edit_user_path(invitor))
+      fill_in 'E-mail', with: "invitee@example.com"
+      assert_difference ActionMailer::Base.deliveries.count do
+        click_link 'Send Invitation'
+      end
+    end
+
+    using_session(:invitee) do
+
+  end
 end
 
