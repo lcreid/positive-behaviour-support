@@ -12,17 +12,17 @@ class Person < ActiveRecord::Base
   has_many :links, foreign_key: :person_a_id
   has_many :reverse_links, foreign_key: :person_b_id, class_name: Link
   has_many :people, through: :links, source: :person_b
-  has_many :users, through: :people
+  has_many :users, through: :people, source: :user
   has_many :routines, -> {order("routines.name")}, dependent: :destroy
   has_many :completed_routines, -> {order("completed_routines.routine_done_at")}, through: :routines, dependent: :destroy
   has_many :completed_expectations, through: :completed_routines
   has_many :goals, dependent: :destroy
-  
+
   accepts_nested_attributes_for :routines
   accepts_nested_attributes_for :goals
-  
+
   validates_presence_of :creator
-  
+
   include PersonHelper
 
 =begin rdoc
@@ -38,7 +38,7 @@ Link a Person to a Person or a User, bidirectionally, so that each entity is con
 to the other.
 See: http://stackoverflow.com/questions/2923692/bidirectional-self-referential-associations
 for confirmation that this is probably a good way to do it.
-=end  
+=end
   def linkup(other)
     return other if other.people.any? { |p| p == self }
     retval = other
@@ -47,11 +47,11 @@ for confirmation that this is probably a good way to do it.
     other.people << self
     retval
   end
-    
+
 =begin rdoc
 Unlink a Person from another Person or a User, bidirectionally, so that each entity is disconnected
 to the other.
-=end  
+=end
   def unlink(other)
     other = other.primary_identity if other.is_a? User
     people.delete(other)
@@ -69,38 +69,38 @@ I would prefer to leave them all alone, but the algorithm is harder.
     # An empty array means no users (which should happen either)
     # Nil means don't do anything with existing links.
     return if updated_users.nil?
-    
+
     # Get rid of the HTML artifact.
     updated_users -= [""]
-    
+
     # Don't let the app be stupid. Can't ever completely unlink a person.
     logger.warn("update_team called with an empty array.") and return if updated_users.empty?
-    
+
     updated_users = updated_users.map { |u| User.find(u) }
-    
+
     # Delete the links that are no longer valid.
     (users - updated_users).each do |u|
 #      puts "Unlinking: #{u.to_yaml}"
       unlink(u)
     end
-    
+
     # Add the new users.
     (updated_users - users).each do |u|
 #      puts "Linking: #{u.to_yaml}"
       linkup(u)
     end
-    
+
     # At the moment, no need to do anything else.
     # What happens when I put attributes on the link?
     # TODO Add parent and other atributes to links.
   end
-  
+
 =begin rdoc
 A person is owned by a user if:
 * The person is the user.
 * They're a parent of the person, # TODO
 * If there is no parent, then the creator is the owner
-=end  
+=end
   def is_owned_by?(user)
     user = User.find(user) unless user.is_a?(User)
     return true if self.user == user
@@ -125,7 +125,7 @@ Get the unique dates on which this person completed at least one routine.
   end
 
 =begin rdoc
-Get arrays of the dates of completed routines and number of columns needed for each date, 
+Get arrays of the dates of completed routines and number of columns needed for each date,
 then also grouped by month and year.
 =end
   def completed_routines_column_layout
@@ -134,7 +134,7 @@ then also grouped by month and year.
       collect { |k, v| [k, v.count] }.
       group_by { |x| x[0].beginning_of_month }.
       flatten
-    
+
     # The date comes out as a string on sqlite and a date on MySql. Crap. Ugliness ahead.
     # More crap. Obviously I can't use a to_date-based query, since the date changes
     # based on the time zone
@@ -146,7 +146,7 @@ then also grouped by month and year.
 #      .flatten
       # Confirm when I add time zone that this uses time zone Ha Ha. It doesn't
   end
-  
+
 =begin rdoc
 Get a has of routines containing completed routines grouped by date.
 =end
@@ -158,7 +158,7 @@ Get a has of routines containing completed routines grouped by date.
         group_by { |cr| cr.routine_done_at.beginning_of_day }]}
     ]
   end
-  
+
   def full_layout
     layout = completed_expectations.each_with_object(Hash.new) do |ce, o|
 #      puts "ce, o: #{ce}, #{o}"
@@ -170,7 +170,7 @@ Get a has of routines containing completed routines grouped by date.
     end
     layout
   end
-  
+
   def completed_expectations_for_day_and_expectation(expectation, day)
     completed_expectations.find_all do |x|
       x.completed_routine.routine_done_at.beginning_of_day == day &&

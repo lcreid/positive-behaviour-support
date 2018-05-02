@@ -12,17 +12,17 @@ class GoalsTest < ActionDispatch::IntegrationTest
     wrapper do
       fill_in 'Target', with: "2"
     end
-    page.must_have_content "Name can't be blank"
+    assert_page_has_content "Name can't be blank"
   end
-  
+
   test "non-numeric target" do
     wrapper do
       fill_in 'Name', with: "Test name"
       fill_in 'Target', with: "3.2"
     end
-    page.must_have_content "Target must be an integer"
+    assert_page_has_content "Target must be an integer"
   end
-  
+
   test "non-numeric target on existing" do
     user = get_logged_in(:user_sharon)
     marty = people(:person_marty)
@@ -31,9 +31,9 @@ class GoalsTest < ActionDispatch::IntegrationTest
     assert_equal edit_goal_path(marty.goals.first), current_path
     fill_in 'Target', with: "3.2"
     click_on "Save"
-    page.must_have_content "Target must be an integer"
+    assert_page_has_content "Target must be an integer"
   end
-  
+
   def wrapper
     user = get_logged_in(:existing_google)
     patient_one = people(:patient_one)
@@ -44,4 +44,3 @@ class GoalsTest < ActionDispatch::IntegrationTest
     click_on "Save"
   end
 end
-

@@ -10,56 +10,56 @@ require 'test_helper'
 class InvitationsTest < ActionDispatch::IntegrationTest
   test "Can click on a message and make it go away" do
     get_logged_in(:user_invitor)
-    
+
     message = messages(:first_message)
-    
+
     assert_difference "@user.unread_messages(true).count", -1 do
       within "#message_#{message.id}" do
         click_link 'read'
       end
     end
     assert has_no_selector?("#message_#{message.id}"), "Message still there"
-  end  
+  end
 
   test "accept invitation and connect third-party" do
     get_logged_in(:user_invitee)
-    
+
     message = messages(:invitation)
-    
+
     assert_difference "@user.people(true).count" do
       within "#message_#{message.id}" do
         click_link 'Accept'
       end
     end
-    assert has_no_selector? "#message_#{message.id}", "Message still there"
-  end  
-  
+    assert has_no_selector?("#message_#{message.id}"), "Message still there"
+  end
+
   test "ignore invitation" do
     get_logged_in(:user_invitee)
-    
+
     message = messages(:invitation)
-    
+
     assert_no_difference "@user.people(true).count" do
       within "#message_#{message.id}" do
         click_link 'Ignore'
       end
-      assert has_no_selector? "#message_#{message.id}", "Message still there"
+      assert has_no_selector?("#message_#{message.id}"), "Message still there"
     end
-  end  
-  
+  end
+
   test "mark invitation as spam" do
     get_logged_in(:user_invitee)
-    
+
     message = messages(:invitation)
-    
+
     assert_no_difference "@user.people(true).count" do
       within "#message_#{message.id}" do
         click_link 'spam'
       end
-      assert has_no_selector? "#message_#{message.id}", "Message still there"
+      assert has_no_selector?("#message_#{message.id}"), "Message still there"
     end
-  end  
-  
+  end
+
   test "invite, accept, and connect" do
     skip # This is for old way of connecting.
     invitee = users(:user_invitee)
@@ -74,9 +74,9 @@ class InvitationsTest < ActionDispatch::IntegrationTest
         click_button('Send')
       end
     end
-    
+
     invitation = invitee.messages(true).order(created_at: :desc).first
-    
+
     # Switch to invitee session and accept invitation
     using_session(:invitee) do
       get_logged_in(invitee)
@@ -89,7 +89,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
       assert_equal home_user_path(invitee), current_path, "Not on home page"
       assert has_no_selector?("#message_#{invitation.id}"), "Message still there"
     end
-  end  
+  end
 
   test "e-mail invitation" do
     clear_emails
@@ -121,4 +121,3 @@ class InvitationsTest < ActionDispatch::IntegrationTest
     end
   end
 end
-

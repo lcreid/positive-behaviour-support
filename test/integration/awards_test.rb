@@ -12,9 +12,9 @@ class AwardsTest < ActionDispatch::IntegrationTest
     wrapper do
       fill_in 'number_of_rewards', with: "1.5"
     end
-    page.must_have_content "Number of rewards is not an integer"
+    assert_page_has_content "Number of rewards is not an integer"
   end
-  
+
   def wrapper
     user = get_logged_in(:user_marie)
     matt = people(:patient_matt)
@@ -25,4 +25,3 @@ class AwardsTest < ActionDispatch::IntegrationTest
     click_on "Give Reward!"
   end
 end
-

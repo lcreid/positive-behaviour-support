@@ -12,16 +12,16 @@ class CompletedRoutinesTest < ActionDispatch::IntegrationTest
     wrapper do
       fill_in 'completed_routine_routine_done_at', with: "2014-02-30 23:50"
     end
-    page.must_have_content "Routine done at is not a valid datetime"
+    assert_page_has_content "Routine done at is not a valid datetime"
   end
-  
+
   test "invalid time" do
     wrapper do
       fill_in 'completed_routine_routine_done_at', with: "2014-02-28 23:61"
     end
-    page.must_have_content "Routine done at is not a valid datetime"
+    assert_page_has_content "Routine done at is not a valid datetime"
   end
-  
+
   def wrapper
     user = get_logged_in(:existing_google)
     patient_one = people(:patient_one)
@@ -32,4 +32,3 @@ class CompletedRoutinesTest < ActionDispatch::IntegrationTest
 #    puts body
   end
 end
-
