@@ -34,7 +34,8 @@ it doesn't exist.
 Find the user based on the information provided by Omniauth.
 =end
   def self.from_omniauth(auth)
-    where(auth.slice("provider", "uid")).first
+    # where(auth.slice("provider", "uid")).first
+    where(provider: auth["provider"], uid: auth["uid"]).first
   end
 
 =begin rdoc
@@ -42,7 +43,7 @@ Return true if the user already exists, based on the information
 provided by Omniauth, false otherwise.
 =end
   def self.from_omniauth_exists?(auth)
-    from_omniauth(auth)? true: false
+    from_omniauth(auth) ? true : false
   end
 
 =begin rdoc
