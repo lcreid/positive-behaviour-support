@@ -11,7 +11,7 @@ require 'capybara/email'
 
 # From http://mifsud.me/transactional-tests-ruby-rails/
 DatabaseCleaner.strategy = :truncation
- 
+
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 
@@ -35,7 +35,7 @@ class ActionDispatch::IntegrationTest
 =begin rdoc
 Helper to log in a user for integration tests. Sets @user. Returns @user.
 Takes a User, or a symbol which will be assumed to be a User fixture.
-=end  
+=end
   def get_logged_in(user)
     @user = set_up_omniauth_mock(user)
 
@@ -44,18 +44,21 @@ Takes a User, or a symbol which will be assumed to be a User fixture.
     # the test case will start off still logged in.
     # I guess that's sort of desirable, so you don't have to keep logging in.
     click_on('Sign out') if has_link? ("Sign out")
+    sleep 2
     assert_equal root_path, current_path
-    
+
     click_on('Google')
 
     # puts page.body
-    
+    sleep 2
+    # puts "@user.subjects.count: #{@user.subjects.count}"
+
     if @user.subjects.count != 1
       assert_equal home_user_path(@user), current_path
     else
       assert_equal person_path(@user.subjects.first), current_path
     end
-    
+
     @user
   end
 
@@ -71,4 +74,3 @@ Takes a User, or a symbol which will be assumed to be a User fixture.
     user
   end
 end
-
