@@ -10,7 +10,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module Pbs
   class Application < Rails::Application
@@ -25,7 +25,7 @@ module Pbs
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
+
     # From: http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
     config.i18n.enforce_available_locales = true
 

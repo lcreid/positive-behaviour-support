@@ -25,17 +25,25 @@ Pbs::Application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  # Raise an error on page load if there are pending migrations
+  # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  
+
   # Set the time zone to something other than PT, so problems are more apparent.
   # Suggested by: http://railscasts.com/episodes/106-time-zones-revised?view=asciicast
   # Duplicate this in test or you'll be really confused.
   # Central America doesn't do DST, so it adds that bit of fun.
   config.time_zone = 'Central America'
+
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
+
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
 end

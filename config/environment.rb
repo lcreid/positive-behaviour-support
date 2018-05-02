@@ -8,4 +8,4 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 require File.expand_path('../application', __FILE__)
 
 # Initialize the Rails application.
-Pbs::Application.initialize!
+Rails.application.initialize!

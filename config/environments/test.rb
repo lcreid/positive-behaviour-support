@@ -20,7 +20,7 @@ Pbs::Application.configure do
 
   # Configure static asset server for tests with Cache-Control for performance.
   config.serve_static_assets  = true
-  config.static_cache_control = "public, max-age=3600"
+  config.static_cache_control = 'public, max-age=3600'
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -39,14 +39,17 @@ Pbs::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
-  
+
   # From: https://github.com/intridea/omniauth/wiki/Integration-Testing
   # From: http://stackoverflow.com/questions/9730886/rails-rspec-and-omniauth-integration-testing
   OmniAuth.config.test_mode = true
-  
+
  # Set the time zone to something other than PT, so problems are more apparent.
   # Suggested by: http://railscasts.com/episodes/106-time-zones-revised?view=asciicast
   # Duplicate this in development or you'll be really confused.
   # Central America doesn't do DST, so it adds that bit of fun.
   config.time_zone = 'Central America'
+
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
 end
