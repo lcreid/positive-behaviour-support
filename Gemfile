@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.0'
 
 # Use sqlite3 as the database for Active Record
 # include it in all environments or the build won't work.
 gem 'sqlite3'
 
 # Use mysql2 in production
-group :production, :staging do 
+group :production, :staging do
   gem 'mysql2'
 end
 
