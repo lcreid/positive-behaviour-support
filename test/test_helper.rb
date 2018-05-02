@@ -8,6 +8,7 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/email'
+require 'capybara/dsl'
 
 # From http://mifsud.me/transactional-tests-ruby-rails/
 DatabaseCleaner.strategy = :truncation
