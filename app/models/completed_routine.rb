@@ -7,15 +7,15 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 class CompletedRoutine < ActiveRecord::Base
   belongs_to :person
   belongs_to :routine
-  belongs_to :recorded_by, class_name: User
-  belongs_to :updated_by, class_name: User
+  belongs_to :recorded_by, class_name: "User"
+  belongs_to :updated_by, class_name: "User"
   belongs_to :routine_category
   has_many :completed_expectations, dependent: :destroy
   accepts_nested_attributes_for :completed_expectations, allow_destroy: true
   scope :most_recent, ->(n = 10000) { reorder(routine_done_at: :desc).limit(n) } # TODO either remove the limit or get rid of this scope altogether
 
   before_create :set_routine_done_at
-  
+
   validates_datetime :routine_done_at, allow_blank: true
 
 =begin rdoc
@@ -35,7 +35,7 @@ that make sense to compare.
     return super unless other.is_a? Routine
     comparable_attributes == other.comparable_attributes
   end
-  
+
 =begin rdoc
 Return a hash of attributes that make sense to compare to a routine.
 =end
@@ -44,7 +44,7 @@ Return a hash of attributes that make sense to compare to a routine.
       "completed_expectations_attributes" => completed_expectations.collect { |ce| ce.comparable_attributes }
     )
   end
-  
+
 =begin rdoc
 Return true if all expectations in the routine were completed successfully,
 or weren't able to be completed through no fault of the patient.
@@ -68,7 +68,7 @@ Return the category name for the completed routine.
   def category_name
     routine_category.try(:name)
   end
-  
+
 =begin rdoc
 Set the category based on the name.
 =end
@@ -78,7 +78,7 @@ Set the category based on the name.
 end
 
 =begin
-A more general way to change keys in a hash is this 
+A more general way to change keys in a hash is this
 (http://stackoverflow.com/questions/4137824/how-to-elegantly-rename-all-keys-in-a-hash-in-ruby):
 
 ages = { "Bruce" => 32, "Clark" => 28 }

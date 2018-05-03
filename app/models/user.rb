@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :people, through: :links, source: :person_b
   has_many :users, through: :people, source: :user
   has_many :messages, foreign_key: :to_id # These are received messages
-  has_many :sent_messages, foreign_key: :from_id, class_name: Message
+  has_many :sent_messages, foreign_key: :from_id, class_name: "Message"
 
 #  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_nil: true, allow_blank: true
   validate :validate_time_zone
@@ -216,7 +216,7 @@ Validate the given timezone either by Rails city name or TZinfo string. Blank or
 Unread messages.
 =end
   def unread_messages(requery = false)
-    messages(requery).where(read: false)
+    messages.reload.where(read: false)
   end
 
 =begin rdoc

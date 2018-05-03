@@ -1,9 +1,3 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -15,10 +9,6 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
-
   # Show full error reports.
   config.consider_all_requests_local = true
 
@@ -28,7 +18,7 @@ Rails.application.configure do
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => 'public, max-age=172800'
+      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -57,14 +47,6 @@ Rails.application.configure do
   # Duplicate this in test or you'll be really confused.
   # Central America doesn't do DST, so it adds that bit of fun.
   config.time_zone = 'Central America'
-  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
-  # yet still be able to expire them through the digest params.
-  config.assets.digest = true
-
-  # Adds additional error checking when serving assets at runtime.
-  # Checks for improperly declared sprockets dependencies.
-  # Raises helpful error messages.
-  config.assets.raise_runtime_errors = true
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
