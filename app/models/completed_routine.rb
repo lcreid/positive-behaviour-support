@@ -58,7 +58,7 @@ Return all the expectations that have ever existed for the routine associated
 with this comopleted routine.
 =end
   def expectations
-    Expectation.uniq.where(routine_id: self.routine_id)
+    Expectation.distinct.where(routine_id: self.routine_id)
   end
 
 # FROM http://railscasts.com/episodes/102-auto-complete-association-revised

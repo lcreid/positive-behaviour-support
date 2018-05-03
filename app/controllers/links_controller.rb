@@ -4,9 +4,9 @@ class LinksController < ApplicationController
   def destroy
     @link = Link.find(params[:id])
     @link.person_a.unlink(@link.person_b)
-    redirect_to :back
+    redirect_back fallback_location: root_path
   end
-  
+
   private
 
   def user_allowed_to_modify_link

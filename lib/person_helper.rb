@@ -19,6 +19,6 @@ Return the list of people attached to the person or user, who have
 at least one routine attached.
 =end  
   def subjects
-    people.joins(:routines).uniq    
+    people.joins(:routines).distinct    
   end
 end

@@ -83,3 +83,7 @@ end
 group :development do
   gem 'capistrano-rails', '~> 1.1'
 end
+
+# FIXME: These were added in transition to Rails 5.0. Remove later.
+gem 'record_tag_helper', '~> 1.0'
+gem 'rails-controller-testing'

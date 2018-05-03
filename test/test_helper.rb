@@ -44,7 +44,7 @@ Takes a User, or a symbol which will be assumed to be a User fixture.
     # It looks like if you don't sign out at the end of each test case,
     # the test case will start off still logged in.
     # I guess that's sort of desirable, so you don't have to keep logging in.
-    click_on('Sign out') if has_link? ("Sign out")
+    click_on('Sign out') if has_link?("Sign out")
     sleep 2
     assert_equal root_path, current_path
 

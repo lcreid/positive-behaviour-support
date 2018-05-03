@@ -12,7 +12,7 @@ class GoalsTest < ActionDispatch::IntegrationTest
     wrapper do
       fill_in 'Target', with: "2"
     end
-    assert_page_has_content "Name can't be blank"
+    assert_text "Name can't be blank"
   end
 
   test "non-numeric target" do
@@ -20,7 +20,7 @@ class GoalsTest < ActionDispatch::IntegrationTest
       fill_in 'Name', with: "Test name"
       fill_in 'Target', with: "3.2"
     end
-    assert_page_has_content "Target must be an integer"
+    assert_text "Target must be an integer"
   end
 
   test "non-numeric target on existing" do
@@ -31,7 +31,7 @@ class GoalsTest < ActionDispatch::IntegrationTest
     assert_equal edit_goal_path(marty.goals.first), current_path
     fill_in 'Target', with: "3.2"
     click_on "Save"
-    assert_page_has_content "Target must be an integer"
+    assert_text "Target must be an integer"
   end
 
   def wrapper

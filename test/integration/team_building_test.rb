@@ -8,7 +8,7 @@ require 'capybara/rails'
 require 'test_helper'
 
 class TeamBuildingTest < ActionDispatch::IntegrationTest
-  self.use_transactional_fixtures = false
+  self.use_transactional_tests = false
 
   def teardown
     DatabaseCleaner.clean
@@ -65,7 +65,7 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
     assert has_selector?("input[id*='description']")
     find('input[id$=_description]').set("Exp 1")
     assert_difference "Expectation.all.count" do
-      assert_difference "person.routines(true).count" do
+      assert_difference "person.routines.reload.count" do
         click_button('Save')
         assert_equal person_path(person), current_path
       end
@@ -81,13 +81,13 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
     click_link(matt.short_name)
     click_link('Edit Team')
     check('Stella')
-    assert_difference "matt.people(true).count" do
+    assert_difference "matt.people.reload.count" do
       click_button('Save')
     end
     assert_equal person_path(matt), current_path
     click_link('Edit Team')
     uncheck('Stella')
-    assert_difference "matt.people(true).count", -1 do
+    assert_difference "matt.people.reload.count", -1 do
       click_button('Save')
     end
   end

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :prepare_for_mobile
+  before_action :prepare_for_mobile
 
   def title
     "Clean Routines"
@@ -84,7 +84,7 @@ Return nil if no user is logged in.
 ###### Time zone support
 # FROM http://railscasts.com/episodes/106-time-zones-revised
 
-  around_filter :user_time_zone, if: :logged_in?
+  around_action :user_time_zone, if: :logged_in?
 
 private
   

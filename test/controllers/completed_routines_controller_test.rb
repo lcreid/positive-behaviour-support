@@ -10,7 +10,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
   test "get a new completed routine form to complete" do
     @controller.log_in(users(:user_marie))
     assert_no_difference "CompletedRoutine.count" do
-      get :new, { routine_id: routines(:turn_off_minecraft) }
+      get :new, params: { routine_id: routines(:turn_off_minecraft) }
     end
 
 #    puts @response.body
@@ -35,7 +35,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
   test "try to get a new completed routine when not allowed access to the routine" do
     @controller.log_in(users(:user_marie))
     assert_raise ActionController::RoutingError do
-      get :new, { routine_id: routines(:belongs_to_no_one) }
+      get :new, params: { routine_id: routines(:belongs_to_no_one) }
     end
   end
 
@@ -70,7 +70,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
       }
     )
     assert_difference "CompletedRoutine.count" do
-      post :create, completed_routine
+      post :create, params: completed_routine
     end
     assert cr = CompletedRoutine.
       where(routine_id: r.id).

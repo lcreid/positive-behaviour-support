@@ -13,7 +13,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
 
     message = messages(:first_message)
 
-    assert_difference "@user.unread_messages(true).count", -1 do
+    assert_difference "@user.unread_messages.reload.count", -1 do
       within "#message_#{message.id}" do
         click_link 'read'
       end
@@ -26,7 +26,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
 
     message = messages(:invitation)
 
-    assert_difference "@user.people(true).count" do
+    assert_difference "@user.people.reload.count" do
       within "#message_#{message.id}" do
         click_link 'Accept'
       end
@@ -39,7 +39,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
 
     message = messages(:invitation)
 
-    assert_no_difference "@user.people(true).count" do
+    assert_no_difference "@user.people.reload.count" do
       within "#message_#{message.id}" do
         click_link 'Ignore'
       end
@@ -52,7 +52,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
 
     message = messages(:invitation)
 
-    assert_no_difference "@user.people(true).count" do
+    assert_no_difference "@user.people.reload.count" do
       within "#message_#{message.id}" do
         click_link 'spam'
       end
@@ -70,18 +70,18 @@ class InvitationsTest < ActionDispatch::IntegrationTest
       click_link('Invite')
       assert_equal new_message_path, current_path
       fill_in 'ID', with: invitee.id
-      assert_difference "invitee.messages(true).count" do
+      assert_difference "invitee.messages.reload.count" do
         click_button('Send')
       end
     end
 
-    invitation = invitee.messages(true).order(created_at: :desc).first
+    invitation = invitee.messages.reload.order(created_at: :desc).first
 
     # Switch to invitee session and accept invitation
     using_session(:invitee) do
       get_logged_in(invitee)
       visit(home_user_path(invitee))
-      assert_difference "invitee.people(true).count" do
+      assert_difference "invitee.people.reload.count" do
         within "#message_#{invitation.id}" do
           click_link 'Accept'
         end
