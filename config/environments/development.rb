@@ -38,6 +38,9 @@ Rails.application.configure do
   # Duplicate this in test or you'll be really confused.
   # Central America doesn't do DST, so it adds that bit of fun.
   config.time_zone = 'Central America'
+  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # yet still be able to expire them through the digest params.
+  config.assets.digest = true
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.

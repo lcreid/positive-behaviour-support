@@ -17,25 +17,25 @@ class CompletedRoutineTest < ActiveSupport::TestCase
     assert_equal r, cr
     assert_equal cr, r
   end
-  
+
   test "get expectations for completed routines reports" do
     cr = completed_routines(:routine_index_one_one)
     assert_equal 4, cr.expectations.size
   end
-  
+
   test "invalid date" do
     cr = completed_routines(:routine_index_one_one)
     h = cr.attributes
-    h[:routine_done_at] = "2014-02-30 12:59"
+    h["routine_done_at"] = "2014-02-30 12:59"
     cr.update_attributes(h)
     refute cr.save
     assert_equal "Routine done at is not a valid datetime", cr.errors.full_messages.first
   end
-  
+
   test "invalid time" do
     cr = completed_routines(:routine_index_one_one)
     h = cr.attributes
-    h[:routine_done_at] = "2014-02-28 12:61"
+    h["routine_done_at"] = "2014-02-28 12:61"
     cr.update_attributes(h)
     refute cr.save
     assert_equal "Routine done at is not a valid datetime", cr.errors.full_messages.first

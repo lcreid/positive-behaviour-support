@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 
 # Use sqlite3 as the database for Active Record
 # include it in all environments or the build won't work.
@@ -66,7 +66,7 @@ gem 'detect_timezone_rails'
 
 gem 'kaminari' # Pagination From http://railscasts.com/episodes/254-pagination-with-kaminari
 
-gem 'validates_timeliness', '~> 3.0'
+gem 'validates_timeliness', '~> 4.0'
 
 group :test do
   gem 'capybara'

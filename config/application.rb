@@ -26,9 +26,12 @@ module Pbs
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # FIXME: Remove this and next two lines if no other problems.
     # From: http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
-    config.i18n.enforce_available_locales = true
+    # config.i18n.enforce_available_locales = true
 
     config.action_mailer.default_url_options = { host: 'cleanroutines.com' }
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

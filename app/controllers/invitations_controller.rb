@@ -11,7 +11,8 @@ class InvitationsController < ApplicationController
       i.disposition = "pending"
     end
     if @invitation.save
-      LinkMailer.invitation_email(@invitation).deliver
+      # FIXME: Make it deliver later in the background. Probably.
+      LinkMailer.invitation_email(@invitation).deliver_now
       redirect_to edit_user_path(current_user)
     else
       render 'new'
@@ -24,7 +25,7 @@ class InvitationsController < ApplicationController
       redirect_to signin_path and return
     end
 
-    unless params[:id] && 
+    unless params[:id] &&
       (@invitation = Invitation.find(params[:id])) &&
       params[:token] &&
       @invitation.token == params[:token] &&
@@ -33,7 +34,7 @@ class InvitationsController < ApplicationController
     end
 
     if (@invitation.disposition = params[:disposition]) == "accept"
-      current_user.linkup(@invitation.invitor) 
+      current_user.linkup(@invitation.invitor)
       current_user.save
     end
 

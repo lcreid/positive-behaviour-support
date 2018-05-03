@@ -167,7 +167,7 @@ to the other.
 Return the Link that joins one User to another.
 =end
   def link_to!(user)
-    Link.find_by!(person_a_id: self.identities, person_b_id: user.identities)
+    Link.find_by!(person_a: self.identities, person_b: user.identities)
     # This should return only one link, as the only links between two users should
     # be the forward and backward link. But I'm not so sure... Return the first for now
   end
