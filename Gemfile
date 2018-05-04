@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.2.0'
 
 gem 'bootsnap'
+gem 'bootstrap', '~> 4.1.0'
 
 # Use sqlite3 as the database for Active Record
 # include it in all environments or the build won't work.

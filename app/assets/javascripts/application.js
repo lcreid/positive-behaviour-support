@@ -10,9 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require jquery-ui
+//= require popper
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require detect_timezone
 //= require jquery.detect_timezone

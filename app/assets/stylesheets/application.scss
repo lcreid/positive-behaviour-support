@@ -4,3 +4,5 @@
 @import "completed_routines";
 @import "welcome";
 @import "jquery-ui";
+// Probably want bootstrap at the end so it picks up customizations.
+@import "bootstrap";
