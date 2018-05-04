@@ -23,7 +23,7 @@ module ApplicationHelper
 
   def validation_messages(object)
     content_for :flashes do
-      render partial: "layouts/flashes", locals: { object: object }
+      render partial: "flashes", locals: { object: object }
     end
 #    if object.errors.any?
 #      content_for :validation_messages do
@@ -31,7 +31,7 @@ module ApplicationHelper
 #         <div id="error_explanation">
 #          <h2> #{pluralize(object.errors.count, "error")} prohibited this #{object.class.name.underscore.humanize.downcase} from being saved:</h2>
 #          <ul>
-#        ] 
+#        ]
 #          object.errors.full_messages.each do |msg|
 #            content += "<li>#{msg}</li>"
 #          end
@@ -40,7 +40,7 @@ module ApplicationHelper
 #        </div>
 #        ]
 #        content.html_safe
-#      end  
+#      end
 #    end
   end
 end

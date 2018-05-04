@@ -33,7 +33,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <div class="right" style="width:48%;">
             <p>
               This is the information you have to send to someone else so that they
-              can invite you to connect. 
+              can invite you to connect.
             </p>
           </div>
           <div class="clear">
@@ -45,7 +45,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <br/>
           Name: <%= f.object.name %>
         </p>
-        
+
         <h2>Preferences</h2>
         <div class="field">
           <p>
@@ -53,7 +53,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
             <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
           </p>
         </div>
-        
+
         <div class="actions">
           <p>
             <!-- The following button trick doesn't work for <= IE8 -->
@@ -62,7 +62,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           </p>
         </div>
       <% end %>
-        
+
       <div id="people">
         <h2>Linked People</h2>
         <table>
@@ -74,12 +74,11 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           </tbody>
         </table>
         <p>
-          <%= link_to '<button type="button">Invite a User to Link Up</button>'.html_safe, 
+          <%= link_to '<button type="button">Invite a User to Link Up</button>'.html_safe,
             new_invitation_path %>
         </p>
       </div>
     </div>
   </div>
 <% end %>
-<%= render partial: "layouts/with_messages" %>
-
+<%= render partial: "with_messages" %>
