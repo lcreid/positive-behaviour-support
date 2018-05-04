@@ -7,20 +7,24 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <%= favicon_link_tag 'gold-star.ico' %>
     <title><%= title || "Clean Routines" %></title>
-    <%= stylesheet_link_tag("application", media: "all", "data-turbolinks-track" => true) unless mobile_device? %>
-    <%= javascript_include_tag("application", "data-turbolinks-track" => true) unless mobile_device? %>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <link href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%# The only place this is used in views/welcome/index.html.erb. %>
     <script>
       <%= yield(:javascript) %>
     </script>
-    <%= csrf_meta_tags %>
   </head>
   <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
     <header>
+      <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
       <%= content_for?(:navigation) ? yield(:navigation) : render('layouts/navigation', formats: ["html"]) %>
     </header>
     <main role="main">
@@ -32,7 +36,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       </div>
     </main>
     <footer>
-      <%= content_for?(:bottom_navigation) ? yield(:bottom_navigation) : render('layouts/bottom_navigation') %>
+      <%= render('layouts/bottom_navigation') %>
     </footer>
   </body>
 </html>
