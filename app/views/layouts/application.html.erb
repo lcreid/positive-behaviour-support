@@ -3,7 +3,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<%# FROM http://railsapps.github.io/rails-default-application-layout.html %>
+  <%# FROM http://railsapps.github.io/rails-default-application-layout.html %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,27 +14,23 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <%# The only place this is used in views/welcome/index.html.erb. %>
     <script>
       <%= yield(:javascript) %>
     </script>
-  </head>
-  <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
-    <header>
-      <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
-      <%= content_for?(:navigation) ? yield(:navigation) : render('navigation', formats: ["html"]) %>
-    </header>
-    <main role="main">
-      <div class="container">
-        <%= yield :flashes if content_for? :flashes %>
-        <%= yield %>
-      </div>
-    </main>
-    <footer>
-      <%= render('bottom_navigation') %>
-    </footer>
-  </body>
-</html>
+    </head>
+    <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
+      <header>
+        <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
+        <%= content_for?(:navigation) ? yield(:navigation) : render('navigation', formats: ["html"]) %>
+      </header>
+      <%= yield :flashes if content_for? :flashes %>
+      <%= yield %>
+      <footer>
+        <%= render('bottom_navigation') %>
+      </footer>
+    </body>
+  </html>

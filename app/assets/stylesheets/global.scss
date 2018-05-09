@@ -30,20 +30,8 @@ $link-colour: #6699FF;
 $box-shadow: rgb(128, 128, 128) !default;
 
 body, p, h4, table, td, th, ul, ol, textarea, input, button {
-  font-size: $font-size;
   font-family: "Lucida Grande",verdana,helvetica,arial,sans-serif;
 }
-h1 { font-size: $font-size + 3px; }
-h2 { font-size: $font-size + 2px; }
-h3 { font-size: $font-size + 1px; }
-
-// set basic styles for containers that are just for spacing
-// .layout_box {
-//   border-style: none;
-//   border-width: 0;
-//   margin: 0;
-//   padding: 0;
-// }
 
 body {
   // @extend .layout_box;
@@ -151,20 +139,6 @@ table { border-collapse: collapse; }
 }
 
 ul.ul_no_decorations li { list-style-type: none; }
-
-h1, h2 {
-  padding: 2px;
-  margin: 10px 0 0 0;
-}
-h1 {
-  background: $h1-background;
-  color: $h1-colour;
-}
-#welcome h1 { background: $content-background; }
-h2 {
-  background: $h2-background;
-  color: $h2-colour;
-}
 
 //table { width: $content-width; }
 
