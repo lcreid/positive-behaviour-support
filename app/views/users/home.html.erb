@@ -3,12 +3,12 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id="home" selected="true">
-  <div id="user-name" class="asdf-container">
+<div id="home" class="container">
+  <div id="user-name">
     <h1><%= @user.name %></h1>
   </div>
   <% content_for :content do %>
-    <div id="patients" class="asdf-container">
+    <div id="patients">
       <h1>Teams</h1>
       <%= render partial: "teams" %>
     </div>

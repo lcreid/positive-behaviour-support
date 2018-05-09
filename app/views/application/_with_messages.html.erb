@@ -4,20 +4,16 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 <div class="row">
-  <div style="col">
+  <div class="col">
     <%= yield(:content) %>
   </div>
 
-  <div style="col-3">
-    <div class="asdf-container">
-      <div id="messages">
-        <h1>Messages</h1>
-        <div class="content">
-          <%= render(partial: "messages/message",
-            collection: current_user.unread_messages.order(created_at: :desc),
-            spacer_template: "messages/message_spacer") || "No unread messages" %>
-        </div>
-      </div>
+  <div class="col-3">
+    <div id="messages">
+      <h1>Messages</h1>
+      <%= render(partial: "messages/message",
+        collection: current_user.unread_messages.order(created_at: :desc),
+        spacer_template: "messages/message_spacer") || "No unread messages" %>
     </div>
   </div>
 </div>
