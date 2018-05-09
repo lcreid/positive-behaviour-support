@@ -28,11 +28,9 @@ Copyright (c) Jade Systems Inc. 2013, 2014
       <%= content_for?(:navigation) ? yield(:navigation) : render('navigation', formats: ["html"]) %>
     </header>
     <main role="main">
-      <div class="centre_in_browser">
+      <div class="container">
         <%= yield :flashes if content_for? :flashes %>
         <%= yield %>
-      </div>
-      <div class="clear">
       </div>
     </main>
     <footer>

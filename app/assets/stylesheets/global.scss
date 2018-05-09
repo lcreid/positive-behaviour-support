@@ -38,21 +38,21 @@ h2 { font-size: $font-size + 2px; }
 h3 { font-size: $font-size + 1px; }
 
 // set basic styles for containers that are just for spacing
-.layout_box {
-  border-style: none;
-  border-width: 0;
-  margin: 0;
-  padding: 0;
-}
+// .layout_box {
+//   border-style: none;
+//   border-width: 0;
+//   margin: 0;
+//   padding: 0;
+// }
 
 body {
-  @extend .layout_box;
+  // @extend .layout_box;
   background: $browser-background;
 }
 table { border-collapse: collapse; }
 
 #flash_area {
-  @extend .layout_box;
+  // @extend .layout_box;
   @extend .centre_in_browser;
 }
 
@@ -67,12 +67,12 @@ table { border-collapse: collapse; }
 }
 
 %menu_common {
-  @extend .layout_box;
+  // @extend .layout_box;
   font-size: $font-size - 2px;
   height:  $top-menu-h;
   line-height: $top-menu-h;
   color: white;
-  background-color: black;
+  // background-color: black;
   a {
     color: white;
     &:hover {
@@ -89,8 +89,8 @@ table { border-collapse: collapse; }
 .clear {clear: both;}
 
 .centre_in_browser {
-  width: $width;
-  @extend .centre;
+  // width: $width;
+  // @extend .centre;
 }
 
 // This takes advantage of the application template setting the controller and view
@@ -101,16 +101,18 @@ table { border-collapse: collapse; }
     @extend .centre;
   }
 }
-// Put a drop shadow on an area.
-// This has to be a parent of the block with the .content.
-.container {
+
+.asdf-container {
   background: $content-background;
-  box-shadow: 2px 2px 3px $box-shadow;
-  margin: 10px 0 10px 0;
+  // box-shadow: 2px 2px 3px $box-shadow;
+  @extend .border;
+  @extend .border-dark;
+  // margin: 10px 0 10px 0;
+  @extend .my-1;
 }
 
-// Pad the stuff inside the container for aesthetic reasons.
-// This has to be a child of the container.
+// Pad the stuff inside the asdf-container for aesthetic reasons.
+// This has to be a child of the asdf-container.
 .content {
   padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
 }
@@ -186,20 +188,9 @@ a { color: $link_colour; }
 
 .button_row { text-align:right; }
 
-/* TODO I would have to download and include the file boxsizing.htc into my app.
-  Already doing lots that isn't supported by IE6 and IE7.
-//<!-- The voodoo gets scary. Force IE6 and IE7 to support IE5's box model -->
-//<!--[if lt IE 8]><style>.bb {behavior:url("boxsizing.htc");}</style><![endif]-->
-*/
-
 div#patients {
   ul { margin: 0; padding-left: 0; }
   li { list-style-type: none; margin: 2px 0 2px 0; }
 }
 
 .vertical_align_children * { vertical-align: middle; }
-
-@import "welcome";
-@import "awards";
-@import "completed_routines";
-@import "common";

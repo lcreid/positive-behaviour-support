@@ -3,21 +3,21 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div style="float:left;width:64%;">
-  <%= yield(:content) %>
-</div>
+<div class="row">
+  <div style="col">
+    <%= yield(:content) %>
+  </div>
 
-<div style="float:right;width:35%;">
-  <div class="container">
-    <div id="messages">
-      <h1>Messages</h1>
-      <div class="content">
-        <%= render(partial: "messages/message", 
-          collection: current_user.unread_messages.order(created_at: :desc), 
-          spacer_template: "messages/message_spacer") || "No unread messages" %>
+  <div style="col-3">
+    <div class="asdf-container">
+      <div id="messages">
+        <h1>Messages</h1>
+        <div class="content">
+          <%= render(partial: "messages/message",
+            collection: current_user.unread_messages.order(created_at: :desc),
+            spacer_template: "messages/message_spacer") || "No unread messages" %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="clear"></div>
-

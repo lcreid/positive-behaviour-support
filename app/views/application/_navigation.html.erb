@@ -3,9 +3,9 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<% if current_user %>
-  <div id="top_menu">
-    <div class="centre_in_browser">
+<div class="container-fluid bg-dark">
+  <% if current_user %>
+    <div id="top_menu">
       <div class="left">
         <% if current_user.subjects.count == 1 %>
           <% unless person_path(current_user.subjects.first) == request.path %>
@@ -16,15 +16,16 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           <%= link_to "Teams", home_user_path(current_user) %>
         <% end %>
       </div>
-      
-      <div class="right">
-        Signed in as <%= current_user.name %>. |
 
-        <%= link_to "Profile", edit_user_path(current_user) %> |
+      <div class="right">
+        Signed in as
+        <%= current_user.name %>. |
+
+        <%= link_to "Profile", edit_user_path(current_user) %>
+        |
 
         <%= link_to "Sign out", signout_path %>
       </div>
     </div>
-  </div>
-<% end %>
-
+  <% end %>
+</div>
