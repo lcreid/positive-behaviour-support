@@ -1,14 +1,3 @@
-$top-menu-h: 30px !default;
-$width: 660px !default;
-$sidebar-width: 300px !default;
-$font-size: 13px !default;
-
-$horizontal-padding: 15px;
-$vertical-padding: 5px;
-$border-width: 0px;
-$margin: 0;
-$content-width: $width - 2 * ($horizontal-padding + $border-width + $margin);
-
 // Colours
 $browser-background: rgb(236, 236, 236);
 $content-background: white !default;
@@ -39,11 +28,6 @@ body {
 }
 table { border-collapse: collapse; }
 
-#flash_area {
-  // @extend .layout_box;
-  @extend .centre_in_browser;
-}
-
 #top_menu {
   @extend %menu_common;
   padding-top: 0;
@@ -56,9 +40,6 @@ table { border-collapse: collapse; }
 
 %menu_common {
   // @extend .layout_box;
-  font-size: $font-size - 2px;
-  height:  $top-menu-h;
-  line-height: $top-menu-h;
   color: white;
   // background-color: black;
   a {
@@ -76,34 +57,11 @@ table { border-collapse: collapse; }
 .centre {margin-left: auto; margin-right: auto;}
 .clear {clear: both;}
 
-.centre_in_browser {
-  // width: $width;
-  // @extend .centre;
-}
-
-// This takes advantage of the application template setting the controller and view
-// for all pages.
-.users_home, .users_edit, .people_show, #welcome {
-  .centre_in_browser {
-    width: $width + $sidebar-width;
-    @extend .centre;
-  }
-}
-
-// Pad the stuff inside the asdf-container for aesthetic reasons.
-// This has to be a child of the asdf-container.
-.content {
-  padding: $vertical-padding $horizontal-padding $vertical-padding $horizontal-padding;
-}
-
 // These next two I want to pull in jquery-ui theme, but I don't know if I can.
 .flash_notice {
-  @extend .centre_in_browser;
   background: $alert-background;
   min-height: 50px;
   $padding: 5px;
-  padding: $padding;
-  width: $width - 2 * $padding;
   border-color: $alert-border-colour;
   border-style: solid none solid none;
   border-width: 1px 0 1px 0;
