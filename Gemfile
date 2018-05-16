@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
+# Use postgres as the database for Active Record
+gem 'pg', "~> 0.18"
+gem 'pg_search'
+# Use Puma as the app server
+gem 'puma', '~> 3.7'
 
 gem 'bootsnap'
 gem 'bootstrap', '~> 4.1.0'
@@ -22,6 +27,7 @@ gem 'sass-rails'
 gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
+# FIXME: Remove this when I can.
 gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -29,12 +35,14 @@ gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+# FIXME: Remove this when I can.
 gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# FIXME: I don't think I need this.
 gem 'jbuilder'
 
 group :doc do
@@ -44,15 +52,6 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 
 # From: http://railscasts.com/episodes/241-simple-omniauth-revised
 gem 'omniauth-twitter'
