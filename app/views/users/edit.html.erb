@@ -4,14 +4,12 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
 
-<div id="user" class="asdf-container">
+<div id="user" class="container">
   <h1>Your Profile</h1>
-</div>
-<% content_for :content do %>
-  <div class="asdf-container">
-    <div class="content">
-      <h2>Identity</h2>
-      <%= form_for(@user) do |f| %>
+  <% content_for :content do %>
+      <div class="content">
+        <h2>Identity</h2>
+        <%= form_for(@user) do |f| %>
         <% if @user.errors.any? %>
           <div class="error_messages">
             <h2>Form is invalid</h2>
@@ -32,18 +30,18 @@ Copyright (c) Jade Systems Inc. 2013, 2014
           </div>
           <div class="right" style="width:48%;">
             <p>
-              This is the information you have to send to someone else so that they
-              can invite you to connect.
+              This is the information you have to send to someone else so that they can invite you to connect.
             </p>
           </div>
-          <div class="clear">
-          </div>
+          <div class="clear"></div>
         </div>
 
         <p>
-          Identity Provider: <%= User.inverse_provider(f.object.provider) %>
+          Identity Provider:
+          <%= User.inverse_provider(f.object.provider) %>
           <br/>
-          Name: <%= f.object.name %>
+          Name:
+          <%= f.object.name %>
         </p>
 
         <h2>Preferences</h2>
@@ -68,17 +66,16 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         <table>
           <tbody>
             <%= content_tag_for(:tr, @user.users) do |other| %>
-              <td><%= other.name %></td>
-              <td><%= link_to( "Unlink", link_path(@user.link_to!(other)), method: :delete) %></td>
-            <% end %>
-          </tbody>
-        </table>
-        <p>
-          <%= link_to '<button type="button">Invite a User to Link Up</button>'.html_safe,
-            new_invitation_path %>
-        </p>
-      </div>
+            <td><%= other.name %></td>
+            <td><%= link_to( "Unlink", link_path(@user.link_to!(other)), method: :delete) %></td>
+          <% end %>
+        </tbody>
+      </table>
+      <p>
+        <%= link_to '<button type="button">Invite a User to Link Up</button>'.html_safe, new_invitation_path %>
+      </p>
     </div>
   </div>
 <% end %>
 <%= render partial: "with_messages" %>
+</div>

@@ -9,10 +9,9 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <%= link_to '<button type="button">Cancel</button>'.html_safe, person_path(@routine.person) %>
 <% end %>
 
-<div class="asdf-container">
+<div class="container">
   <div class="content">
     <h1><%= @routine.name || "Routine" %></h1>
     <%= render partial: "form" %>
   </div>
 </div>
-

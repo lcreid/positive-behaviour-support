@@ -3,20 +3,18 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<div id="patients" class="asdf-container">
+<div id="patients" class="container">
   <h1><%= @person.name %></h1>
-</div>
 <% content_for :content do %>
-  <div class="asdf-container">
-    <div class="content">
-      <p class="button_row">
-        <%= link_to 'Reports', reports_person_path(@person), class: "btn btn-light btn-sm" %>
-        <%= link_to 'Edit Team', edit_person_path(@person), class: "btn btn-light btn-sm" %>
-      </p>
-      <%= render partial: "routines/index" %>
-      <%= render partial: "goals/index" %>
-      <%= render partial: "completed_routines/index" %>
-    </div>
+  <div class="content">
+    <p class="button_row">
+      <%= link_to 'Reports', reports_person_path(@person), class: "btn btn-light btn-sm" %>
+      <%= link_to 'Edit Team', edit_person_path(@person), class: "btn btn-light btn-sm" %>
+    </p>
+    <%= render partial: "routines/index" %>
+    <%= render partial: "goals/index" %>
+    <%= render partial: "completed_routines/index" %>
   </div>
 <% end %>
 <%= render partial: "with_messages" %>
+</div>

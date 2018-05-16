@@ -90,15 +90,6 @@ table { border-collapse: collapse; }
   }
 }
 
-.asdf-container {
-  background: $content-background;
-  // box-shadow: 2px 2px 3px $box-shadow;
-  @extend .border;
-  @extend .border-dark;
-  // margin: 10px 0 10px 0;
-  @extend .my-1;
-}
-
 // Pad the stuff inside the asdf-container for aesthetic reasons.
 // This has to be a child of the asdf-container.
 .content {
