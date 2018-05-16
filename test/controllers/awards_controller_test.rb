@@ -9,8 +9,8 @@ require 'test_helper'
 class AwardsControllerTest < ActionController::TestCase
   def setup
     @user = users(:user_marie)
-    @patient = @user.people[0]
-    @goal = @patient.goals[0]
+    @patient = @user.people.find_by(name: "Matt-Patient")
+    @goal = @patient.goals.find_by(name: "Time Off")
   end
 
   test "new award" do
