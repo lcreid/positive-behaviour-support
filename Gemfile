@@ -50,6 +50,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
+gem 'bootstrap_form', git: "https://github.com/lcreid/rails-bootstrap-forms.git", branch: "419-check-radio-errors-d"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
