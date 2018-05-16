@@ -8,17 +8,17 @@ module PersonHelper
 #  def users
 #    people.select { |person| ! person.user_id.nil? }
 #  end
-  
+
   # The following is deprecated. See "subjects"
   def patients
-    people.select { |person| person.user_id.nil? }
+    people.where(user_id: nil)
   end
 
 =begin rdoc
 Return the list of people attached to the person or user, who have
 at least one routine attached.
-=end  
+=end
   def subjects
-    people.joins(:routines).distinct    
+    people.joins(:routines).distinct
   end
 end

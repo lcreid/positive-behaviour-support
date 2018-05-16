@@ -95,7 +95,7 @@ class UserTest < ActiveSupport::TestCase
     Training.create(user)
     assert_equal 3, user.people.size
     assert_equal 2, user.patients.size
-    pt1 = user.patients[0]
+    pt1 = user.patients.find_by(name: "Training Patient 1")
     assert_equal 3, pt1.routines.size
     assert_equal 2, pt1.goals.size
     assert_equal 13, pt1.completed_routines.size
