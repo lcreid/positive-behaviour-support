@@ -6,7 +6,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 
 <% content_for :cancel_button do %>
   <!-- The following button trick doesn't work for <= IE8 -->
-  <%= link_to '<button type="button">Cancel</button>'.html_safe, person_path(@completed_routine.person) %>
+  <%= link_to "Cancel", person_path(@completed_routine.person), class: "btn btn-secondary" %>
 <% end %>
 
 <div class="container">

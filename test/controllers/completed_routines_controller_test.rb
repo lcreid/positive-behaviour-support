@@ -1,10 +1,6 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class CompletedRoutinesControllerTest < ActionController::TestCase
   test "get a new completed routine form to complete" do
@@ -13,10 +9,11 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
       get :new, params: { routine_id: routines(:turn_off_minecraft) }
     end
 
-#    puts @response.body
+    #    puts @response.body
 
-    assert_select 'h1', "Turn off Minecraft -- Max-Patient"
-    assert_select '.expectations tbody tr', 2
+    assert_select "h1", "Turn off Minecraft -- Max-Patient"
+    # There are three rows, plus a row for each routine
+    assert_select ".new_completed_routine .row", 5
   end
 
   test "try to get a new completed routine without routine_id" do
@@ -44,7 +41,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     skip "TIMEZONE PROBLEM"
     @controller.log_in(user = users(:user_marie))
     r = routines(:turn_off_minecraft)
-    expectations = r.expectations.collect { |e| e.description }
+    expectations = r.expectations.collect(&:description)
 
     good_day = "Good day!"
     completed_routine = ActionController::Parameters.new(
@@ -72,10 +69,10 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_difference "CompletedRoutine.count" do
       post :create, params: completed_routine
     end
-    assert cr = CompletedRoutine.
-      where(routine_id: r.id).
-      order(:updated_at).
-      last, "No completed routines for user #{user.name}"
+    assert cr = CompletedRoutine
+                .where(routine_id: r.id)
+                .order(:updated_at)
+                .last, "No completed routines for user #{user.name}"
     assert_redirected_to person_path(cr.person)
     assert_equal r.id, cr.routine_id
     assert_equal r.person_id, cr.person_id
@@ -84,6 +81,6 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_equal 2, cr.completed_expectations.size
     assert_equal expectations[0], cr.completed_expectations[0].description
     assert_equal expectations[1], cr.completed_expectations[1].description
-    assert_equal Time.zone.local(2014, 01, 23, 00, 30), cr.routine_done_at
+    assert_equal Time.zone.local(2014, 0o1, 23, 0o0, 30), cr.routine_done_at
   end
 end

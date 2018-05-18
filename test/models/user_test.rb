@@ -103,7 +103,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 0, pt1.goals[1].clean_routines.size
     assert_equal user, pt1.people.first.user
     assert pt1.completed_expectations.all? { |ce| ce.expectation }, "Missing expectations from completed expectations"
-    pt2 = user.patients[1]
+    pt2 = user.patients.find_by(name: "Training Patient 2")
     assert_equal 2, pt2.routines.size
     assert_equal 0, pt2.goals.size
     assert_equal 0, pt2.completed_routines.size

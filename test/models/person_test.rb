@@ -193,15 +193,15 @@ class PersonTest < ActiveSupport::TestCase
     person = people(:person_marty)
     full_layout = person.full_layout
     assert_equal correct_hash[routines(:routine_index_two)], full_layout[routines(:routine_index_two)]
-    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0101)],
-      full_layout[routines(:routine_index_one)][expectations(:ri0101)]
-    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0102)],
-      full_layout[routines(:routine_index_one)][expectations(:ri0102)]
-    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0103)],
-      full_layout[routines(:routine_index_one)][expectations(:ri0103)]
-    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0104)],
-      full_layout[routines(:routine_index_one)][expectations(:ri0104)]
-    assert_equal correct_hash[routines(:routine_index_one)], full_layout[routines(:routine_index_one)]
+    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0101)].sort,
+      full_layout[routines(:routine_index_one)][expectations(:ri0101)].sort
+    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0102)].sort,
+      full_layout[routines(:routine_index_one)][expectations(:ri0102)].sort
+    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0103)].sort,
+      full_layout[routines(:routine_index_one)][expectations(:ri0103)].sort
+    assert_equal correct_hash[routines(:routine_index_one)][expectations(:ri0104)].sort,
+      full_layout[routines(:routine_index_one)][expectations(:ri0104)].sort
+    assert_equal correct_hash[routines(:routine_index_one)].sort, full_layout[routines(:routine_index_one)].sort
     assert_equal correct_hash, full_layout
   end
 
