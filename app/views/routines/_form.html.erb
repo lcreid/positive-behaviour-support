@@ -3,16 +3,16 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 %>
-<%= form_for @routine do |rf| %>
+<%= bootstrap_form_for @routine do |rf| %>
   <%= rf.hidden_field :person_id %>
   <p>
-    <%= rf.label :name, "Routine Name: " %><%= rf.text_field :name %>
-    Goal: <%= rf.select :goal_id, @routine.person.goals.collect {|g| [ g.name, g.id ] } %>
+    <%= rf.text_field :name, label: "Routine Name" %>
+    <%= rf.select :goal_id, @routine.person.goals.collect {|g| [ g.name, g.id ] } %>
   </p>
 
   <h2>Expectations</h2>
   <%= rf.fields_for :expectations do |builder| %>
-    <%= render 'expectation_fields', f: builder %>
+    <%= render "expectation_fields", f: builder %>
   <% end %>
   <p><%= link_to_add_fields "Add Expectation", rf, :expectations %></p>
 
@@ -21,4 +21,3 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <%= rf.submit 'Save' %>
   </p>
 <% end %>
-
