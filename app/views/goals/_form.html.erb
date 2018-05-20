@@ -1,23 +1,15 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
 <%= validation_messages @goal %>
 
-<%= form_for shallow_args(@goal.person, @goal) do |rf| %>
+<%= bootstrap_form_for shallow_args(@goal.person, @goal) do |rf| %>
   <%= rf.hidden_field :person_id %>
   <p>
-    <%= rf.label :name, "Goal Name: ", class: "ui-hidden-accessible" %>
-    <%= rf.text_field :name, placeholder: "Goal Name" %>
+    <%= rf.text_field :name, placeholder: "Goal Name", label: "Goal Name" %>
   </p>
   <p class="vertical_align_children">
-    <%= rf.label :description, "Goal Description: ", class: "ui-hidden-accessible" %>
-    <%= rf.text_area :description, placeholder: "Description" %>
+    <%= rf.text_area :description, placeholder: "Description", label: "Description" %>
   </p>
   <p>
-    <%= rf.label :target, "Target: " %>
-    <%= rf.text_field :target, size: 5, type: "number", value: 1, min: 1, placeholder: "Target" %>
+    <%= rf.text_field :target, size: 5, type: "number", value: 1, min: 1, placeholder: "Target", label: "Target" %>
   </p>
 
   <p>
@@ -25,4 +17,3 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <%= rf.submit 'Save' %>
   </p>
 <% end %>
-
