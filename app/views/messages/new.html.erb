@@ -1,39 +1,29 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-
 <div id="invitation" class="container">
   <h1>Invite</h1>
-  <div class="content">
-    <div style="display:inline;float:left;width:55%;">
-      <%= form_for(@message) do |f| %>
-        <p>
-          <%= f.label :to_id, 'Unique User ID: ' %>
-          <%= f.text_field :to_id %>
-        </p>
-        <p>
-          <%= submit_tag "Send" %>
-          <!-- The following button trick doesn't work for <= IE8 -->
-          <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
-        </p>
-      <% end %>
-    </div>
-    <div style="display:inline;float:right;width:40%">
+  <div style="display:inline;float:left;width:55%;">
+    <%= bootstrap_form_for(@message) do |f| %>
       <p>
-        Find out from the user to whom you wish to connect,
-        what their unique user ID is. They can find this out
-        on their profile page.
+        <%= f.text_field :to_id, label: "Unique User ID" %>
       </p>
       <p>
-        Fill in their unique user ID, then click 'Send'.
+        <%= f.submit "Send" %>
+        <!-- The following button trick doesn't work for <= IE8 -->
+        <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
       </p>
-      <p>
-        We do it this way to reduce the chance of spam, or
-        phishing attempts to gain access to someone else's
-        data in the Clean Routines app.
-    </div>
-    <div style="clear:both"></div>
+    <% end %>
+  </div>
+  <div style="display:inline;float:right;width:40%">
+    <p>
+      Find out from the user to whom you wish to connect,
+      what their unique user ID is. They can find this out
+      on their profile page.
+    </p>
+    <p>
+      Fill in their unique user ID, then click 'Send'.
+    </p>
+    <p>
+      We do it this way to reduce the chance of spam, or
+      phishing attempts to gain access to someone else's
+      data in the Clean Routines app.
   </div>
 </div>
