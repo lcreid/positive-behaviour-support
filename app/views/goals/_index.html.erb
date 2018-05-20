@@ -14,16 +14,16 @@ Copyright (c) Jade Systems Inc. 2013, 2014
         <th colspan="2">Actions</th>
       </thead>
       <tbody>
-        <%= content_tag_for(:tr, @person.goals) do |g| %>
+        <%= content_tag_for(:tr, @person.goals.order(:name)) do |g| %>
           <td><%= g.name %></td>
           <td style="text-align: right;"><%= g.target.to_s %></td>
           <td style="text-align: right;"><%= g.pending %></td>
-          <td><%= link_to("Edit Goal", 
-            edit_goal_path(g), 
+          <td><%= link_to("Edit Goal",
+            edit_goal_path(g),
               data: {role: "button", icon: "edit", iconpos: "notext", ajax: false}) %></td>
           <td style="text-align: right;">
-            <%= link_to("Give Reward", 
-              new_award_path(goal_id: g.id), 
+            <%= link_to("Give Reward",
+              new_award_path(goal_id: g.id),
               data: {role: "button", icon: "plus", iconpos: "notext", ajax: false}) if g.pending > 0 %>
           </td>
         <% end %>
@@ -33,12 +33,11 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <% end %>
         <tr>
           <td>
-            <%= link_to 'New Goal', 
-              new_person_goal_path(@person.id), 
+            <%= link_to 'New Goal',
+              new_person_goal_path(@person.id),
               data: {role: "button", icon: "plus", iconpos: "right", ajax: false} %>
           </td>
         </tr>
     </tbody>
   </table>
 </div>
-

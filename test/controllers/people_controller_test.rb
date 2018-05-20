@@ -132,17 +132,16 @@ class PeopleControllerTest < ActionController::TestCase
 
     assert_select "div.pending_rewards" do |d|
       assert_select d[0], "table tbody tr", 3 do |reward|
-        assert_select reward[0], "td", text: "Time Off"
-        assert_select reward[1], "td", text: "Nothing"
+        assert_select reward[0], "td", text: "Nothing"
+        assert_select reward[1], "td", text: "Time Off"
 
-        assert_select reward[0], "a[href='#{new_award_path(goal_id: subject.goals[0].id)}']"
-        assert_select reward[1], "a", 1
+        assert_select reward[0], "a", 1
+        assert_select reward[1], "a[href='#{new_award_path(goal_id: subject.goals.find_by(name: 'Time Off').id)}']"
       end
     end
   end
 
   test "Format of person dashboard (Max)" do
-    # FIXME: Put this test back in.
     # The documentation says that `assert_select` should match to root node,
     # but clearly the below doesn't work.
     # Actually, it's weirder than that. The failure is moving around with no
