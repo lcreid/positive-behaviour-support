@@ -5,7 +5,7 @@
 
 // From http://stackoverflow.com/questions/1030793/input-with-displayblock-is-not-a-block-why-not
 .grow_child_to_parent {
-  display: block; 
+  display: block;
   width: 100%;
   box-sizing: border-box; /* css3 rec */
   -moz-box-sizing: border-box; /* ff2 */
@@ -18,13 +18,8 @@
   display: block;
   overflow: hidden;
   // the standard Firefox input box has a 3px border all around, but it's thin.
-  padding-right: 6px; 
+  padding-right: 6px;
   > input { width: 100%; }
-}
-
-.label_for_fill_rest_of_line {
-  @extend .left;
-  padding: 4px 0; // Input box has border 3px and padding 1px
 }
 
 .clean_routine {
@@ -34,4 +29,3 @@
 .dirty_routine {
   background-color: #FFFF99;
 }
-

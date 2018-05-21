@@ -1,7 +1,5 @@
+@import "bootstrap";
 @import "global";
-@import "awards";
 @import "common";
 @import "completed_routines";
 @import "jquery-ui";
-// Probably want bootstrap at the end so it picks up customizations.
-@import "bootstrap";

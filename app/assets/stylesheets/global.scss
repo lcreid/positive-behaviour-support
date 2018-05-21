@@ -4,8 +4,6 @@ $content-background: white !default;
 $menu-background: black !default;
 $menu-text-colour: white !default;
 $note-background: rgb(255, 255, 204) !default;
-$alert-background: rgb(255, 255, 204) !default;
-$alert-border-colour: #FFCCCC !default;
 $h1-background: rgb(237, 243, 254) !default;
 $h1-colour: black !default;
 $h2-background: $browser-background !default;
@@ -23,14 +21,13 @@ body, p, h4, table, td, th, ul, ol, textarea, input, button {
 }
 
 body {
-  // @extend .layout_box;
   background: $browser-background;
 }
 table { border-collapse: collapse; }
 
 #top_menu {
   @extend %menu_common;
-  padding-top: 0;
+  // padding-top: 0;
 }
 
 #bottom_menu {
@@ -39,36 +36,28 @@ table { border-collapse: collapse; }
 }
 
 %menu_common {
-  // @extend .layout_box;
-  color: white;
-  // background-color: black;
+  @extend .text-light;
+  @extend .bg-dark;
   a {
-    color: white;
+    color: inherit;
     &:hover {
       opacity:0.6;
-      filter:alpha(opacity=60); /* For IE8 and earlier */
     }
   }
 }
 
-.left {float: left;}
-.left_inline {float: left; display:inline-block;}
-.right {float: right;}
-.centre {margin-left: auto; margin-right: auto;}
-.clear {clear: both;}
-
 // These next two I want to pull in jquery-ui theme, but I don't know if I can.
 .flash_notice {
-  background: $alert-background;
+  @extend .bg-warning;
   min-height: 50px;
   $padding: 5px;
-  border-color: $alert-border-colour;
+  @extend .border-danger;
   border-style: solid none solid none;
   border-width: 1px 0 1px 0;
 }
 .flash_alert {
   // @extend .ui-state-highlight;
-  background: $alert-background;
+  @extend .bg-danger;
 }
 #error_explanation {
   @extend .flash_alert;
@@ -80,16 +69,6 @@ table { border-collapse: collapse; }
 
   ul { margin-top: 6px; }
 }
-
-.field_with_errors {
-  padding: 1px;
-  background-color: red;
-  display: table;
-}
-
-ul.ul_no_decorations li { list-style-type: none; }
-
-//table { width: $content-width; }
 
 th {
   background-color: $table-heading-background;

@@ -1,7 +1,8 @@
 <div id="invitation" class="container">
   <h1>Invite</h1>
-  <div style="display:inline;float:left;width:55%;">
-    <%= bootstrap_form_for(@message) do |f| %>
+  <div class="row">
+    <div class="col-7">
+      <%= bootstrap_form_for(@message) do |f| %>
       <p>
         <%= f.text_field :to_id, label: "Unique User ID" %>
       </p>
@@ -10,20 +11,22 @@
         <!-- The following button trick doesn't work for <= IE8 -->
         <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
       </p>
-    <% end %>
-  </div>
-  <div style="display:inline;float:right;width:40%">
-    <p>
-      Find out from the user to whom you wish to connect,
-      what their unique user ID is. They can find this out
-      on their profile page.
-    </p>
-    <p>
-      Fill in their unique user ID, then click 'Send'.
-    </p>
-    <p>
-      We do it this way to reduce the chance of spam, or
-      phishing attempts to gain access to someone else's
-      data in the Clean Routines app.
+      <% end %>
+    </div>
+    <div class="col">
+      <p>
+        Find out from the user to whom you wish to connect,
+        what their unique user ID is. They can find this out
+        on their profile page.
+      </p>
+      <p>
+        Fill in their unique user ID, then click 'Send'.
+      </p>
+      <p>
+        We do it this way to reduce the chance of spam, or
+        phishing attempts to gain access to someone else's
+        data in the Clean Routines app.
+      </p>
+    </div>
   </div>
 </div>
