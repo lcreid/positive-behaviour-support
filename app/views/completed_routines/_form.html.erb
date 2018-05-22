@@ -37,11 +37,8 @@
     </div>
     <div class="col">
       <% @completed_routine.routine_done_at ||= Time.current %>
-      <%= crf.text_field :routine_done_at,
-        value: @completed_routine.routine_done_at.to_s(:datetime_local),
-        placeholder: "Routine Date/Time",
-        type: "datetime-local",
-        class: "datetimepicker" %>
+      <%= crf.datetime_field :routine_done_at,
+        placeholder: "Routine Date/Time" %>
     </div>
   </div>
   <div class="row">

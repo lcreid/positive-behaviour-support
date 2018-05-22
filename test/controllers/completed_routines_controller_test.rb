@@ -37,14 +37,12 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
   end
 
   test "complete a routine" do
-    # FIXME
-    skip "TIMEZONE PROBLEM"
     @controller.log_in(user = users(:user_marie))
     r = routines(:turn_off_minecraft)
     expectations = r.expectations.collect(&:description)
 
     good_day = "Good day!"
-    completed_routine = ActionController::Parameters.new(
+    completed_routine = {
       completed_routine: {
         routine_id: r.id.to_s,
         person_id: r.person_id,
@@ -65,7 +63,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
           }
         }
       }
-    )
+    }
     assert_difference "CompletedRoutine.count" do
       post :create, params: completed_routine
     end
