@@ -15,6 +15,6 @@
   </div>
   <p>
     <%= yield :cancel_button if content_for? :cancel_button %>
-    <%= submit_tag "Give Reward!" %>
+    <%= submit_tag "Give Reward!", class: "btn btn-secondary" %>
   </p>
 <% end %>

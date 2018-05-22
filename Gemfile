@@ -79,11 +79,17 @@ gem 'kaminari' # Pagination From http://railscasts.com/episodes/254-pagination-w
 gem 'validates_timeliness', '~> 4.0'
 
 group :test do
-  gem 'capybara'
-  gem 'capybara_minitest_spec'
-  gem 'capybara-webkit'
+  # gem 'capybara'
+  # gem 'capybara_minitest_spec'
+  # gem 'capybara-webkit'
   gem 'capybara-email'
+  # FIXME: Probably don't really need this anymore.
   gem 'database_cleaner'
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
 end
 
 group :test, :development do
