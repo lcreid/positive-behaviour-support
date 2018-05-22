@@ -35,6 +35,7 @@ class ActionDispatch::IntegrationTest
     # the test case will start off still logged in.
     # I guess that's sort of desirable, so you don't have to keep logging in.
     click_on("Sign out") if has_link?("Sign out")
+    sleep 2
     assert_equal root_path, current_path
     click_on("Google")
     sleep 2

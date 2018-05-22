@@ -39,7 +39,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
   test "complete a routine" do
     @controller.log_in(user = users(:user_marie))
     r = routines(:turn_off_minecraft)
-    expectations = r.expectations.collect(&:description)
+    expectations = r.expectations.map(&:description).sort
 
     good_day = "Good day!"
     completed_routine = {
@@ -77,8 +77,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
     assert_equal r.name, cr.name
     assert_equal good_day, cr.comment
     assert_equal 2, cr.completed_expectations.size
-    assert_equal expectations[0], cr.completed_expectations[0].description
-    assert_equal expectations[1], cr.completed_expectations[1].description
-    assert_equal Time.zone.local(2014, 0o1, 23, 0o0, 30), cr.routine_done_at
+    assert_equal expectations, cr.completed_expectations.map(&:description).sort
+    assert_equal Time.zone.local(2014, 1, 23, 0, 30), cr.routine_done_at
   end
 end

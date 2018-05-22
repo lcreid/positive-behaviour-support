@@ -3,7 +3,6 @@
 <%# The next two are to handle mobile devices. Sure wish I had my head around this better. %>
 <%= yield :heading_buttons if content_for? :heading_buttons %>
 <%= yield :flashes if content_for? :flashes %>
-
 <%= form_tag(:awards) do %>
   <%= hidden_field_tag :goal_id, @goal.id %>
   <h1 class="text-center">Congratulations!</h1>

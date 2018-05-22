@@ -4,6 +4,8 @@
 <%# The next two are to handle mobile devices. Sure wish I had my head around this better. %>
 <%= yield :heading_buttons if content_for? :heading_buttons %>
 <%= yield :flashes if content_for? :flashes %>
+<%= @completed_routine.inspect %>
+<%= "TIME: #{@completed_routine.routine_done_at&.strftime('%Y-%m-%dT%T')}" %>
 
 <%= bootstrap_form_for(@completed_routine) do |crf| %>
   <%= crf.hidden_field :name %>
@@ -36,9 +38,9 @@
         data: { autocomplete_source: RoutineCategory.order(:name).map(&:name) }) %>
     </div>
     <div class="col">
-      <% @completed_routine.routine_done_at ||= Time.current %>
-      <%= crf.datetime_field :routine_done_at,
-        placeholder: "Routine Date/Time" %>
+      <% @completed_routine.routine_done_at ||= Time.zone.now %>
+      <%# NOTE: According to docs I shouldn't have to give my own format, but I do. %>
+      <%= crf.datetime_field :routine_done_at, value: crf.object.routine_done_at.strftime("%Y-%m-%dT%R") %>
     </div>
   </div>
   <div class="row">
