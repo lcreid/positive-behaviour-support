@@ -49,7 +49,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
         name: r.name,
         comment: good_day,
         routine_done_at_date: "2014-01-23",
-        routine_done_at_time: "12:30 AM",
+        routine_done_at_time: "00:30",
         completed_expectations_attributes: {
           "0" => {
             observation: "Y",
