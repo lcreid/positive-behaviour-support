@@ -8,9 +8,14 @@
   <h1 class="text-center">Congratulations!</h1>
   <p>You've earned <%= @goal.description %></p>
   <div class="ui-field-contain">
-    <%= label_tag "number_of_rewards", "Rewards: " %>
-    <%= number_field_tag "number_of_rewards", "1", {type: :number, min: 1, max: @goal.pending, size: 2} %>
-    (Enter 1 to <%= @goal.pending %>)
+    <%= number_field_tag "number_of_rewards",
+                         "1",
+                         label: "Rewards",
+                         type: :number,
+                         min: 1,
+                         max: @goal.pending,
+                         size: 2,
+                         help: "(Enter 1 to #{@goal.pending})" %>
   </div>
   <p>
     <%= yield :cancel_button if content_for? :cancel_button %>
