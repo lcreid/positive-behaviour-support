@@ -21,7 +21,7 @@
     <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
       <header>
         <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
-        <%= content_for?(:navigation) ? yield(:navigation) : render('navigation', formats: ["html"]) %>
+        <%= content_for?(:navigation) ? yield(:navigation) : render('menu', formats: ["html"]) %>
       </header>
       <%= yield :flashes if content_for? :flashes %>
       <%= yield %>
