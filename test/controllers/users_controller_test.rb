@@ -1,10 +1,6 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class UsersControllerTest < ActionController::TestCase
   test "get logged in user" do
@@ -16,12 +12,12 @@ class UsersControllerTest < ActionController::TestCase
 
     patient = user.people[0]
 
-    assert_select 'div#user-name' do
-      assert_select 'h1', "Marie"
+    assert_select "div#user-name" do
+      assert_select "h1", "Marie"
     end
-    assert_select 'div#top_menu', /.*Marie.*/
-    assert_select 'div#patients' do
-      assert_select 'li.person', 2
+    assert_select "nav#test-top-menu" # No longer put user name in top bar, text: /.*Marie.*/
+    assert_select "div#patients" do
+      assert_select "li.person", 2
     end
   end
 
@@ -46,8 +42,8 @@ class UsersControllerTest < ActionController::TestCase
 
     get :edit, params: { id: uid }
 
-    assert_select '#people'
-    assert_select '.user', 2
-    assert_select '.user a', 2
+    assert_select "#people"
+    assert_select ".user", 2
+    assert_select ".user a", 2
   end
 end

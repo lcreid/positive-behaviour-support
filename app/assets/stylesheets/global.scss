@@ -25,27 +25,6 @@ body {
 }
 table { border-collapse: collapse; }
 
-#top_menu {
-  @extend %menu_common;
-  // padding-top: 0;
-}
-
-#bottom_menu {
-  @extend %menu_common;
-  margin-top: 20px;
-}
-
-%menu_common {
-  @extend .text-light;
-  @extend .bg-dark;
-  a {
-    color: inherit;
-    &:hover {
-      opacity:0.6;
-    }
-  }
-}
-
 // These next two I want to pull in jquery-ui theme, but I don't know if I can.
 .flash_notice {
   @extend .bg-warning;
