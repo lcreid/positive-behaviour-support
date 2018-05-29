@@ -1,7 +1,7 @@
 GIT
-  remote: https://github.com/lcreid/rails-bootstrap-forms.git
-  revision: 6d34088de370644abf81b1e700b133e80ca04bae
-  branch: 419-check-radio-errors-d
+  remote: https://github.com/bootstrap-ruby/bootstrap_form.git
+  revision: fbce97a4d16ad08d10181cf3630c78038b7ea339
+  branch: master
   specs:
     bootstrap_form (4.0.0.dev)
       rails (>= 5.0)
