@@ -1,0 +1,18 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <%= favicon_link_tag 'gold-star.ico' %>
+  <title><%= title || "Clean Routines" %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= action_cable_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <%# The only place this is used in views/welcome/index.html.erb. %>
+  <script>
+    <%= yield(:javascript) %>
+  </script>
+</head>

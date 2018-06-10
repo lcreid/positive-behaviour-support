@@ -1,25 +1,20 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-  <% content_for :javascript do %>
-    $(document).ready(function() {
-      $('a.time_zone').each(function() {
-        this.href = this.href + "?time_zone=" + encodeURIComponent($().get_timezone());
-      });
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $('a.time_zone').each(function() {
+      this.href = this.href + "?time_zone=" + encodeURIComponent($().get_timezone());
     });
-  <% end %>
-  <% content_for :navigation do %><% end %>
-  <div class="jumbotron mb-4">
-    <div class="container">
-      <h1 class="display-3">Welcome to Clean Routines</h1>
-      <p>
-        A token-reward system to be used as part of a comprehensive behaviour support program.
-      </p>
-    </div>
+  });
+<% end %>
+<div class="jumbotron jumbotron-fluid mb-4">
+  <div class="container text-center">
+    <h1>Welcome to Clean Routines</h1>
+    <p class="lead">
+      A token-reward system to be used as part of a comprehensive behaviour support program.
+    </p>
   </div>
+</div>
 
+<div class="container">
   <div id='sign_in_with'>
     <%= render partial: "idps", formats: [:html] %>
   </div>

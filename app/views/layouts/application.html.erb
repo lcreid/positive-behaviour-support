@@ -1,26 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <%= favicon_link_tag 'gold-star.ico' %>
-    <title><%= title || "Clean Routines" %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= action_cable_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <%# The only place this is used in views/welcome/index.html.erb. %>
-    <script>
-      <%= yield(:javascript) %>
-    </script>
-    </head>
-    <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
-      <header class="mb-4">
-        <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
+  <%= render "head" %>
+  <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
+    <header class="mb-4">
+      <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
         <%= content_for?(:navigation) ? yield(:navigation) : render('menu', formats: ["html"]) %>
       </header>
       <%= yield :flashes if content_for? :flashes %>

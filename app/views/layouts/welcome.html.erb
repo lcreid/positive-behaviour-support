@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <%= render "head" %>
+  <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
+    <%= yield %>
+    <footer>
+      <%= render('bottom_navigation') %>
+    </footer>
+  </body>
+</html>
