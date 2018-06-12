@@ -1,8 +1,9 @@
-class PeopleController < ApplicationController
-  before_action :user_allowed_to_modify_person, except: [:create, :new]
+# frozen_string_literal: true
 
-  def edit
-  end
+class PeopleController < ApplicationController
+  before_action :user_allowed_to_modify_person, except: %i[create new]
+
+  def edit; end
 
   def new
     @person = Person.new
@@ -33,26 +34,17 @@ class PeopleController < ApplicationController
   end
 
   def destroy
-    @person.destroy # TODO I don't think I wan to destroy any data, so re-think this.
+    @person.destroy # TODO: I don't think I wan to destroy any data, so re-think this.
     redirect_back fallback_location: root_path
   end
 
   def show
-    @completed_routines = @person.completed_routines.
-      reorder(routine_done_at: :desc).
-      page(params[:page]).per(15)
-
-#    respond_to do |format|
-#      format.html # index.html.erb
-#      format.mobile  {
-#        puts "*** #{home_user_path(current_user)}#person_#{@person.id}"
-#        redirect_to home_user_path(current_user)# + "#person_#{@person.id}"
-#      }
-#    end
+    @completed_routines = @person.completed_routines
+                                 .reorder(routine_done_at: :desc)
+                                 .page(params[:page]).per(15)
   end
 
-  def reports
-  end
+  def reports; end
 
   private
 

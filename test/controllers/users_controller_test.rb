@@ -10,11 +10,6 @@ class UsersControllerTest < ActionController::TestCase
     get :home, params: { id: @controller.current_user.id }
     assert :success
 
-    patient = user.people[0]
-
-    assert_select "div#user-name" do
-      assert_select "h1", "Marie"
-    end
     assert_select "nav#test-top-menu" # No longer put user name in top bar, text: /.*Marie.*/
     assert_select "div#patients" do
       assert_select "li.person", 2

@@ -1,6 +1,7 @@
-<ul class="list-group">
-  <%= content_tag_for(:li, @user.subjects) do | patient | %>
-  <%= link_to patient.short_name, person_path(patient), data: { ajax: false } %>
+<ul class="nav flex-column">
+  <%= content_tag_for(:li, @user.subjects, class: "nav-item") do | patient | %>
+  <%= link_to patient.short_name, person_path(patient), class: "nav-link d-inline" %>
+  <%= link_to "Edit", edit_person_path(patient), class: "btn btn-secondary btn-sm float-right d-inline" %>
   <% end %>
-  <li><%= link_to 'New Team', new_person_path, data: { ajax: false } %></li>
+  <li><%= link_to 'New Team', new_person_path, class: "nav-link" %></li>
 </ul>
