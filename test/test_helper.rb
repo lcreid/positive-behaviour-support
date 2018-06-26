@@ -6,9 +6,6 @@ require "rails/test_help"
 require "capybara/email"
 require "capybara/dsl"
 
-# From http://mifsud.me/transactional-tests-ruby-rails/
-DatabaseCleaner.strategy = :truncation
-
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 

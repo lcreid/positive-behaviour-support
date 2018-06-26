@@ -12,15 +12,7 @@ gem 'puma', '~> 3.7'
 
 gem 'bootsnap'
 gem 'bootstrap', '~> 4.1.0'
-
-# Use sqlite3 as the database for Active Record
-# include it in all environments or the build won't work.
-gem 'sqlite3'
-
-# Use mysql2 in production
-group :production, :staging do
-  gem 'mysql2'
-end
+gem "bootstrap_form", ">= 4.0.0.alpha1"
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -43,19 +35,10 @@ gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# FIXME: I don't think I need this.
-gem 'jbuilder'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
-gem "bootstrap_form", ">= 4.0.0.alpha1"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
@@ -79,12 +62,7 @@ gem 'kaminari' # Pagination From http://railscasts.com/episodes/254-pagination-w
 gem 'validates_timeliness', '~> 4.0'
 
 group :test do
-  # gem 'capybara'
-  # gem 'capybara_minitest_spec'
-  # gem 'capybara-webkit'
   gem 'capybara-email'
-  # FIXME: Probably don't really need this anymore.
-  gem 'database_cleaner'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
