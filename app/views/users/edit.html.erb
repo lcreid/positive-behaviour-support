@@ -1,68 +1,52 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-
-<div id="user" class="container">
+<div id="user">
   <h1>Your Profile</h1>
-  <% content_for :content do %>
-      <div class="content">
-        <h2>Identity</h2>
-        <%= bootstrap_form_for(@user) do |f| %>
-        <% if @user.errors.any? %>
-          <div class="error_messages">
-            <h2>Form is invalid</h2>
-            <ul>
-              <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
+  <h2>Identity</h2>
+  <%= bootstrap_form_for(@user) do |f| %>
+  <!-- TODO: Rationalize error handling. Need something for base errors. -->
+  <% if @user.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
-
-        <div class="even_row">
-          <%= f.text_field :id,
-          readonly: "readonly",
-          label: "Unique User ID",
-          help: "This is the information you have to send to someone else so that they can invite you to connect." %>
-        </div>
-
-        <p>
-          Identity Provider:
-          <%= User.inverse_provider(f.object.provider) %>
-          <br/>
-          Name:
-          <%= f.object.name %>
-        </p>
-
-        <h2>Preferences</h2>
-            <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
-
-        <div class="actions">
-          <p>
-            <!-- The following button trick doesn't work for <= IE8 -->
-            <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
-            <%= f.submit "Update Profile" %>
-          </p>
-        </div>
-      <% end %>
-
-      <div id="people">
-        <h2>Linked People</h2>
-        <table>
-          <tbody>
-            <%= content_tag_for(:tr, @user.users) do |other| %>
-            <td><%= other.name %></td>
-            <td><%= link_to("Unlink", link_path(@user.link_to!(other)), method: :delete, class: "btn btn-secondary btn-sm") %></td>
-          <% end %>
-        </tbody>
-      </table>
-      <p>
-        <%= link_to "Invite a User to Link Up", new_invitation_path, class: "btn btn-secondary" %>
-      </p>
+      </ul>
     </div>
+  <% end %>
+
+  <div class="even_row">
+  <%= f.text_field :id, readonly: "readonly", label: "Unique User ID", help: "This is the information you have to send to someone else so that they can invite you to connect." %>
   </div>
-<% end %>
-<%= render partial: "with_messages" %>
+
+  <p>
+    Identity Provider:
+    <%= User.inverse_provider(f.object.provider) %>
+    <br/>
+    Name:
+    <%= f.object.name %>
+  </p>
+
+  <h2>Preferences</h2>
+  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
+
+  <div class="actions">
+    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+    <%= f.submit "Update Profile" %>
+  </div>
+  <% end %>
+
+  <div id="people">
+    <h2>Linked People</h2>
+    <table>
+      <tbody>
+        <%= content_tag_for(:tr, @user.users) do |other| %>
+        <td><%= other.name %></td>
+        <td><%= link_to("Unlink", link_path(@user.link_to!(other)), method: :delete, class: "btn btn-secondary btn-sm") %></td>
+        <% end %>
+      </tbody>
+    </table>
+    <p>
+      <%= link_to "Invite a User to Link Up", new_invitation_path, class: "btn btn-secondary" %>
+    </p>
+  </div>
 </div>
