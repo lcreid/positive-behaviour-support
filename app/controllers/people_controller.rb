@@ -3,6 +3,8 @@
 class PeopleController < ApplicationController
   before_action :user_allowed_to_modify_person, except: %i[create new]
 
+  layout "new_application", only: :show
+
   def edit; end
 
   def new

@@ -1,15 +1,10 @@
-<div id="patients" class="container">
+<div id="patients">
   <h1><%= @person.short_name %></h1>
-<% content_for :content do %>
-  <div class="content">
-    <p class="button_row">
-      <%= link_to 'Reports', reports_person_path(@person), class: "btn btn-light btn-sm" %>
-      <%= link_to 'Edit Team', edit_person_path(@person), class: "btn btn-light btn-sm" %>
-    </p>
-    <%= render partial: "routines/index" %>
-    <%= render partial: "goals/index" %>
-    <%= render partial: "completed_routines/index" %>
-  </div>
-<% end %>
-<%= render partial: "with_messages" %>
+  <p class="button_row">
+    <%= link_to 'Reports', reports_person_path(@person), class: "btn btn-light btn-sm" %>
+    <%= link_to 'Edit Team', edit_person_path(@person), class: "btn btn-light btn-sm" %>
+  </p>
+  <%= render partial: "routines/index" %>
+  <%= render partial: "goals/index" %>
+  <%= render partial: "completed_routines/index" %>
 </div>
