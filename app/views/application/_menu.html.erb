@@ -1,42 +1,39 @@
-<!-- The trick seems to be, if you want colour that goes all the way across
-    the viewport, just use a div, not a container. Doh! -->
-<div class="bg-dark">
-  <%# bg-primary needed also on nav for fixed manu to show up. %>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="test-top-menu">
-    <!-- Don't put this in the container -->
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="container">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <% if current_user %>
-            <% if current_user.subjects.count == 1 %>
-              <%= link_to "Home", person_path(current_user.subjects.first), class: "nav-link" %>
-            <% end %>
-            <%= link_to "Teams", home_user_path(current_user), class: "nav-link" %>
-            <% end %>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <% if current_user %>
-          <li class="nav-item">
-            <%= link_to "Profile", edit_user_path(current_user), class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Sign out", signout_path, class: "nav-link" %>
-          </li>
+<!-- The trick seems to be, if you want colour that goes all the way across the viewport, just use a div, not a container. Doh! -->
+<nav class="navbar navbar-expand navbar-dark bg-dark justify-content-center" id="test-top-menu">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <% if current_user %>
+        <% if current_user.subjects.count == 1 %>
+          <%= link_to person_path(current_user.subjects.first), class: "nav-link" do %>
+            <%= octicon "home", "aria-label": "Home", class: "octicon-light" %>
+            <span class="d-none d-sm-inline-block">Home</span>
           <% end %>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</div>
+        <% end %>
+        <%= link_to home_user_path(current_user), class: "nav-link" do %>
+          <%= octicon "organization", "aria-label": "Teams", class: "octicon-light" %>
+          <span class="d-none d-sm-inline-block">Teams</span>
+        <% end %>
+      <% end %>
+    </li>
+    <% if current_user %>
+      <li class="nav-item">
+        <%= link_to messages_path(current_user), class: "nav-link" do %>
+          <%= octicon "bell", "aria-label": "Notifications", class: "octicon-light" %>
+          <span class="d-none d-sm-inline-block">Notifications</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to edit_user_path(current_user), class: "nav-link" do %>
+          <%= octicon "gear", "aria-label": "Profile", class: "octicon-light" %>
+          <span class="d-none d-sm-inline-block">Profile</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to signout_path, class: "nav-link" do %>
+          <%= octicon "sign-out", "aria-label": "Sign out", class: "octicon-light" %>
+          <span class="d-none d-sm-inline-block">Sign out</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

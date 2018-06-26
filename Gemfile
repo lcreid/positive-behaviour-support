@@ -43,6 +43,8 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
+gem 'octicons_helper'
+
 # From: http://railscasts.com/episodes/241-simple-omniauth-revised
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'

@@ -23,8 +23,8 @@ Pbs::Application.routes.draw do
     resources :goals, shallow: true
   end
   resources :links, only: [:destroy]
-  resources :messages, only: %i[update new create]
-  resources :invitations, only: %i[new create] do
+  resources :messages, only: %i[index create new update]
+  resources :invitations, only: %i[create new] do
     member do
       get "respond" # TODO: This should be put or post, but I can't test it.
     end
