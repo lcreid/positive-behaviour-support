@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <%= render "head" %>
+  <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
+    <header class="mb-4">
+      <%= render 'menu' %>
+    </header>
+    <div class="container">
+      <%= yield :flashes if content_for? :flashes %>
+      <div class="row">
+        <div class="col">
+          <%= yield %>
+        </div>
+        <div class="col-3 border-left">
+          <div id="messages">
+            <h1>Messages</h1>
+            <%= render(partial: "messages/message",
+              collection: current_user.unread_messages.order(created_at: :desc),
+              spacer_template: "messages/message_spacer") || "No unread messages" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <%= render('bottom_navigation') %>
+    </footer>
+  </body>
+</html>
