@@ -8,6 +8,7 @@
       </header>
       <%= yield :flashes if content_for? :flashes %>
       <%= yield %>
+      <div class="mb-5"></div>
       <footer>
         <%= render('bottom_navigation') %>
       </footer>

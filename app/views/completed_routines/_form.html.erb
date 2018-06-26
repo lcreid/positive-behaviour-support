@@ -4,8 +4,8 @@
 <%# The next two are to handle mobile devices. Sure wish I had my head around this better. %>
 <%= yield :heading_buttons if content_for? :heading_buttons %>
 <%= yield :flashes if content_for? :flashes %>
-<%= @completed_routine.inspect %>
-<%= "TIME: #{@completed_routine.routine_done_at&.strftime('%Y-%m-%dT%T')}" %>
+<%#= @completed_routine.inspect %>
+<%#= "TIME: #{@completed_routine.routine_done_at&.strftime('%Y-%m-%dT%T')}" %>
 
 <%= bootstrap_form_for(@completed_routine) do |crf| %>
   <%= crf.hidden_field :name %>
