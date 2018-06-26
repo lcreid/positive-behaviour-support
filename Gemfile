@@ -55,7 +55,7 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
-gem 'bootstrap_form', git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "master"
+gem "bootstrap_form", ">= 4.0.0.alpha1"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
