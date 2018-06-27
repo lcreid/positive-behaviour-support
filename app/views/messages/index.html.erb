@@ -3,4 +3,7 @@
   <%= render(partial: "message",
     collection: current_user.unread_messages.order(created_at: :desc),
     spacer_template: "message_spacer") || "No unread messages" %>
+  <p>
+    <%= link_to "Back", :back, class: "btn btn-secondary" %>
+  </p>
 </div>
