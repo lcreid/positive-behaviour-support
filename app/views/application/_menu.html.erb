@@ -19,6 +19,7 @@
       <li class="nav-item">
         <%= link_to messages_path(current_user), class: "nav-link" do %>
           <%= octicon "bell", "aria-label": "Notifications", class: "octicon-light" %>
+          <%= content_tag(:span, current_user.messages.count, class: "messages-available messages-superscript") unless current_user.messages.count.zero? %>
           <span class="d-none d-sm-inline-block">Notifications</span>
         <% end %>
       </li>
