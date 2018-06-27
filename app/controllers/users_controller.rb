@@ -5,8 +5,6 @@ class UsersController < ApplicationController
   before_action :validate_login
   before_action :set_user
 
-  layout "application_with_messages", only: :home
-
   def show; end
 
   def home

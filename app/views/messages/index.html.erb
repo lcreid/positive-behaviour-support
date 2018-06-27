@@ -1,0 +1,6 @@
+<div id="messages" class="container">
+  <h1>Messages</h1>
+  <%= render(partial: "message",
+    collection: current_user.unread_messages.order(created_at: :desc),
+    spacer_template: "message_spacer") || "No unread messages" %>
+</div>

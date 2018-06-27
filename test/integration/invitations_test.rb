@@ -1,21 +1,18 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
-require 'capybara/rails'
-require 'test_helper'
+# frozen_string_literal: true
+
+require "capybara/rails"
+require "test_helper"
 
 class InvitationsTest < ActionDispatch::IntegrationTest
   test "Can click on a message and make it go away" do
     get_logged_in(:user_invitor)
+    click_on "Notifications"
 
     message = messages(:first_message)
 
     assert_difference "@user.unread_messages.reload.count", -1 do
       within "#message_#{message.id}" do
-        click_link 'read'
+        click_link "read"
       end
     end
     assert has_no_selector?("#message_#{message.id}"), "Message still there"
@@ -23,12 +20,13 @@ class InvitationsTest < ActionDispatch::IntegrationTest
 
   test "accept invitation and connect third-party" do
     get_logged_in(:user_invitee)
+    click_on "Notifications"
 
     message = messages(:invitation)
 
     assert_difference "@user.people.reload.count" do
       within "#message_#{message.id}" do
-        click_link 'Accept'
+        click_link "Accept"
       end
     end
     assert has_no_selector?("#message_#{message.id}"), "Message still there"
@@ -36,12 +34,13 @@ class InvitationsTest < ActionDispatch::IntegrationTest
 
   test "ignore invitation" do
     get_logged_in(:user_invitee)
+    click_on "Notifications"
 
     message = messages(:invitation)
 
     assert_no_difference "@user.people.reload.count" do
       within "#message_#{message.id}" do
-        click_link 'Ignore'
+        click_link "Ignore"
       end
       assert has_no_selector?("#message_#{message.id}"), "Message still there"
     end
@@ -49,12 +48,13 @@ class InvitationsTest < ActionDispatch::IntegrationTest
 
   test "mark invitation as spam" do
     get_logged_in(:user_invitee)
+    click_on "Notifications"
 
     message = messages(:invitation)
 
     assert_no_difference "@user.people.reload.count" do
       within "#message_#{message.id}" do
-        click_link 'spam'
+        click_link "spam"
       end
       assert has_no_selector?("#message_#{message.id}"), "Message still there"
     end
@@ -67,11 +67,11 @@ class InvitationsTest < ActionDispatch::IntegrationTest
     using_session(:invitor) do
       invitor = get_logged_in(users(:user_invitor))
       visit(edit_user_path(invitor))
-      click_link('Invite')
+      click_link("Invite")
       assert_equal new_message_path, current_path
-      fill_in 'ID', with: invitee.id
+      fill_in "ID", with: invitee.id
       assert_difference "invitee.messages.reload.count" do
-        click_button('Send')
+        click_button("Send")
       end
     end
 
@@ -83,7 +83,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
       visit(home_user_path(invitee))
       assert_difference "invitee.people.reload.count" do
         within "#message_#{invitation.id}" do
-          click_link 'Accept'
+          click_link "Accept"
         end
       end
       assert_equal home_user_path(invitee), current_path, "Not on home page"
@@ -99,23 +99,23 @@ class InvitationsTest < ActionDispatch::IntegrationTest
     using_session(:invitor) do
       invitor = get_logged_in(:user_invitor)
       visit(edit_user_path(invitor))
-      click_link 'Invite'
+      click_link "Invite"
       assert_equal new_invitation_path, current_path
-      fill_in 'E-mail', with: test_address
+      fill_in "E-mail", with: test_address
       assert_difference "ActionMailer::Base.deliveries.count" do
-        click_button 'Send Invitation'
+        click_button "Send Invitation"
       end
     end
 
     using_session(:invitee) do
-      puts "ALREADY LOGGED IN" if has_link? ("Sign out")
+      puts "ALREADY LOGGED IN" if has_link? "Sign out"
       invitee = set_up_omniauth_mock(:user_invitee)
       open_email test_address
       # puts current_email.body
-      assert_difference 'invitee.people.count' do
-        current_email.click_on 'Accept'
+      assert_difference "invitee.people.count" do
+        current_email.click_on "Accept"
         assert_equal signin_path, current_path
-        click_link 'Google'
+        click_link "Google"
         assert_equal edit_user_path(invitee), current_path
       end
     end
