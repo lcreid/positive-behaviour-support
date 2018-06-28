@@ -7,8 +7,12 @@
         <%= content_for?(:navigation) ? yield(:navigation) : render('menu', formats: ["html"]) %>
       </header>
       <div class="container">
-        <%= yield :flashes if content_for? :flashes %>
-        <%= yield %>
+        <div class="row justify-content-around">
+          <div class="col-12 col-md-8 col-lg-6">
+            <%= yield :flashes if content_for? :flashes %>
+            <%= yield %>
+          </div>
+        </div>
       </div>
       <div class="mb-5"></div>
       <footer>
