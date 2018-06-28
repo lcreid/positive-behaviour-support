@@ -2,7 +2,7 @@
   <h1><%= @person.short_name %></h1>
   <p class="button_row">
     <%= link_to 'Reports', reports_person_path(@person), class: "btn btn-light btn-sm" %>
-    <%= link_to 'Edit Team', edit_person_path(@person), class: "btn btn-light btn-sm" %>
+    <%= link_to 'Edit Subject', edit_person_path(@person), class: "btn btn-light btn-sm" %>
   </p>
   <%= render partial: "routines/index" %>
   <%= render partial: "goals/index" %>

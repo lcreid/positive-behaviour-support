@@ -29,7 +29,8 @@ class PersonProfileTest < ApplicationSystemTestCase
     get_logged_in(:user_marie)
 
     assert_no_difference "Link.count" do
-      all("a", text: "Edit").first.click
+      all("li.list-group-item a").first.click
+      click_on "Edit Subject"
       fill_in "Short name", with: "New Name"
       click_on("Save")
     end

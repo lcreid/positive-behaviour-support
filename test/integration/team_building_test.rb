@@ -71,13 +71,13 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
     get_logged_in(:user_marie)
     matt = people(:patient_matt)
     click_link(matt.short_name)
-    click_link("Edit Team")
+    click_link("Edit Subject")
     check("Stella")
     assert_difference "matt.people.reload.count" do
       click_button("Save")
     end
     assert_equal person_path(matt), current_path
-    click_link("Edit Team")
+    click_link("Edit Subject")
     uncheck("Stella")
     assert_difference "matt.people.reload.count", -1 do
       click_button("Save")
