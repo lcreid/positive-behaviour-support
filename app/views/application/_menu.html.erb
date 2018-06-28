@@ -17,7 +17,7 @@
     </li>
     <% if current_user %>
       <li class="nav-item">
-        <%= link_to messages_path(current_user), class: "nav-link d-flex" do %>
+        <%= link_to messages_path(current_user), class: "nav-link d-flex position-relative" do %>
           <%= octicon "bell", "aria-label": "Notifications", class: "octicon-light align-self-center" %>
           <%= content_tag(:span,
                           current_user.messages.count,
