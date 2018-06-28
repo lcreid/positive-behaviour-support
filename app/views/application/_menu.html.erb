@@ -4,35 +4,37 @@
     <li class="nav-item">
       <% if current_user %>
         <% if current_user.subjects.count == 1 %>
-          <%= link_to person_path(current_user.subjects.first), class: "nav-link" do %>
-            <%= octicon "home", "aria-label": "Home", class: "octicon-light" %>
-            <span class="d-none d-sm-inline-block">Home</span>
+          <%= link_to person_path(current_user.subjects.first), class: "nav-link d-flex" do %>
+            <%= octicon "home", "aria-label": "Home", class: "octicon-light align-self-center" %>
+            <span class="d-none d-sm-inline-block ml-sm-1">Home</span>
           <% end %>
         <% end %>
-        <%= link_to home_user_path(current_user), class: "nav-link" do %>
-          <%= octicon "organization", "aria-label": "Teams", class: "octicon-light" %>
-          <span class="d-none d-sm-inline-block">Teams</span>
+        <%= link_to home_user_path(current_user), class: "nav-link d-flex" do %>
+          <%= octicon "organization", "aria-label": "Teams", class: "octicon-light align-self-center" %>
+          <span class="d-none d-sm-inline-block ml-sm-1">Teams</span>
         <% end %>
       <% end %>
     </li>
     <% if current_user %>
       <li class="nav-item">
-        <%= link_to messages_path(current_user), class: "nav-link" do %>
-          <%= octicon "bell", "aria-label": "Notifications", class: "octicon-light" %>
-          <%= content_tag(:span, current_user.messages.count, class: "messages-available messages-superscript") unless current_user.messages.count.zero? %>
-          <span class="d-none d-sm-inline-block">Notifications</span>
+        <%= link_to messages_path(current_user), class: "nav-link d-flex" do %>
+          <%= octicon "bell", "aria-label": "Notifications", class: "octicon-light align-self-center" %>
+          <%= content_tag(:span,
+                          current_user.messages.count,
+                          class: "messages-available messages-superscript align-self-center") unless current_user.messages.count.zero? %>
+          <span class="d-none d-sm-inline-block ml-sm-1">Notifications</span>
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to edit_user_path(current_user), class: "nav-link" do %>
-          <%= octicon "gear", "aria-label": "Profile", class: "octicon-light" %>
-          <span class="d-none d-sm-inline-block">Profile</span>
+        <%= link_to edit_user_path(current_user), class: "nav-link d-flex" do %>
+          <%= octicon "gear", "aria-label": "Profile", class: "octicon-light align-self-center" %>
+          <span class="d-none d-sm-inline-block ml-sm-1">Profile</span>
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to signout_path, class: "nav-link" do %>
-          <%= octicon "sign-out", "aria-label": "Sign out", class: "octicon-light" %>
-          <span class="d-none d-sm-inline-block">Sign out</span>
+        <%= link_to signout_path, class: "nav-link d-flex" do %>
+          <%= octicon "sign-out", "aria-label": "Sign out", class: "octicon-light align-self-center" %>
+          <span class="d-none d-sm-inline-block ml-sm-1">Sign out</span>
         <% end %>
       </li>
     <% end %>
