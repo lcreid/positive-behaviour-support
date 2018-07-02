@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <%= render "head" %>
-  <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
+  <body class="pt-5 <%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
     <header class="mb-4">
       <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
         <%= content_for?(:navigation) ? yield(:navigation) : render('menu', formats: ["html"]) %>
