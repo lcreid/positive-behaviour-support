@@ -7,7 +7,7 @@ class PersonProfileTest < ApplicationSystemTestCase
     get_logged_in(:user_marie)
 
     assert_difference "Link.count", 2 do
-      click_link("New Team")
+      click_link("New Subject")
       assert_equal new_person_path, current_path
       click_on("Save")
     end
@@ -18,7 +18,7 @@ class PersonProfileTest < ApplicationSystemTestCase
     get_logged_in(:user_marie)
 
     assert_no_difference "Link.count" do
-      click_link("New Team")
+      click_link("New Subject")
       assert_equal new_person_path, current_path
       click_link("Cancel")
     end

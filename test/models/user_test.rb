@@ -229,7 +229,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "Teams" do
+  test "Subjects" do
     one = users(:existing_google)
     marie = users(:user_marie)
 
