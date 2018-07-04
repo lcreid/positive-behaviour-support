@@ -17,13 +17,19 @@ class CompletedRoutinesTest < ApplicationSystemTestCase
   #   end
   #   assert_content "Routine done at is not a valid datetime"
   # end
-  #
-  # def wrapper
-  #   get_logged_in(:existing_google)
-  #   patient_one = people(:patient_one)
-  #   assert_equal person_path(patient_one), current_path
-  #   click_link("New Observations")
-  #   yield
-  #   click_on "Save"
-  # end
+
+  test "complete a routine" do
+    wrapper do
+      flunk
+    end
+  end
+
+  def wrapper
+    get_logged_in(:existing_google)
+    patient_one = people(:patient_one)
+    assert_equal person_path(patient_one), current_path
+    click_link("New Observations")
+    yield
+    click_on "Save"
+  end
 end

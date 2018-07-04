@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
-require "capybara/rails"
-require "test_helper"
+require "application_system_test_case"
 
-class TeamBuildingTest < ActionDispatch::IntegrationTest
-  self.use_transactional_tests = false
-
+class TeamBuildingTest < ApplicationSystemTestCase
   test "Add a routine" do
     get_logged_in(:user_marie)
 
@@ -37,8 +34,6 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
 
   test "save backwards from routine" do
     skip
-    # This test needs Javascript
-    Capybara.current_driver = :webkit
 
     get_logged_in(:user_marie)
 
@@ -62,9 +57,6 @@ class TeamBuildingTest < ActionDispatch::IntegrationTest
         assert_equal person_path(person), current_path
       end
     end
-
-    # Turn off Javascript
-    Capybara.use_default_driver
   end
 
   test "change team" do
