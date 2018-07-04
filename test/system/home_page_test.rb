@@ -25,7 +25,7 @@ class HomePageTest < ApplicationSystemTestCase
     # There are 8 completed routines at this point. The paginator is set to show 15 at a time.
     assert_difference "CompletedRoutine.all.count" do
       assert has_selector?("div.completed_routines tbody tr", count: 8), "Unexpected completed routines"
-      all("a", text: "New Observations").first.click
+      within(".routines") { click_on "Brush teeth" }
       assert_equal new_completed_routine_path, current_path
       choose("Y")
       click_button("Save")

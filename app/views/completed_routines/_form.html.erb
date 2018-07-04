@@ -1,3 +1,4 @@
+<!-- FIXME: Do the messages/flashes right. -->
 <%= validation_messages @completed_routine %>
 
 
@@ -12,7 +13,7 @@
   <%= crf.hidden_field :routine_id %>
   <%= crf.hidden_field :person_id %>
   <%= crf.fields_for(:completed_expectations, class: :expectations) do |cef| %>
-    <div class="row">
+    <div class="row <%= css_test_class(cef.object.description) -%>">
       <div class="col">
         <%= cef.object.description %>
         <%= cef.hidden_field :description %>

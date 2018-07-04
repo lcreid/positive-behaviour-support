@@ -13,6 +13,7 @@ Pbs::Application.routes.draw do
     end
   end
 
+  # TODO: completed_routines could be shallowly nested under routines.
   resources :completed_routines, except: %i[show destroy]
   resources :awards, only: %i[new create]
   resources :routines

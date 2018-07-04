@@ -3,6 +3,7 @@
 require "application_system_test_case"
 
 class CompletedRoutinesTest < ApplicationSystemTestCase
+  include ApplicationHelper
   # It appears to be impossible to force the wrong data into the control.
   # test "invalid date" do
   #   wrapper do
@@ -20,15 +21,15 @@ class CompletedRoutinesTest < ApplicationSystemTestCase
 
   test "complete a routine" do
     wrapper do
-      flunk
+      within(".#{css_test_class('Get pencils, pens, etc.')}") { choose "Y" }
+      within(".#{css_test_class('Put away pencils, pens, etc.')}") { choose "Y" }
     end
   end
 
   def wrapper
-    get_logged_in(:existing_google)
-    patient_one = people(:patient_one)
-    assert_equal person_path(patient_one), current_path
-    click_link("New Observations")
+    get_logged_in(:user_marie)
+    patient_matt = people(:patient_matt)
+    visit new_completed_routine_path(routine_id: patient_matt.routines.find_by(name: "Do homework").id)
     yield
     click_on "Save"
   end
