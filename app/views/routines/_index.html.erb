@@ -1,22 +1,11 @@
 <div class="routines mt-2">
   <h4>Routines</h4>
-  <table class="grow_child_to_parent">
-    <tbody>
-      <% @person.routines.each do |routine| %>
-      <%= content_tag(:tr, class: css_test_class(routine.name)) do %>
-        <td>
-          <%= link_to(routine.name, new_completed_routine_path(routine_id: routine.id)) %>
-        </td>
-        <td style="text-align: right;">
-          <%= link_to('Edit', edit_routine_path(routine), data: {role: "button", icon: "edit", iconpos: "notext", ajax: false}) %>
-        </td>
+  <ul class="list-group">
+    <% @person.routines.each do |routine| %>
+      <%= content_tag(:li, class: "list-group-item #{css_test_class(routine.name)}") do %>
+        <%= link_to(routine.name, new_completed_routine_path(routine_id: routine.id)) %>
+        <%= octicon "chevron-right", class: "h-100 float-right" %>
       <% end %>
-      <% end %>
-      <tr>
-        <td>
-          <%= link_to 'New Routine', new_routine_path(person: @person.attributes), data: {role: "button", icon: "plus", iconpos: "right", ajax: false} %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <% end %>
+  </ul>
 </div>

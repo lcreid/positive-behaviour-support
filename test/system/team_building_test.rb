@@ -3,22 +3,6 @@
 require "application_system_test_case"
 
 class TeamBuildingTest < ApplicationSystemTestCase
-  test "Add a routine" do
-    get_logged_in(:user_marie)
-
-    visit(person_path(@user.people.last))
-    click_link("New Routine")
-    assert_equal new_routine_path, current_path
-  end
-
-  test "Add a goal" do
-    get_logged_in(:user_marie)
-
-    visit(person_path(@user.people.last))
-    click_link("New Goal")
-    assert_equal new_person_goal_path(@user.people.last), current_path
-  end
-
   test "cancel backwards from routine" do
     get_logged_in(:user_marie)
 
@@ -26,6 +10,7 @@ class TeamBuildingTest < ApplicationSystemTestCase
     visit(home_user_path(@user))
     click_link("Matt-Patient")
     assert_equal person_path(person), current_path
+    click_on "Edit Subject"
     click_link("New Routine")
     assert_equal new_routine_path, current_path
     click_link("Cancel")

@@ -1,13 +1,13 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
 <div id="person_edit" class="container">
   <%= bootstrap_form_for @person do |pf| %>
     <%= pf.hidden_field :creator_id %>
     <%= pf.text_field :name, help: "Typically this should be the name of the person the team is working with." %>
     <%= pf.text_field :short_name, help: "Choose a short name that identifies the person to you and the rest of the team, but won't necessarily identify the person to anyone else. This is so you don't have to worry about people identifying the person by looking over your shoulder." %>
+
+    <% if @person.persisted? %>
+    <%= link_to 'New Routine', new_routine_path(person: @person.attributes) %>
+    <%= link_to 'New Goal', new_person_goal_path(@person.id) %>
+    <% end %>
 
     <h2>Subject</h2>
     <%# The team are users who are connected to the patient. %>

@@ -26,13 +26,6 @@
       <tbody>
         <tr><td>No goals assigned.</td></tr>
     <% end %>
-        <tr>
-          <td>
-            <%= link_to 'New Goal',
-              new_person_goal_path(@person.id),
-              data: {role: "button", icon: "plus", iconpos: "right", ajax: false} %>
-          </td>
-        </tr>
     </tbody>
   </table>
 </div>

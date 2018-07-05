@@ -124,14 +124,14 @@ class PeopleControllerTest < ActionController::TestCase
     get :show, params: { id: subject.id }
     assert_response :success
 
-    assert_select "div#patients h1", "Matt-Patient"
-    assert_select ".routines h2", "Routines"
-    assert_select ".pending_rewards h2", "Goals and Rewards"
+    assert_select "div#patients h4", "Matt-Patient"
+    assert_select ".routines h4", "Routines"
+    assert_select ".pending_rewards h4", "Goals and Rewards"
 
-    assert_select ".routines table tbody tr", 4
+    assert_select ".routines li", 3
 
     assert_select "div.pending_rewards" do |d|
-      assert_select d[0], "table tbody tr", 3 do |reward|
+      assert_select d[0], "table tbody tr", 2 do |reward|
         assert_select reward[0], "td", text: "Nothing"
         assert_select reward[1], "td", text: "Time Off"
 
@@ -152,17 +152,12 @@ class PeopleControllerTest < ActionController::TestCase
     get :show, params: { id: subject.id }
     assert_response :success
 
-    assert_select "div#patients h1", text: "Max-Patient"
+    assert_select "div#patients h4", text: "Max-Patient"
 
-    assert_select ".routines h2", text: "Routines"
-    assert_select ".routines table tbody tr", 3 do |reward|
-      assert_select reward[0], "td", text: /^Go to bed.*/
-      assert_select reward[0], "a", 2 do |links|
-        assert_equal "Edit", links[0].text
-        assert_equal "New Observations", links[1].text
-      end
-      assert_select reward[1], "td", text: /^Turn off Minecraft.*/
-    end
+    assert_select ".routines h4", text: "Routines"
+    assert_select ".routines a", 2
+    assert_select ".routines a", text: /^Go to bed.*/
+    assert_select ".routines a", text: /^Turn off Minecraft.*/
   end
 
   test "show report of completed routines" do
