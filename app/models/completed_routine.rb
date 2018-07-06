@@ -11,6 +11,7 @@ class CompletedRoutine < ActiveRecord::Base
   scope :most_recent, ->(n = 10_000) { reorder(routine_done_at: :desc).limit(n) } # TODO: either remove the limit or get rid of this scope altogether
   scope :clean, -> { where_not_exists(:completed_expectations, "observation = 'N' or observation is null") }
   scope :dirty, -> { where_exists(:completed_expectations, "observation = 'N' or observation is null") }
+  scope :unawarded, -> { clean.where(awarded: false) }
 
   before_create :set_routine_done_at
 

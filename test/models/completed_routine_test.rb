@@ -41,5 +41,6 @@ class CompletedRoutineTest < ActiveSupport::TestCase
     assert_equal 14, CompletedRoutine.count
     assert_equal 7, CompletedRoutine.clean.count
     assert_equal 7, CompletedRoutine.dirty.count
+    assert_equal 7, CompletedRoutine.unawarded.count, "Available awards wrong."
   end
 end

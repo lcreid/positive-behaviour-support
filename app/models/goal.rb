@@ -8,6 +8,8 @@ class Goal < ActiveRecord::Base
   validates :target, numericality: { only_integer: true }, allow_blank: true
   validates :name, presence: true
 
+  scope :pending_rewards, -> { joins(:completed_routines).merge(CompletedRoutine.unawarded).group("goals.id").having("count(completed_routines.*) / target > 0") }
+
   # rdoc
   # Return the number of clean routines for this goal,
   # minus the number of routines already rewarded, and divide that difference
@@ -19,13 +21,8 @@ class Goal < ActiveRecord::Base
   # rdoc
   # Return the clean routines for this goal that haven't been
   # awarded yet.
-  def pending_routines(ignore_cache = false)
-    clean_routines(ignore_cache).where(awarded: false)
-  end
-
-  def clean_routines(_ignore_cache = false)
-    #    completed_routines(ignore_cache).select { |cr| cr.is_clean? }
-    completed_routines.clean
+  def pending_routines(_ignore_cache = false)
+    completed_routines.unawarded
   end
 
   def awarded(ignore_cache = false)
@@ -45,7 +42,7 @@ class Goal < ActiveRecord::Base
       return
     end
 
-    pending_routines.sort_by(&:routine_done_at) .first(n * target).each do |give|
+    pending_routines.sort_by(&:routine_done_at).first(n * target).each do |give|
       give.awarded = true
       give.save!
     end
