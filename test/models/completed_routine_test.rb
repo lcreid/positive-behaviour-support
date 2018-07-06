@@ -38,6 +38,8 @@ class CompletedRoutineTest < ActiveSupport::TestCase
   end
 
   test "clean routines" do
-    assert_equal 100, CompletedRoutine.clean.count
+    assert_equal 14, CompletedRoutine.count
+    assert_equal 7, CompletedRoutine.clean.count
+    assert_equal 7, CompletedRoutine.dirty.count
   end
 end

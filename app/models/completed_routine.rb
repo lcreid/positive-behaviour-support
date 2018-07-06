@@ -3,22 +3,14 @@
 class CompletedRoutine < ActiveRecord::Base
   belongs_to :person
   belongs_to :routine
-  belongs_to :recorded_by, class_name: "User"
-  belongs_to :updated_by, class_name: "User"
-  belongs_to :routine_category
+  belongs_to :recorded_by, class_name: "User", optional: true
+  belongs_to :updated_by, class_name: "User", optional: true
+  belongs_to :routine_category, optional: true
   has_many :completed_expectations, dependent: :destroy
   accepts_nested_attributes_for :completed_expectations, allow_destroy: true
   scope :most_recent, ->(n = 10_000) { reorder(routine_done_at: :desc).limit(n) } # TODO: either remove the limit or get rid of this scope altogether
-  scope :clean, lambda {
-    where(<<~NOT_EXISTS
-      not exists (
-        select 1 from completed_expectations
-        where completed_routines.id = completed_expectations.completed_routine_id
-        and (observation = 'N' or observation is null)
-      )
-          NOT_EXISTS
-    )
-  }
+  scope :clean, -> { where_not_exists(:completed_expectations, "observation = 'N' or observation is null") }
+  scope :dirty, -> { where_exists(:completed_expectations, "observation = 'N' or observation is null") }
 
   before_create :set_routine_done_at
 

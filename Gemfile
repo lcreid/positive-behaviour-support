@@ -63,6 +63,8 @@ gem 'kaminari' # Pagination From http://railscasts.com/episodes/254-pagination-w
 
 gem 'validates_timeliness', '~> 4.0'
 
+gem 'where_exists'
+
 group :test do
   gem 'capybara-email'
   # Adds support for Capybara system testing and selenium driver
