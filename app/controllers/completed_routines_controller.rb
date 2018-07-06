@@ -24,6 +24,7 @@ class CompletedRoutinesController < ApplicationController
     if @completed_routine.save
       redirect_to person_path(@completed_routine.person)
     else
+      logger.error("Failed to create CompletedRoutine #{@completed_routine}: #{@completed_routine.errors.full_messages}")
       render "new"
     end
   end
@@ -39,6 +40,7 @@ class CompletedRoutinesController < ApplicationController
     if @completed_routine.save
       redirect_to person_path(@completed_routine.person)
     else
+      logger.error("Failed to update CompletedRoutine #{@completed_routine}: #{@completed_routine.errors.full_messages}")
       render "new"
     end
   end

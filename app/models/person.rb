@@ -7,7 +7,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
 require 'person_helper'
 
 class Person < ActiveRecord::Base
-  belongs_to :user # if this is an identity of a User
+  belongs_to :user, optional: true # if this is an identity of a User
   belongs_to :creator, class_name: "User"
   has_many :links, foreign_key: :person_a_id
   has_many :reverse_links, foreign_key: :person_b_id, class_name: "Link"

@@ -2,7 +2,7 @@
 
 class CompletedExpectation < ActiveRecord::Base
   belongs_to :completed_routine
-  belongs_to :expectation
+  belongs_to :expectation, optional: true # FIXME: this should not be optional.
   scope :clean, -> { where("observation = 'Y' or observation = 'N/A'") }
   scope :not_clean, -> { where("observation = 'N' or observation is null") }
 
