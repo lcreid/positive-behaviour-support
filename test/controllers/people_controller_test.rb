@@ -126,18 +126,14 @@ class PeopleControllerTest < ActionController::TestCase
 
     assert_select "div#patients h4", "Matt-Patient"
     assert_select ".routines h4", "Routines"
-    assert_select ".pending_rewards h4", "Goals and Rewards"
+    assert_select ".pending_rewards h4", "Rewards"
 
     assert_select ".routines li", 3
 
-    assert_select "div.pending_rewards" do |d|
-      assert_select d[0], "table tbody tr", 2 do |reward|
-        assert_select reward[0], "td", text: "Nothing"
-        assert_select reward[1], "td", text: "Time Off"
-
-        assert_select reward[0], "a", 1
-        assert_select reward[1], "a[href='#{new_award_path(goal_id: subject.goals.find_by(name: 'Time Off').id)}']"
-      end
+    assert_select "div.pending_rewards" do
+      assert_select "li", 1
+      assert_select "a", text: /Time Off/
+      assert_select "a[href='#{new_award_path(goal_id: subject.goals.find_by(name: 'Time Off').id)}']"
     end
   end
 

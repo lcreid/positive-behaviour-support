@@ -6,7 +6,7 @@
 <%= form_tag(:awards) do %>
   <%= hidden_field_tag :goal_id, @goal.id %>
   <h1 class="text-center">Congratulations!</h1>
-  <p>You've earned <%= @goal.description %></p>
+  <p>You've earned <%= @goal.name %>: <%= @goal.description %></p>
   <div class="ui-field-contain">
     <%= number_field_tag "number_of_rewards",
                          "1",

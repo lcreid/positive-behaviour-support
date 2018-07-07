@@ -1,0 +1,17 @@
+<div class="pending_rewards mt-2">
+  <h4>Rewards</h4>
+  <% if @person.goals.pending_rewards.present? %>
+  <ul class="list-group">
+    <% @person.goals.pending_rewards.order(:name).each do |g| %>
+    <li class="list-group-item">
+      <%= link_to(new_award_path(goal_id: g.id)) do %>
+      <%= g.pending %> available rewards for <%= g.name %>.
+      <%= octicon "chevron-right", class: "h-100 float-right" %>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+  <% else %>
+    No rewards pending.
+  <% end %>
+</div>
