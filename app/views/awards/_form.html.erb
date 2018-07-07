@@ -3,7 +3,7 @@
 <%# The next two are to handle mobile devices. Sure wish I had my head around this better. %>
 <%= yield :heading_buttons if content_for? :heading_buttons %>
 <%= yield :flashes if content_for? :flashes %>
-<%= bootstrap_form_with(url: awards_path) do |f| %>
+<%= bootstrap_form_with(url: awards_path, local: true) do |f| %>
   <%= f.hidden_field @goal.id %>
   <h1 class="text-center">Congratulations!</h1>
   <p>You've earned <%= @goal.name %>: <%= @goal.description %></p>
