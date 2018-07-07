@@ -3,22 +3,24 @@
 <%# The next two are to handle mobile devices. Sure wish I had my head around this better. %>
 <%= yield :heading_buttons if content_for? :heading_buttons %>
 <%= yield :flashes if content_for? :flashes %>
-<%= form_tag(:awards) do %>
-  <%= hidden_field_tag :goal_id, @goal.id %>
+<%= bootstrap_form_with(url: awards_path) do |f| %>
+  <%= f.hidden_field @goal.id %>
   <h1 class="text-center">Congratulations!</h1>
   <p>You've earned <%= @goal.name %>: <%= @goal.description %></p>
-  <div class="ui-field-contain">
-    <%= number_field_tag "number_of_rewards",
-                         "1",
-                         label: "Rewards",
-                         type: :number,
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8">
+    <%= f.number_field "number_of_rewards",
+                         append: f.submit("reward!"),
+                         value: 1,
+                         prepend: "Give",
                          min: 1,
                          max: @goal.pending,
                          size: 2,
+                         hide_label: true,
                          help: "(Enter 1 to #{@goal.pending})" %>
+    </div>
   </div>
   <p>
     <%= yield :cancel_button if content_for? :cancel_button %>
-    <%= submit_tag "Give Reward!", class: "btn btn-secondary" %>
   </p>
 <% end %>
