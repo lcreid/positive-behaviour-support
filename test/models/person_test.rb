@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-# Copyright (c) Jade Systems Inc. 2013, 2014
 require "test_helper"
 
 class PersonTest < ActiveSupport::TestCase
@@ -67,20 +63,6 @@ class PersonTest < ActiveSupport::TestCase
 
   test "hash for completed routines detailed overview" do
     Time.use_zone("Samoa") do
-      correct_hash = {
-        DateTime.parse("2014-01-15T00:00:00") => [
-          routines(:routine_index_one) => [completed_routines(:routine_index_one_one)]
-        ],
-        DateTime.parse("2014-01-16T00:00:00") => [
-          routines(:routine_index_two) => [completed_routines(:routine_index_two_one)]
-        ],
-        DateTime.parse("2014-01-17T00:00:00") => [
-          routines(:routine_index_one) => [completed_routines(:routine_index_one_one)]
-        ],
-        DateTime.parse("2014-01-18T00:00:00") => [
-          routines(:routine_index_one) => [completed_routines(:routine_index_one_one)]
-        ]
-      }
       correct_completed_routines_column_layout = [
         Time.zone.parse("2014-01-01T00:00:00"), [
           [Time.zone.parse("2014-01-30T00:00:00"), 1],
