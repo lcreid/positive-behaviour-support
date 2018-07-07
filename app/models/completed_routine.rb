@@ -21,7 +21,7 @@ class CompletedRoutine < ActiveRecord::Base
   # By default, the routine is given a date and time of when the person began
   # recording the observations. This field is editable in the form.
   def set_routine_done_at
-    self.routine_done_at ||= Time.now
+    self.routine_done_at ||= Time.zone.now
   end
 
   # rdoc
