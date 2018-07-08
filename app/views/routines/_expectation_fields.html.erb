@@ -1,7 +1,6 @@
 <%# From http://railscasts.com/episodes/196-nested-model-form-revised %>
 
 <fieldset>
-  <%= f.text_field :description, label: "Expectation" %>
+  <%= f.text_field :description, hide_label: true, append: link_to("Remove", '#', class: "remove_fields") %>
   <%= f.hidden_field :_destroy %>
-  <%= link_to "Remove", '#', class: "remove_fields" %>
 </fieldset>
