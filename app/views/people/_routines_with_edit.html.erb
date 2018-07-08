@@ -1,0 +1,18 @@
+<!-- TODO: make it so I don't have to hide this section on new. -->
+<%= content_tag :div, class: "routines mt-2" do %>
+  <p>Routines</p>
+  <ul class="list-group">
+    <% @person.routines.order(:name).each do |routine| %>
+      <li class="list-group-item">
+        <%= link_to(routine.name, edit_routine_path(routine)) %>
+        <%= octicon "pencil", class: "h-100 float-right" %>
+      </li>
+    <% end %>
+    <li class="list-group-item">
+      <%= link_to(new_routine_path(person: @person.attributes)) do %>
+        New Routine
+        <%= octicon "plus", class: "h-100 float-right" %>
+      <% end %>
+    </li>
+  </ul>
+<% end if @person.persisted? %>

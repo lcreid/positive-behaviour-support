@@ -1,13 +1,12 @@
 <div id="person_edit">
   <%= bootstrap_form_for @person do |pf| %>
   <%= pf.hidden_field :creator_id %>
-  <%= pf.text_field :name, help: "Typically this should be the name of the person the team is working with." %>
-<%= pf.text_field :short_name, help: "Choose a short name that identifies the person to you and the rest of the team, but won't necessarily identify the person to anyone else. This is so you don't have to worry about people identifying the person by looking over your shoulder." %>
+  <%= pf.text_field :name %>
+  <%= pf.text_field :short_name,
+                    help: "A name that identifies the person to anyone working with them, but won't identify the person to anyone else. This is so you don't have to worry about people identifying the person by looking over your shoulder." %>
 
-  <% if @person.persisted? %>
-    <%= link_to 'New Routine', new_routine_path(person: @person.attributes) %>
-    <%= link_to 'New Goal', new_person_goal_path(@person.id) %>
-  <% end %>
+  <%= render "routines_with_edit" %>
+  <%= render "goals_with_edit" %>
 
   <!-- The team are users who are connected to the patient. -->
   <ul class="list-group">
@@ -17,7 +16,8 @@
                                   :name,
                                   checked: @person.users.map(&:id),
                                   help: "Check the boxes beside your connections that you want to allow to work with this person.",
-                                  label: "Team") do |cb| %>
+                                  label: "Team",
+                                  wrapper_class: "mt-2") do |cb| %>
     <li class="list-group-item">
       <%= cb.check_box(hidden: current_user == cb.object) %>
       <%= cb.label(hidden: current_user == cb.object) %>
