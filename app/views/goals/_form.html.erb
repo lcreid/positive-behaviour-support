@@ -9,11 +9,17 @@
     <%= rf.text_area :description, placeholder: "Description", label: "Description" %>
   </p>
   <p>
-    <%= rf.text_field :target, size: 5, type: "number", value: 1, min: 1, placeholder: "Target", label: "Target" %>
+    <%= rf.text_field :target,
+                      size: 5,
+                      type: "number",
+                      value: @goal.target || 1,
+                      min: 1,
+                      placeholder: "Target",
+                      help: "The number of clean routines the subject has to achieve to receive a reward." %>
   </p>
 
   <p>
-    <%= yield :cancel_button if content_for? :cancel_button %>
+    <%= link_to "Cancel", person_path(@goal.person), class: "btn btn-secondary" %>
     <%= rf.submit 'Save' %>
   </p>
 <% end %>

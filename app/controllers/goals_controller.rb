@@ -1,16 +1,11 @@
+# frozen_string_literal: true
+
 class GoalsController < ApplicationController
-  before_action :user_allowed_to_access_goal, except: [:create, :new]
-  before_action :prep_new_goal, only: [:create, :new]
+  before_action :user_allowed_to_access_goal, except: %i[create new]
+  before_action :prep_new_goal, only: %i[create new]
 
   def show
     @goal = Goal.find(params[:id])
-  end
-
-  def edit
-    render "new"
-  end
-
-  def new
   end
 
   def create
