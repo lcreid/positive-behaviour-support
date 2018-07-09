@@ -3,9 +3,11 @@
   <h2>Routines</h2>
   <table class="grow_child_to_parent">
     <tbody>
-      <%= content_tag_for(:tr, patient.routines) do |routine| %>
+      <%=  patient.routines.order(:name).each do |routine| %>
+      <tr>
         <td><%= link_to(routine.name, routine_path(routine)) %></td>
         <td style="text-align: right;"><%= link_to('Add New', new_completed_routine_path(routine_id: routine.id)) %></td>
+      </tr>
       <% end %>
     </tbody>
   </table>
@@ -18,11 +20,13 @@
         <th>Name</th><th style="width:6em;">Target</th><th style="width:6em;">Eligible Rewards</th><th>Action</th>
       </thead>
       <tbody>
-        <%= content_tag_for(:tr, patient.goals) do |g| %>
+        <%=  patient.goals.order(:name).each do |g| %>
+        <tr>
           <td><%= g.name %></td>
           <td style="text-align: right;"><%= g.target.to_s %></td>
           <td style="text-align: right;"><%= g.pending %></td>
           <td style="text-align: right;"><%= link_to("Give award", new_award_path(goal_id: g.id)) if g.pending > 0 %></td>
+        </tr>
         <% end %>
       </tbody>
     </table>
@@ -31,4 +35,3 @@
   <% end %>
 </div>
 <%= render partial: "completed_routines/completed_routines", locals: { patient: patient } %>
-

@@ -14,21 +14,23 @@
           <tbody>
           <% @person.routines.order(name: :asc).each do |r| %>
             <%# Loop on expectations %>
-            <%= content_tag_for(:tr, r.expectations) do |e| %>
+            <%= r.expectations.each do |e| %>
+            <tr>
               <td><%= r.name %></td>
               <td><%= e.description %></td>
               <%# Loop on Dates %>
               <% @detail_columns.each do |day, cols| %>
-                <%# Loop on completed expectations within the date %>
-                <% ces = @person.completed_expectations_for_day_and_expectation(e, day) %>
-                <% ces.each do |ce| %>
-                  <td style="text-align:center"><%= ce.observation %></td>
-                <% end %>
-                <%# if fewer completed expectations than needed, output empty column(s) %>
-                <%= (cols - ces.count).times.reduce("") { |sum, x| sum + "<td></td>"}.html_safe %>
+              <%# Loop on completed expectations within the date %>
+              <% ces = @person.completed_expectations_for_day_and_expectation(e, day) %>
+              <% ces.each do |ce| %>
+              <td style="text-align:center"><%= ce.observation %></td>
               <% end %>
+              <%# if fewer completed expectations than needed, output empty column(s) %>
+              <%= (cols - ces.count).times.reduce("") { |sum, x| sum + "<td></td>"}.html_safe %>
+              <% end %>
+            </tr>
             <% end %>
-          <% end %>
+            <% end %>
           </tbody>
         </table>
       </div>

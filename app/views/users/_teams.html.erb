@@ -1,9 +1,11 @@
 <ul class="list-group">
-  <%= content_tag_for(:li, @user.subjects, class: "list-group-item") do | patient | %>
+  <% @user.subjects.order(:short_name).each do | patient | %>
+  <li class="list-group-item person">
     <%= link_to person_path(patient) do %>
       <%= patient.short_name %>
       <%= octicon "chevron-right", class: "h-100 float-right" %>
     <% end %>
+  </li>
   <% end %>
   <li class="list-group-item">
     <%= link_to new_person_path do %>

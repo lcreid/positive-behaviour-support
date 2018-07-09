@@ -1,6 +1,6 @@
 <!-- TODO: Is this file still necessary? -->
 <div class="pending_rewards mt-2">
-<h4>Goals and Rewards</h4>
+  <h4>Goals and Rewards</h4>
   <table>
     <% if 0 < @person.goals.count %>
       <thead>
@@ -10,23 +10,29 @@
         <th colspan="2">Actions</th>
       </thead>
       <tbody>
-        <%= content_tag_for(:tr, @person.goals.order(:name)) do |g| %>
+        <% @person.goals.order(:name).each do |g| %>
+        <tr>
           <td><%= g.name %></td>
           <td style="text-align: right;"><%= g.target.to_s %></td>
           <td style="text-align: right;"><%= g.pending %></td>
-          <td><%= link_to("Edit Goal",
-            edit_goal_path(g),
-              data: {role: "button", icon: "edit", iconpos: "notext", ajax: false}) %></td>
+          <td>
+            <%= link_to("Edit Goal",
+                        edit_goal_path(g),
+                        data: {role: "button", icon: "edit", iconpos: "notext", ajax: false}) %>
+          </td>
           <td style="text-align: right;">
             <%= link_to("Give Reward",
-              new_award_path(goal_id: g.id),
-              data: {role: "button", icon: "plus", iconpos: "notext", ajax: false}) if g.pending > 0 %>
+                        new_award_path(goal_id: g.id),
+                        data: {role: "button", icon: "plus", iconpos: "notext", ajax: false}) if g.pending > 0 %>
           </td>
-        <% end %>
+        </tr>
+      <% end %>
     <% else %>
       <tbody>
-        <tr><td>No goals assigned.</td></tr>
-    <% end %>
+        <tr>
+          <td>No goals assigned.</td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>

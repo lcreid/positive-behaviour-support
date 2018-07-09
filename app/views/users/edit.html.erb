@@ -39,9 +39,11 @@
     <h2>Linked People</h2>
     <table>
       <tbody>
-        <%= content_tag_for(:tr, @user.users) do |other| %>
-        <td><%= other.name %></td>
-        <td><%= link_to("Unlink", link_path(@user.link_to!(other)), method: :delete, class: "btn btn-secondary btn-sm") %></td>
+        <% @user.users.each do |other| %>
+        <tr class="user">
+          <td><%= other.name %></td>
+          <td><%= link_to("Unlink", link_path(@user.link_to!(other)), method: :delete, class: "btn btn-secondary btn-sm") %></td>
+        </tr>
         <% end %>
       </tbody>
     </table>
