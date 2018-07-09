@@ -221,8 +221,6 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (6.0.3)
-    record_tag_helper (1.0.0)
-      actionview (~> 5.x)
     rubyzip (1.2.1)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
@@ -253,7 +251,6 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    timecop (0.9.1)
     timeliness (0.3.8)
     turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
@@ -302,11 +299,9 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.2.0)
   rails-controller-testing
-  record_tag_helper (~> 1.0)
   sass-rails
   sdoc
   selenium-webdriver
-  timecop
   turbolinks
   uglifier
   validates_timeliness (~> 4.0)

@@ -70,10 +70,6 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-group :test, :development do
-  gem 'timecop'
-end
-
 group :development do
   gem 'capistrano-rails', '~> 1.1'
 end
