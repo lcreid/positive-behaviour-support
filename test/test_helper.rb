@@ -31,14 +31,15 @@ class ActionDispatch::IntegrationTest
     # It looks like if you don't sign out at the end of each test case,
     # the test case will start off still logged in.
     # I guess that's sort of desirable, so you don't have to keep logging in.
+    # I think this may only get triggered on some tests that use two sessions.
+    # There should be a better way to work that.
     if has_link?("Sign out")
-      puts "Signing out"
       click_on("Sign out")
       sleep 2
     end
     assert_equal root_path, current_path
     click_on("Google")
-    sleep 2
+    assert_text @user.subjects.first.name unless @user.subjects.empty?
     # puts "@user.subjects.count: #{@user.subjects.count}"
 
     if @user.subjects.count != 1

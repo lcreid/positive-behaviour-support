@@ -1,6 +1,6 @@
 <%= validation_messages @goal %>
 
-<%= bootstrap_form_for shallow_args(@goal.person, @goal) do |rf| %>
+<%= bootstrap_form_for shallow_args(@goal.person, @goal), local: true do |rf| %>
   <%= rf.hidden_field :person_id %>
   <p>
     <%= rf.text_field :name, placeholder: "Goal Name", label: "Goal Name" %>
@@ -19,7 +19,7 @@
   </p>
 
   <p>
-    <%= link_to "Cancel", person_path(@goal.person), class: "btn btn-secondary" %>
+    <%= link_to("Cancel", where_we_came_from_url(person_path(@goal.person)), class: "btn btn-secondary") %>
     <%= rf.submit 'Save' %>
   </p>
 <% end %>

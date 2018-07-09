@@ -20,14 +20,26 @@ class NavigationTest < ApplicationSystemTestCase
     click_on "Edit Subject"
     click_link("New Routine")
     # TODO: Fix new routine to be nested then use assert_current_path
-    assert_equal current_path, new_routine_path
+    assert_equal new_routine_path, current_path
   end
 
   test "add a goal" do
     get_logged_in(:user_marie)
-    visit(person_path(@user.people.last))
+    subject = @user.people.last
+    visit(person_path(subject))
     click_on "Edit Subject"
+    assert_current_path edit_person_path(subject)
     click_link("New Goal")
-    assert_equal current_path, new_person_goal_path(@user.people.last)
+    assert_selector "h4", text: "New Goal"
+    assert_equal new_person_goal_path(subject), current_path
+    click_on "Cancel"
+    assert_field "Name", with: subject.name
+    assert_current_path edit_person_path(subject)
+    click_link("New Goal")
+    assert_selector "h4", text: "New Goal"
+    fill_in "Goal Name", with: "gol gol gol"
+    click_on "Save"
+    assert_field "Name", with: subject.name
+    assert_current_path edit_person_path(subject)
   end
 end
