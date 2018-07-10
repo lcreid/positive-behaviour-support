@@ -9,7 +9,7 @@
       </li>
     <% end %>
     <li class="list-group-item">
-      <%= link_to(new_routine_path(person: @person.attributes)) do %>
+      <%= link_to(new_person_routine_path(@person)) do %>
         New Routine
         <%= octicon "plus", class: "h-100 float-right" %>
       <% end %>

@@ -16,12 +16,16 @@ Pbs::Application.routes.draw do
   # TODO: completed_routines could be shallowly nested under routines.
   resources :completed_routines, except: %i[show destroy]
   resources :awards, only: %i[new create]
-  resources :routines
   resources :people do
     member do
       get "reports"
     end
     resources :goals, shallow: true, except: %i[show]
+    resources :routines, shallow: true do
+      member do
+        get "reports"
+      end
+    end
   end
   resources :links, only: [:destroy]
   resources :messages, only: %i[index create new update]

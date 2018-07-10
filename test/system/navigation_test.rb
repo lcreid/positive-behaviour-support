@@ -26,7 +26,7 @@ class NavigationTest < ApplicationSystemTestCase
     click_link("New Routine")
     assert_selector "h4", text: "New Routine"
     # TODO: Fix new routine to be nested then use assert_current_path
-    assert_equal new_routine_path, current_path
+    assert_equal new_person_routine_path(subject), current_path
     click_on "Save"
     assert_field "Name", with: subject.name
     assert_current_path edit_person_path(subject)

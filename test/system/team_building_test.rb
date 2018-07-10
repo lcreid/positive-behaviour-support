@@ -12,7 +12,7 @@ class TeamBuildingTest < ApplicationSystemTestCase
     assert_equal person_path(person), current_path
     click_on "Edit Subject"
     click_link("New Routine")
-    assert_equal new_routine_path, current_path
+    assert_equal new_person_routine_path(person), current_path
     click_link("Cancel")
     assert_field "Name", with: person.name
     assert_equal edit_person_path(person), current_path
@@ -25,7 +25,7 @@ class TeamBuildingTest < ApplicationSystemTestCase
     visit(edit_person_path(person))
     assert_current_path edit_person_path(person)
     click_link("New Routine")
-    assert_equal new_routine_path, current_path
+    assert_equal new_person_routine_path(person), current_path
     fill_in "Name", with: "Capy add"
     # Can't add exepctation because I don't have Javascript support in Capybara yet.
     click_link "Add Expectation"

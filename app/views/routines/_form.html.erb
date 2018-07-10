@@ -1,4 +1,4 @@
-<%= bootstrap_form_for @routine, local: true do |rf| %>
+<%= bootstrap_form_for [@person, @routine], local: true do |rf| %>
   <%= rf.hidden_field :person_id %>
   <p>
     <%= rf.text_field :name, label: "Routine Name" %>

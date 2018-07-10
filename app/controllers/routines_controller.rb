@@ -14,13 +14,15 @@ class RoutinesController < ApplicationController
   end
 
   def new
-    params.require(:person)
     @routine = Routine.new
-    @routine.person_id = params[:person][:id]
+    @routine.person_id = params[:person_id]
+    @person = Person.find(params[:person_id])
   end
 
   def create
-    @routine = Routine.new(routine_params)
+    # FIXME: person_ids can be spoofed.
+    @person = Person.find(params[:person_id])
+    @routine = @person.routines.build(routine_params)
     if @routine.save
       redirect_to where_we_came_from_url(person_path(@routine.person))
     else
