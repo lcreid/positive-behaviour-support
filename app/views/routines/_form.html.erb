@@ -1,8 +1,3 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
 <%= bootstrap_form_for @routine, local: true do |rf| %>
   <%= rf.hidden_field :person_id %>
   <p>
@@ -17,7 +12,7 @@ Copyright (c) Jade Systems Inc. 2013, 2014
   <p><%= link_to_add_fields "Add Expectation", rf, :expectations %></p>
 
   <p>
-    <%= yield :cancel_button if content_for? :cancel_button %>
+    <%= link_to "Cancel", where_we_came_from_url(person_path(@routine.person)), class: "btn btn-secondary" %>
     <%= rf.submit 'Save' %>
   </p>
 <% end %>

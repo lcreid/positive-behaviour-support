@@ -14,7 +14,8 @@ class TeamBuildingTest < ApplicationSystemTestCase
     click_link("New Routine")
     assert_equal new_routine_path, current_path
     click_link("Cancel")
-    assert_equal person_path(person), current_path
+    assert_field "Name", with: person.name
+    assert_equal edit_person_path(person), current_path
   end
 
   test "save backwards from routine" do
@@ -36,7 +37,8 @@ class TeamBuildingTest < ApplicationSystemTestCase
     assert_difference "Expectation.all.count" do
       assert_difference "person.routines.reload.count" do
         click_button("Save")
-        assert_equal person_path(person), current_path
+        assert_field "Name", with: person.name
+        assert_equal edit_person_path(person), current_path
       end
     end
   end

@@ -72,6 +72,18 @@ class ApplicationController < ActionController::Base
 
   around_action :user_time_zone, if: :logged_in?
 
+  # Set the URL to which to return after creating or updating something.
+  def set_back
+    session[:here_after_save] = request.headers["HTTP_REFERER"]
+    # puts session[:here_after_save]
+  end
+
+  # Return the URL that started the create or update.
+  def where_we_came_from_url(fallback = root_path)
+    session[:here_after_save] || fallback
+  end
+  helper_method :where_we_came_from_url
+
   private
 
   def user_time_zone(&block)

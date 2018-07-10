@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class RoutinesControllerTest < ActionController::TestCase
   test "try to delete a routine when not logged in" do
@@ -17,7 +19,7 @@ class RoutinesControllerTest < ActionController::TestCase
   test "delete a routine" do
     @controller.log_in(users(:user_marie))
 
-    @request.env['HTTP_REFERER'] = 'http://localhost:3000/user/edit'
+    @request.env["HTTP_REFERER"] = "http://localhost:3000/user/edit"
 
     assert_difference "Routine.all.count", -1 do
       delete :destroy, params: { id: routines(:clean_up_room).id }
@@ -75,8 +77,8 @@ class RoutinesControllerTest < ActionController::TestCase
       assert_no_difference "Expectation.all.count" do
         post :update,
           params: { id: routine.id,
-          routine: { name: "New Name",
-            expectations_attributes: [{description: "new description", id: expectation.id}] } }
+                    routine: { name: "New Name",
+                               expectations_attributes: [{ description: "new description", id: expectation.id }] } }
       end
     end
     assert_redirected_to person_path(person)

@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 class RoutinesController < ApplicationController
-  before_action :user_allowed_to_access_routine, except: [:create, :new]
+  # include GetBack
+  before_action :user_allowed_to_access_routine, except: %i[create new]
+  before_action :set_back, only: %i[edit new]
 
   def show
     @routine = Routine.find(params[:id])
@@ -18,7 +22,7 @@ class RoutinesController < ApplicationController
   def create
     @routine = Routine.new(routine_params)
     if @routine.save
-      redirect_to person_path(@routine.person)
+      redirect_to where_we_came_from_url(person_path(@routine.person))
     else
       render "new"
     end
@@ -27,7 +31,7 @@ class RoutinesController < ApplicationController
   def update
     @routine.update_attributes(routine_params)
     if @routine.save
-      redirect_to person_path(@routine.person)
+      redirect_to where_we_came_from_url(person_path(@routine.person))
     else
       render "new"
     end
@@ -48,6 +52,6 @@ class RoutinesController < ApplicationController
 
   def routine_params
     params.require(:routine).permit(:name, :person_id, :goal_id, :_destroy,
-      expectations_attributes: [:description, :routine_id, :id])
+      expectations_attributes: %i[description routine_id id])
   end
 end
