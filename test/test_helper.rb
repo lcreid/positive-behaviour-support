@@ -35,8 +35,7 @@ class ActionDispatch::IntegrationTest
     # There should be a better way to work that.
     if has_link?("Sign out")
       click_on("Sign out")
-      # FIXME: Change to assert_no_text "Sign Out"
-      sleep 2
+      assert_no_text "Sign Out"
     end
     assert_equal root_path, current_path
     click_on("Google")
