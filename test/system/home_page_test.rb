@@ -11,7 +11,7 @@ class HomePageTest < ApplicationSystemTestCase
     visit(root_path)
     click_on("Sign out") if has_link? "Sign out"
     click_on("Twitter")
-    sleep 2
+    assert_link "Sign out"
     assert_equal home_user_path(user), current_path
   end
 
