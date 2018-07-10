@@ -35,6 +35,7 @@ class ActionDispatch::IntegrationTest
     # There should be a better way to work that.
     if has_link?("Sign out")
       click_on("Sign out")
+      # FIXME: Change to assert_no_text "Sign Out"
       sleep 2
     end
     assert_equal root_path, current_path
@@ -59,5 +60,14 @@ class ActionDispatch::IntegrationTest
                                                                        "name" => user.name)
 
     user
+  end
+
+  # Controller tests should inherit from this class now, and then the old way of logging
+  # in won't work. Change the controller test log-ins to this (although we should also
+  # simply get rid of controller tests).
+  def controller_test_log_in(user)
+    set_up_omniauth_mock(user)
+    get "/auth/google_oauth2"
+    follow_redirect!
   end
 end
