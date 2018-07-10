@@ -21,7 +21,7 @@ Pbs::Application.routes.draw do
     member do
       get "reports"
     end
-    resources :goals, shallow: true
+    resources :goals, shallow: true, except: %i[show]
   end
   resources :links, only: [:destroy]
   resources :messages, only: %i[index create new update]

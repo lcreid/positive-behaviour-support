@@ -1,6 +1,6 @@
 <%= validation_messages @goal %>
 
-<%= bootstrap_form_for shallow_args(@goal.person, @goal), local: true do |rf| %>
+<%= bootstrap_form_for [@person, @goal], local: true do |rf| %>
   <%= rf.hidden_field :person_id %>
   <p>
     <%= rf.text_field :name, placeholder: "Goal Name", label: "Goal Name" %>

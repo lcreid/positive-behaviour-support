@@ -17,11 +17,7 @@ module ApplicationHelper
     link_to(name, "#", class: "add_fields", data: { id: id, fields: fields.delete("\n") })
   end
 
-  # Suggestion from the net to keep forms for nested resources DRY
-  def shallow_args(parent, child)
-    child.try(:new_record?) ? [parent, child] : child
-  end
-
+  # TODO: Rationalize message display.
   def validation_messages(object)
     content_for :flashes do
       render partial: "flashes", locals: { object: object }

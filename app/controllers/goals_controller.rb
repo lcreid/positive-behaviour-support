@@ -21,10 +21,6 @@ class GoalsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
-  def show
-    @goal = Goal.find(params[:id])
-  end
-
   def update
     @goal.update_attributes(goal_params)
     if @goal.save

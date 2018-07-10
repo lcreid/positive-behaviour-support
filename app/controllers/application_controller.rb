@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-# Copyright (c) Jade Systems Inc. 2013, 2014
 class ApplicationController < ActionController::Base
   def title
     "Clean Routines"
@@ -20,14 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   #  private
-
-  #=begin rdoc
-  # Make a link look like a button.
-  #=end
-  #  def link_to_button(text, path, options = {})
-  #    link_to "<button type=\"button\">#{text}</button>".html_safe, path
-  #  end
-  #  helper_method :link_to_button
 
   ###### Session helpers ######
 
