@@ -12,6 +12,7 @@ class TeamBuildingTest < ApplicationSystemTestCase
     assert_equal person_path(person), current_path
     click_on "Edit Subject"
     click_link("New Routine")
+    assert_selector "h4", text: "New Routine"
     assert_equal new_person_routine_path(person), current_path
     click_link("Cancel")
     assert_field "Name", with: person.name
