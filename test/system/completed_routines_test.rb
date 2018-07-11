@@ -26,6 +26,21 @@ class CompletedRoutinesTest < ApplicationSystemTestCase
     end
   end
 
+  test "edit a routine" do
+    get_logged_in(:user_marie)
+    completed_routine = completed_routines(:matt_one_one)
+    visit edit_completed_routine_path(completed_routine)
+    within(".#{css_test_class('Do without reminder')}") do
+      choose "N"
+    end
+    assert_no_difference "CompletedRoutine.count" do
+      assert_no_difference "CompletedExpectation.count" do
+        click_on "Save"
+      end
+    end
+    assert(completed_routine.reload.completed_expectations.all { |ce| ce.observation == "N" })
+  end
+
   def wrapper
     get_logged_in(:user_marie)
     patient_matt = people(:patient_matt)
