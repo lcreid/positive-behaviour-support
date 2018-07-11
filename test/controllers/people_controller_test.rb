@@ -2,41 +2,41 @@
 
 require "test_helper"
 
-class PeopleControllerTest < ActionController::TestCase
+class PeopleControllerTest < ActionDispatch::IntegrationTest
   #  test "try to delete a person without a link" do
-  #    @controller.log_in(users(:existing_linkedin))
+  #    controller_test_log_in(users(:existing_linkedin))
   #    assert_raise ActionController::ParameterMissing do
-  #      delete :destroy, id: nil
+  #      delete people_url, id: nil
   #    end
   #  end
 
   test "try to delete a person when not logged in" do
     assert_raise ActionController::RoutingError do
-      delete :destroy, params: { id: people(:patient_two) }
+      delete people_url(people(:patient_two))
     end
   end
 
   test "try to delete a person when not allowed" do
-    @controller.log_in(users(:existing_linkedin))
+    controller_test_log_in(users(:existing_linkedin))
     assert_raise ActionController::RoutingError do
-      delete :destroy, params: { id: people(:patient_one) }
+      delete people_url(people(:patient_one))
     end
   end
 
   test "delete a person" do
-    @controller.log_in(users(:existing_linkedin))
+    controller_test_log_in(users(:existing_linkedin))
 
     @request.env["HTTP_REFERER"] = "http://localhost:3000/user/edit"
 
     assert_difference "Person.all.count", -1 do
-      delete :destroy, params: { id: people(:patient_two) }
+      delete person_url(people(:patient_two))
     end
     # FIXME: Removed to get rid of deprecation
     # assert_redirected_to :back
   end
 
   #  test "try to edit a person without a link" do
-  #    @controller.log_in(users(:existing_linkedin))
+  #    controller_test_log_in(users(:existing_linkedin))
   #    assert_raise ActionController::ParameterMissing do
   #      get :edit, id: nil
   #    end
@@ -44,56 +44,56 @@ class PeopleControllerTest < ActionController::TestCase
 
   test "try to edit a person when not logged in" do
     assert_raise ActionController::RoutingError do
-      get :edit, params: { id: people(:patient_two) }
+      get edit_person_url(people(:patient_two))
     end
   end
 
   test "try to edit a person when not allowed" do
-    @controller.log_in(users(:existing_linkedin))
+    controller_test_log_in(users(:existing_linkedin))
     assert_raise ActionController::RoutingError do
-      get :edit, params: { id: people(:patient_one) }
+      get edit_person_url(people(:patient_one))
     end
   end
 
   test "edit a person" do
-    @controller.log_in(users(:existing_linkedin))
+    controller_test_log_in(users(:existing_linkedin))
 
-    get :edit, params: { id: people(:patient_two) }
+    get edit_person_url(people(:patient_two))
     assert_response :success
-    assert_not_nil assigns(:person)
+    # assert_not_nil assigns(:person)
   end
 
   #  test "try to update a person without a link" do
-  #    @controller.log_in(users(:existing_linkedin))
+  #    controller_test_log_in(users(:existing_linkedin))
   #    assert_raise ActionController::ParameterMissing do
-  #      post :update, id: nil
+  #      patch person_url(nil)
   #    end
   #  end
 
   test "try to update a person when not logged in" do
     person = people(:patient_two)
     assert_raise ActionController::RoutingError do
-      post :update, params: { id: person.id, person: { name: "New Name" } }
+      patch person_url(person.id), params: { person: { name: "New Name" } }
     end
   end
 
   test "try to update a person when not allowed" do
-    @controller.log_in(users(:existing_linkedin))
+    controller_test_log_in(users(:existing_linkedin))
     person = people(:patient_one)
     assert_raise ActionController::RoutingError do
-      post :update, params: { id: person.id, person: { name: "New Name" } }
+      patch person_url(person.id), params: { person: { name: "New Name" } }
     end
   end
 
   test "update a person" do
-    @controller.log_in(users(:existing_linkedin))
+    controller_test_log_in(users(:existing_linkedin))
 
     @request.env["HTTP_REFERER"] = "http://test.hostperson/edit"
 
     person = people(:patient_two)
     original_person_name = person.short_name
 
-    post :update, params: { id: person.id, person: { name: "New Name" } }
+    patch person_url(person.id), params: { person: { name: "New Name" } }
     assert_redirected_to person_path(person)
 
     db_person = Person.find(person.id)
@@ -101,27 +101,27 @@ class PeopleControllerTest < ActionController::TestCase
   end
 
   test "show page to create a new person" do
-    @controller.log_in(user = users(:existing_linkedin))
+    controller_test_log_in(user = users(:existing_linkedin))
 
-    get :new, params: { creator_id: user.id }
+    get new_person_url, params: { creator_id: user.id }
     assert_response :success
-    assert_not_nil assigns(:person)
+    # assert_not_nil assigns(:person)
   end
 
   test "create a person" do
-    @controller.log_in(user = users(:existing_linkedin))
+    controller_test_log_in(user = users(:existing_linkedin))
 
     assert_difference "user.people.count" do
-      post :create, params: { person: { name: "New Name", creator_id: user.id } }
+      post people_url, params: { person: { name: "New Name", creator_id: user.id } }
       assert_redirected_to person_path(user.people.last)
     end
   end
 
   test "Format of person dashboard (Matt)" do
-    @controller.log_in(users(:user_marie))
+    controller_test_log_in(users(:user_marie))
 
     subject = people(:patient_matt)
-    get :show, params: { id: subject.id }
+    get person_url(subject)
     assert_response :success
 
     assert_select "div#patients h4", "Matt-Patient"
@@ -142,10 +142,10 @@ class PeopleControllerTest < ActionController::TestCase
     # but clearly the below doesn't work.
     # Actually, it's weirder than that. The failure is moving around with no
     # obvious explanation.
-    @controller.log_in(users(:user_marie))
+    controller_test_log_in(users(:user_marie))
 
     subject = people(:patient_max)
-    get :show, params: { id: subject.id }
+    get person_url(subject)
     assert_response :success
 
     assert_select "div#patients h4", text: "Max-Patient"
@@ -157,9 +157,9 @@ class PeopleControllerTest < ActionController::TestCase
   end
 
   test "show report of completed routines" do
-    @controller.log_in(users(:user_sharon))
+    controller_test_log_in(users(:user_sharon))
     patient = people(:person_marty)
-    get :reports, params: { id: patient.id }
+    get reports_person_url(patient)
     assert :success
 
     #    puts @response.body

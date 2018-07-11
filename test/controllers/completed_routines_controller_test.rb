@@ -2,11 +2,11 @@
 
 require "test_helper"
 
-class CompletedRoutinesControllerTest < ActionController::TestCase
+class CompletedRoutinesControllerTest < ActionDispatch::IntegrationTest
   test "get a new completed routine form to complete" do
-    @controller.log_in(users(:user_marie))
+    controller_test_log_in(users(:user_marie))
     assert_no_difference "CompletedRoutine.count" do
-      get :new, params: { routine_id: routines(:turn_off_minecraft) }
+      get new_completed_routine_url, params: { routine_id: routines(:turn_off_minecraft).id }
     end
 
     #    puts @response.body
@@ -17,27 +17,27 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
   end
 
   test "try to get a new completed routine without routine_id" do
-    @controller.log_in(users(:user_marie))
+    controller_test_log_in(users(:user_marie))
     assert_raise ActionController::ParameterMissing do
-      get :new
+      get new_completed_routine_url
     end
   end
 
   test "try to get a new completed routine when not logged in" do
     assert_raise ActionController::RoutingError do
-      get :new
+      get new_completed_routine_url
     end
   end
 
   test "try to get a new completed routine when not allowed access to the routine" do
-    @controller.log_in(users(:user_marie))
+    controller_test_log_in(users(:user_marie))
     assert_raise ActionController::RoutingError do
-      get :new, params: { routine_id: routines(:belongs_to_no_one) }
+      get new_completed_routine_url, params: { routine_id: routines(:belongs_to_no_one).id }
     end
   end
 
   test "complete a routine" do
-    @controller.log_in(user = users(:user_marie))
+    controller_test_log_in(user = users(:user_marie))
     r = routines(:turn_off_minecraft)
     expectations = r.expectations.map(&:description).sort
 
@@ -65,7 +65,7 @@ class CompletedRoutinesControllerTest < ActionController::TestCase
       }
     }
     assert_difference "CompletedRoutine.count" do
-      post :create, params: completed_routine
+      post completed_routines_url, params: completed_routine
     end
     assert cr = CompletedRoutine
                 .where(routine_id: r.id)

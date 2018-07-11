@@ -2,16 +2,16 @@
 
 require "test_helper"
 
-class WelcomeControllerTest < ActionController::TestCase
+class WelcomeControllerTest < ActionDispatch::IntegrationTest
   test "logged in should get user home" do
-    uid = users(:existing_twitter).id
-    session[:user_id] = uid
-    get :index
-    assert_redirected_to(home_user_path(uid))
+    user = users(:existing_twitter)
+    controller_test_log_in(user)
+    get welcome_index_url
+    assert_redirected_to(home_user_path(user))
   end
 
   test "not logged in should get welcome" do
-    get :index
+    get welcome_index_url
     assert_response :success
 
     # TODO: This sort of check should be in a system test.

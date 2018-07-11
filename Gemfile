@@ -73,6 +73,3 @@ end
 group :development do
   gem 'capistrano-rails', '~> 1.1'
 end
-
-# FIXME: These were added in transition to Rails 5.0. Remove later.
-gem 'rails-controller-testing'
