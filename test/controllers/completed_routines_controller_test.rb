@@ -11,7 +11,7 @@ class CompletedRoutinesControllerTest < ActionDispatch::IntegrationTest
 
     #    puts @response.body
 
-    assert_select "h1", "Turn off Minecraft -- Max-Patient"
+    assert_select "h4", "Turn off Minecraft -- Max-Patient"
     # There are three rows, plus a row for each routine
     assert_select ".new_completed_routine .row", 5
   end
