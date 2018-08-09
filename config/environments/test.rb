@@ -38,6 +38,10 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # LCR: Add config to send e-mail to a reasonable place for testing.
+  config.action_mailer.default_url_options = { host: '127.0.0.1',
+                                               port: 3001 }
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

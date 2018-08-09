@@ -39,12 +39,14 @@ class ActionDispatch::IntegrationTest
     end
     assert_equal root_path, current_path
     click_on("Google")
-    assert_text @user.subjects.first.name unless @user.subjects.empty?
+    # assert_text @user.subjects.first.name unless @user.subjects.empty?
     # puts "@user.subjects.count: #{@user.subjects.count}"
 
     if @user.subjects.count != 1
+      assert_text "New Subject"
       assert_equal home_user_path(@user), current_path
     else
+      assert_text @user.subjects.first.name
       assert_equal person_path(@user.subjects.first), current_path
     end
 
@@ -57,7 +59,6 @@ class ActionDispatch::IntegrationTest
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new("provider" => user.provider,
                                                                        "uid" => user.uid.to_s,
                                                                        "name" => user.name)
-
     user
   end
 

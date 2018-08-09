@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require "capybara/rails"
-require "test_helper"
+require "application_system_test_case"
 
-class InvitationsTest < ActionDispatch::IntegrationTest
+class InvitationsTest < ApplicationSystemTestCase
   test "Can click on a message and make it go away" do
     get_logged_in(:user_invitor)
     click_on "Notifications"
@@ -111,11 +110,11 @@ class InvitationsTest < ActionDispatch::IntegrationTest
       puts "ALREADY LOGGED IN" if has_link? "Sign out"
       invitee = set_up_omniauth_mock(:user_invitee)
       open_email test_address
-      # puts current_email.body
       assert_difference "invitee.people.count" do
         current_email.click_on "Accept"
-        assert_equal signin_path, current_path
+        # assert_equal signin_path, current_path
         click_link "Google"
+        assert_text "Your Profile"
         assert_equal edit_user_path(invitee), current_path
       end
     end
