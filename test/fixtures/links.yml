@@ -12,14 +12,6 @@ two_to_one:
   person_a: user_two
   person_b: user_one
 
-two_to_patient_one:
-  person_a: user_two
-  person_b: patient_one
-
-patient_one_to_two:
-  person_a: patient_one
-  person_b: user_two
-
 three_to_two:
   person_a: user_three
   person_b: user_two
@@ -27,14 +19,6 @@ three_to_two:
 two_to_three:
   person_a: user_two
   person_b: user_three
-
-four_to_patient:
-  person_a: user_four
-  person_b: patient_two
-
-patient_to_four:
-  person_a: patient_two
-  person_b: user_four
 
 four_to_user:
   person_a: user_four
@@ -107,4 +91,3 @@ sharon_to_marty:
 marty_to_sharon:
   person_a: person_marty
   person_b: person_sharon
-

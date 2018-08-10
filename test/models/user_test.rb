@@ -37,7 +37,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "user four has two links" do
     user = users(:existing_linkedin)
-    assert_equal 2, user.links.size
+    assert_equal 1, user.links.size
   end
 
   test "user one has one User" do
@@ -56,7 +56,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "user four has one User and one Patient" do
     user = users(:existing_linkedin)
-    assert_equal 2, user.people.size
+    assert_equal 1, user.people.size
     assert_equal 1, user.patients.size
     assert_equal 1, user.users.size
     assert_equal "Patient Two", user.patients.first.short_name
