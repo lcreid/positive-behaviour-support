@@ -34,8 +34,10 @@ class GoalsController < ApplicationController
 
   def user_allowed_to_access_goal
     params.require(:id) # Theoretically, this isn't right, but it seems to work.
-    @goal = Goal.find(params[:id])
+    @goal = current_user.goals.find(params[:id])
     current_user.can_access_goal?(@goal) || not_found
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
   def goal_params
@@ -44,9 +46,11 @@ class GoalsController < ApplicationController
 
   def prep_new_goal
     params.require(:person_id)
-    @person = Person.find(params[:person_id])
+    @person = current_user.subjects.find(params[:person_id])
     @goal = Goal.new
     @goal.person_id = params[:person_id]
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
   # Set the URL to which to return after creating or updating something.
