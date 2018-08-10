@@ -28,11 +28,7 @@ class TeamBuildingTest < ApplicationSystemTestCase
     click_link("New Routine")
     assert_equal new_person_routine_path(person), current_path
     fill_in "Name", with: "Capy add"
-    # Can't add exepctation because I don't have Javascript support in Capybara yet.
     click_link "Add Expectation"
-    # puts body
-    # puts "Console: #{page.driver.console_messages}"
-    # puts "Errors: #{page.driver.error_messages}"
     assert_selector("input[id*='description']")
     find("input[id$=_description]").set("Exp 1")
     assert_difference "Expectation.all.count" do

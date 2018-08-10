@@ -9,7 +9,7 @@
   <%= render "goals_with_edit" %>
 
   <!-- The team are users who are connected to the patient. -->
-  <ul class="list-group">
+  <ul class="list-unstyled">
     <%= pf.collection_check_boxes(:caregiver_ids,
                                   (current_user.users + @person.caregivers).uniq,
                                   :id,
@@ -18,8 +18,9 @@
                                   help: "Check the boxes beside your connections that you want to allow to work with this person.",
                                   label: "Team",
                                   wrapper_class: "mt-2") do |cb| %>
-    <li class="list-group-item">
-      <%= cb.check_box(hidden: current_user == cb.object) %>
+    <li>
+      <%= cb.check_box(disabled: current_user == cb.object) %>
+      <%= hidden_field(:person, :caregiver_ids, multiple: true) if current_user == cb.object %>
     </li>
   <% end %>
 </ul>
