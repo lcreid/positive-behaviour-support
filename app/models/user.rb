@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   # New
   has_many :person_users, dependent: :destroy
   has_many :subjects, through: :person_users, class_name: "Person", inverse_of: :caregivers, source: :person
+  has_many :goals, through: :subjects
 
   validate :validate_time_zone
 
