@@ -5,7 +5,7 @@ class CompletedRoutinesController < ApplicationController
   before_action :user_allowed_to_edit, except: %i[new create index report]
 
   def new
-    template = Routine.find(params[:routine_id])
+    template = current_user.routines.find(params[:routine_id])
     #    puts template.comparable_attributes
     #    puts template.expectations.size
     @completed_routine = CompletedRoutine.new(template.copyable_attributes)
@@ -16,6 +16,8 @@ class CompletedRoutinesController < ApplicationController
     #    template.expectations.each do |e|
     #      @completed_routine.completed_expectations << CompletedExpectation.new(description: e.description)
     #    end
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
   def create
@@ -47,7 +49,7 @@ class CompletedRoutinesController < ApplicationController
 
   def index
     params.require(:person_id)
-    @person = Person.find(params[:person_id])
+    @person = current_user.subjects.find(params[:person_id])
   end
 
   def report; end
@@ -60,8 +62,10 @@ class CompletedRoutinesController < ApplicationController
   end
 
   def user_allowed_to_edit
-    @completed_routine = CompletedRoutine.find(params[:id])
+    @completed_routine = current_user.completed_routines.find(params[:id])
     current_user.can_modify?(@completed_routine) || not_found
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
   def completed_routine_params
