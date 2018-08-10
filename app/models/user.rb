@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "person_helper"
-
 class User < ActiveRecord::Base
   has_many :identities, class_name: "Person", dependent: :destroy
   has_many :links, through: :identities

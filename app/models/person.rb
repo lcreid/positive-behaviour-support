@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "person_helper"
-
 class Person < ActiveRecord::Base
   belongs_to :user, optional: true # if this is an identity of a User
   belongs_to :creator, class_name: "User"
@@ -24,8 +22,6 @@ class Person < ActiveRecord::Base
   has_many :caregivers, through: :person_users, class_name: "User", inverse_of: :subjects, source: :user
 
   validates_presence_of :creator
-
-  include PersonHelper
 
   # rdoc
   # Return the short_name, if any, or the name.

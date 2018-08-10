@@ -35,8 +35,8 @@ class PersonTest < ActiveSupport::TestCase
     person = people(:user_four)
     assert_equal 2, person.people.size
     assert_equal 1, person.users.size
-    assert_equal 1, person.patients.size
-    assert_equal "Patient Two", person.patients.first.short_name
+    assert_equal 1, person.user.patients.size
+    assert_equal "Patient Two", person.user.patients.first.short_name
     assert_equal "Three Yahoo", person.users.first.name
   end
 
