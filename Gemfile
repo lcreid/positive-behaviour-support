@@ -12,7 +12,7 @@ gem 'puma', '~> 3.7'
 
 gem 'bootsnap'
 gem 'bootstrap', '~> 4.1.0'
-gem "bootstrap_form", ">= 4.0.0.alpha1"
+gem "bootstrap_form", git: "https://github.com/lcreid/rails-bootstrap-forms.git", branch: "477-collection-block"
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
