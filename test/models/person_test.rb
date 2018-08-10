@@ -9,12 +9,6 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal "User Two", person.links.first.person_b.short_name
   end
 
-  test "person two has one Patient link" do
-    person = people(:user_five)
-    assert_equal 1, person.links.size
-    assert_equal "Patient for User Five", person.links.first.person_b.short_name
-  end
-
   test "person four has two links" do
     person = people(:user_four)
     assert_equal 2, person.links.size

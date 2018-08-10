@@ -28,10 +28,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "User Two", user.links.first.person_b.short_name
   end
 
-  test "user five has one Patient link" do
-    user = users(:user_five)
-    assert_equal 1, user.links.size
-    assert_equal "Patient for User Five", user.links.first.person_b.short_name
+  test "person two has one Patient link" do
+    person = users(:user_five)
+    assert_equal 1, person.person_users.size
+    assert_equal "Patient for User Five", person.subjects.first.short_name
+    assert_equal "Patient for User Five", person.person_users.first.person.short_name
   end
 
   test "user four has two links" do
@@ -89,7 +90,7 @@ class UserTest < ActiveSupport::TestCase
   test "create training data" do
     user = User.create!(name: "Training Data User")
     Training.create(user)
-    assert_equal 3, user.people.size
+    assert_equal 1, user.people.size
     assert_equal 2, user.patients.size
     pt1 = user.patients.find_by(name: "Training Patient 1")
     assert_equal 3, pt1.routines.size
@@ -97,13 +98,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 13, pt1.completed_routines.size
     assert_equal 8, pt1.goals[0].completed_routines.clean.size
     assert_equal 0, pt1.goals[1].completed_routines.clean.size
-    assert_equal user, pt1.people.first.user
+    assert_equal user, pt1.caregivers.first
     assert pt1.completed_expectations.all?(&:expectation), "Missing expectations from completed expectations"
     pt2 = user.patients.find_by(name: "Training Patient 2")
     assert_equal 2, pt2.routines.size
     assert_equal 0, pt2.goals.size
     assert_equal 0, pt2.completed_routines.size
-    assert_equal user, pt2.people.first.user
+    assert_equal user, pt2.caregivers.first
     assert pt1.completed_expectations.all?(&:expectation), "Missing expectations from completed expectations"
   end
 

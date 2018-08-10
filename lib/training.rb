@@ -1,58 +1,47 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
+# frozen_string_literal: true
+
 class Hash
   def change_keys(mappings)
     Hash[
-      map { |k, v|
+      map do |k, v|
         [
-        mappings[k] || k,
-        case
-          when v.kind_of?(Hash)
+          mappings[k] || k,
+          if v.is_a?(Hash)
             v.change_keys(mappings)
-          when v.kind_of?(Array)
-            v.collect { |x| x.kind_of?(Hash) ? x.change_keys(mappings): x }
+          elsif v.is_a?(Array)
+            v.collect { |x| x.is_a?(Hash) ? x.change_keys(mappings) : x }
           else
             v
-        end
+          end
         ]
-      }
+      end
     ]
   end
 
   def change_values(mappings)
     Hash[
-      map { |k, v|
+      map do |k, v|
         [
-        k,
-        case
-          when v.kind_of?(Hash)
+          k,
+          if v.is_a?(Hash)
             v.change_values(mappings)
-          when v.kind_of?(Array)
-            v.collect { |x| x.kind_of?(Hash) ? x.change_values(mappings): mappings[k] || v}
+          elsif v.is_a?(Array)
+            v.collect { |x| x.is_a?(Hash) ? x.change_values(mappings) : mappings[k] || v }
           else
             mappings[k] || v
-        end
+          end
         ]
-      }
+      end
     ]
   end
 end
 
 module Training
-  def Training.create(user)
-=begin
-When a new user comes along, we create some training/demo data for them.
-=end
-    i = user.primary_identity
-=begin
-They get two patients. The first patient has three routines and two goals.
-The first goal, rather unrealistically, requires only three clean routines
-to be eligible for a reward.
-=end
+  def self.create(user)
+    # When a new user comes along, we create some training/demo data for them.
+    # They get two patients. The first patient has three routines and two goals.
+    # The first goal, rather unrealistically, requires only three clean routines
+    # to be eligible for a reward.
     pt1 = {
       name: "Training Patient 1",
       creator_id: user.id,
@@ -84,14 +73,12 @@ to be eligible for a reward.
       ]
     }
 
-    pt = Person.create!(pt1)
+    pt = user.subjects.create!(pt1)
     # Patch the first two routines to have the goals associated with them
     pt.routines[0..1].each { |r| pt.goals[0].routines << r }
-=begin
-The first patient also has ten completed routines, eight of which are clean,
-meaning the patient is eligible for two rewards, with two left over.
-=end
-    [6,4,3].each_with_index do |reps,i|
+    # The first patient also has ten completed routines, eight of which are clean,
+    # meaning the patient is eligible for two rewards, with two left over.
+    [6, 4, 3].each_with_index do |reps, i|
       make_completed_routines(pt.routines[i], reps, -1.day)
     end
     # Make two of the routines not clean.
@@ -99,14 +86,11 @@ meaning the patient is eligible for two rewards, with two left over.
     pt.routines[1].completed_routines[1].completed_expectations[0].observation = "N"
     pt.routines[0].completed_routines[2].completed_expectations[0].save!
     pt.routines[1].completed_routines[1].completed_expectations[0].save!
-#    clean_up_room = pt1[:routines_attributes][0].merge(routine_id: pt.routines[0].id)
-#    pt.routines[0] << CompletedRoutine.create!(pt1[:routines_attributes])
-#    brush_teeth = pt1[:routines_attributes][1].merge(routine_id: pt.routines[1].id)
+    #    clean_up_room = pt1[:routines_attributes][0].merge(routine_id: pt.routines[0].id)
+    #    pt.routines[0] << CompletedRoutine.create!(pt1[:routines_attributes])
+    #    brush_teeth = pt1[:routines_attributes][1].merge(routine_id: pt.routines[1].id)
 
-    i.linkup(pt)
-=begin
-The second patient has two routines and no goals.
-=end
+    # The second patient has two routines and no goals.
     pt2 = {
       name: "Training Patient 2",
       creator_id: user.id,
@@ -130,53 +114,51 @@ The second patient has two routines and no goals.
       ]
     }
 
-    pt = Person.create!(pt2)
-    i.linkup(pt)
+    pt = user.subjects.create!(pt2)
 
-    i.linkup(User.create!(name: "Training User 1", uid: 1, provider: "Training", created_at: user.created_at))
+    user.primary_identity.linkup(User.create!(name: "Training User 1", uid: 1, provider: "Training", created_at: user.created_at))
   end
 
-  def Training.make_completed_routines(routine, reps, date_increment, start_time = Time.current)
+  def self.make_completed_routines(routine, reps, date_increment, start_time = Time.current)
     completed_routines = []
     reps.times do |i|
       completed_routines << CompletedRoutine.create!(routine.copyable_attributes) do |cr|
-#        puts "routine.copyable_attributes: #{routine.copyable_attributes.inspect}"
+        #        puts "routine.copyable_attributes: #{routine.copyable_attributes.inspect}"
         cr.created_at = cr.updated_at = start_time + i * date_increment
         cr.completed_expectations.each do |ce|
           ce.save!
-#          puts "ce: #{ce.inspect}"
-          ce.comment = "Comment #{i.to_s}"
+          #          puts "ce: #{ce.inspect}"
+          ce.comment = "Comment #{i}"
           ce.observation = "Y"
         end
       end
-#      hash = routine.attributes.change_keys("id" => "routine_id" ).
-#        merge("created_at" => start_time + i * date_increment,
-#          "updated_at" => start_time + i * date_increment
-#        )
-#      hash.delete_if { |k,v| k == "goal_id" }
-#      hash = hash.merge(completed_expectations_attributes:
-#        routine.expectations.collect do |e|
-#          e.attributes.
-#            merge("observation" => "Y",
-#              "comment" => "Comment #{i.to_s}",
-#              "created_at" => start_time + i * date_increment,
-#              "updated_at" => start_time + i * date_increment
-#              ).
-#            delete_if { |k,v| k == "routine_id" || k == "id" }
-#        end
-#      )
-#      completed_routines << hash
+      #      hash = routine.attributes.change_keys("id" => "routine_id" ).
+      #        merge("created_at" => start_time + i * date_increment,
+      #          "updated_at" => start_time + i * date_increment
+      #        )
+      #      hash.delete_if { |k,v| k == "goal_id" }
+      #      hash = hash.merge(completed_expectations_attributes:
+      #        routine.expectations.collect do |e|
+      #          e.attributes.
+      #            merge("observation" => "Y",
+      #              "comment" => "Comment #{i.to_s}",
+      #              "created_at" => start_time + i * date_increment,
+      #              "updated_at" => start_time + i * date_increment
+      #              ).
+      #            delete_if { |k,v| k == "routine_id" || k == "id" }
+      #        end
+      #      )
+      #      completed_routines << hash
     end
     completed_routines
   end
 
-=begin rdoc
-Delete the training data for a user, defined as patients and user
-created within 15s of the user being created.
-=end
-  def Training.delete(user)
+  # rdoc
+  # Delete the training data for a user, defined as patients and user
+  # created within 15s of the user being created.
+  def self.delete(user)
     # Assumes delete dependent is on for the relevant associations.
-    range = user.created_at - 1.second .. user.created_at + 15.seconds
+    range = user.created_at - 1.second..user.created_at + 15.seconds
 
     user.users.each do |u|
       if range.cover? u.created_at
@@ -185,9 +167,9 @@ created within 15s of the user being created.
       end
     end
 
-    user.people.reload.each do |p|
+    user.subjects.reload.each do |p|
       if range.cover? p.created_at
-        user.unlink(p)
+        # user.unlink(p)
         p.destroy
       end
     end

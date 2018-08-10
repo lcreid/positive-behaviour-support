@@ -10,11 +10,13 @@ class User < ActiveRecord::Base
   has_many :messages, foreign_key: :to_id # These are received messages
   has_many :sent_messages, foreign_key: :from_id, class_name: "Message"
 
+  # New
+  has_many :person_users, dependent: :destroy
+  has_many :subjects, through: :person_users, class_name: "Person", inverse_of: :caregivers, source: :person
+
   validate :validate_time_zone
 
   after_create :add_primary_identity
-
-  include PersonHelper
 
   # rdoc
   # Find the user based on the information provided by Omniauth,
@@ -53,6 +55,10 @@ class User < ActiveRecord::Base
         raise "Shouldn't happen."
       end
     end
+  end
+
+  def patients
+    subjects
   end
 
   private

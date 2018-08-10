@@ -18,7 +18,7 @@ module PersonHelper
 Return the list of people attached to the person or user, who have
 at least one routine attached.
 =end
-  def subjects
-    people.joins(:routines).distinct
-  end
+  # def subjects
+  #   people.joins(:routines).distinct
+  # end
 end

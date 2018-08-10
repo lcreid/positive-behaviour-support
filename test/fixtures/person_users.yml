@@ -1,0 +1,33 @@
+two_to_patient_one:
+  user: existing_google
+  person: patient_one
+
+# TODO: Put this back in, maybe. A test case fails because can't delete patient_two
+# while this record exists.
+four_to_patient:
+  user: existing_linkedin
+  person: patient_two
+
+four_to_user:
+  user: user_four
+  person: user_three
+
+user_marie_to_max:
+  user: user_marie
+  person: patient_max
+
+user_marie_to_matt:
+  user: user_marie
+  person: patient_matt
+
+user_five_to_patient:
+  user: user_five
+  person: patient_for_user_five
+
+P30_to_p10_secondary:
+  user: p10_secondary
+  person: p30
+
+sharon_to_marty:
+  user: user_sharon
+  person: person_marty

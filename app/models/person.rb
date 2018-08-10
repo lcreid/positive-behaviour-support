@@ -19,6 +19,10 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :routines
   accepts_nested_attributes_for :goals
 
+  # New
+  has_many :person_users, dependent: :destroy
+  has_many :caregivers, through: :person_users, class_name: "User", inverse_of: :subjects, source: :user
+
   validates_presence_of :creator
 
   include PersonHelper
