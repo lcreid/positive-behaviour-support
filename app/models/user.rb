@@ -100,8 +100,7 @@ class User < ActiveRecord::Base
   # * Possibly other conditions that are to be defined.
   def can_access?(routine)
     routine = Routine.find(routine) unless routine.is_a?(Routine)
-    return false unless routine
-    people.any? { |p| p.id == routine.person_id }
+    routine.person && team_member_for?(routine.person)
   end
 
   # rdoc
@@ -119,7 +118,7 @@ class User < ActiveRecord::Base
   def can_modify?(o)
     case o
     when CompletedRoutine, Goal, Routine
-      team_member_for?(o.person)
+      o.person && team_member_for?(o.person)
     else
       false
     end
@@ -130,7 +129,8 @@ class User < ActiveRecord::Base
   def team_member_for?(person)
     person = Person.find(person) unless person.is_a? Person
     return false unless person
-    people.any? { |p| p == person }
+    person.caregivers.include?(self)
+    # people.any? { |p| p == person }
   end
 
   # rdoc

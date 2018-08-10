@@ -11,10 +11,10 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new(person_params)
-    current_user.linkup(@person)
+    @person = current_user.subjects.build(person_params)
+    @person.caregivers << current_user
 
-    @person.update_team(params[:person][:users])
+    # @person.update_team(params[:person][:users])
     if @person.save
       redirect_to person_path(@person)
     else
@@ -55,6 +55,7 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:name, :short_name, :real_name, :creator_id)
+    # TODO: Get rid of creator_id. Should always be current_user, and can be spoofed if it's a param.
+    params.require(:person).permit(:name, :short_name, :real_name, :creator_id, caregiver_ids: [])
   end
 end

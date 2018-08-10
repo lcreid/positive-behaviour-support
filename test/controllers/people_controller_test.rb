@@ -111,9 +111,9 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
   test "create a person" do
     controller_test_log_in(user = users(:existing_linkedin))
 
-    assert_difference "user.people.count" do
+    assert_difference "user.subjects.count" do
       post people_url, params: { person: { name: "New Name", creator_id: user.id } }
-      assert_redirected_to person_path(user.people.last)
+      assert_redirected_to person_path(user.reload.subjects.last)
     end
   end
 

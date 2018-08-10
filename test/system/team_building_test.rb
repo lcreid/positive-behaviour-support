@@ -50,13 +50,13 @@ class TeamBuildingTest < ApplicationSystemTestCase
     click_link(matt.short_name)
     click_link("Edit Subject")
     check("Stella")
-    assert_difference "matt.people.count" do
+    assert_difference "matt.caregivers.count" do
       click_button("Save")
     end
     assert_equal person_path(matt), current_path
     click_link("Edit Subject")
     uncheck("Stella")
-    assert_difference "matt.people.count", -1 do
+    assert_difference "matt.caregivers.count", -1 do
       click_button("Save")
     end
   end
