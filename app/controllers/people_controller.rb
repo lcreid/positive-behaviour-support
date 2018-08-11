@@ -3,7 +3,8 @@
 class PeopleController < ApplicationController
   before_action :user_allowed_to_modify_person, except: %i[create new]
 
-  def edit; end
+  def edit
+  end
 
   def new
     @person = Person.new
@@ -25,7 +26,7 @@ class PeopleController < ApplicationController
   def update
     @person.update_attributes(person_params)
 
-    @person.update_team(params[:person][:users])
+    # @person.update_team(params[:person][:users])
     if @person.save
       redirect_to person_path(@person)
     else
@@ -34,7 +35,7 @@ class PeopleController < ApplicationController
   end
 
   def destroy
-    @person.destroy # TODO: I don't think I wan to destroy any data, so re-think this.
+    @person.destroy # TODO: I don't think I want to destroy any data, so re-think this.
     redirect_back fallback_location: root_path
   end
 
@@ -49,9 +50,11 @@ class PeopleController < ApplicationController
   private
 
   def user_allowed_to_modify_person
-    params.require(:id) # Theoretically, this isn't right, but it seems to work.
-    @person = Person.find(params[:id])
+    params.require(:id)
+    @person = current_user.subjects.find(params[:id])
     current_user.can_modify_person?(@person) || not_found
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
   def person_params

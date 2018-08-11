@@ -20,7 +20,7 @@
                                   wrapper_class: "mt-2") do |cb| %>
     <li>
       <%= cb.check_box(disabled: current_user == cb.object) %>
-      <%= hidden_field(:person, :caregiver_ids, multiple: true) if current_user == cb.object %>
+      <%= hidden_field_tag("person[caregiver_ids][]", cb.object.id, id: "person_caregiver_ids_#{cb.object.to_param}") if current_user == cb.object %>
     </li>
   <% end %>
 </ul>
