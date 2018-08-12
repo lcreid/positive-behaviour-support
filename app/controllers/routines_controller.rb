@@ -6,7 +6,7 @@ class RoutinesController < ApplicationController
   before_action :set_back, only: %i[edit new]
 
   def show
-    @routine = Routine.find(params[:id])
+    @routine = current_user.routines.find(params[:id])
   end
 
   def edit
@@ -48,8 +48,10 @@ class RoutinesController < ApplicationController
 
   def user_allowed_to_access_routine
     params.require(:id) # Theoretically, this isn't right, but it seems to work.
-    @routine = Routine.find(params[:id])
+    @routine = current_user.routines.find(params[:id])
     current_user.can_access?(@routine) || not_found
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
   def routine_params
