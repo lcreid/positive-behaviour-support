@@ -1,40 +1,22 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-<%# FROM http://railsapps.github.io/rails-default-application-layout.html %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= favicon_link_tag 'gold-star.ico' %>
-    <title><%= title || "Clean Routines" %></title>
-    <%= stylesheet_link_tag("application", media: "all", "data-turbolinks-track" => true) unless mobile_device? %>
-    <%= javascript_include_tag("application", "data-turbolinks-track" => true) unless mobile_device? %>
-    <%= stylesheet_link_tag 'mobile' if mobile_device? %>
-    <%= javascript_include_tag 'mobile' if mobile_device? %>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <link href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
-    <script>
-      <%= yield(:javascript) %>
-    </script>
-    <%= csrf_meta_tags %>
-  </head>
-  <body class="<%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
-    <header>
-      <%= content_for?(:navigation) ? yield(:navigation) : render('layouts/navigation', formats: ["html"]) %>
-    </header>
-    <main role="main">
-      <div class="centre_in_browser">
-        <%= yield :flashes if content_for? :flashes %>
-        <%= yield %>
+  <%= render "head" %>
+  <body class="pt-5 <%= controller_name %> <%= action_name %> <%= controller_name %>_<%= action_name %>">
+    <header class="mb-4">
+      <%# The only place :navigation is set is in views/welcome/index.html.erb. %>
+        <%= content_for?(:navigation) ? yield(:navigation) : render('menu', formats: ["html"]) %>
+      </header>
+      <div class="container">
+        <div class="row justify-content-around">
+          <div class="col-12 col-md-8 col-lg-6">
+            <%= yield :flashes if content_for? :flashes %>
+            <%= yield %>
+          </div>
+        </div>
       </div>
-      <div class="clear">
-      </div>
-    </main>
-    <footer>
-      <%= content_for?(:bottom_navigation) ? yield(:bottom_navigation) : render('layouts/bottom_navigation') %>
-    </footer>
-  </body>
-</html>
+      <div class="mb-5"></div>
+      <footer>
+        <%= render('bottom_navigation') %>
+      </footer>
+    </body>
+  </html>

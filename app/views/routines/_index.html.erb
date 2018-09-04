@@ -1,33 +1,11 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-<div class="routines">
-  <h2>Routines</h2>
-  <table class="grow_child_to_parent">
-    <tbody>
-      <%= content_tag_for(:tr, @person.routines) do |routine| %>
-        <td><%= routine.name %></td>
-        <td style="text-align: right;">
-          <%= link_to('Edit', 
-            edit_routine_path(routine), 
-            data: {role: "button", icon: "edit", iconpos: "notext", ajax: false}) %>
-        </td>
-        <td style="text-align: right;">
-          <%= link_to('New Observations', 
-            new_completed_routine_path(routine_id: routine.id), 
-            data: {role: "button", icon: "plus", iconpos: "notext", ajax: false}) %>
-        </td>
+<div class="routines mt-2">
+  <h4>Routines</h4>
+  <ul class="list-group">
+    <% @person.routines.each do |routine| %>
+      <%= content_tag(:li, class: "list-group-item #{css_test_class(routine.name)}") do %>
+        <%= link_to(routine.name, new_completed_routine_path(routine_id: routine.id)) %>
+        <%= octicon "chevron-right", class: "h-100 float-right" %>
       <% end %>
-      <tr>
-        <td>
-          <%= link_to 'New Routine', 
-            new_routine_path(person: @person.attributes),
-            data: {role: "button", icon: "plus", iconpos: "right", ajax: false} %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <% end %>
+  </ul>
 </div>
-

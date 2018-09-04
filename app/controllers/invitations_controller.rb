@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvitationsController < ApplicationController
   skip_before_action :require_login, only: :respond
 
@@ -11,29 +13,31 @@ class InvitationsController < ApplicationController
       i.disposition = "pending"
     end
     if @invitation.save
-      LinkMailer.invitation_email(@invitation).deliver
+      # TODO: Make it deliver later in the background. Probably.
+      LinkMailer.invitation_email(@invitation).deliver_now
       redirect_to edit_user_path(current_user)
     else
-      render 'new'
+      render "new"
     end
   end
 
   def respond
-    if ! logged_in?
+    unless logged_in?
       session[:original_url] = request.original_url
-      redirect_to signin_path and return
+      redirect_to(signin_path) && return
     end
 
-    unless params[:id] && 
-      (@invitation = Invitation.find(params[:id])) &&
-      params[:token] &&
-      @invitation.token == params[:token] &&
-      params[:disposition]
+    # TODO: Check that the invitation is for the current user.
+    unless params[:id] &&
+           (@invitation = Invitation.find(params[:id])) &&
+           params[:token] &&
+           @invitation.token == params[:token] &&
+           params[:disposition]
       not_found
     end
 
     if (@invitation.disposition = params[:disposition]) == "accept"
-      current_user.linkup(@invitation.invitor) 
+      current_user.linkup(@invitation.invitor)
       current_user.save
     end
 

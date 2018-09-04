@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top" id="test-top-menu">
+  <div class="container">
+    <ul class="navbar-nav justify-content-between w-100">
+      <li class="nav-item">
+        <% if current_user.subjects.count == 1 %>
+          <%= link_to person_path(current_user.subjects.first), class: "nav-link" do %>
+            <%= octicon "home", "aria-label": "Home", class: "octicon-light align-self-center" %>
+            <span class="d-none d-sm-inline-block ml-sm-1">Home</span>
+          <% end %>
+        <% else %>
+          <%= link_to home_user_path(current_user), class: "nav-link" do %>
+            <%= octicon "organization", "aria-label": "Subjects", class: "octicon-light align-self-center" %>
+            <span class="d-none d-sm-inline-block ml-sm-1">Subjects</span>
+          <% end %>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to messages_path(current_user), class: "nav-link position-relative" do %>
+          <%= octicon "bell", "aria-label": "Notifications", class: "octicon-light align-self-center" %>
+          <%= content_tag(:span,
+                          current_user.messages.count,
+                          class: "messages-available messages-superscript align-self-center") unless current_user.messages.count.zero? %>
+          <span class="d-none d-sm-inline-block ml-sm-1">Notifications</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to edit_user_path(current_user), class: "nav-link" do %>
+          <%= octicon "gear", "aria-label": "Profile", class: "octicon-light align-self-center" %>
+          <span class="d-none d-sm-inline-block ml-sm-1">Profile</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to signout_path, class: "nav-link" do %>
+          <%= octicon "sign-out", "aria-label": "Sign out", class: "octicon-light align-self-center" %>
+          <span class="d-none d-sm-inline-block ml-sm-1">Sign out</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>

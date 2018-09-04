@@ -1,0 +1,6 @@
+<% content_for :cancel_button do %>
+  <%= link_to "Cancel", person_path(@goal.person), class: "btn btn-secondary" %>
+<% end %>
+
+<h4><%= @goal.name %></h4>
+<%= render "form" %>

@@ -1,27 +1,20 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-
 <% content_for :cancel_button do %>
-  <!-- The following button trick doesn't work for <= IE8 -->
-  <%= link_to '<button type="button">Cancel</button>'.html_safe, person_path(@completed_routine.person) %>
+  <%= link_to "Cancel", person_path(@completed_routine.person), class: "btn btn-secondary" %>
 <% end %>
 
 <div class="container">
-  <h1><%= "#{@completed_routine.name} -- #{@completed_routine.person.short_name}" %></h1>
+  <h4><%= "#{@completed_routine.name} -- #{@completed_routine.person.short_name}" %></h4>
   <%= render partial: "form" %>
 </div>
 
 <%# FROM http://xdsoft.net/jqplugins/datetimepicker/ %>
-<%= stylesheet_link_tag("jquery.datetimepicker", media: "all") unless mobile_device? %>
-<%= javascript_include_tag("jquery.datetimepicker") unless mobile_device? %>
-<script>
+<%#= stylesheet_link_tag("jquery.datetimepicker", media: "all") %>
+<%#= javascript_include_tag("jquery.datetimepicker") %>
+<!-- <script>
   $('.datetimepicker').datetimepicker({
   step: 15,
   format: 'Y-m-d H:i'
   });
-  
+
   $('.buttonset').buttonset();
-</script>
+</script> -->

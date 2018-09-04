@@ -1,6 +1,12 @@
-<div id="terms" class="container centre_in_browser" style="width:400px;">
-  <div class="content">
-    <%= render "terms" %>
-    <p><%= link_to "<button type=\"button\">Back</button>".html_safe, :back %></p>
+<div id="terms" class="container mt-2 py-1 px-2">
+  <div class="row justify-content-around">
+    <div class="col-12 col-md-8 col-lg-6">
+      <%= render "terms" %>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-12 col-md-8 col-lg-6">
+      <%= link_to "Back", :back, class: "btn btn-secondary" %>
+    </div>
   </div>
 </div>

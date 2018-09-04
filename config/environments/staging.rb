@@ -81,6 +81,10 @@ Pbs::Application.configure do
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
+  # Rotate logs, keeping 100 files of 1 MB each
+  logger           = ActiveSupport::Logger.new("log/#{Rails.env}.log", 100)
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
+
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end

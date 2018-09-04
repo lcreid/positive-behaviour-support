@@ -18,18 +18,18 @@ class SessionsController < ApplicationController
   skip_before_action :require_login
 
   def create
-    new_user = ! User.from_omniauth_exists?(env["omniauth.auth"])
-    user = User.from_omniauth_or_create(env["omniauth.auth"])
+    new_user = ! User.from_omniauth_exists?(request.env["omniauth.auth"])
+    user = User.from_omniauth_or_create(request.env["omniauth.auth"])
     log_in(user)
-    
+
     # Get time zone and set it if not set in DB.
 #    puts "User time zone: #{user.time_zone}"
-#    puts "env['omniauth.params']['time_zone']: #{env['omniauth.params']['time_zone']}"
-#    puts "env['omniauth.params']: #{env['omniauth.params']}"
-    if env["omniauth.params"] && env["omniauth.params"]["time_zone"]
-      tz = Rack::Utils.unescape(env["omniauth.params"]["time_zone"])
+#    puts "request.env['omniauth.params']['time_zone']: #{request.env['omniauth.params']['time_zone']}"
+#    puts "request.env['omniauth.params']: #{request.env['omniauth.params']}"
+    if request.env["omniauth.params"] && request.env["omniauth.params"]["time_zone"]
+      tz = Rack::Utils.unescape(request.env["omniauth.params"]["time_zone"])
 #      puts tz
-      if user.time_zone.blank? 
+      if user.time_zone.blank?
 #        puts "Set time zone to #{tz}"
         user.time_zone = tz
         user.save!
@@ -45,13 +45,13 @@ class SessionsController < ApplicationController
       end
     else
       logger.info("#{user.name} (id: #{user.id}) logged in with no time zone from browser.")
-    end      
-    
+    end
+
     # Now create training data if a new user. Have to set the time zone explicitly
     Time.use_zone(user.time_zone) do
-      Training.create(user) 
+      Training.create(user)
     end if new_user
-    
+
     # I modified the next line to go to the user's home
     if session[:original_url]
       redirect_to session[:original_url]

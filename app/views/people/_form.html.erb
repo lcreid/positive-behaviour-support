@@ -1,68 +1,33 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-<div id="person_edit" class="container">
-  <div class="content">
-    <%= form_for @person do |pf| %>
-      <%= pf.hidden_field :creator_id %>
-      <div class="left" style="width:48%;">
-        <p><%= pf.label :name, 'Name: ' %><%= pf.text_field :name %></p>
-      </div>
-      <div class="right" style="width:48%;">
-        <p>
-          Typically this should be the name of the person the team is working with.
-        </p>
-      </div>
-      <div class="clear"/>
-      <div class="even_row">
-        <div class="left" style="width:48%;">
-          <p>
-            <%= pf.label :short_name, 'Short Name: ' %><%= pf.text_field :short_name %>
-          </p>
-        </div>
-        <div class="right" style="width:48%;">
-          <p>
-            Choose a short name that identifies the person to you and the rest
-            of the team, but won't necessarily identify the person to anyone else.
-            This is so you don't have to worry about people identifying the person
-            by looking over your shoulder.
-          </p>
-        </div>
-        <div class="clear"></div>
-      </div>
-    
-      <div>
-        <h2>Team</h2>
-        <%# The team are users who are connected to the patient. %>
-        <%# You can delete team members that you can't add back in. %>
-        <div class="left" style="width:48%;display:inline;">
-          <ul class="ul_no_decorations">
-            <%= pf.collection_check_boxes(:users, 
-              (current_user.users + @person.users).uniq, 
-              :id, 
-              :name, 
-              checked: @person.users.map(&:id)) do |cb| %>
-              <li>
-                <%= cb.check_box(hidden: current_user == cb.object) %>
-                <%= cb.label(hidden: current_user == cb.object) %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="right" style="width:48%;">
-          <p>
-            Check the boxes beside your connections that you want to have working on this team.
-          <p>
-        </div>
-        <div class="clear"></div>
-      </div>
+<div id="person_edit">
+  <%= bootstrap_form_for @person do |pf| %>
+  <%= pf.hidden_field :creator_id %>
+  <%= pf.text_field :name %>
+  <%= pf.text_field :short_name,
+                    help: "A name that identifies the person to anyone working with them, but won't identify the person to anyone else. This is so you don't have to worry about people identifying the person by looking over your shoulder." %>
 
-      <p>
-        <%= link_to '<button type="button">Cancel</button>'.html_safe, :back %>
-        <%= pf.submit 'Save' %>
-      </p>
-    <% end %>
-  </div>
+  <%= render "routines_with_edit" %>
+  <%= render "goals_with_edit" %>
+
+  <!-- The team are users who are connected to the patient. -->
+  <ul class="list-unstyled">
+    <%= pf.collection_check_boxes(:caregiver_ids,
+                                  (current_user.users + @person.caregivers).uniq,
+                                  :id,
+                                  :name,
+                                  checked: @person.caregivers.map(&:id),
+                                  help: "Check the boxes beside your connections that you want to allow to work with this person.",
+                                  label: "Team",
+                                  wrapper_class: "mt-2") do |cb| %>
+    <li>
+      <%= cb.check_box(disabled: current_user == cb.object) %>
+      <%= hidden_field(:person, :caregiver_ids, multiple: true, value: cb.object.to_param) if current_user == cb.object %>
+    </li>
+  <% end %>
+</ul>
+
+<p>
+  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+  <%= pf.submit 'Save' %>
+</p>
+<% end %>
 </div>

@@ -1,10 +1,6 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class CompletedExpectationTest < ActiveSupport::TestCase
   test "completed expectation created from" do
@@ -12,5 +8,15 @@ class CompletedExpectationTest < ActiveSupport::TestCase
     ce = CompletedExpectation.new(e.copyable_attributes)
     assert_equal e, ce
     assert_equal ce, e
+  end
+
+  test "clean expectations" do
+    assert_equal 18, CompletedExpectation.clean.count
+    cr = completed_routines(:matt_one_four)
+    assert_equal [completed_expectations(:matt_one_four_one)], cr.completed_expectations.clean
+    assert_equal [completed_expectations(:matt_one_four_two)], cr.completed_expectations.not_clean
+    cr = completed_routines(:matt_one_five)
+    assert_equal [completed_expectations(:matt_one_five_one)], cr.completed_expectations.clean
+    assert_equal [completed_expectations(:matt_one_five_two)], cr.completed_expectations.not_clean
   end
 end

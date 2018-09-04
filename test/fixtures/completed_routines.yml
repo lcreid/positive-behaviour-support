@@ -9,56 +9,56 @@ matt_one_one:
   comment: 
   person: patient_matt
   routine: clean_up_room
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
 
 matt_one_two:
   name: Clean up room
   comment: 
   person: patient_matt
   routine: clean_up_room
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
 
 matt_one_three:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
 
 matt_one_four:
   name: Do homework
   comment: 
   person: patient_matt
   routine: do_homework
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
 
 matt_one_five:
   name: Do homework
   comment: 
   person: patient_matt
   routine: do_homework
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
 
 matt_one_six:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
 
 matt_one_seven:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
 
 matt_one_eight:
   name: Brush teeth
   comment: 
   person: patient_matt
   routine: brush_teeth
-  routine_done_at: <%= Time.now %>
+  routine_done_at: <%= Time.zone.now %>
   
 routine_index_one_one:
   name: R1
