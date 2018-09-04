@@ -1,5 +1,5 @@
 class Invitation < ActiveRecord::Base
-  belongs_to :invitor, class_name: User
+  belongs_to :invitor, class_name: "User"
   validates_presence_of :token
   before_validation :add_token
 

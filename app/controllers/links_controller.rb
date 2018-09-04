@@ -2,11 +2,13 @@ class LinksController < ApplicationController
   before_action :user_allowed_to_modify_link
 
   def destroy
-    @link = Link.find(params[:id])
+    @link = current_user.links.find(params[:id])
     @link.person_a.unlink(@link.person_b)
-    redirect_to :back
+    redirect_back fallback_location: root_path
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
-  
+
   private
 
   def user_allowed_to_modify_link

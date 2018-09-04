@@ -1,53 +1,40 @@
-=begin
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-=end
-require 'test_helper'
+# frozen_string_literal: true
 
-class UsersControllerTest < ActionController::TestCase
+require "test_helper"
+
+class UsersControllerTest < ActionDispatch::IntegrationTest
   test "get logged in user" do
-    user = users(:user_marie)
-    uid = user.id
-    session[:user_id] = uid
-    get :home, {id: @controller.current_user.id}
+    controller_test_log_in(user = users(:user_marie))
+    get home_user_url(@controller.current_user)
     assert :success
-    
-    patient = user.people[0]
-    
-    assert_select 'div#user-name' do
-      assert_select 'h1', "Marie"
-    end
-    assert_select 'div#top_menu', /.*Marie.*/
-    assert_select 'div#patients' do
-      assert_select 'li.person', 2
+
+    assert_select "nav#test-top-menu" # No longer put user name in top bar, text: /.*Marie.*/
+    assert_select "div#patients" do
+      assert_select "li.person", 2
     end
   end
-  
+
   test "get not logged in user" do
     uid = users(:existing_twitter).id
     assert_raise ActionController::RoutingError do
-      get :home, {id: uid}
+      get user_url(uid)
     end
   end
-  
+
   test "get other user" do
-    uid = users(:existing_twitter).id
-    session[:user_id] = uid
+    controller_test_log_in(users(:existing_twitter))
     assert_raise ActionController::RoutingError do
-      get :home, {id: 0}
+      get user_url(0)
     end
   end
-  
+
   test "profile page" do
-    uid = users(:user_marie).id
-    session[:user_id] = uid
-    
-    get :edit, id: uid
-    
-    assert_select '#people'
-    assert_select '.user', 2
-    assert_select '.user a', 2
+    controller_test_log_in(user = users(:user_marie))
+
+    get edit_user_url(user)
+
+    assert_select "#people"
+    assert_select ".user", 2
+    assert_select ".user a", 2
   end
 end

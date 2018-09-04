@@ -1,0 +1,75 @@
+// Colours
+$browser-background: rgb(236, 236, 236);
+$content-background: white !default;
+$menu-background: black !default;
+$menu-text-colour: white !default;
+$note-background: rgb(255, 255, 204) !default;
+$h1-background: rgb(237, 243, 254) !default;
+$h1-colour: black !default;
+$h2-background: $browser-background !default;
+$h2-colour: black !default;
+$table-heading-background: $browser-background !default;
+$background-odd: $content-background;
+$background-even: rgb(250,250,250);
+$table-border-colour: $table-heading-background;
+$table-heading-border-colour: white;
+$link-colour: #6699FF;
+$box-shadow: rgb(128, 128, 128) !default;
+
+body, p, h4, table, td, th, ul, ol, textarea, input, button {
+  font-family: "Lucida Grande",verdana,helvetica,arial,sans-serif;
+}
+
+body {
+  background: $browser-background;
+}
+table { border-collapse: collapse; }
+
+// These next two I want to pull in jquery-ui theme, but I don't know if I can.
+.flash_notice {
+  @extend .bg-warning;
+  min-height: 50px;
+  $padding: 5px;
+  @extend .border-danger;
+  border-style: solid none solid none;
+  border-width: 1px 0 1px 0;
+}
+.flash_alert {
+  // @extend .ui-state-highlight;
+  @extend .bg-danger;
+}
+#error_explanation {
+  @extend .flash_alert;
+
+  h2 {
+    font-weight: normal;
+    background: transparent;
+  }
+
+  ul { margin-top: 6px; }
+}
+
+th {
+  background-color: $table-heading-background;
+  font-weight: normal;
+  border-style: solid solid none solid;
+  border-width: thin thin 0 thin;
+  border-color: $table-heading-border-colour;
+}
+tr {
+  border-style: solid;
+  border-width: thin 0 thin 0;
+  border-color: $table-border-colour;
+  vertical-align: middle;
+}
+.odd_row { background-color: $background-odd; }
+.even_row { background-color: $background-even; }
+
+.button_row { text-align:right; }
+
+div#patients {
+  ul { margin: 0; padding-left: 0; }
+  li { list-style-type: none; margin: 2px 0 2px 0; }
+}
+
+.vertical_align_children * { vertical-align: middle; }

@@ -21,3 +21,5 @@ omniauth.sh
 /config/initializers/omniauth.rb
 
 pbs.sublime-workspace
+
+.vagrant

@@ -1,14 +1,16 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-<div role="main" class="content ui-content">
-  <ul data-role="listview">
-    <%= content_tag_for(:li, @user.subjects) do | patient | %>
-      <%= link_to patient.short_name, person_path(patient), data: { ajax: false } %>
+<ul class="list-group">
+  <% @user.subjects.order(:short_name).each do | patient | %>
+  <li class="list-group-item person">
+    <%= link_to person_path(patient) do %>
+      <%= patient.short_name %>
+      <%= octicon "chevron-right", class: "h-100 float-right" %>
     <% end %>
-    <li><%= link_to 'New Team', new_person_path, data: { ajax: false } %></li>
-  </ul>
-</div>
-
+  </li>
+  <% end %>
+  <li class="list-group-item">
+    <%= link_to new_person_path do %>
+      New Subject
+      <%= octicon "plus", class: "h-100 float-right" %>
+    <% end %>
+  </li>
+</ul>

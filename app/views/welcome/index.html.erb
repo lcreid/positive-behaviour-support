@@ -1,22 +1,79 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
 <% content_for :javascript do %>
-  $(document).ready(function() {
-    $('a.time_zone').each(function() {
-      this.href = this.href + "?time_zone=" 
-        + encodeURIComponent($().get_timezone());
-    });
-  });
+  $(document).ready(function() { $('a.time_zone').each(function() { this.href = this.href + "?time_zone=" + encodeURIComponent($().get_timezone()); }); });
 <% end %>
-<% content_for :navigation do %>
-<% end %>
-<div class="container">
-  <div id='sign_in'>
-    <%= render "content" %>
-    <div class="terms"><%= render "terms" %></div>
+<div class="jumbotron jumbotron-fluid mb-4">
+  <div class="container text-center">
+    <h1>Clean Routines</h1>
+    <p class="lead">
+      <!-- A token-reward system to be used as part of a comprehensive behaviour support program. -->
+      A tool to encourage socially-expected behaviour.
+    </p>
   </div>
 </div>
 
+<div class="container">
+  <div class="row justify-content-around">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div id='sign_in_with'>
+        <%= render partial: "idps" %>
+      </div>
+
+      <div class="shadow">
+        <h4 class="bg-dark text-light text-center py-1">
+          Who is Clean Routines for?
+        </h4>
+        <p class="px-2 pb-2">
+          Clean Routines is for the parents, care-givers, therapists, and school staff of a child who is struggling because they exhibit unexpected behviour in day-to-day activities.
+        </p>
+      </div>
+
+      <div class="shadow">
+        <h4 class="bg-dark text-light text-center py-1">
+          How does it work?
+        </h4>
+        <p class="px-2 pb-2">
+          Clean Routines is like a gold-star chart. Expectations are set for behaviour in various situations ("routines"). The child is observed during these routines, and their success is meeting the expectations is recorded in Clean Routines.
+        </p>
+        <p class="px-2 pb-2">
+          Goals can be set up that trigger rewards. Rewards are tallied automatically, and parents can manage giving the rewards through Clean Routines.
+        </p>
+        <p class="px-2 pb-2">
+          Clear expectations and consistent rewarding often lead to changes in behaviour.
+        </p>
+      </div>
+
+      <div class="shadow">
+        <h4 class="bg-dark text-light text-center py-1">
+          Getting Started
+        </h4>
+        <p class="px-2 pb-2">
+          Just sign up and enter some information about the child. Then invite other parents, care-givers, therapists, and school staff to work with the child.
+        </p>
+      </div>
+
+      <div class="shadow">
+        <h4 class="bg-dark text-light text-center py-1">
+          Using
+        </h4>
+        <p class="px-2 pb-2">
+          The above description says "child", but Clean Routines can be used for anyone for whom a positive behaviour support approach might help.
+        </p>
+        <p class="px-2 pb-2">
+          You can use it like a gold star chart, to help your child learn daily routines.
+        </p>
+        <p class="px-2 pb-2">
+          It's most powerful in conjunction with professionals trained in positive behaviour support approaches. No more copying sheets of paper for home and school, and then trying to collect them to track the child's progress. The on-line forms are available
+          on a phone or tablet, and the parents and therapist can instantly review the child's performance.
+        </p>
+      </div>
+
+      <div class="shadow">
+        <h4 class="bg-dark text-light text-center py-1"></h4>
+        <p class="px-2 pb-2"></p>
+      </div>
+
+      <div class="shadow">
+        <%= render "terms" %>
+      </div>
+    </div>
+  </div>

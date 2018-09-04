@@ -5,19 +5,19 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) Jade Systems Inc. 2013, 2014
 =end
 class Routine < ActiveRecord::Base
-  belongs_to :person
-  belongs_to :goal, inverse_of: :routines
+  belongs_to :person, optional: true # TODO: Should this really be optional?
+  belongs_to :goal, inverse_of: :routines, optional: true
   has_many :completed_routines, dependent: :destroy
   has_many :expectations, dependent: :destroy
   accepts_nested_attributes_for :expectations, allow_destroy: true
-  
+
 =begin rdoc
 Return a hash of attributes that make sense to compare to a completed routine.
 =end
   def comparable_attributes
     copyable_attributes
   end
-  
+
 =begin rdoc
 Return a hash of attributes that make sense to copy to initialize a completed routine.
 Note that this means changing the key of the "id" attribute
@@ -28,7 +28,7 @@ to "routine_id".
       "completed_expectations_attributes" => expectations.collect { |e| e.comparable_attributes }
     )
   end
-  
+
 =begin rdoc
 Override == when the other object is a CompletedRoutine, to test only the attributes
 that make sense to compare.

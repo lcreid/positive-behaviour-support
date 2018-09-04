@@ -1,0 +1,20 @@
+<!-- TODO: make it so I don't have to hide this section on new. -->
+<%= content_tag :div, class: "goals mt-2" do %>
+  <p>Goals</p>
+  <ul class="list-group">
+    <% @person.goals.order(:name).each do |goal| %>
+      <li class="list-group-item">
+        <%= link_to edit_goal_path(goal) do %>
+        <%= goal.name %>
+        <%= octicon "pencil", class: "h-100 float-right" %>
+      </li>
+    <% end %>
+  <% end %>
+  <li class="list-group-item">
+    <%= link_to new_person_goal_path(@person) do %>
+    New Goal
+    <%= octicon "plus", class: "h-100 float-right" %>
+    <% end %>
+    </li>
+  </ul>
+<% end if @person.persisted? %>

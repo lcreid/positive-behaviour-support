@@ -1,37 +1,35 @@
+# rubocop:disable Style/StringLiterals
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '~> 5.2.0'
+# Use postgres as the database for Active Record
+gem 'pg', "~> 0.18"
+gem 'pg_search'
+# Use Puma as the app server
+gem 'puma', '~> 3.7'
 
-# Use sqlite3 as the database for Active Record
-# include it in all environments or the build won't work.
-gem 'sqlite3'
-
-# Use mysql2 in production
-group :production, :staging do 
-  gem 'mysql2'
-end
+gem 'bootsnap'
+gem 'bootstrap', '~> 4.1.0'
+gem "bootstrap_form", git: "https://github.com/lcreid/rails-bootstrap-forms.git", branch: "477-collection-block"
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+# FIXME: Remove this when I can.
+gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -41,14 +39,7 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'octicons_helper'
 
 # From: http://railscasts.com/episodes/241-simple-omniauth-revised
 gem 'omniauth-twitter'
@@ -66,18 +57,17 @@ gem 'detect_timezone_rails'
 
 gem 'kaminari' # Pagination From http://railscasts.com/episodes/254-pagination-with-kaminari
 
-gem 'validates_timeliness', '~> 3.0'
+gem 'validates_timeliness', '~> 4.0'
+
+gem 'where_exists'
 
 group :test do
-  gem 'capybara'
-  gem 'capybara_minitest_spec'
-  gem 'capybara-webkit'
   gem 'capybara-email'
-  gem 'database_cleaner'
-end
-
-group :test, :development do
-  gem 'timecop'
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
 end
 
 group :development do

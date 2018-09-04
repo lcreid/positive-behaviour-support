@@ -1,0 +1,31 @@
+//This Source Code Form is subject to the terms of the Mozilla Public
+//License, v. 2.0. If a copy of the MPL was not distributed with this
+//file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//Copyright (c) Jade Systems Inc. 2013, 2014
+
+// From http://stackoverflow.com/questions/1030793/input-with-displayblock-is-not-a-block-why-not
+.grow_child_to_parent {
+  display: block;
+  width: 100%;
+  box-sizing: border-box; /* css3 rec */
+  -moz-box-sizing: border-box; /* ff2 */
+  -ms-box-sizing: border-box; /* ie8 */
+  -webkit-box-sizing: border-box; /* safari3 */
+  -khtml-box-sizing: border-box; /* konqueror */
+}
+
+.input_fill_rest_of_line {
+  display: block;
+  overflow: hidden;
+  // the standard Firefox input box has a 3px border all around, but it's thin.
+  padding-right: 6px;
+  > input { width: 100%; }
+}
+
+.clean_routine {
+  background-color: #CCFF99;
+}
+
+.dirty_routine {
+  background-color: #FFFF99;
+}

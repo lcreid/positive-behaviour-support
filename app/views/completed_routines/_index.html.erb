@@ -1,25 +1,20 @@
-<%# This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
-Copyright (c) Jade Systems Inc. 2013, 2014
-%>
-<div class="completed_routines">
-  <h2>Recently Completed Routines</h2>
+<div class="completed_routines mt-2">
+  <h4>Recently Completed Routines</h4>
   <% if 0 < @completed_routines.count %>
-    <table data-role="table" data-mode="reflow" class="ui-responsive">
+    <table class="table">
       <thead>
-        <th data-priority="1">Routine</th><th>Clean?</th><th data-priority="2">Date</th>
+        <th class="text-left">Routine</th>
+        <th class="text-center">Clean?</th>
+        <th class="text-right">Date</th>
       </thead>
       <tbody>
       <% @completed_routines.each do |cr| %>
         <tr class="<%= cr.is_clean? ? "clean_routine" : "dirty_routine" %>">
           <td>
-            <%= link_to(cr.name, 
-              edit_completed_routine_path(cr), 
-              data: {role: "button", icon: "edit", iconpos: "right", ajax: false}) %>
+            <%= link_to(cr.name, edit_completed_routine_path(cr)) %>
           </td>
-          <td style="text-align: center;"><%= cr.is_clean?.humanize %></td>
-          <td style="text-align: right;"><%= cr.routine_done_at.to_s(:humanized_ago) %></td> 
+          <td class="text-center"><%= cr.is_clean?.humanize %></td>
+          <td class="text-right"><%= cr.routine_done_at.to_s(:humanized_ago) %></td>
         </tr>
       <% end %>
       </tbody>
@@ -29,4 +24,3 @@ Copyright (c) Jade Systems Inc. 2013, 2014
     <p>No recently completed routines.</p>
   <% end %>
 </div>
-
