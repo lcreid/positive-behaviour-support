@@ -114,7 +114,7 @@ class InvitationsTest < ApplicationSystemTestCase
         current_email.click_on "Accept"
         # assert_equal signin_path, current_path
         click_link "Google"
-        assert_text "Your Profile"
+        assert_text "Profile"
         assert_equal edit_user_path(invitee), current_path
       end
     end

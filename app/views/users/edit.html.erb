@@ -1,17 +1,25 @@
 <div id="user">
-  <h1>Your Profile</h1>
-  <h2>Identity</h2>
+  <h4>Profile</h4>
   <%= bootstrap_form_for(@user) do |f| %>
+  <%= f.email_field :email %>
+  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
+
+  <div class="actions">
+    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+    <%= f.submit "Update Profile" %>
+  </div>
+
+  <h4>Identity</h4>
   <!-- TODO: Rationalize error handling. Need something for base errors. -->
   <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+  <div class="error_messages">
+    <h2>Form is invalid</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
 
   <div class="even_row">
@@ -25,18 +33,10 @@
     Name:
     <%= f.object.name %>
   </p>
-
-  <h2>Preferences</h2>
-  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, selected: @user.time_zone %>
-
-  <div class="actions">
-    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
-    <%= f.submit "Update Profile" %>
-  </div>
   <% end %>
 
   <div id="people">
-    <h2>Linked People</h2>
+    <hr>Linked People</hr>
     <table>
       <tbody>
         <% @user.users.each do |other| %>

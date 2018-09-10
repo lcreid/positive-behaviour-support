@@ -31,7 +31,9 @@ class User < ActiveRecord::Base
   # Find the user based on the information provided by Omniauth.
   def self.from_omniauth(auth)
     # where(auth.slice("provider", "uid")).first
-    where(provider: auth["provider"], uid: auth["uid"]).first
+    user = where(provider: auth["provider"], uid: auth["uid"]).first
+    user.update_attributes!(email: auth.info["email"]) if user.email != auth.info["email"]
+    user
   end
 
   # rdoc
@@ -44,9 +46,10 @@ class User < ActiveRecord::Base
   # rdoc
   # Create a User based on the information provided by Omniauth.
   def self.create_from_omniauth(auth)
-    user = create! do |user|
+    create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
+      user.email = auth.info["email"]
       case user.provider
       when "twitter", "Training", "facebook", "yahoo"
         user.name = auth["info"]["nickname"]
@@ -190,9 +193,7 @@ class User < ActiveRecord::Base
   # rdoc
   # Validate the given timezone either by Rails city name or TZinfo string. Blank or nil is also okay.
   def validate_time_zone
-    unless time_zone.blank? || Time.find_zone(time_zone)
-      errors.add(:validate_time_zone, "#{time_zone} is not a valid time zone.")
-    end
+    errors.add(:validate_time_zone, "#{time_zone} is not a valid time zone.") unless time_zone.blank? || Time.find_zone(time_zone)
   end
 
   # rdoc
