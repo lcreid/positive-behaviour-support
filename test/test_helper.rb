@@ -58,7 +58,8 @@ class ActionDispatch::IntegrationTest
 
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new("provider" => user.provider,
                                                                        "uid" => user.uid.to_s,
-                                                                       "name" => user.name)
+                                                                       "name" => user.name,
+                                                                       "info": { "email": "#{user.name.tr(' ', '.')}@example.com"})
     user
   end
 

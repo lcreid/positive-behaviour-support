@@ -6,9 +6,19 @@ require "training"
 class UserTest < ActiveSupport::TestCase
   test "new Twitter user" do
     nickname = "Twitter 1001"
-    assert !User.from_omniauth_exists?("provider" => "twitter", "uid" => 1001, "info" => { "nickname" => nickname })
+    assert !User.from_omniauth_exists?("provider" => "twitter",
+                                       "uid" => 1001,
+                                       "info" => {
+                                         "email" => "#{nickname}@example.com",
+                                         "nickname" => nickname
+                                         })
     assert_difference("User.count") do
-      User.from_omniauth_or_create("provider" => "twitter", "uid" => 1001, "info" => { "nickname" => nickname })
+      User.from_omniauth_or_create("provider" => "twitter",
+                                   "uid" => 1001,
+                                   "info" => {
+                                     "email" => "#{nickname}@example.com",
+                                     "nickname" => nickname
+                                     })
     end
     assert_equal nickname, User.where(uid: 1001).first.name
   end
@@ -17,7 +27,10 @@ class UserTest < ActiveSupport::TestCase
     assert_no_difference("User.count") do
       User.from_omniauth_or_create("provider" => users(:existing_twitter).provider,
                                    "uid" => users(:existing_twitter).uid,
-                                   "info" => { "nickname" => users(:existing_twitter).name })
+                                   "info" => {
+                                     "email" => "#{users(:existing_twitter).name}@example.com",
+                                     "nickname" => users(:existing_twitter).name
+                                     })
     end
   end
 

@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     # where(auth.slice("provider", "uid")).first
     user = where(provider: auth["provider"], uid: auth["uid"]).first
-    user.update_attributes!(email: auth.info["email"]) if user.email != auth.info["email"]
+    user.update_attributes!(email: auth["info"]["email"]) if user && user.email != auth["info"]["email"]
     user
   end
 
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.email = auth.info["email"]
+      user.email = auth["info"]["email"]
       case user.provider
       when "twitter", "Training", "facebook", "yahoo"
         user.name = auth["info"]["nickname"]
