@@ -37,7 +37,7 @@ class ActionDispatch::IntegrationTest
       click_on("Sign out")
       assert_no_text "Sign Out"
     end
-    assert_equal root_path, current_path
+    assert_selector "h1", text: "Clean Routines"
     click_on("Google")
     # assert_text @user.subjects.first.name unless @user.subjects.empty?
     # puts "@user.subjects.count: #{@user.subjects.count}"
