@@ -1,6 +1,6 @@
 // From http : //railscasts.com/episodes/196-nested-model-form-revised
 $(document).on('turbolinks:load', function() {
-  console.log('loading')
+  // console.log('loading')
   $('form').on('click', '.remove_fields', null, function(event) {
     console.log("A");
     $(this).prev('input[type=hidden]').val('1');
